@@ -6,6 +6,10 @@
   --about-bands: 12%;
   --main-margin: 15px;
 }
+html {
+  overflow: hidden;
+  scroll-behavior: auto;
+}
 body {
   display: flex;
   flex-direction: column;
@@ -44,7 +48,12 @@ header img {
 nav {
   height: 100%;
   display: flex;
-  align-content: center;
+  /* position: relative; */
+}
+nav div {
+  height: 100%;
+  display: flex;
+  /* align-items: center; */
 }
 nav a {
   height: 100%;
@@ -52,6 +61,12 @@ nav a {
   padding-left: 24px;
   padding-right: 24px;
   position: relative;
+}
+nav p {
+  height: 100%;
+  align-content: center;
+  position: absolute;
+  padding-left: 24px;
 }
 
 /*** ANCHORS OFFSETTING ***************************************************/
@@ -84,7 +99,7 @@ nav a {
   width: 100%;
   height: 100%;
 }
-.content-banner {
+#banner-content {
   width: 600px;
   margin: 0px var(--main-margin);
   height: 100%;
@@ -101,13 +116,13 @@ nav a {
 #buttons-section {
   display: flex;
   justify-content: center;
+  pointer-events: none;
 }
 #home a,
 #home button {
   height: 30px;
   width: 110px;
   justify-content: center;
-  border-radius: 30px;
   align-items: center;
   display: flex;
   border: none;
@@ -148,7 +163,7 @@ nav a {
   margin: var(--about-bands) 0px;
   height: calc(var(--section-height) - 2 * var(--about-bands));
 }
-#content-about {
+#about-content {
   z-index: 1;
   width: var(--max-width);
   display: flex;
@@ -158,7 +173,7 @@ nav a {
   margin: var(--about-bands) var(--main-margin);
 }
 #photo {
-  width: 30%;
+  width: 20%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -262,6 +277,16 @@ nav a {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin-bottom: 15px;
+  position: relative;
+  z-index: 1;
+}
+#skills-left,
+#skills-center,
+#skills-right {
+  padding: 15px;
+  margin: 15px;
+  position: relative;
+  z-index: 1;
 }
 #skills h3 {
   display: flex;
@@ -277,14 +302,32 @@ nav a {
   justify-content: center;
   align-items: center;
   gap: 10px 10px;
+  position: relative;
+  z-index: 1;
+  /* position: relative; */
 }
 #skills li {
   flex-basis: 30%;
   text-align: center;
+  position: relative;
+}
+.info-bubble {
+  position: absolute;
+  padding: 10px;
+  display: none;
+  z-index: 2;
+  /* See JS "info-bubble" for more options (width, position, margin) */
+  /* max-width: 20vw; */
+}
+#skills li div {
+  /* position: relative; */
+  /* z-index: 1; */
 }
 #skills img {
   width: 100%;
   height: 30px;
+  position: relative;
+  z-index: 1;
 }
 #skills h4 {
   margin-top: 5px;

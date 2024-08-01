@@ -15,6 +15,15 @@
   <link rel="stylesheet" href="./text.css">
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./animations.css">
+
+  <script src="./scripts/scroll-to-top-for-resize.js"></script>
+  <script src="./scripts/auto-scroll.js"></script>
+  <script src="./scripts/animations-popper.js"></script>
+  <script src="./scripts/disable-buttons.js"></script>
+  <script src="./scripts/skills-items-animation.js"></script>
+  <script src="./scripts/info-bubble.js"></script>
+  <script src="./scripts/scroll-to-top-on-reload.js"></script>
+</head>
 </head>
 
 <body>
@@ -22,25 +31,62 @@
     <!-- <div id="texture-header"></div> -->
     <div id="title">
       <img src="./svg/flag-fr.svg" alt="Icône de téléchargement." />
-      <h1>LÉGER Thomas</h1>
+      <h1>Thomas LÉGER</h1>
     </div>
     <nav>
-      <a href="#home-a">Accueil</a>
-      <a href="#about-a">Qui suis-je ?</a>
-      <a href="#skills-a">Compétences</a>
-      <a href="#examples-a">Exemples</a>
-      <a href="#contact-a">Contact</a>
+      <div>
+        <p>Accueil</p>
+        <a href="#home-a" class="active">Accueil</a>
+      </div>
+      <div>
+        <p>Qui suis-je ?</p>
+        <a href="#about-a">Qui suis-je ?</a>
+      </div>
+      <div>
+        <p>Compétences</p>
+        <a href="#skills-a">Compétences</a>
+      </div>
+      <div>
+        <p>Exemples</p>
+        <a href="#examples-a">Exemples</a>
+      </div>
+      <div>
+        <p>Contact</p>
+        <a href="#contact-a">Contact</a>
+      </div>
     </nav>
+    <!-- <nav>
+      <div>
+        <p>Accueil</p>
+        <a href="#home-a" class="active">ACCUEIL</a>
+      </div>
+      <div>
+        <p>QUI SUIS-JE ?</p>
+        <a href="#about-a">QUI SUIS-JE ?</a>
+      </div>
+      <div>
+        <p>COMPÉTENCES</p>
+        <a href="#skills-a">COMPÉTENCES</a>
+      </div>
+      <div>
+        <p>EXEMPLES</p>
+        <a href="#examples-a">EXEMPLES</a>
+      </div>
+      <div>
+        <p>CONTACT</p>
+        <a href="#contact-a">CONTACT</a>
+      </div>
+    </nav> -->
   </header>
-  <div id="home-a">
+  <div id="home-a" class="anchor">
   </div>
   <section id="home">
     <img src="./gif/coding_1.webp" alt="Image animée d'écriture de code." class="mon-style">
-    <div class="filter"></div>
-    <div class="content-banner">
-      <h2>dev full stack</h2>
-      <p>ce que j’aime dans le dev prfinvirnvpkvfmknsmnvsmfknvksn msknvsmfknmvk nsfkvnsmknvsrinvpr cvbd dbtbe e </p>
-      <div id="buttons-section">
+    <div id="filter"></div>
+    <div id="banner-content">
+      <h2 class="banner-content-h2-intro">dev full stack</h2>
+      <p class="banner-content-p-intro">ce que j’aime dans le dev prfinvirnvpkvfmknsmnvsmfknvksn msknvsmfknmvk nsfkvnsmknvsrinvpr cvbd dbtbe e </p>
+      <div id="buttons-section" class="buttons-section-intro">
         <a href="#contact">Contact</a>
         <button>
           <img src="./svg/download.svg" alt="Icône de téléchargement." />
@@ -50,15 +96,15 @@
     </div>
   </section>
 
-  <div id="about-a">
+  <div id="about-a" class="anchor">
   </div>
   <section id="about">
     <div class="background"></div>
     <div class="texture-grain"></div>
-    <div id="content-about">
+    <div id="about-content">
       <div id="photo">
         <div id="bloc-photo">
-          <img src="./images/photo2.jpg" alt="Photo profil" />
+          <img src="./images/photo.jpg" alt="Photo profil" />
           <!-- <p>LÉGER Thomas</p> -->
         </div>
       </div>
@@ -70,11 +116,11 @@
     </div>
   </section>
 
-  <div id="skills-a">
+  <div id="skills-a" class="anchor">
   </div>
   <section id="skills">
     <div class="background"></div>
-    <div class="texture-grain"></div>
+    <!-- <div class="texture-grain"></div> -->
     <div id="skills-content">
       <h2 class="title">COMPÉTENCES</h2>
 
@@ -82,20 +128,30 @@
         <div id="skills-left">
           <h3>Frontend</h3>
           <ul>
-            <li><img src="./svg/html.svg" alt="Icône - HTML">
-              <h4>HTML</h4>
+            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
+              <div><img src="./svg/html.svg" alt="Icône - HTML">
+                <h4>HTML</h4>
+              </div>
             </li>
-            <li><img src="./svg/css.svg" alt="Icône - CSS">
-              <h4>CSS</h4>
+            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
+              <div><img src="./svg/css.svg" alt="Icône - CSS">
+                <h4>CSS</h4>
+              </div>
             </li>
-            <li><img src="./svg/sass.svg" alt="Icône - SASS">
-              <h4>SASS</h4>
+            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
+              <div><img src="./svg/sass.svg" alt="Icône - SASS">
+                <h4>SASS</h4>
+              </div>
             </li>
-            <li><img src="./svg/javascript.svg" alt="Icône - JavaScript">
-              <h4>JavaScript</h4>
+            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
+              <div><img src="./svg/javascript.svg" alt="Icône - JavaScript">
+                <h4>JavaScript</h4>
+              </div>
             </li>
-            <li><img src="./svg/react.svg" alt="Icône - React">
-              <h4>React</h4>
+            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
+              <div><img src="./svg/react.svg" alt="Icône - React">
+                <h4>React</h4>
+              </div>
             </li>
           </ul>
         </div>
@@ -103,17 +159,25 @@
         <div id="skills-center">
           <h3>Backend</h3>
           <ul>
-            <li><img src="./svg/node-js.svg" alt="Icône - Node.JS">
-              <h4>Node.JS</h4>
+            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
+              <div><img src="./svg/node-js.svg" alt="Icône - Node.JS">
+                <h4>Node.JS</h4>
+              </div>
             </li>
-            <li><img src="./svg/express-js.svg" alt="Icône - Express.JS">
-              <h4>Express.JS</h4>
+            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
+              <div><img src="./svg/express-js.svg" alt="Icône - Express.JS">
+                <h4>Express.JS</h4>
+              </div>
             </li>
-            <li><img src="./svg/mongodb.svg" alt="Icône - MongoDB">
-              <h4>Mongoose</h4>
+            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
+              <div><img src="./svg/mongodb.svg" alt="Icône - MongoDB">
+                <h4>Mongoose</h4>
+              </div>
             </li>
-            <li><img src="./svg/php.svg" alt="Icône - PHP">
-              <h4>PHP</h4>
+            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
+              <div><img src="./svg/php.svg" alt="Icône - PHP">
+                <h4>PHP</h4>
+              </div>
             </li>
           </ul>
         </div>
@@ -121,20 +185,30 @@
         <div id="skills-right">
           <h3>Outils</h3>
           <ul>
-            <li><img src="./svg/git.svg" alt="Icône - Git">
-              <h4>Git</h4>
+            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
+              <div><img src="./svg/git.svg" alt="Icône - Git">
+                <h4>Git</h4>
+              </div>
             </li>
-            <li><img src="./svg/github.svg" alt="Icône - GitHub">
-              <h4>GitHub</h4>
+            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
+              <div><img src="./svg/github.svg" alt="Icône - GitHub">
+                <h4>GitHub</h4>
+              </div>
             </li>
-            <li><img src="./svg/figma.svg" alt="Icône - Figma">
-              <h4>Figma</h4>
+            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
+              <div><img src="./svg/figma.svg" alt="Icône - Figma">
+                <h4>Figma</h4>
+              </div>
             </li>
-            <li><img src="./svg/notion.svg" alt="Icône - Notion">
-              <h4>Notion</h4>
+            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
+              <div><img src="./svg/notion.svg" alt="Icône - Notion">
+                <h4>Notion</h4>
+              </div>
             </li>
-            <li><img src="./svg/postman.svg" alt="Icône - Postman">
-              <h4>Postman</h4>
+            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
+              <div><img src="./svg/postman.svg" alt="Icône - Postman">
+                <h4>Postman</h4>
+              </div>
             </li>
           </ul>
         </div>
@@ -143,7 +217,7 @@
     </div>
   </section>
 
-  <div id="examples-a">
+  <div id="examples-a" class="anchor">
   </div>
   <section id="examples">
     <div class="background"></div>
@@ -171,7 +245,7 @@
     </div>
   </section>
 
-  <div id="contact-a">
+  <div id="contact-a" class="anchor">
   </div>
   <section id="contact">
     <div class="background"></div>
