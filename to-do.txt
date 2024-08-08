@@ -1,0 +1,16 @@
+
+faire gif accueil
+
+contact
+
+backend
+
+ecrire contenu
+
+responisve
+
+anim souligne titre exemple
+example filte hover bug fix posistion cursor
+
+opti + acessibiltié
+tester compatibilite navigateurs

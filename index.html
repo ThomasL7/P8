@@ -5,24 +5,24 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>LEGER Thomas - Portfolio</title>
+  <title>Thomas LÉGER - Portfolio</title>
   <meta name="description" content="" />
   <link rel="icon" href="./favicon.ico" />
   <meta name="theme-color" content="#000000" />
 
-  <link rel="stylesheet" href="./reset.css">
-  <link rel="stylesheet" href="./oragnization.css">
-  <link rel="stylesheet" href="./text.css">
-  <link rel="stylesheet" href="./style.css">
-  <link rel="stylesheet" href="./animations.css">
+  <link rel="stylesheet" href="./styles/reset.css">
+  <link rel="stylesheet" href="./styles/oragnization.css">
+  <link rel="stylesheet" href="./styles/appearance.css">
+  <link rel="stylesheet" href="./styles/text.css">
+  <link rel="stylesheet" href="./styles/animations.css">
 
-  <script src="./scripts/scroll-to-top-for-resize.js"></script>
-  <script src="./scripts/auto-scroll.js"></script>
-  <script src="./scripts/animations-popper.js"></script>
-  <script src="./scripts/disable-buttons.js"></script>
+  <script src="./scripts/scroll-to-top-on-reload.js"></script>
+  <script type="module" src="./scripts/scroll+anchor-links.js"></script>
+  <script src="./scripts/animations-transition.js"></script>
+  <!-- <script src="./scripts/disable-banner-buttons-in-animation.js"></script> -->
   <script src="./scripts/skills-items-animation.js"></script>
   <script src="./scripts/info-bubble.js"></script>
-  <script src="./scripts/scroll-to-top-on-reload.js"></script>
+  <script type="module" src="./scripts/examples-modal.js"></script>
 </head>
 </head>
 
@@ -30,7 +30,7 @@
   <header>
     <!-- <div id="texture-header"></div> -->
     <div id="title">
-      <img src="./svg/flag-fr.svg" alt="Icône de téléchargement." />
+      <img src="./assets/svg/flag-fr.svg" alt="Icône de téléchargement." />
       <h1>Thomas LÉGER</h1>
     </div>
     <nav>
@@ -55,43 +55,23 @@
         <a href="#contact-a">Contact</a>
       </div>
     </nav>
-    <!-- <nav>
-      <div>
-        <p>Accueil</p>
-        <a href="#home-a" class="active">ACCUEIL</a>
-      </div>
-      <div>
-        <p>QUI SUIS-JE ?</p>
-        <a href="#about-a">QUI SUIS-JE ?</a>
-      </div>
-      <div>
-        <p>COMPÉTENCES</p>
-        <a href="#skills-a">COMPÉTENCES</a>
-      </div>
-      <div>
-        <p>EXEMPLES</p>
-        <a href="#examples-a">EXEMPLES</a>
-      </div>
-      <div>
-        <p>CONTACT</p>
-        <a href="#contact-a">CONTACT</a>
-      </div>
-    </nav> -->
   </header>
+
   <div id="home-a" class="anchor">
   </div>
   <section id="home">
-    <img src="./gif/coding_1.webp" alt="Image animée d'écriture de code." class="mon-style">
+    <img src="./assets/gif/coding_1.webp" alt="Image animée d'écriture de code." class="mon-style">
     <div id="filter"></div>
     <div id="banner-content">
-      <h2 class="banner-content-h2-intro">dev full stack</h2>
-      <p class="banner-content-p-intro">ce que j’aime dans le dev prfinvirnvpkvfmknsmnvsmfknvksn msknvsmfknmvk nsfkvnsmknvsrinvpr cvbd dbtbe e </p>
-      <div id="buttons-section" class="buttons-section-intro">
-        <a href="#contact">Contact</a>
-        <button>
-          <img src="./svg/download.svg" alt="Icône de téléchargement." />
-          CV
-        </button>
+      <h2 class="opacity-0">dev full stack</h2>
+      <p class="opacity-0">ce que j’aime dans le dev prfinvirnvpkvfmknsmnvsmfknvksn msknvsmfknmvk nsfkvnsmknvsrinvpr cvbd dbtbe e </p>
+      <div id="buttons-section" class="opacity-0">
+        <a id="contact-button" href="#contact">Contact</a>
+        <!-- <button id="CV-dl"> -->
+        <a id="CV-dl" href="./datas/CV-Thomas-LEGER.pdf" download="CV - Thomas LÉGER.pdf">
+          <img src="./assets/svg/download.svg" alt="Icône de téléchargement." />
+          CV</a>
+        <!-- </button> -->
       </div>
     </div>
   </section>
@@ -104,7 +84,7 @@
     <div id="about-content">
       <div id="photo">
         <div id="bloc-photo">
-          <img src="./images/photo.jpg" alt="Photo profil" />
+          <img src="./assets/images/photo.jpg" alt="Photo profil" />
           <!-- <p>LÉGER Thomas</p> -->
         </div>
       </div>
@@ -129,27 +109,27 @@
           <h3>Frontend</h3>
           <ul>
             <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./svg/html.svg" alt="Icône - HTML">
+              <div><img src="./assets/svg/html.svg" alt="Icône - HTML">
                 <h4>HTML</h4>
               </div>
             </li>
             <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./svg/css.svg" alt="Icône - CSS">
+              <div><img src="./assets/svg/css.svg" alt="Icône - CSS">
                 <h4>CSS</h4>
               </div>
             </li>
             <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./svg/sass.svg" alt="Icône - SASS">
+              <div><img src="./assets/svg/sass.svg" alt="Icône - SASS">
                 <h4>SASS</h4>
               </div>
             </li>
             <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./svg/javascript.svg" alt="Icône - JavaScript">
+              <div><img src="./assets/svg/javascript.svg" alt="Icône - JavaScript">
                 <h4>JavaScript</h4>
               </div>
             </li>
             <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./svg/react.svg" alt="Icône - React">
+              <div><img src="./assets/svg/react.svg" alt="Icône - React">
                 <h4>React</h4>
               </div>
             </li>
@@ -160,22 +140,22 @@
           <h3>Backend</h3>
           <ul>
             <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./svg/node-js.svg" alt="Icône - Node.JS">
+              <div><img src="./assets/svg/node-js.svg" alt="Icône - Node.JS">
                 <h4>Node.JS</h4>
               </div>
             </li>
             <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./svg/express-js.svg" alt="Icône - Express.JS">
+              <div><img src="./assets/svg/express-js.svg" alt="Icône - Express.JS">
                 <h4>Express.JS</h4>
               </div>
             </li>
             <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./svg/mongodb.svg" alt="Icône - MongoDB">
+              <div><img src="./assets/svg/mongodb.svg" alt="Icône - MongoDB">
                 <h4>Mongoose</h4>
               </div>
             </li>
             <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./svg/php.svg" alt="Icône - PHP">
+              <div><img src="./assets/svg/php.svg" alt="Icône - PHP">
                 <h4>PHP</h4>
               </div>
             </li>
@@ -186,27 +166,27 @@
           <h3>Outils</h3>
           <ul>
             <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./svg/git.svg" alt="Icône - Git">
+              <div><img src="./assets/svg/git.svg" alt="Icône - Git">
                 <h4>Git</h4>
               </div>
             </li>
             <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./svg/github.svg" alt="Icône - GitHub">
+              <div><img src="./assets/svg/github.svg" alt="Icône - GitHub">
                 <h4>GitHub</h4>
               </div>
             </li>
             <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./svg/figma.svg" alt="Icône - Figma">
+              <div><img src="./assets/svg/figma.svg" alt="Icône - Figma">
                 <h4>Figma</h4>
               </div>
             </li>
             <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./svg/notion.svg" alt="Icône - Notion">
+              <div><img src="./assets/svg/notion.svg" alt="Icône - Notion">
                 <h4>Notion</h4>
               </div>
             </li>
             <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./svg/postman.svg" alt="Icône - Postman">
+              <div><img src="./assets/svg/postman.svg" alt="Icône - Postman">
                 <h4>Postman</h4>
               </div>
             </li>
@@ -224,21 +204,93 @@
     <div class="texture-grain"></div>
     <div id="examples-content">
       <h2 class="title">EXEMPLES</h2>
+      <div id="modal-background">
+        <!-- <div class="modal-arrows">
+          <img id="modal-previous" src="./assets/svg/next-svgrepo-com (4).svg" alt="Icône précédent.">
+        </div> -->
+        <img id="modal-previous" src="./assets/svg/next.svg" alt="Icône précédent.">
+        <div id="modal">
+          <img id="modal-image" src="./assets/images/example-test.jpg" alt="Image du projet">
+          <div id="modal-right-content">
+            <div id="modal-title">
+              <h3 id="m-tit">cercnejln j nljnl</h3>
+              <img id="close-icon" src="./assets/svg/close.svg" alt="Icône de fermeture de fenêtre">
+            </div>
+            <div id="modal-main-content">
+              <h4>Lien</h4>
+              <a id="m-lin" href="#">sfvsfvbkhbkhbkhb</a>
+              <h4>Description</h4>
+              <p id="m-des">vsvfsvkhbsv hksfvhbskhbvksbf vkfshvhsfv sfbvhksfvsf bsfhbkbvskhfvshfv</p>
+              <h4>Difficultés rencontrées</h4>
+              <div id="m-dif">
+                <p><img class="arrow-text" src="./assets/svg/arrow-problem.svg" alt="Flèche.">
+                  flnjs fjs lfnfjslfnjfff fvfsvvs<br>
+                  <span>Solution :</span> d dfnlj ndjfnldnjfnldnfjnvlfdv dffvd
+                </p>
+                <p><img class="arrow-text" src="./assets/svg/arrow-problem.svg" alt="Flèche.">
+                  flnjs fjs lfnfjslfnjfff fvfsvvs<br>
+                  <span>Solution :</span> d dfnlj ndjfnldnjfnldnfjnvlfdv dffvd
+                </p>
+              </div>
+              <h4>Compétences acquises</h4>
+              <ul id="m-ski">
+                <li>svfvs fsvsfvfs</li>
+                <li>svfvs fsvsfvfs</li>
+                <li>svfvs fsvsfvfs</li>
+                <li>svfvs fsvsfvfs</li>
+                <li>svfvs fsvsfvfs</li>
+                <li>svfvs fsvsfvfs</li>
+                <li>svfvs fsvsfvfs</li>
+                <li>svfvs fsvsfvfs</li>
+                <li>svfvs fsvsfvfs</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <img id="modal-next" src="./assets/svg/next.svg" alt="Icône suivant.">
+        <!-- <div class="modal-arrows">
+          <img id="modal-next" src="./assets/svg/next-svgrepo-com (4).svg" alt="Icône suivant.">
+        </div> -->
+      </div>
       <div id="gallery">
-        <article data-id="1">
-          <img loading="lazy" src="./images/example-test.jpg" alt="Image projet - example.title">
+        <article id="e1">
+          <div>
+            <div data-id="1" class="examples-filter">
+              <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
+              <p>Cliquez pour plus d'informations.</p>
+            </div>
+            <img class="examples-image" loading="lazy" src="./assets/images/example-test.jpg" alt="Image projet - example.title">
+          </div>
           <h3>sfjvskjn fnkj dnfjd</h3>
         </article>
-        <article data-id="2">
-          <img loading="lazy" src="./images/example-test.jpg" alt="Image projet - example.title">
+        <article id="e2">
+          <div>
+            <div data-id="2" class="examples-filter">
+              <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
+              <p>Cliquez pour plus d'informations.</p>
+            </div>
+            <img class="examples-image" loading="lazy" src="./assets/images/example-test.jpg" alt="Image projet - example.title">
+          </div>
           <h3>vfdjvndkj nfdjkvnjkdfnkfvjvjkd nfdj</h3>
         </article>
-        <article data-id="3">
-          <img loading="lazy" src="./images/example-test.jpg" alt="Image projet - example.title">
+        <article id="e3">
+          <div>
+            <div data-id="3" class="examples-filter">
+              <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
+              <p>Cliquez pour plus d'informations.</p>
+            </div>
+            <img class="examples-image" loading="lazy" src="./assets/images/example-test.jpg" alt="Image projet - example.title">
+          </div>
           <h3>df iji nidnoindf dudd fn</h3>
         </article>
-        <article data-id="4">
-          <img loading="lazy" src="./images/example-test.jpg" alt="Image projet - example.title">
+        <article id="e4">
+          <div>
+            <div data-id="4" class="examples-filter">
+              <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
+              <p>Cliquez pour plus d'informations.</p>
+            </div>
+            <img class="examples-image" loading="lazy" src="./assets/images/example-test.jpg" alt="Image projet - example.title">
+          </div>
           <h3>df dino difn odfn fdi ndof n fdin dofi ndfi</h3>
         </article>
       </div>
@@ -249,7 +301,7 @@
   </div>
   <section id="contact">
     <div class="background"></div>
-    <div class="texture-grain"></div>
+    <!-- <div class="texture-grain"></div> -->
     <div id="contact-content">
       <h2 class="title">CONTACT</h2>
       <form>
