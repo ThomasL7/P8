@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
   <title>Thomas LÉGER - Portfolio</title>
   <meta name="description" content="" />
@@ -11,84 +11,93 @@
   <meta name="theme-color" content="#000000" />
 
   <link rel="stylesheet" href="./styles/reset.css">
-  <link rel="stylesheet" href="./styles/oragnization.css">
-  <link rel="stylesheet" href="./styles/appearance.css">
-  <link rel="stylesheet" href="./styles/text.css">
-  <link rel="stylesheet" href="./styles/animations.css">
+  <link rel="stylesheet" href="./styles/general.css">
+  <link rel="stylesheet" href="./styles/header.css">
+  <link rel="stylesheet" href="./styles/home.css">
+  <link rel="stylesheet" href="./styles/about.css">
+  <link rel="stylesheet" href="./styles/skills.css">
+  <link rel="stylesheet" href="./styles/info-bubbles.css">
+  <link rel="stylesheet" href="./styles/examples.css">
+  <link rel="stylesheet" href="./styles/modal.css">
+  <link rel="stylesheet" href="./styles/contact.css">
 
-  <script src="./scripts/scroll-to-top-on-reload.js"></script>
-  <script type="module" src="./scripts/scroll+anchor-links.js"></script>
+  <link rel="stylesheet" href="./styles/general-animations.css">
+  <link rel="stylesheet" href="./styles/header-animations.css">
+  <link rel="stylesheet" href="./styles/home-animations.css">
+  <link rel="stylesheet" href="./styles/about-animations.css">
+  <link rel="stylesheet" href="./styles/skills-animations.css">
+  <link rel="stylesheet" href="./styles/info-bubbles-animations.css">
+  <link rel="stylesheet" href="./styles/examples-animations.css">
+  <link rel="stylesheet" href="./styles/modal-animations.css">
+  <link rel="stylesheet" href="./styles/contact-animations.css">
+
+  <script src="./datas/info-bubbles.js"></script>
+  <script src="./datas/examples.js"></script>
+
+  <script src="./scripts/disable-zoom.js"></script>
+  <script src="./scripts/slide-change.js"></script>
   <script src="./scripts/animations-transition.js"></script>
-  <!-- <script src="./scripts/disable-banner-buttons-in-animation.js"></script> -->
-  <script src="./scripts/skills-items-animation.js"></script>
-  <script src="./scripts/info-bubble.js"></script>
-  <script type="module" src="./scripts/examples-modal.js"></script>
-</head>
+  <script src="./scripts/animations-in-slides.js"></script>
+  <script src="./scripts/modal.js"></script>
 </head>
 
 <body>
   <header>
-    <!-- <div id="texture-header"></div> -->
-    <div id="title">
+    <div id="header-title-block">
       <img src="./assets/svg/flag-fr.svg" alt="Icône de téléchargement." />
       <h1>Thomas LÉGER</h1>
     </div>
     <nav>
       <div>
+        <a href="#home-link" class="nav-link-active">Accueil</a>
         <p>Accueil</p>
-        <a href="#home-a" class="active">Accueil</a>
       </div>
       <div>
+        <a href="#about-link" class="nav-link-hover">Qui suis-je ?</a>
         <p>Qui suis-je ?</p>
-        <a href="#about-a">Qui suis-je ?</a>
       </div>
       <div>
+        <a href="#skills-link" class="nav-link-hover">Compétences</a>
         <p>Compétences</p>
-        <a href="#skills-a">Compétences</a>
       </div>
       <div>
+        <a href="#examples-link" class="nav-link-hover">Exemples</a>
         <p>Exemples</p>
-        <a href="#examples-a">Exemples</a>
       </div>
       <div>
+        <a href="#contact-link" class="nav-link-hover">Contact</a>
         <p>Contact</p>
-        <a href="#contact-a">Contact</a>
       </div>
     </nav>
   </header>
 
-  <div id="home-a" class="anchor">
+  <div id="home-link" class="anchors">
   </div>
   <section id="home">
-    <img src="./assets/gif/coding_1.webp" alt="Image animée d'écriture de code." class="mon-style">
-    <div id="filter"></div>
-    <div id="banner-content">
-      <h2 class="opacity-0">dev full stack</h2>
-      <p class="opacity-0">ce que j’aime dans le dev prfinvirnvpkvfmknsmnvsmfknvksn msknvsmfknmvk nsfkvnsmknvsrinvpr cvbd dbtbe e </p>
-      <div id="buttons-section" class="opacity-0">
-        <a id="contact-button" href="#contact">Contact</a>
-        <!-- <button id="CV-dl"> -->
-        <a id="CV-dl" href="./datas/CV-Thomas-LEGER.pdf" download="CV - Thomas LÉGER.pdf">
+    <img src="./assets/gif/coding.webp" alt="Image animée d'écriture de code." class="mon-style">
+    <div id="home-filter"></div>
+    <div id="home-content">
+      <h2>dev full stack</h2>
+      <p>ce que j’aime dans le dev prfinvirnvpkvfmknsmnvsmfknvksn msknvsmfknmvk nsfkvnsmknvsrinvpr cvbd dbtbe e </p>
+      <div id="home-buttons">
+        <a style="cursor: default;" id="home-contact-button" href="#contact-link">Contact</a>
+        <a style="cursor: default;" id="home-CV-button" href="./datas/CV-Thomas-LEGER.pdf" download="CV - Thomas LÉGER.pdf">
           <img src="./assets/svg/download.svg" alt="Icône de téléchargement." />
           CV</a>
-        <!-- </button> -->
       </div>
     </div>
   </section>
 
-  <div id="about-a" class="anchor">
+  <div id="about-link" class="anchors">
   </div>
   <section id="about">
     <div class="background"></div>
-    <div class="texture-grain"></div>
+    <div id="texture-static"></div>
     <div id="about-content">
-      <div id="photo">
-        <div id="bloc-photo">
-          <img src="./assets/images/photo.jpg" alt="Photo profil" />
-          <!-- <p>LÉGER Thomas</p> -->
-        </div>
+      <div id="about-block-photo">
+        <img src="./assets/images/photo.jpg" alt="Photo profil" />
       </div>
-      <div id="text-about">
+      <div id="about-text">
         <h2>QUI SUIS-JE ?</h2>
         <p>Ma reconversion, pourquoi personnalité + qualité sdvsdvsdknvdsjkvb dsbvksdvs dvbsdjkvbdsjb vkdsbvsjkdbvjsbdvjkbs</p> <br>
         <p>vdjb jkvbsdjvbsbsjkvsbdjvdvsdvdinlvsdknldsknvlksn dkdsnvlksndlk nvlkdns lkvdsn dslnvl dskvndslk nldsnvldsk ndlsnv dslknvl ksndlkvnsdvsd</p>
@@ -96,97 +105,110 @@
     </div>
   </section>
 
-  <div id="skills-a" class="anchor">
+  <div id="skills-link" class="anchors">
   </div>
   <section id="skills">
     <div class="background"></div>
-    <!-- <div class="texture-grain"></div> -->
     <div id="skills-content">
-      <h2 class="title">COMPÉTENCES</h2>
+      <h2 class="slide-title-style">COMPÉTENCES</h2>
+      <div id="skills-trees">
 
-      <div id="skills-table">
-        <div id="skills-left">
+        <div id="skills-tree-left">
           <h3>Frontend</h3>
           <ul>
-            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./assets/svg/html.svg" alt="Icône - HTML">
+            <li>
+              <p class="info-bubbles"></p>
+              <div class="skills-items-div"><img src="./assets/svg/html.svg" alt="Icône - HTML">
                 <h4>HTML</h4>
               </div>
             </li>
-            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./assets/svg/css.svg" alt="Icône - CSS">
+            <li>
+              <p class="info-bubbles"></p>
+              <div class="skills-items-div"><img src="./assets/svg/css.svg" alt="Icône - CSS">
                 <h4>CSS</h4>
               </div>
             </li>
-            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./assets/svg/sass.svg" alt="Icône - SASS">
+            <li>
+              <p class="info-bubbles"></p>
+              <div class="skills-items-div"><img src="./assets/svg/sass.svg" alt="Icône - SASS">
                 <h4>SASS</h4>
               </div>
             </li>
-            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./assets/svg/javascript.svg" alt="Icône - JavaScript">
+            <li>
+              <p class="info-bubbles"></p>
+              <div class="skills-items-div"><img src="./assets/svg/javascript.svg" alt="Icône - JavaScript">
                 <h4>JavaScript</h4>
               </div>
             </li>
-            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./assets/svg/react.svg" alt="Icône - React">
+            <li>
+              <p class="info-bubbles"></p>
+              <div class="skills-items-div"><img src="./assets/svg/react.svg" alt="Icône - React">
                 <h4>React</h4>
               </div>
             </li>
           </ul>
         </div>
 
-        <div id="skills-center">
+        <div id="skills-tree-center">
           <h3>Backend</h3>
           <ul>
-            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./assets/svg/node-js.svg" alt="Icône - Node.JS">
+            <li>
+              <p class="info-bubbles"></p>
+              <div class="skills-items-div"><img src="./assets/svg/node-js.svg" alt="Icône - Node.JS">
                 <h4>Node.JS</h4>
               </div>
             </li>
-            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./assets/svg/express-js.svg" alt="Icône - Express.JS">
+            <li>
+              <p class="info-bubbles"></p>
+              <div class="skills-items-div"><img src="./assets/svg/express-js.svg" alt="Icône - Express.JS">
                 <h4>Express.JS</h4>
               </div>
             </li>
-            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./assets/svg/mongodb.svg" alt="Icône - MongoDB">
-                <h4>Mongoose</h4>
+            <li>
+              <p class="info-bubbles"></p>
+              <div class="skills-items-div"><img src="./assets/svg/mongodb.svg" alt="Icône - MongoDB">
+                <h4>MongoDB</h4>
               </div>
             </li>
-            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./assets/svg/php.svg" alt="Icône - PHP">
+            <li>
+              <p class="info-bubbles"></p>
+              <div class="skills-items-div"><img src="./assets/svg/php.svg" alt="Icône - PHP">
                 <h4>PHP</h4>
               </div>
             </li>
           </ul>
         </div>
 
-        <div id="skills-right">
+        <div id="skills-tree-right">
           <h3>Outils</h3>
           <ul>
-            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./assets/svg/git.svg" alt="Icône - Git">
+            <li>
+              <p class="info-bubbles"></p>
+              <div class="skills-items-div"><img src="./assets/svg/git.svg" alt="Icône - Git">
                 <h4>Git</h4>
               </div>
             </li>
-            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./assets/svg/github.svg" alt="Icône - GitHub">
+            <li>
+              <p class="info-bubbles"></p>
+              <div class="skills-items-div"><img src="./assets/svg/github.svg" alt="Icône - GitHub">
                 <h4>GitHub</h4>
               </div>
             </li>
-            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./assets/svg/figma.svg" alt="Icône - Figma">
+            <li>
+              <p class="info-bubbles"></p>
+              <div class="skills-items-div"><img src="./assets/svg/figma.svg" alt="Icône - Figma">
                 <h4>Figma</h4>
               </div>
             </li>
-            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./assets/svg/notion.svg" alt="Icône - Notion">
+            <li>
+              <p class="info-bubbles"></p>
+              <div class="skills-items-div"><img src="./assets/svg/notion.svg" alt="Icône - Notion">
                 <h4>Notion</h4>
               </div>
             </li>
-            <li data-info-bubble="VERVRVER ZFFZER Z ZF FVFRVRZ">
-              <div><img src="./assets/svg/postman.svg" alt="Icône - Postman">
+            <li>
+              <p class="info-bubbles"></p>
+              <div class="skills-items-div"><img src="./assets/svg/postman.svg" alt="Icône - Postman">
                 <h4>Postman</h4>
               </div>
             </li>
@@ -197,99 +219,76 @@
     </div>
   </section>
 
-  <div id="examples-a" class="anchor">
+  <div id="examples-link" class="anchors">
   </div>
   <section id="examples">
     <div class="background"></div>
-    <div class="texture-grain"></div>
     <div id="examples-content">
-      <h2 class="title">EXEMPLES</h2>
-      <div id="modal-background">
-        <!-- <div class="modal-arrows">
-          <img id="modal-previous" src="./assets/svg/next-svgrepo-com (4).svg" alt="Icône précédent.">
-        </div> -->
-        <img id="modal-previous" src="./assets/svg/next.svg" alt="Icône précédent.">
+      <h2 class="slide-title-style">EXEMPLES</h2>
+
+      <div id="modal-screen">
+        <img id="modal-previous-button" src="./assets/svg/next.svg" alt="Icône précédent.">
         <div id="modal">
-          <img id="modal-image" src="./assets/images/example-test.jpg" alt="Image du projet">
-          <div id="modal-right-content">
-            <div id="modal-title">
-              <h3 id="m-tit">cercnejln j nljnl</h3>
-              <img id="close-icon" src="./assets/svg/close.svg" alt="Icône de fermeture de fenêtre">
+          <img id="modal-image" src="" alt="Image du projet">
+          <div id="modal-text-content">
+            <div id="modal-header">
+              <h3 id="modal-title"></h3>
+              <img id="modal-close-icon" src="./assets/svg/close.svg" alt="Icône de fermeture de fenêtre">
             </div>
-            <div id="modal-main-content">
+            <div id="modal-body">
               <h4>Lien</h4>
-              <a id="m-lin" href="#">sfvsfvbkhbkhbkhb</a>
+              <a id="modal-link" href="#"></a>
               <h4>Description</h4>
-              <p id="m-des">vsvfsvkhbsv hksfvhbskhbvksbf vkfshvhsfv sfbvhksfvsf bsfhbkbvskhfvshfv</p>
+              <p id="modal-description"></p>
               <h4>Difficultés rencontrées</h4>
-              <div id="m-dif">
-                <p><img class="arrow-text" src="./assets/svg/arrow-problem.svg" alt="Flèche.">
-                  flnjs fjs lfnfjslfnjfff fvfsvvs<br>
-                  <span>Solution :</span> d dfnlj ndjfnldnjfnldnfjnvlfdv dffvd
-                </p>
-                <p><img class="arrow-text" src="./assets/svg/arrow-problem.svg" alt="Flèche.">
-                  flnjs fjs lfnfjslfnjfff fvfsvvs<br>
-                  <span>Solution :</span> d dfnlj ndjfnldnjfnldnfjnvlfdv dffvd
-                </p>
-              </div>
+              <div id="modal-difficulties"></div>
               <h4>Compétences acquises</h4>
-              <ul id="m-ski">
-                <li>svfvs fsvsfvfs</li>
-                <li>svfvs fsvsfvfs</li>
-                <li>svfvs fsvsfvfs</li>
-                <li>svfvs fsvsfvfs</li>
-                <li>svfvs fsvsfvfs</li>
-                <li>svfvs fsvsfvfs</li>
-                <li>svfvs fsvsfvfs</li>
-                <li>svfvs fsvsfvfs</li>
-                <li>svfvs fsvsfvfs</li>
+              <ul id="modal-skills">
               </ul>
             </div>
           </div>
         </div>
-        <img id="modal-next" src="./assets/svg/next.svg" alt="Icône suivant.">
-        <!-- <div class="modal-arrows">
-          <img id="modal-next" src="./assets/svg/next-svgrepo-com (4).svg" alt="Icône suivant.">
-        </div> -->
+        <img id="modal-next-button" src="./assets/svg/next.svg" alt="Icône suivant.">
       </div>
-      <div id="gallery">
-        <article id="e1">
+
+      <div id="examples-gallery">
+        <article id="example-1">
           <div>
-            <div data-id="1" class="examples-filter">
+            <div class="examples-filters" style="cursor: default;">
               <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
               <p>Cliquez pour plus d'informations.</p>
             </div>
-            <img class="examples-image" loading="lazy" src="./assets/images/example-test.jpg" alt="Image projet - example.title">
+            <img class="examples-images" loading="lazy" src="./assets/images/example.jpg" alt="Image projet - example.title">
           </div>
           <h3>sfjvskjn fnkj dnfjd</h3>
         </article>
-        <article id="e2">
+        <article id="example-2">
           <div>
-            <div data-id="2" class="examples-filter">
+            <div class="examples-filters" style="cursor: default;">
               <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
               <p>Cliquez pour plus d'informations.</p>
             </div>
-            <img class="examples-image" loading="lazy" src="./assets/images/example-test.jpg" alt="Image projet - example.title">
+            <img class="examples-images" loading="lazy" src="./assets/images/example.jpg" alt="Image projet - example.title">
           </div>
           <h3>vfdjvndkj nfdjkvnjkdfnkfvjvjkd nfdj</h3>
         </article>
-        <article id="e3">
+        <article id="example-3">
           <div>
-            <div data-id="3" class="examples-filter">
+            <div class="examples-filters" style="cursor: default;">
               <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
               <p>Cliquez pour plus d'informations.</p>
             </div>
-            <img class="examples-image" loading="lazy" src="./assets/images/example-test.jpg" alt="Image projet - example.title">
+            <img class="examples-images" loading="lazy" src="./assets/images/example.jpg" alt="Image projet - example.title">
           </div>
           <h3>df iji nidnoindf dudd fn</h3>
         </article>
-        <article id="e4">
+        <article id="example-4">
           <div>
-            <div data-id="4" class="examples-filter">
+            <div class="examples-filters" style="cursor: default;">
               <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
               <p>Cliquez pour plus d'informations.</p>
             </div>
-            <img class="examples-image" loading="lazy" src="./assets/images/example-test.jpg" alt="Image projet - example.title">
+            <img class="examples-images" loading="lazy" src="./assets/images/example.jpg" alt="Image projet - example.title">
           </div>
           <h3>df dino difn odfn fdi ndof n fdin dofi ndfi</h3>
         </article>
@@ -297,13 +296,13 @@
     </div>
   </section>
 
-  <div id="contact-a" class="anchor">
+  <div id="contact-link" class="anchors">
   </div>
   <section id="contact">
     <div class="background"></div>
-    <!-- <div class="texture-grain"></div> -->
+    <!-- <div class="texture-static"></div> -->
     <div id="contact-content">
-      <h2 class="title">CONTACT</h2>
+      <h2 class="slide-title-style">CONTACT</h2>
       <form>
         <div id="family-name">
           <label for="family-name">Nom :</label>

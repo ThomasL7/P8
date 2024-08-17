@@ -1,7 +1,7 @@
-const examples = [
+window.examplesModalDatas = [
   {
     title: "cercnejln j nljnl",
-    image: "example-test.jpg",
+    image: "example.jpg",
     link: "sfvsfvbkhbkhbkhb",
     description: "vsvfsvkhbsv hksfvhbskhbvksbf vkfshvhsfv sfbvhksfvsf bsfhbkbvskhfvshfv",
     difficulties: [
@@ -18,7 +18,7 @@ const examples = [
   },
   {
     title: "title de l'article 2",
-    image: "image2.jpg",
+    image: "example.jpg",
     link: "lien2",
     description: "Description de l'article 2",
     difficulties: [
@@ -35,7 +35,7 @@ const examples = [
   },
   {
     title: "title de l'article 3",
-    image: "image3.jpg",
+    image: "example.jpg",
     link: "lien3",
     description: "Description de l'article 3",
     difficulties: [
@@ -52,7 +52,7 @@ const examples = [
   },
   {
     title: "title de l'article 4",
-    image: "image4.jpg",
+    image: "example.jpg",
     link: "lien4",
     description: "Description de l'article 4",
     difficulties: [
@@ -65,8 +65,6 @@ const examples = [
         solutions: "solutions 2 de l'article 4",
       },
     ],
-    skills: ["Compétence 1 de l'article 4", "Compétence 2 de l'article 4", "Compétence 3 de l'article 4"],
+    skills: ["Compétence 1 de l'article 4"],
   },
 ];
-
-export default examples;

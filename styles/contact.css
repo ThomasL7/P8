@@ -1,0 +1,38 @@
+#contact {
+  display: flex;
+  flex-direction: column;
+  height: var(--section-height);
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  color: var(--black);
+}
+
+#contact .background {
+  background: radial-gradient(circle at center, rgb(100, 121, 212) 0%, rgb(35, 56, 170) 100%);
+}
+
+#contact-content {
+  z-index: 1;
+  width: var(--slide-max-width);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: 0px var(--slide-side-margin);
+}
+
+#contact-content h2 {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 38px;
+  font-size: 26px;
+  font-weight: 800;
+}
+
+#contact-content .slide-title-style::before,
+#contact-content .slide-title-style::after {
+  background-color: var(--black);
+}

@@ -1,0 +1,70 @@
+#home-content h2 {
+  opacity: 0;
+}
+
+.home-title-intro {
+  animation: home-title-intro 0.85s cubic-bezier(0.21, 0.7, 0.57, 0.97) 0s 1 normal forwards;
+}
+
+@keyframes home-title-intro {
+  0% {
+    opacity: 1;
+    transform: scale(0);
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#home p {
+  opacity: 0;
+}
+
+.home-text-intro {
+  animation: home-text-intro 1.25s cubic-bezier(0.31, -0.39, 0.95, 0.7) 0s 1 normal forwards;
+}
+
+@keyframes home-text-intro {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#home-buttons {
+  opacity: 0;
+}
+
+.home-buttons-intro {
+  animation: home-buttons-intro 3.25s cubic-bezier(0.72, -0.98, 0.69, 1.32) 0s 1 normal forwards;
+}
+
+@keyframes home-buttons-intro {
+  0% {
+    opacity: 0;
+    filter: blur(12px);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.home-button-hover {
+  background: radial-gradient(ellipse at center, #e46464 0%, #e26060 100%);
+  box-shadow: 3px 4px 35px rgba(255, 0, 0, 0.5);
+  text-shadow: 0px 0px 8px #e4e2e279;
+  animation: home-button-hover 0.25s ease-in-out 0s 1 normal forwards;
+}
+
+@keyframes home-button-hover {
+  0% {
+  }
+  100% {
+    transform: scale(1.055);
+  }
+}

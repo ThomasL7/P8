@@ -128,8 +128,8 @@ nav p {
 #buttons-section {
   display: flex;
   justify-content: center;
-  cursor: none;
-  pointer-events: none;
+  /* cursor: none; */
+  /* pointer-events: none; */
 }
 #home a {
   height: 30px;

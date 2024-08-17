@@ -1,0 +1,20 @@
+:root {
+  /* ==== Info bubbles ==== */
+  --info-bubbles-width: 15vw;
+  --bubble-offset-x: 8;
+  --bubble-offset-y: -8;
+  --bubble-margin-right: 30;
+}
+
+.info-bubbles {
+  position: absolute;
+  padding: 10px;
+  display: none;
+  z-index: 1;
+  white-space: nowrap;
+  border-radius: 5px;
+  background-color: rgba(20, 20, 20, 0.884);
+  color: rgb(235, 223, 223);
+  font-size: 14px;
+  font-weight: 200;
+}

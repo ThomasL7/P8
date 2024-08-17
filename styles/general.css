@@ -1,0 +1,64 @@
+:root {
+  /* ==== Colors ==== */
+  --white: white;
+  --black: #141313;
+
+  /* ==== Sizes ==== */
+  --slide-max-width: 1280px;
+  --slide-side-margin: 15px;
+  --header-height: 38px;
+  --section-height: calc(100vh - var(--header-height));
+  --slide-bands-height: 12%;
+}
+
+html {
+  overflow: hidden;
+  scroll-behavior: auto;
+  cursor: default;
+  background-color: rgb(63, 63, 63);
+  font-size: 18px;
+  font-family: "Arial";
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+/* Anchors offsetting */
+#home-link,
+#about-link,
+#skills-link,
+#examples-link,
+#contact-link {
+  display: block;
+  position: relative;
+  top: calc(-1 * var(--header-height));
+  visibility: hidden;
+}
+
+/* Classes */
+.background {
+  position: absolute;
+  width: 100%;
+  height: var(--section-height);
+}
+
+.slide-title-style::before,
+.slide-title-style::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 125%;
+  height: 5px;
+}
+
+.slide-title-style::before {
+  top: -12px;
+}
+
+.slide-title-style::after {
+  top: 38px;
+}

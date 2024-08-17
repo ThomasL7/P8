@@ -1,17 +1,19 @@
 :root {
   --scroll-delay: 750;
-  --header-animation-time: 0.6s;
-  /* --header-title-animation-time: 1s; */
-  --outro-animation-time: 500s;
+  --header-animation-duration: 0.6s;
+  /* --header-title-animation-duration: 1s; */
+  --outro-animation-duration: 500s;
   --item-y-position: 0;
-  --skills-item-animation-time: 0.75s;
+  --skills-item-animation-duration: 0.75s;
+  --skills-item-animation-height: -12px;
+  --skills-item-ending-animation-duration: 350;
   --info-bubble-text-speed: 30;
   --filter-values: grayscale(0) brightness(1);
 }
 
 /*** Header ***************************************************/
 header {
-  animation: header-anim var(--header-animation-time) cubic-bezier(0.46, 0.01, 0.67, 0.86) 0s 1 normal none;
+  animation: header-anim var(--header-animation-duration) cubic-bezier(0.46, 0.01, 0.67, 0.86) 0s 1 normal none;
 }
 @keyframes header-anim {
   0% {
@@ -21,7 +23,7 @@ header {
   }
 }
 #title {
-  animation: main-title-anim var(--header-animation-time) ease-out 0s 1 normal none;
+  animation: main-title-anim var(--header-animation-duration) ease-out 0s 1 normal none;
   /* transform: translateX(-100%); */
 }
 @keyframes main-title-anim {
@@ -46,7 +48,7 @@ header {
 }
 
 nav {
-  animation: nav-anim var(--header-animation-time) ease-out 0s 1 normal none;
+  animation: nav-anim var(--header-animation-duration) ease-out 0s 1 normal none;
 }
 @keyframes nav-anim {
   /* 0% {
@@ -139,8 +141,8 @@ nav a:hover {
     opacity: 1;
   }
 }
-#home button:hover,
-#home a:hover {
+/* #home a:hover */
+.home-button-anim {
   background: radial-gradient(ellipse at center, #e46464 0%, #e26060 100%);
   animation: button 0.25s ease-in-out 0s 1 normal forwards;
   box-shadow: 3px 4px 35px rgba(255, 0, 0, 0.5);
@@ -153,7 +155,7 @@ nav a:hover {
   }
 }
 .outro-forward {
-  animation: outro-forward var(--outro-animation-time) linear 0s 1 normal forwards;
+  animation: outro-forward var(--outro-animation-duration) linear 0s 1 normal forwards;
 }
 @keyframes outro-forward {
   0% {
@@ -279,7 +281,7 @@ nav a:hover {
 }
 /* #skills li div:hover */
 .skills-items-anim {
-  animation: bounce var(--skills-item-animation-time) ease-in-out 0s infinite none;
+  animation: bounce var(--skills-item-animation-duration) ease-in-out 0s infinite none;
   /* cursor: help; */
 }
 @keyframes bounce {
@@ -287,28 +289,28 @@ nav a:hover {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-12px);
+    transform: translateY(var(--skills-item-animation-height));
   }
   100% {
     transform: translateY(0);
   }
 }
-.skills-items-end-anim {
-  animation: back-to-normal 0.15s ease-out 0s normal none;
-  /* transition: transform 6s 0s ease-in-out;
+/* .skills-items-end-anim {
+  animation: back-to-normal 0.15s ease-out 0s normal none; */
+/* transition: transform 6s 0s ease-in-out;
   transform: translateY(0); */
-  /* transition: transform 5s ease-out; */
-}
+/* transition: transform 5s ease-out; */
+/* }
 @keyframes back-to-normal {
   0% {
-    transform: translateY(var(--item-y-position));
-    /* transform: translateY(attr(data-y-position px)); */
-    /* transform: translateY(-33px); */
-  }
+    transform: translateY(var(--item-y-position)); */
+/* transform: translateY(attr(data-y-position px)); */
+/* transform: translateY(-33px); */
+/* }
   100% {
     transform: translateY(0);
   }
-}
+} */
 /* .skills-items-end-anim {
   animation: bounce-outro 0.75s ease-out 0s 1 none;
 }
@@ -389,11 +391,15 @@ nav a:hover {
     opacity: 1;
   } */
   0% {
-    transform: rotateX(-80deg);
+    /* transform: scale(1) rotateX(-80deg); */
+
+    transform: scaleY(0.2);
     opacity: 0;
   }
   100% {
-    transform: rotateX(0);
+    /* transform: rotateX(0); */
+    transform: scaleY(1);
+    /* transform: scale(1) rotateX(0deg); */
     opacity: 1;
   }
   /* 0% {
@@ -411,7 +417,8 @@ nav a:hover {
   transition: transform 0.15s 0s ease-in-out;
   transform: scale(1.03);
 }
-.examples-filter:hover {
+/* .examples-filter:hover */
+.examples-filter-hover {
   /* transition: opacity 0.15s 0s ease-out; */
   animation: examples-filter-hover 0.35s cubic-bezier(0.09, 0.65, 0.4, 1) 0s 1 normal forwards;
   /* opacity: 1; */

@@ -1,4 +1,7 @@
-import { getModalState } from "./modal-state.js";
+// Scroll to top on reload
+window.onbeforeunload = function () {
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+};
 
 document.addEventListener("DOMContentLoaded", () => {
   let index = 0;
@@ -6,16 +9,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const anchors = document.querySelectorAll(".anchor");
   const maxIndex = anchors.length - 1;
   let isScrolling;
-  const headerAnimationTime = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-animation-time")) * 1000;
-  // const headerTitleAnimationTime = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-title-animation-time")) * 1000;
+  const headerAnimationDuration = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-animation-duration")) * 1000;
+  // const headerTitleAnimationduration = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-title-animation-duration")) * 1000;
   const scrollTimeOut = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--scroll-delay"));
   const navLinks = document.querySelectorAll("nav a");
   const contactLink = document.getElementById("contact-button");
+  const h1 = document.querySelector("h1");
 
   // Events listener (wheel + keyboard) for index and functions
   setTimeout(() => {
     window.addEventListener("wheel", (event) => {
-      if (isScrolling || getModalState()) return;
+      if (isScrolling || window.isModalOpen) return;
       isScrolling = true;
       setTimeout(() => (isScrolling = false), scrollTimeOut);
       previousIndex = index;
@@ -37,31 +41,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     window.addEventListener("keydown", (event) => {
-      if (isScrolling || getModalState()) return;
-      isScrolling = true;
-      setTimeout(() => (isScrolling = false), scrollTimeOut);
-      if (document.activeElement.tagName.toLowerCase() === "input" || document.activeElement.tagName.toLowerCase() === "textarea" || document.activeElement.tagName.toLowerCase() === "select") {
-        return;
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+        if (isScrolling || window.isModalOpen) return;
+        isScrolling = true;
+        setTimeout(() => (isScrolling = false), scrollTimeOut);
+        if (document.activeElement.tagName.toLowerCase() === "input" || document.activeElement.tagName.toLowerCase() === "textarea" || document.activeElement.tagName.toLowerCase() === "select") {
+          return;
+        }
+        previousIndex = index;
+        if (event.key === "ArrowDown") {
+          index++;
+        } else if (event.key === "ArrowUp") {
+          index--;
+        }
+        if (index < 0) {
+          index = 0;
+          return;
+        }
+        if (index > maxIndex) {
+          index = maxIndex;
+          return;
+        }
+        scrollToAnchor();
+        setActiveNavLink();
+        window.dispatchEvent(new CustomEvent("indexChanged", { detail: { index, previousIndex } }));
       }
-      previousIndex = index;
-      if (event.key === "ArrowDown") {
-        index++;
-      } else if (event.key === "ArrowUp") {
-        index--;
-      }
-      if (index < 0) {
-        index = 0;
-        return;
-      }
-      if (index > maxIndex) {
-        index = maxIndex;
-        return;
-      }
-      scrollToAnchor();
-      setActiveNavLink();
-      window.dispatchEvent(new CustomEvent("indexChanged", { detail: { index, previousIndex } }));
     });
-  }, headerAnimationTime);
+  }, headerAnimationDuration);
 
   // Resizing window reset to current anchor
   window.addEventListener("resize", function () {
@@ -97,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
           window.dispatchEvent(new CustomEvent("indexChanged", { detail: { index, previousIndex } }));
         }
       });
-    }, headerAnimationTime);
+    }, headerAnimationDuration);
   });
 
   function setActiveNavLink() {
@@ -105,16 +111,33 @@ document.addEventListener("DOMContentLoaded", () => {
     navLinks[index].classList.add("active");
   }
 
+  // H1 link
+  h1.addEventListener("click", () => {
+    if (index !== 1) {
+      if (h1.dataset.animState === "true") {
+        if (isScrolling) return;
+        setTimeout(() => (isScrolling = false), scrollTimeOut);
+        previousIndex = 0;
+        index = 1;
+        setActiveNavLink();
+        document.getElementById(anchors[index].id).scrollIntoView({ behavior: "auto" });
+        window.dispatchEvent(new CustomEvent("indexChanged", { detail: { index, previousIndex } }));
+      }
+    }
+  });
+
   // Contact home banner button link
   contactLink.addEventListener("click", (event) => {
     event.preventDefault();
-    if (isScrolling) return;
-    isScrolling = true;
-    setTimeout(() => (isScrolling = false), scrollTimeOut);
-    previousIndex = 0;
-    index = maxIndex;
-    setActiveNavLink();
-    document.getElementById(anchors[index].id).scrollIntoView({ behavior: "auto" });
-    window.dispatchEvent(new CustomEvent("indexChanged", { detail: { index, previousIndex } }));
+    if (contactLink.parentElement.dataset.animState === "true") {
+      if (isScrolling) return;
+      isScrolling = true;
+      setTimeout(() => (isScrolling = false), scrollTimeOut);
+      previousIndex = 0;
+      index = maxIndex;
+      setActiveNavLink();
+      document.getElementById(anchors[index].id).scrollIntoView({ behavior: "auto" });
+      window.dispatchEvent(new CustomEvent("indexChanged", { detail: { index, previousIndex } }));
+    }
   });
 });

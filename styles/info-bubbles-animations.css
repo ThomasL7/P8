@@ -1,0 +1,39 @@
+:root {
+  /* ==== Info bubbles ==== */
+  --info-bubbles-text-speed: 25;
+}
+
+.info-bubbles-open {
+  display: block;
+  animation: info-bubbles-open 0.35s cubic-bezier(0.3, 0.85, 0.57, 0.9) 0s 1 normal none;
+  transform-origin: 0% 100%;
+}
+
+@keyframes info-bubbles-open {
+  0% {
+    opacity: 0.2;
+    transform: scale(0.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.info-bubbles-close {
+  display: none;
+  animation: info-bubbles-close 0.11s cubic-bezier(0.3, 0.85, 0.6, 0.98) 0s 1 normal none;
+  transform-origin: 0% 100%;
+}
+
+@keyframes info-bubbles-close {
+  0% {
+    display: block;
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.1;
+    transform: scale(0.2);
+  }
+}

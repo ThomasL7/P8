@@ -1,0 +1,115 @@
+#skills {
+  display: flex;
+  justify-content: center;
+  height: var(--section-height);
+  width: 100%;
+  color: var(--white);
+}
+
+#skills .background {
+  height: var(--section-height);
+  background: radial-gradient(circle at center, rgb(110, 190, 236) 0%, rgb(67, 129, 167) 100%);
+}
+
+#skills-content {
+  width: var(--slide-max-width);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: 0px var(--slide-side-margin);
+}
+
+#skills-content h2 {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 38px;
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.slide-title-style::before,
+.slide-title-style::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 125%;
+  height: 5px;
+  background-color: var(--white);
+}
+
+.slide-title-style::before {
+  top: -12px;
+}
+
+.slide-title-style::after {
+  top: 38px;
+}
+
+#skills-trees {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 15px;
+}
+
+#skills-tree-left,
+#skills-tree-center,
+#skills-tree-right {
+  padding: 15px;
+  margin: 15px;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.192) 0%, rgba(255, 255, 255, 0.082) 100%);
+  border-radius: 15px;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.062);
+}
+
+.front-z-index {
+  z-index: 1;
+}
+
+#skills-trees h3 {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 36px;
+  font-size: 26px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+#skills-trees ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px 15px;
+}
+
+#skills-trees li {
+  flex-basis: 30%;
+  text-align: center;
+  position: relative;
+}
+
+.skills-items-div img {
+  width: 100%;
+  height: 30px;
+}
+
+.skills-items-div h4 {
+  margin-top: 5px;
+  margin-bottom: 32px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--black);
+}
+
+#skills-content > p {
+  margin-top: 11px;
+  width: 80%;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 400;
+}

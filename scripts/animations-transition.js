@@ -1,226 +1,168 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const scrollTimeOut = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--scroll-delay"));
-  const headerAnimationTime = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-animation-time")) * 1000;
-  // const headerTitleAnimationTime = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-title-animation-time")) * 1000;
-
-  // let onLoadAnim = true;
-  // Home (0)
-  const bannerContentH2 = document.querySelector("#banner-content h2");
-  const bannerContentP = document.querySelector("#banner-content p");
-  const buttonsSection = document.getElementById("buttons-section");
-  const bannerContent = document.getElementById("banner-content");
-  // About (1)
-  const photo = document.getElementById("photo");
-  const imgPhoto = document.querySelector("#photo img");
-  const textAbout = document.getElementById("text-about");
+  const root = document.documentElement;
+  // ==== DOM ====
+  const header = document.querySelector("header");
+  const headerTitleBlock = document.getElementById("header-title-block");
+  const headerTitle = document.querySelector("h1");
+  const nav = document.querySelector("nav");
+  const navLinks = document.querySelectorAll("nav a");
+  const homeContent = document.getElementById("home-content");
+  const homeTitle = document.querySelector("#home-content h2");
+  const homeText = document.querySelector("#home-content p");
+  const homeButtons = document.getElementById("home-buttons");
   const aboutContent = document.getElementById("about-content");
-  // Skills (2)
-  const skillsH2 = document.querySelector("#skills h2");
-  const skillsTrees = document.querySelectorAll("#skills-table > div");
-  const skillsLeft = document.getElementById("skills-left");
-  const skillsCenter = document.getElementById("skills-center");
-  const skillsRight = document.getElementById("skills-right");
-  const skillsP = document.querySelector("#skills p");
+  const aboutBlockPhoto = document.getElementById("about-block-photo");
+  const aboutImagePhoto = document.querySelector("#about-block-photo img");
+  const aboutText = document.getElementById("about-text");
   const skillsContent = document.getElementById("skills-content");
-  const skillsItems = document.querySelectorAll("#skills-table li div");
-  // Examples (3)
+  const skillsTitle = document.querySelector("#skills-content h2");
+  const skillsTreeLeft = document.getElementById("skills-tree-left");
+  const skillsTreeCenter = document.getElementById("skills-tree-center");
+  const skillsTreeRight = document.getElementById("skills-tree-right");
+  const skillsText = document.querySelector("#skills-content > p");
   const examplesContent = document.getElementById("examples-content");
-  const examplesH2 = document.querySelector("#examples-content h2");
-  const gallery = document.getElementById("gallery");
-  const e1 = document.getElementById("e1");
-  const e2 = document.getElementById("e2");
-  const e3 = document.getElementById("e3");
-  const e4 = document.getElementById("e4");
-  const examples = document.querySelectorAll("#gallery article");
-  const examplesImage = document.querySelectorAll(".examples-filter");
-  const modalPrevious = document.getElementById("modal-previous");
-  const modal = document.getElementById("modal");
-  const modalNext = document.getElementById("modal-next");
+  const examplesTitle = document.querySelector("#examples-content h2");
+  const example1 = document.getElementById("example-1");
+  const example2 = document.getElementById("example-2");
+  const example3 = document.getElementById("example-3");
+  const example4 = document.getElementById("example-4");
+  // ==== Classes ====
+  const CLASS_ELEMENTS_HEADER_INTRO = "elements-header-intro";
+  const CLASS_HEADER_INTRO = "header-intro";
+  const CLASS_HEADER_TITLE_HOVER = "header-title-hover";
+  const CLASS_HOME_BUTTONS_INTRO = "home-buttons-intro";
+  const CLASS_HOME_TEXT_INTRO = "home-text-intro";
+  const CLASS_HOME_TITLE_INTRO = "home-title-intro";
+  const CLASS_NAV_LINK_HOVER = "nav-link-hover";
+  const CLASS_NAV_LINK_ACTIVE = "nav-link-active";
+  const CLASS_OUTRO_BACKWARD = "slide-outro-backward";
+  const CLASS_OUTRO_FORWARD = "slide-outro-forward";
+  // ==== Constants ====
+  const contentSlidesAndIntroClassesArray = [
+    {
+      index: 0,
+      slide: homeContent,
+      elements: [
+        { element: homeTitle, introClass: CLASS_HOME_TITLE_INTRO },
+        { element: homeText, introClass: CLASS_HOME_TEXT_INTRO },
+        { element: homeButtons, introClass: CLASS_HOME_BUTTONS_INTRO },
+      ],
+    },
+    {
+      index: 1,
+      slide: aboutContent,
+      elements: [
+        { element: aboutBlockPhoto, introClass: "about-block-photo-intro" },
+        { element: aboutImagePhoto, introClass: "about-image-photo-intro" },
+        { element: aboutText, introClass: "about-text-intro" },
+      ],
+    },
+    {
+      index: 2,
+      slide: skillsContent,
+      elements: [
+        { element: skillsTitle, introClass: "skills-title-intro" },
+        { element: skillsTreeLeft, introClass: "skills-tree-left-intro" },
+        { element: skillsTreeCenter, introClass: "skills-tree-center-intro" },
+        { element: skillsTreeRight, introClass: "skills-tree-right-intro" },
+        { element: skillsText, introClass: "skills-text-intro" },
+      ],
+    },
+    {
+      index: 3,
+      slide: examplesContent,
+      elements: [
+        { element: examplesTitle, introClass: "examples-title-intro" },
+        { element: example1, introClass: "example-1-intro" },
+        { element: example2, introClass: "example-2-intro" },
+        { element: example3, introClass: "example-3-intro" },
+        { element: example4, introClass: "example-4-intro" },
+      ],
+    },
+  ];
+  const headerAnimationDuration = parseFloat(getComputedStyle(root).getPropertyValue("--header-animation-duration")) * 1000;
+  const scrollDuration = parseInt(getComputedStyle(root).getPropertyValue("--delay-before-next-scroll"));
+  //  ==== Booleans ====
+  window.isHeaderTitleAnimationEnded = false;
 
-  // Home animations delay for header animation
-  setTimeout(() => {
-    bannerContentH2.classList.remove("opacity-0");
-    bannerContentH2.classList.remove("opacity-0");
-    bannerContentH2.classList.remove("opacity-0");
-    bannerContentH2.classList.add("banner-content-h2-intro");
-    bannerContentP.classList.add("banner-content-p-intro");
-    buttonsSection.classList.add("buttons-section-intro");
-  }, headerAnimationTime);
+  //*** Functions ****************************************************/
+  function addIntrosAfterLoading() {
+    header.classList.add(CLASS_HEADER_INTRO);
+    headerTitleBlock.classList.add(CLASS_ELEMENTS_HEADER_INTRO);
+    nav.classList.add(CLASS_ELEMENTS_HEADER_INTRO);
+    setTimeout(() => {
+      headerTitle.classList.add(CLASS_HEADER_TITLE_HOVER);
+      homeTitle.classList.add(CLASS_HOME_TITLE_INTRO);
+      homeText.classList.add(CLASS_HOME_TEXT_INTRO);
+      homeButtons.classList.add(CLASS_HOME_BUTTONS_INTRO);
+      window.isHeaderTitleAnimationEnded = true;
+    }, headerAnimationDuration);
+  }
 
-  //*** Set animations on index change ****************************************************/
-  window.addEventListener("indexChanged", function (event) {
-    // // Remove intro animations & add outro animations
-    switch (event.detail.previousIndex) {
-      case 0:
-        buttonsSection.style.pointerEvents = "none";
-        buttonsSection.style.cursor = "default";
+  function removeIntrosBeforeLoading() {
+    header.classList.remove(CLASS_HEADER_INTRO);
+    headerTitleBlock.classList.remove(CLASS_ELEMENTS_HEADER_INTRO);
+    nav.classList.remove(CLASS_ELEMENTS_HEADER_INTRO);
+    homeTitle.classList.remove(CLASS_HOME_TITLE_INTRO);
+    homeText.classList.remove(CLASS_HOME_TEXT_INTRO);
+    homeButtons.classList.remove(CLASS_HOME_BUTTONS_INTRO);
+  }
 
-        setTimeout(() => {
-          // if (onLoadAnim) {
-          //   bannerContentH2.classList.remove("banner-content-h2-on-load");
-          //   bannerContentP.classList.remove("banner-content-p-on-load");
-          //   buttonsSection.classList.remove("buttons-section-on-load");
-          //   onLoadAnim = false;
-          // }
-          bannerContentH2.classList.remove("banner-content-h2-intro");
-          bannerContentP.classList.remove("banner-content-p-intro");
-          buttonsSection.classList.remove("buttons-section-intro");
-        }, scrollTimeOut);
+  function handleHeaderHoverAnimations(previousIndexSlide, indexSlide) {
+    navLinks[previousIndexSlide].classList.add(CLASS_NAV_LINK_HOVER);
+    navLinks[indexSlide].classList.remove(CLASS_NAV_LINK_HOVER);
+    if (previousIndexSlide === 1) headerTitle.classList.add(CLASS_HEADER_TITLE_HOVER);
+    if (indexSlide === 1) headerTitle.classList.remove(CLASS_HEADER_TITLE_HOVER);
+  }
 
-        if (event.detail.previousIndex < event.detail.index) {
-          bannerContent.classList.add("outro-forward");
-        } else {
-          bannerContent.classList.add("outro-backward");
-        }
-        break;
-
-      case 1:
-        setTimeout(() => {
-          photo.classList.remove("photo-intro");
-          imgPhoto.classList.remove("img-photo-intro");
-          textAbout.classList.remove("text-about-intro");
-        }, scrollTimeOut);
-
-        if (event.detail.previousIndex < event.detail.index) {
-          aboutContent.classList.add("outro-forward");
-        } else {
-          aboutContent.classList.add("outro-backward");
-        }
-        break;
-
-      case 2:
-        skillsItems.forEach((skillsItem) => {
-          skillsItem.style.pointerEvents = "none";
-          skillsItem.style.cursor = "default";
-        });
-
-        setTimeout(() => {
-          skillsH2.classList.remove("skills-h2-intro");
-          skillsLeft.classList.remove("skills-left-intro");
-          skillsCenter.classList.remove("skills-center-intro");
-          skillsRight.classList.remove("skills-right-intro");
-          skillsP.classList.remove("skills-p-intro");
-        }, scrollTimeOut);
-
-        if (event.detail.previousIndex < event.detail.index) {
-          skillsContent.classList.add("outro-forward");
-        } else {
-          skillsContent.classList.add("outro-backward");
-        }
-        break;
-
-      case 3:
-        examplesImage.forEach((exampleImage) => {
-          exampleImage.style.pointerEvents = "none";
-          exampleImage.style.cursor = "default";
-        });
-
-        setTimeout(() => {
-          examplesH2.classList.remove("examples-h2-intro");
-          e1.classList.remove("examples-e1-intro");
-          e2.classList.remove("examples-e2-intro");
-          e3.classList.remove("examples-e3-intro");
-          e4.classList.remove("examples-e4-intro");
-        }, scrollTimeOut);
-        if (event.detail.previousIndex < event.detail.index) {
-          examplesContent.classList.add("outro-forward");
-        } else {
-          examplesContent.classList.add("outro-backward");
-        }
-        break;
-
-      case 4:
-        break;
-      case 5:
-        break;
-
-      default:
-        break;
-    }
-
-    // Add animations intro & remove outro animations
-    switch (event.detail.index) {
-      case 0:
-        bannerContent.classList.remove("outro-forward");
-        bannerContent.classList.remove("outro-backward");
-
-        bannerContentH2.classList.add("banner-content-h2-intro");
-        bannerContentP.classList.add("banner-content-p-intro");
-        buttonsSection.classList.add("buttons-section-intro");
-        break;
-
-      case 1:
-        aboutContent.classList.remove("outro-forward");
-        aboutContent.classList.remove("outro-backward");
-        imgPhoto.classList.remove("img-photo-fixed-filter");
-
-        photo.classList.add("photo-intro");
-        imgPhoto.classList.add("img-photo-intro");
-        textAbout.classList.add("text-about-intro");
-        break;
-
-      case 2:
-        skillsContent.classList.remove("outro-forward");
-        skillsContent.classList.remove("outro-backward");
-
-        skillsH2.classList.add("skills-h2-intro");
-        skillsLeft.classList.add("skills-left-intro");
-        skillsCenter.classList.add("skills-center-intro");
-        skillsRight.classList.add("skills-right-intro");
-        skillsP.classList.add("skills-p-intro");
-        break;
-
-      case 3:
-        examplesContent.classList.remove("outro-forward");
-        examplesContent.classList.remove("outro-backward");
-
-        examplesH2.classList.add("examples-h2-intro");
-        e1.classList.add("examples-e1-intro");
-        e2.classList.add("examples-e2-intro");
-        e3.classList.add("examples-e3-intro");
-        e4.classList.add("examples-e4-intro");
-        break;
-
-      case 4:
-        break;
-      case 5:
-        break;
-
-      default:
-        break;
-    }
-  });
-
-  //*** Managing cursor pointer and interactions when animations is playing *************************************/
-  // Home
-  buttonsSection.addEventListener("animationend", (event) => {
-    if (event.animationName === "banner-buttons") {
-      buttonsSection.style.pointerEvents = "auto";
-      buttonsSection.style.cursor = "pointer";
-    }
-  });
-
-  // Skills
-  skillsTrees.forEach((tree) => {
-    const items = tree.querySelectorAll("li div");
-    tree.addEventListener("animationend", (event) => {
-      if (event.animationName === "pop") {
-        items.forEach((item) => {
-          item.style.pointerEvents = "auto";
-          item.style.cursor = "help";
+  function setIntroAnimationsSlide(indexSlide) {
+    contentSlidesAndIntroClassesArray.forEach(({ index, elements }) => {
+      if (indexSlide === index) {
+        elements.forEach(({ element, introClass }) => {
+          element.classList.add(introClass);
         });
       }
     });
-  });
+  }
 
-  // Examples
-  examples.forEach((example) => {
-    const image = example.querySelector(".examples-filter");
-    example.addEventListener("animationstart", (event) => {
-      if (event.animationName === "examples-anim") {
-        image.style.pointerEvents = "auto";
-        image.style.cursor = "pointer";
+  function setActiveNavLink(previousIndexSlide, indexSlide) {
+    navLinks[previousIndexSlide].classList.remove(CLASS_NAV_LINK_ACTIVE);
+    navLinks[indexSlide].classList.add(CLASS_NAV_LINK_ACTIVE);
+  }
+
+  function setOutroAnimationsSlide(previousIndexSlide, indexSlide) {
+    const outroAnimationType = previousIndexSlide < indexSlide ? CLASS_OUTRO_FORWARD : CLASS_OUTRO_BACKWARD;
+
+    contentSlidesAndIntroClassesArray.forEach(({ index, slide, elements }) => {
+      if (previousIndexSlide === index) {
+        slide.classList.add(outroAnimationType);
+        setTimeout(() => {
+          elements.forEach(({ element, introClass }) => {
+            element.classList.remove(introClass);
+          });
+          slide.classList.remove(outroAnimationType);
+        }, scrollDuration);
       }
     });
+  }
+
+  //*** Events ****************************************************/
+  window.onload = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    window.dispatchEvent(new CustomEvent("windowLoaded"));
+    addIntrosAfterLoading();
+  };
+
+  window.onbeforeunload = function () {
+    removeIntrosBeforeLoading();
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  };
+
+  window.addEventListener("indexSlideChanged", function (event) {
+    const { previousIndexSlide, indexSlide } = event.detail;
+    setOutroAnimationsSlide(previousIndexSlide, indexSlide);
+    setActiveNavLink(previousIndexSlide, indexSlide);
+    setIntroAnimationsSlide(indexSlide);
+    handleHeaderHoverAnimations(previousIndexSlide, indexSlide);
   });
 });

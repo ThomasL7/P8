@@ -1,0 +1,57 @@
+#about-block-photo {
+  transform: rotate(-5deg);
+}
+
+.about-block-photo-intro {
+  opacity: 0;
+  animation: about-block-photo-intro 1s cubic-bezier(0.62, 0.11, 0.61, 1.01) 0.15s 1 normal forwards;
+}
+
+@keyframes about-block-photo-intro {
+  0% {
+    opacity: 1;
+    transform: translateY(-50px) scale(1.3) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(0) scale(1) rotate(-5deg);
+  }
+  60% {
+    transform: translateY(-5px) scale(1.025) rotate(-5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(-5deg);
+  }
+}
+
+.about-image-photo-intro {
+  filter: grayscale(100%) brightness(2%);
+  animation: about-image-photo-intro 2.6s cubic-bezier(0.57, 0.21, 0.51, 0.86) 0.25s 1 normal forwards;
+}
+
+@keyframes about-image-photo-intro {
+  0% {
+    filter: grayscale(100%) brightness(3%);
+  }
+  100% {
+    filter: none;
+  }
+}
+
+.about-text-intro {
+  opacity: 0;
+  animation: about-text-intro 1s cubic-bezier(0.66, 0.01, 0.51, 1.18) 0.15s 1 normal forwards;
+}
+
+@keyframes about-text-intro {
+  0% {
+    opacity: 0;
+    transform: translateX(+150%);
+  }
+  98% {
+    transform: translateX(-7px);
+  }
+  100% {
+    opacity: 1;
+  }
+}

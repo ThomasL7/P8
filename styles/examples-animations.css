@@ -1,0 +1,83 @@
+.examples-title-intro {
+  opacity: 0;
+  animation: slide-title-intro 0.85s ease-in-out 0s 1 normal forwards;
+}
+
+.example-1-intro {
+  opacity: 0;
+  animation: example-intro 0.45s ease-in-out 0.6s 1 normal forwards;
+}
+
+.example-2-intro {
+  opacity: 0;
+  animation: example-intro 0.45s ease-in-out 1s 1 normal forwards;
+}
+
+.example-3-intro {
+  opacity: 0;
+  animation: example-intro 0.45s ease-in-out 1.4s 1 normal forwards;
+}
+
+.example-4-intro {
+  opacity: 0;
+  animation: example-intro 0.45s ease-in-out 1.8s 1 normal forwards;
+}
+
+@keyframes example-intro {
+  0% {
+    opacity: 0;
+    transform: scaleY(0.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+.examples-divs-hover {
+  transform: scale(1.03);
+  transition: transform 0.15s 0s ease-in-out;
+  box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.452);
+}
+
+.examples-filters-hover {
+  animation: examples-filters-hover 0.35s cubic-bezier(0.09, 0.65, 0.4, 1) 0s 1 normal forwards;
+}
+
+@keyframes examples-filters-hover {
+  0% {
+    opacity: 0;
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.active-example-filter-open {
+  filter: brightness(45%);
+}
+
+.active-example-filter-on-change {
+  animation: active-example-filter-on-change 0.32s linear 0s 1 normal forwards;
+}
+
+@keyframes active-example-filter-on-change {
+  0% {
+  }
+  100% {
+    filter: brightness(45%);
+  }
+}
+
+.active-example-filter-close {
+  animation: active-example-filter-close 0.5s linear 0s 1 normal none;
+}
+
+@keyframes active-example-filter-close {
+  0% {
+    filter: brightness(45%);
+  }
+  100% {
+  }
+}
