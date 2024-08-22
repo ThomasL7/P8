@@ -36,7 +36,7 @@ nav {
 .header-title-hover:hover {
   cursor: pointer;
   text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.205);
-  animation: header-title-hover 0.525s ease-in-out 0s infinite alternate none;
+  animation: header-title-hover 0.525s ease-in 0s infinite alternate none;
 }
 
 @keyframes header-title-hover {
@@ -51,14 +51,14 @@ nav {
 
 .nav-link-active {
   color: var(--black);
-  background-color: rgb(211, 205, 205);
+  background-color: var(--white);
   box-shadow: 0px 3px 10px rgba(238, 238, 238, 0.205);
 }
 
 .nav-link-hover:hover {
   cursor: pointer;
   color: var(--black);
-  background-color: rgb(233, 226, 226);
+  background-color: var(--white);
   box-shadow: 0px 3px 10px rgba(238, 238, 238, 0.205);
   animation: nav-link-hover 0.5s ease-in-out 0s infinite alternate none;
 }

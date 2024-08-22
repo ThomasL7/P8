@@ -15,3 +15,6 @@ h1 hover shadows class anim
 separatorin modal?
 
 PAS ANIMATION HOVER PR H1 ET NAV SI DEJA SUR INDEXSLIDE
+
+nav text aen doublon a cache
+loading icon tournant home

@@ -1,8 +1,13 @@
-.modal-open {
-  animation: modal-close-or-open 0.75s cubic-bezier(0.18, 0.41, 0.4, 1) 0s 1 normal forwards;
+:root {
+  /* ==== Durations ==== */
+  --modal-closing-animation-duration: 0.15s;
 }
 
-@keyframes modal-close-or-open {
+.modal-open {
+  animation: modal-open 0.75s cubic-bezier(0.18, 0.41, 0.4, 1) 0s 1 normal none;
+}
+
+@keyframes modal-open {
   0% {
     transform: scale(0.9);
     filter: blur(3px);
@@ -12,6 +17,46 @@
   }
 }
 
-.modal-close {
-  animation: modal-close-or-open 1.5s cubic-bezier(0.09, 0.65, 0.4, 1) 0s 1 normal forwards;
+#modal-previous-button:hover {
+  animation: modal-previous-hover 0.4s linear 0s infinite alternate forwards;
+}
+
+@keyframes modal-previous-hover {
+  0% {
+    transform: scale(1) rotate(180deg) translateX(0);
+  }
+  100% {
+    transform: scale(1.075) rotate(180deg) translateX(10px);
+  }
+}
+
+#modal-next-button:hover {
+  animation: modal-next-hover 0.4s linear 0s infinite alternate forwards;
+}
+
+@keyframes modal-next-hover {
+  0% {
+    transform: scale(1) translateX(0);
+  }
+  100% {
+    transform: scale(1.075) translateX(10px);
+  }
+}
+
+#modal-close-icon:hover {
+  transform: scale(1.15);
+  transition: transform 0.3s 0s ease-in-out;
+}
+
+.modal-screen-close {
+  animation: modal-screen-close var(--modal-closing-animation-duration) linear 0s 1 normal forwards;
+}
+
+@keyframes modal-screen-close {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

@@ -1,12 +1,12 @@
 :root {
   /* ==== Colors ==== */
-  --white: white;
+  --white: rgb(255, 255, 255);
   --black: #141313;
 
   /* ==== Sizes ==== */
   --slide-max-width: 1280px;
-  --slide-side-margin: 15px;
-  --header-height: 38px;
+  --slide-side-margin: 40px;
+  --header-height: 48px;
   --section-height: calc(100vh - var(--header-height));
   --slide-bands-height: 12%;
 }
@@ -15,7 +15,7 @@ html {
   overflow: hidden;
   scroll-behavior: auto;
   cursor: default;
-  background-color: rgb(63, 63, 63);
+  background-color: rgb(65, 65, 65);
   font-size: 18px;
   font-family: "Arial";
 }
@@ -25,6 +25,7 @@ body {
   flex-direction: column;
   min-width: 320px;
   min-height: 100vh;
+  color: var(--white);
 }
 
 /* Anchors offsetting */

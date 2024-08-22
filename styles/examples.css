@@ -18,15 +18,22 @@
   justify-content: center;
   height: 100%;
   margin: 0px var(--slide-side-margin);
+  padding: 50px 0;
+  box-sizing: border-box;
 }
 
 #examples-content h2 {
   display: flex;
   justify-content: center;
   position: relative;
-  margin-bottom: 58px;
-  font-size: 26px;
+  margin-bottom: 56px;
+  font-size: 22px;
   font-weight: 800;
+}
+
+#examples-content .slide-title-style::before,
+#examples-content .slide-title-style::after {
+  width: 175%;
 }
 
 #examples-content .slide-title-style::before,
@@ -36,11 +43,10 @@
 
 #examples-gallery {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 25px 30px;
-  width: 100%;
-  padding: 0px 15px;
-  box-sizing: border-box;
+  grid-template-columns: repeat(3, 30%);
+  grid-gap: 20px 32px;
+  max-width: 95%;
+  justify-content: center;
 }
 
 #examples-gallery article {
@@ -48,39 +54,13 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100%;
 }
 
 #examples-gallery article > div {
   position: relative;
   width: 100%;
   box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.212);
-}
-
-.examples-filters {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  background-color: rgba(0, 0, 0, 0.73);
-  color: var(--white);
-}
-
-.examples-filters img {
-  width: 20px;
-  height: 20px;
-  margin-bottom: 10px;
-}
-
-.examples-filters p {
-  padding: 0px 10px;
-  font-size: 16px;
-  font-weight: 400;
-  text-align: center;
+  height: 130px;
 }
 
 .examples-images {
@@ -90,8 +70,35 @@
 }
 
 #examples-gallery h3 {
-  margin-top: 8px;
+  margin-top: 12px;
   font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.1;
+}
+
+/* Filter */
+.examples-filters {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.747);
+  color: var(--white);
+}
+
+.examples-filters img {
+  height: 20px;
+  margin-bottom: 8px;
+}
+
+.examples-filters p {
+  padding: 0px 10px;
+  font-size: 16px;
   font-weight: 500;
   text-align: center;
 }

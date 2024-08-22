@@ -55,28 +55,28 @@
 }
 
 .active-example-filter-open {
-  filter: brightness(45%);
+  filter: brightness(40%);
 }
 
 .active-example-filter-on-change {
-  animation: active-example-filter-on-change 0.32s linear 0s 1 normal forwards;
+  animation: active-example-filter-on-change 0.25s linear 0s 1 normal forwards;
 }
 
 @keyframes active-example-filter-on-change {
   0% {
   }
   100% {
-    filter: brightness(45%);
+    filter: brightness(40%);
   }
 }
 
 .active-example-filter-close {
-  animation: active-example-filter-close 0.5s linear 0s 1 normal none;
+  animation: active-example-filter-close 0.2s linear 0s 1 normal none;
 }
 
 @keyframes active-example-filter-close {
   0% {
-    filter: brightness(45%);
+    filter: brightness(40%);
   }
   100% {
   }

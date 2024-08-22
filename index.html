@@ -34,11 +34,8 @@
   <script src="./datas/info-bubbles.js"></script>
   <script src="./datas/examples.js"></script>
 
-  <script src="./scripts/disable-zoom.js"></script>
-  <script src="./scripts/slide-change.js"></script>
-  <script src="./scripts/animations-transition.js"></script>
-  <script src="./scripts/animations-in-slides.js"></script>
-  <script src="./scripts/modal.js"></script>
+  <script src="./scripts/functions.js"></script>
+  <script src="./scripts/events.js"></script>
 </head>
 
 <body>
@@ -229,20 +226,23 @@
       <div id="modal-screen">
         <img id="modal-previous-button" src="./assets/svg/next.svg" alt="Icône précédent.">
         <div id="modal">
-          <img id="modal-image" src="" alt="Image du projet">
-          <div id="modal-text-content">
+          <div id="modal-content">
             <div id="modal-header">
               <h3 id="modal-title"></h3>
               <img id="modal-close-icon" src="./assets/svg/close.svg" alt="Icône de fermeture de fenêtre">
             </div>
             <div id="modal-body">
-              <h4>Lien</h4>
+              <img id="modal-image" src="" alt="Image du projet">
+              <h4>Lien :</h4>
               <a id="modal-link" href="#"></a>
-              <h4>Description</h4>
+              <hr>
+              <h4>Description :</h4>
               <p id="modal-description"></p>
-              <h4>Difficultés rencontrées</h4>
+              <hr>
+              <h4>Difficultés rencontrées :</h4>
               <div id="modal-difficulties"></div>
-              <h4>Compétences acquises</h4>
+              <hr>
+              <h4>Compétences acquises :</h4>
               <ul id="modal-skills">
               </ul>
             </div>
@@ -256,7 +256,7 @@
           <div>
             <div class="examples-filters" style="cursor: default;">
               <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
-              <p>Cliquez pour plus d'informations.</p>
+              <p>Cliquez pour plus d'informations !</p>
             </div>
             <img class="examples-images" loading="lazy" src="./assets/images/example.jpg" alt="Image projet - example.title">
           </div>
@@ -266,7 +266,7 @@
           <div>
             <div class="examples-filters" style="cursor: default;">
               <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
-              <p>Cliquez pour plus d'informations.</p>
+              <p>Cliquez pour plus d'informations !</p>
             </div>
             <img class="examples-images" loading="lazy" src="./assets/images/example.jpg" alt="Image projet - example.title">
           </div>
@@ -276,7 +276,7 @@
           <div>
             <div class="examples-filters" style="cursor: default;">
               <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
-              <p>Cliquez pour plus d'informations.</p>
+              <p>Cliquez pour plus d'informations !</p>
             </div>
             <img class="examples-images" loading="lazy" src="./assets/images/example.jpg" alt="Image projet - example.title">
           </div>
@@ -286,7 +286,7 @@
           <div>
             <div class="examples-filters" style="cursor: default;">
               <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
-              <p>Cliquez pour plus d'informations.</p>
+              <p>Cliquez pour plus d'informations !</p>
             </div>
             <img class="examples-images" loading="lazy" src="./assets/images/example.jpg" alt="Image projet - example.title">
           </div>

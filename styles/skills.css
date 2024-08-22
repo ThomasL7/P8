@@ -19,14 +19,16 @@
   justify-content: center;
   height: 100%;
   margin: 0px var(--slide-side-margin);
+  padding: 50px 0;
+  box-sizing: border-box;
 }
 
 #skills-content h2 {
   display: flex;
   justify-content: center;
   position: relative;
-  margin-bottom: 38px;
-  font-size: 26px;
+  margin-bottom: 56px;
+  font-size: 22px;
   font-weight: 800;
 }
 
@@ -35,13 +37,13 @@
   content: "";
   display: block;
   position: absolute;
-  width: 125%;
-  height: 5px;
+  width: 140%;
+  height: 4px;
   background-color: var(--white);
 }
 
 .slide-title-style::before {
-  top: -12px;
+  top: -16px;
 }
 
 .slide-title-style::after {
@@ -49,19 +51,18 @@
 }
 
 #skills-trees {
-  width: 100%;
+  width: 95%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin-bottom: 15px;
+  gap: 0 28px;
 }
 
 #skills-tree-left,
 #skills-tree-center,
 #skills-tree-right {
-  padding: 15px;
-  margin: 15px;
+  padding: 30px 10px 35px 10px;
   background: radial-gradient(circle at center, rgba(255, 255, 255, 0.192) 0%, rgba(255, 255, 255, 0.082) 100%);
-  border-radius: 15px;
+  border-radius: 18px;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.062);
 }
 
@@ -72,9 +73,8 @@
 #skills-trees h3 {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
-  margin-bottom: 36px;
-  font-size: 26px;
+  margin-bottom: 34px;
+  font-size: 25px;
   font-weight: 600;
   text-decoration: underline;
 }
@@ -84,32 +84,31 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 10px 15px;
+  gap: 30px 15px;
 }
 
 #skills-trees li {
-  flex-basis: 30%;
+  flex-basis: 28%;
   text-align: center;
   position: relative;
+  box-sizing: border-box;
 }
 
 .skills-items-div img {
-  width: 100%;
-  height: 30px;
+  height: 32px;
 }
 
 .skills-items-div h4 {
   margin-top: 5px;
-  margin-bottom: 32px;
   font-size: 18px;
   font-weight: 600;
   color: var(--black);
 }
 
 #skills-content > p {
-  margin-top: 11px;
-  width: 80%;
+  margin-top: 40px;
+  width: 75%;
   text-align: center;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 400;
 }

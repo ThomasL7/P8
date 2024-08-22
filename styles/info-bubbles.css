@@ -1,8 +1,8 @@
 :root {
   /* ==== Info bubbles ==== */
   --info-bubbles-width: 15vw;
-  --bubble-offset-x: 8;
-  --bubble-offset-y: -8;
+  --bubble-offset-x: 6;
+  --bubble-offset-y: 2;
   --bubble-margin-right: 30;
 }
 
@@ -17,4 +17,14 @@
   color: rgb(235, 223, 223);
   font-size: 14px;
   font-weight: 200;
+}
+
+.info-bubble-width-unset {
+  width: unset;
+  white-space: nowrap;
+}
+
+.info-bubble-width-max {
+  width: var(--info-bubbles-width);
+  white-space: normal;
 }

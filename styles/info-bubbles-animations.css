@@ -1,12 +1,18 @@
 :root {
-  /* ==== Info bubbles ==== */
-  --info-bubbles-text-speed: 25;
+  /* ==== Durations ==== */
+  --info-bubbles-text-speed: 15;
 }
 
-.info-bubbles-open {
+.info-bubbles-open-right {
   display: block;
   animation: info-bubbles-open 0.35s cubic-bezier(0.3, 0.85, 0.57, 0.9) 0s 1 normal none;
   transform-origin: 0% 100%;
+}
+
+.info-bubbles-open-left {
+  display: block;
+  animation: info-bubbles-open 0.35s cubic-bezier(0.3, 0.85, 0.57, 0.9) 0s 1 normal none;
+  transform-origin: 100% 0%;
 }
 
 @keyframes info-bubbles-open {
@@ -20,10 +26,16 @@
   }
 }
 
-.info-bubbles-close {
+.info-bubbles-close-right {
   display: none;
-  animation: info-bubbles-close 0.11s cubic-bezier(0.3, 0.85, 0.6, 0.98) 0s 1 normal none;
+  animation: info-bubbles-close 0.1s cubic-bezier(0.3, 0.85, 0.6, 0.98) 0s 1 normal none;
   transform-origin: 0% 100%;
+}
+
+.info-bubbles-close-left {
+  display: none;
+  animation: info-bubbles-close 0.1s cubic-bezier(0.3, 0.85, 0.6, 0.98) 0s 1 normal none;
+  transform-origin: 100% 0%;
 }
 
 @keyframes info-bubbles-close {

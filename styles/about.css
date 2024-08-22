@@ -1,13 +1,19 @@
+:root {
+  /* ==== Sizes ==== */
+  --slide-bands-height: 12%;
+}
+
 #about {
   display: flex;
-  height: var(--section-height);
-  align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at center, rgb(30, 30, 31) 0%, #2c2c2c 50%, rgb(24, 23, 23));
+  align-items: center;
+  height: var(--section-height);
+  color: var(--black);
+  background: radial-gradient(ellipse at center, rgb(30, 30, 31) 0%, #2c2c2c 50%, rgb(24, 23, 23));
 }
 
 #about .background {
-  background: radial-gradient(circle at center, rgb(235, 217, 57) 0%, rgb(207, 205, 45) 100%);
+  background: radial-gradient(ellipse at center, rgb(235, 218, 72) 0%, rgb(180, 178, 38) 100%);
 }
 
 #about .background,
@@ -35,36 +41,38 @@
 }
 
 #about-block-photo {
-  width: 20%;
-  height: 65%;
+  width: 238px;
+  height: 272px;
   display: flex;
   justify-content: center;
   background: radial-gradient(circle at center, rgb(238, 238, 238) 0%, rgb(236, 236, 236) 85%, rgb(209, 209, 209) 100%);
   border-radius: 15px;
   box-shadow: 3px 8px 15px rgba(0, 0, 0, 0.233);
-  margin-right: 100px;
+  margin-left: 20px;
+  margin-right: 65px;
 }
 
 #about-block-photo img {
   margin-top: 5%;
   object-fit: cover;
   width: 90%;
-  height: 80%;
+  height: 81%;
   position: relative;
   border-radius: 15px;
   border: 1px solid rgb(204, 204, 204);
 }
 
 #about-text {
-  width: 38%;
+  width: 50%;
   display: flex;
   flex-direction: column;
-  color: var(--black);
+  box-sizing: border-box;
+  padding: 0 30px;
 }
 
 #about-text h2 {
   margin-bottom: 30px;
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 800;
 }
 
@@ -79,7 +87,10 @@
 }
 
 #about-text p {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 400;
   width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }

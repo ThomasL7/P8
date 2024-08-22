@@ -1,7 +1,7 @@
 :root {
   /* ==== Skills ==== */
   --skills-item-animation-height: -12px;
-  --skills-item-ending-animation-duration: 250;
+  --skills-item-ending-animation-duration: 0.25s;
 }
 
 .skills-title-intro {
