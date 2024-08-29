@@ -9,11 +9,13 @@
   align-items: center;
   height: var(--section-height);
   color: var(--black);
+  /* background: rgb(27, 27, 29); */
   background: radial-gradient(ellipse at center, rgb(30, 30, 31) 0%, #2c2c2c 50%, rgb(24, 23, 23));
 }
 
 #about .background {
-  background: radial-gradient(ellipse at center, rgb(235, 218, 72) 0%, rgb(180, 178, 38) 100%);
+  /* background-color: rgb(241, 222, 47); */
+  background: radial-gradient(ellipse at center, rgb(245, 230, 98) 0%, rgb(207, 192, 56) 100%);
 }
 
 #about .background,

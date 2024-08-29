@@ -1,9 +1,9 @@
 window.examplesModalDatas = [
   {
     title: "cercnejln j nljnl",
-    image: "example.jpg",
+    image: "example-1.jpg",
     link: "sfvsfvbkhbkhbkhb",
-    description: "vsvfsvkhbsv hksfvhbskhbvksbf vkfshvhsfv sfbvhksfvsf bsfhbkbvskhfvshfv",
+    description: "vsvfsvkhbsv hksfvhb fsd sd fsd fsd fs dfsd fsdl fsd fjsdmljfmsjlfsldj msd jfl msdlfjsmdf jsdm lfj smdfj lsdm flj sdml fjmsdljml jgmsdl jgsdjmg oisdj mgsd gjsdmo skhbvksbf vkfshvhsfv sfbvhksfvsf bsfhbkbvskhfvshfv",
     difficulties: [
       {
         problems: "flnjs fjs lfnfjslfnjfff fvfsvvs",
@@ -18,7 +18,7 @@ window.examplesModalDatas = [
   },
   {
     title: "title de l'article 2",
-    image: "example.jpg",
+    image: "example-2.jpg",
     link: "lien2",
     description: "Description de l'article 2",
     difficulties: [
@@ -35,7 +35,7 @@ window.examplesModalDatas = [
   },
   {
     title: "title de l'article 3",
-    image: "example.jpg",
+    image: "example-3.jpg",
     link: "lien3",
     description: "Description de l'article 3",
     difficulties: [
@@ -52,7 +52,7 @@ window.examplesModalDatas = [
   },
   {
     title: "title de l'article 4",
-    image: "example.jpg",
+    image: "example-4.jpg",
     link: "lien4",
     description: "Description de l'article 4",
     difficulties: [

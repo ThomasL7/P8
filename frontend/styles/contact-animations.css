@@ -1,0 +1,5 @@
+#contact-form button:hover {
+  cursor: pointer;
+  background: radial-gradient(ellipse at center, rgb(160, 160, 160) 0%, rgb(190, 190, 190) 100%);
+  text-shadow: 0px 0px 6px #eeeeeed5;
+}

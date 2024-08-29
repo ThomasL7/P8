@@ -120,6 +120,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  document.addEventListener("mousemove", (event) => {
+    getMousePosition(event);
+  });
+
   window.examplesFilters.forEach((exampleFilter, index) => {
     exampleFilter.addEventListener("mouseenter", (event) => {
       getMousePosition(event);
@@ -135,6 +139,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // → Modal
   window.modalPreviousButton.addEventListener("click", (event) => setModalPreviousExample(event));
   window.modalNextButton.addEventListener("click", (event) => setModalNextExample(event));
-});
 
-// ===== Contact =====
+  window.modalDescriptionButton.addEventListener("click", () => changeModalText("description"));
+  window.modalDifficultiesButton.addEventListener("click", () => changeModalText("difficulties"));
+  window.modalSkillsButton.addEventListener("click", () => changeModalText("skills"));
+
+  // ===== Contact =====
+  window.contactForm.addEventListener("submit", (event) => contactPostRequest(event));
+});

@@ -8,6 +8,8 @@
 
 #skills .background {
   height: var(--section-height);
+  /* background: rgb(99, 182, 230); */
+  /* background: rgb(107, 176, 216); */
   background: radial-gradient(circle at center, rgb(110, 190, 236) 0%, rgb(67, 129, 167) 100%);
 }
 
@@ -23,13 +25,13 @@
   box-sizing: border-box;
 }
 
-#skills-content h2 {
+.slide-title-style {
   display: flex;
   justify-content: center;
   position: relative;
-  margin-bottom: 56px;
   font-size: 22px;
   font-weight: 800;
+  margin-bottom: 56px;
 }
 
 .slide-title-style::before,
@@ -37,7 +39,7 @@
   content: "";
   display: block;
   position: absolute;
-  width: 140%;
+  width: 250px;
   height: 4px;
   background-color: var(--white);
 }
@@ -100,7 +102,7 @@
 
 .skills-items-div h4 {
   margin-top: 5px;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
   color: var(--black);
 }

@@ -45,7 +45,6 @@ nav {
   }
   100% {
     opacity: 0.12;
-    transform: scale(1);
   }
 }
 
@@ -53,6 +52,7 @@ nav {
   color: var(--black);
   background-color: var(--white);
   box-shadow: 0px 3px 10px rgba(238, 238, 238, 0.205);
+  opacity: 1;
 }
 
 .nav-link-hover:hover {

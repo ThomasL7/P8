@@ -34,17 +34,17 @@
   }
 }
 
-.examples-divs-hover {
+.example-div-hover {
   transform: scale(1.03);
   transition: transform 0.15s 0s ease-in-out;
   box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.452);
 }
 
-.examples-filters-hover {
-  animation: examples-filters-hover 0.35s cubic-bezier(0.09, 0.65, 0.4, 1) 0s 1 normal forwards;
+.example-filter-hover {
+  animation: example-filter-hover 0.35s cubic-bezier(0.09, 0.65, 0.4, 1) 0s 1 normal forwards;
 }
 
-@keyframes examples-filters-hover {
+@keyframes example-filter-hover {
   0% {
     opacity: 0;
     filter: blur(3px);
@@ -52,6 +52,10 @@
   100% {
     opacity: 1;
   }
+}
+
+#examples-gallery .example-h3-hover {
+  text-decoration: underline;
 }
 
 .active-example-filter-open {

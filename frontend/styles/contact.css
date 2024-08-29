@@ -1,0 +1,111 @@
+#contact {
+  display: flex;
+  flex-direction: column;
+  height: var(--section-height);
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  color: var(--white);
+}
+
+#contact .background {
+  /* background-color: rgb(52, 95, 160); */
+  /* background-color: #2d57a0; */
+  background: radial-gradient(ellipse at center, #4073ca 0%, #305ca8 100%);
+}
+
+#contact-content {
+  z-index: 1;
+  width: var(--slide-max-width);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: 0px var(--slide-side-margin);
+}
+
+#contact-form {
+  display: flex;
+  flex-direction: column;
+
+  width: 425px;
+}
+
+#contact-full-name {
+  display: flex;
+  width: 100%;
+  gap: 0px 20px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+#contact-form label {
+  margin-bottom: 10px;
+  font-size: 17px;
+  font-weight: 400;
+}
+
+#contact-form input,
+#contact-message {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 400;
+  box-sizing: border-box;
+  border: 1px solid rgb(156, 156, 156);
+  background: radial-gradient(ellipse at center, rgb(255, 255, 255) 0%, rgb(238, 238, 238));
+}
+
+#contact-content input {
+  padding: 1px 6px;
+  height: 30px;
+  margin-bottom: 22px;
+}
+
+#contact-message {
+  padding: 3px 6px;
+  height: 100px;
+  line-height: 1.1;
+}
+
+#contact-errors-form {
+  display: none;
+  width: 87.5%;
+  margin: auto;
+  margin-top: 25px;
+  margin-bottom: -5px;
+  align-items: center;
+  border: 1px solid rgb(255, 255, 255);
+}
+
+#contact-errors-form img {
+  padding: 5px 3px;
+  height: 19px;
+  margin: 0px 10px;
+}
+
+#contact-errors-form p {
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  border: 1px solid rgb(255, 255, 255);
+  border-width: 0px 1px;
+}
+
+#contact-form button {
+  color: var(--black);
+  width: 58%;
+  border: none;
+  background: radial-gradient(ellipse at center, rgb(236, 236, 236) 0%, rgb(236, 236, 236) 100%);
+  padding: 7px 5px;
+  font-size: 15px;
+  font-weight: 600;
+  margin: auto;
+  margin-top: 32px;
+  border-radius: 50px;
+}
