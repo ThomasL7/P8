@@ -48,6 +48,10 @@ nav div {
   position: relative;
 }
 
+#nav-menu-burger {
+  display: none;
+}
+
 nav p,
 nav a {
   height: 100%;

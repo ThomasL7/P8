@@ -3,7 +3,7 @@
   --info-bubbles-width: 15vw;
   --bubble-offset-x: 6;
   --bubble-offset-y: 2;
-  --bubble-margin-right: 30;
+  --bubble-margin: 30;
 }
 
 .info-bubbles {
@@ -20,7 +20,7 @@
 }
 
 .info-bubble-width-unset {
-  width: unset;
+  width: "";
   white-space: nowrap;
 }
 

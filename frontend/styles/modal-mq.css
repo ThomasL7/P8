@@ -1,0 +1,26 @@
+@media (max-width: 768px) {
+  #modal {
+    height: 85%;
+    max-height: "";
+    width: 70%;
+    max-width: "";
+  }
+
+  #modal-image-section {
+    height: 100px;
+  }
+
+  #modal-buttons-section h4,
+  #modal-buttons-section p {
+    border-radius: 25px;
+  }
+
+  .modal-buttons-text {
+    display: none;
+  }
+
+  .modal-buttons-images {
+    height: 16px;
+    display: flex;
+  }
+}

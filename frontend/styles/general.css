@@ -12,7 +12,7 @@
 }
 
 html {
-  overflow: hidden;
+  overflow-x: hidden;
   scroll-behavior: auto;
   cursor: default;
   background-color: rgb(65, 65, 65);
@@ -26,6 +26,10 @@ body {
   min-width: 320px;
   min-height: 100vh;
   color: var(--white);
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 /* Anchors offsetting */
@@ -62,4 +66,8 @@ body {
 
 .slide-title-style::after {
   top: 38px;
+}
+
+.invisible-block-for-mobile {
+  height: 10px;
 }

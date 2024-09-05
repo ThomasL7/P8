@@ -6,33 +6,37 @@ document.addEventListener("DOMContentLoaded", () => {
   // → window
   window.onload = () => {
     scrollToTop();
+    checkIfOnMobileAndActiveScroll(window.mqMobileTrigger);
     addHeaderAndHomeIntroAnimations();
     createAllArraysOfBlocksCollision();
     updateSkillsInfoBubblesWidth();
     setIsWindowLoadedTrue();
   };
 
-  window.onbeforeunload = function () {
+  window.onbeforeunload = () => {
     resetHomeBeforeReloading();
     scrollToTop();
   };
 
   window.addEventListener("resize", () => {
     updateCurrentSlideView();
+    adjustModalPosition();
     updateSkillsInfoBubblesWidth();
     updateAllArraysOfBlocksCollision();
   });
+
+  // window.addEventListener("scroll", () => ifMobileSlideLimitsAreReach());
 
   window.addEventListener(
     "wheel",
     (event) => {
       disableZoom(event);
       scrollSlideChange(event);
+      ifMobileSlideLimitsAreReach();
     },
     { passive: false }
   );
 
-  // → Document
   document.addEventListener("keydown", (event) => {
     disableZoom(event);
     arrowsSlideChange(event);
@@ -40,10 +44,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("click", (event) => {
     checkIfClosingModal(event);
+    checkIfClosingMobileNav(event);
   });
 
   // → Custom events
-  window.addEventListener("indexSlideChange", function () {
+  window.addEventListener("indexSlideChange", () => {
     addOutroAnimationsSlide();
     addIntroAnimationsSlide();
     setActiveClassToNavLink();
@@ -51,12 +56,23 @@ document.addEventListener("DOMContentLoaded", () => {
     resetPreviousSlide();
   });
 
+  // ===== Mobile events =====
+  window.addEventListener("touchstart", (event) => updateStartScrollingPosition(event));
+  window.addEventListener("touchend", (event) => checkIfScrolling(event));
+
+  // → Media query trigger (Mobile)
+  window.mqMobileTrigger.addEventListener("change", (event) => checkIfOnMobileAndActiveScroll(event));
+
   // ===== Header =====
   window.headerTitle.addEventListener("click", () => handleHeaderTitleClick());
 
-  window.navLinks.forEach((navLink, index) => {
-    navLink.addEventListener("click", (event) => handleNavLinkClick(event, index));
-  });
+  for (let i = 0; i < window.navLinks.length; i++) {
+    const navLink = window.navLinks[i];
+    navLink.addEventListener("click", (event) => handleNavLinkClick(event, i));
+  }
+
+  // ===== Header (Mobile) =====
+  window.navMenuBurger.addEventListener("click", (event) => addMobileNavOpenAnimation(event));
 
   // // ===== Home =====
   window.homeButtons.addEventListener("animationend", (event) => {
@@ -79,52 +95,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ===== Skills =====
   let skillIndexInSkillsTreeArray = [];
-  window.skillsTrees.forEach((skillsTree, treeIndex) => {
+  for (let treeIndex = 0; treeIndex < window.skillsTrees.length; treeIndex++) {
+    const skillsTree = window.skillsTrees[treeIndex];
     // Create index array of items divs in skills trees
     const skillsDivsInTree = skillsTree.querySelectorAll(".skills-items-div");
-    skillsDivsInTree.forEach((_, skillIndex) => {
+    for (let skillIndex = 0; skillIndex < skillsDivsInTree.length; skillIndex++) {
       skillIndexInSkillsTreeArray.push({ treeIndex, skillIndex });
-    });
+    }
 
     skillsTree.addEventListener("animationend", (event) => {
       if (event.animationName === "skills-tree-intro") {
-        skillsDivsInTree.forEach((skillsDiv, skillIndex) => {
+        for (let skillIndex = 0; skillIndex < skillsDivsInTree.length; skillIndex++) {
+          const skillsDiv = skillsDivsInTree[skillIndex];
           // Getting real index of item div
           const index = skillIndexInSkillsTreeArray.findIndex((item) => item.treeIndex === treeIndex && item.skillIndex === skillIndex);
           addStyleCursorForSkills(index);
           setIsSkillsIntroAnimationsEndedTrue(index);
           checkIfHoverSkillAfterIntro(skillsDiv, index);
-        });
+        }
       }
     });
-  });
+  }
 
-  window.skills.forEach((skill, index) => {
+  for (let i = 0; i < window.skills.length; i++) {
+    const skill = window.skills[i];
     skill.addEventListener("mouseenter", (event) => {
       getMousePosition(event);
-      handleEnterSkill(null, index);
+      handleEnterSkill(null, i);
     });
     skill.addEventListener("mouseleave", (event) => {
       getMousePosition(event);
       handleLeaveSkill();
     });
-  });
+  }
 
   // ===== Examples =====
-  window.examples.forEach((example, index) => {
+  for (let i = 0; i < window.examples.length; i++) {
+    const example = window.examples[i];
     example.addEventListener("animationstart", (event) => {
       if (event.animationName === "example-intro") {
-        addStyleCursorForExamples(index);
-        setIsExamplesIntroAnimationsEndedTrue(index);
+        addStyleCursorForExamples(i);
+        setIsExamplesIntroAnimationsEndedTrue(i);
       }
     });
-  });
+  }
 
   document.addEventListener("mousemove", (event) => {
     getMousePosition(event);
   });
 
-  window.examplesFilters.forEach((exampleFilter, index) => {
+  for (let index = 0; index < window.examplesFilters.length; index++) {
+    const exampleFilter = window.examplesFilters[index];
     exampleFilter.addEventListener("mouseenter", (event) => {
       getMousePosition(event);
       handleEnterExample(exampleFilter, index);
@@ -134,15 +155,15 @@ document.addEventListener("DOMContentLoaded", () => {
       handleLeaveExample();
     });
     exampleFilter.addEventListener("click", (event) => openModalExample(event, index));
-  });
+  }
 
   // → Modal
   window.modalPreviousButton.addEventListener("click", (event) => setModalPreviousExample(event));
   window.modalNextButton.addEventListener("click", (event) => setModalNextExample(event));
 
-  window.modalDescriptionButton.addEventListener("click", () => changeModalText("description"));
-  window.modalDifficultiesButton.addEventListener("click", () => changeModalText("difficulties"));
-  window.modalSkillsButton.addEventListener("click", () => changeModalText("skills"));
+  window.modalDescriptionButtonH4.addEventListener("click", () => changeModalTextAndActiveButton("description"));
+  window.modalDifficultiesButtonH4.addEventListener("click", () => changeModalTextAndActiveButton("difficulties"));
+  window.modalSkillsButtonH4.addEventListener("click", () => changeModalTextAndActiveButton("skills"));
 
   // ===== Contact =====
   window.contactForm.addEventListener("submit", (event) => contactPostRequest(event));

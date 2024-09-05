@@ -1,0 +1,24 @@
+@media (max-width: 768px) {
+  @media (max-width: 768px) {
+    #examples {
+      height: auto;
+      position: relative;
+    }
+
+    #examples .background {
+      position: absolute;
+      height: 100%;
+    }
+
+    #examples-content {
+      justify-content: start;
+      padding: 0px;
+    }
+
+    #examples-gallery {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 50px;
+    }
+  }
+}

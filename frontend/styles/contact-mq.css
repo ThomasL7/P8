@@ -1,0 +1,33 @@
+@media (max-width: 768px) {
+  #contact {
+    height: auto;
+    position: relative;
+  }
+
+  #contact .background {
+    position: absolute;
+    height: 100%;
+  }
+
+  #contact-content {
+    width: 100%;
+  }
+  #contact-form {
+    width: 100%;
+    max-width: 425px;
+    padding: 0 60px;
+    box-sizing: border-box;
+  }
+
+  #contact-form button {
+    width: auto;
+    margin-bottom: 50px;
+    padding: 7px 20px;
+  }
+}
+
+@media (max-width: 475px) {
+  #contact-full-name {
+    flex-direction: column;
+  }
+}

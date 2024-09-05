@@ -1,20 +1,13 @@
 
-faire gif accueil
-contact
-backend
+faire gif accueil et img
 ecrire contenu
 responisve
 opti + acessibiltié
 tester compatibilite navigateurs
-alert check compati avec module
-
-anim souligne titre exemple
-scroll aniamtion et temps
 modifier police, 2 polices?
-h1 hover shadows class anim
-separatorin modal?
 
-PAS ANIMATION HOVER PR H1 ET NAV SI DEJA SUR INDEXSLIDE
-
-nav text aen doublon a cache
-loading icon tournant home
+bug skill hover
+modal icon mobile
+scroll method mobile
+fleche cligno modal
+couleur hover

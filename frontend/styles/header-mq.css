@@ -1,0 +1,42 @@
+:root {
+  /* ==== Sizes ==== */
+  --header-height-on-mobile: 35px;
+}
+
+@media (max-width: 768px) {
+  #nav-menu-burger {
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+    height: 100%;
+  }
+
+  #nav-menu-burger img {
+    height: 23px;
+  }
+
+  nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    top: var(--header-height-on-mobile);
+  }
+
+  nav a,
+  nav p {
+    border: none;
+    background-color: rgb(231, 231, 231);
+    color: var(--black);
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 6px 12px 18px;
+    text-align: right;
+    vertical-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    font-weight: 400;
+    font-size: 16px;
+  }
+}
