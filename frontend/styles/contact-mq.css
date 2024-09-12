@@ -1,13 +1,14 @@
 @media (max-width: 768px) {
   #contact {
     height: auto;
-    position: relative;
+    /* position: relative; */
+    min-height: var(--section-height);
   }
 
-  #contact .background {
+  /* #contact .background {
     position: absolute;
     height: 100%;
-  }
+  } */
 
   #contact-content {
     width: 100%;

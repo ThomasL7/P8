@@ -5,7 +5,7 @@
 // → General
 let root;
 let rootCSS;
-let html;
+let body;
 let anchors;
 let invisibleBlockForMobile;
 // → header
@@ -52,6 +52,7 @@ let example1;
 let example2;
 let example3;
 let example4;
+let example5;
 let examplesFilters;
 let examplesH3;
 // Modal
@@ -70,11 +71,14 @@ let modalDifficultiesButtonH4;
 let modalSkillsButtonH4;
 let modalButtonsImages;
 let modalText;
+let modalTextArrowUp;
+let modalTextArrowDown;
 let modalLink;
 // → Contact
 let contactSection;
 let contactContent;
 let contactTitle;
+let contactText;
 let contactForm;
 let contactFormInputs;
 let contactFamilyName;
@@ -93,7 +97,7 @@ const CLASS_HOME_BUTTONS_INTRO = "home-buttons-intro";
 const CLASS_HOME_TEXT_INTRO = "home-text-intro";
 const CLASS_HOME_TITLE_INTRO = "home-title-intro";
 const CLASS_ELEMENTS_HEADER_INTRO = "elements-header-intro";
-const CLASS_EXAMPLE_DIV_HOVER = "example-div-hover";
+const CLASS_EXAMPLE_ARTICLE_HOVER = "example-article-hover";
 const CLASS_EXAMPLE_FILTER_HOVER = "example-filter-hover";
 const CLASS_EXAMPLE_H3_HOVER = "example-h3-hover";
 const CLASS_FILTER_CHANGE = "active-example-filter-on-change";
@@ -107,6 +111,7 @@ const CLASS_HEADER_TITLE_HOVER = "header-title-hover";
 const CLASS_HOME_BUTTON_HOVER = "home-button-hover";
 const CLASS_INFO_BUBBLE_CLOSE_LEFT = "info-bubbles-close-left";
 const CLASS_INFO_BUBBLE_CLOSE_RIGHT = "info-bubbles-close-right";
+const CLASS_INFO_BUBBLE_DISPLAY_AND_HIDE = "info-bubble-display-and-hide";
 const CLASS_INFO_BUBBLE_OPEN_LEFT = "info-bubbles-open-left";
 const CLASS_INFO_BUBBLE_OPEN_RIGHT = "info-bubbles-open-right";
 const CLASS_INFO_BUBBLE_WIDTH_MAX = "info-bubble-width-max";
@@ -130,11 +135,13 @@ const CLASS_OUTRO_FORWARD = "slide-outro-forward";
 
 // ===== Variables =====
 // → General
-let bottomMobileSlideLimitHitCount = 0;
 let bottomCurrentMobileSlideLimit;
 let contentSlidesAndIntroClassesArray;
 let indexSlide = 0;
+let isBottomMobileSlideLimitReach = false;
+let isSlideScrollable = false;
 let isScrolling = false;
+let isTopMobileSlideLimitReach = false;
 let isWindowLoaded = false;
 let maxIndexSlide = 0;
 let mouseX = 0;
@@ -144,7 +151,6 @@ let scrollDuration = 0;
 let sectionMobileSlides;
 let startMobileTouch = 0;
 let endMobileTouch = 0;
-let topMobileSlideLimitHitCount = 0;
 let topCurrentMobileSlideLimit;
 // Media queries
 let isOnMobile = false;
@@ -181,7 +187,6 @@ let infoBubbleMargin = 0;
 let infoBubbleOffsetX = 0;
 let infoBubbleOffsetY = 0;
 let infoBubbleOffsetYOnMobile = 0;
-let infoBubbleWidthCSSValue = 0;
 let infoBubbleTextsArray = [];
 let infoBubbleWidth = 0;
 let isHoverSkillArray = [];
@@ -202,6 +207,7 @@ let previousIndexOfExample = 0;
 // Modal
 let isModalOpen = false;
 let isModalSlideChanging = false;
+let isModalTextScrollable = false;
 let modalClosingAnimationDuration = 0;
 let modalPreviousActiveSection = null;
 let modalSlideChangeCount = 0;
@@ -219,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // → General
   root = document.documentElement;
   rootCSS = getComputedStyle(root);
-  html = document.querySelector("html");
+  body = document.body;
   anchors = document.querySelectorAll(".anchors");
   invisibleBlockForMobile = document.querySelectorAll(".invisible-block-for-mobile");
   // → header
@@ -276,6 +282,7 @@ document.addEventListener("DOMContentLoaded", () => {
   example2 = document.getElementById("example-2");
   example3 = document.getElementById("example-3");
   example4 = document.getElementById("example-4");
+  example5 = document.getElementById("example-5");
   window.examplesFilters = document.querySelectorAll(".examples-filters");
   examplesFilters = window.examplesFilters;
   examplesH3 = document.querySelectorAll("#examples-gallery article h3");
@@ -297,12 +304,16 @@ document.addEventListener("DOMContentLoaded", () => {
   window.modalSkillsButtonH4 = document.getElementById("modal-skills-button-h4");
   modalSkillsButtonH4 = window.modalSkillsButtonH4;
   modalButtonsImages = document.querySelectorAll(".modal-buttons-images");
-  modalText = document.getElementById("modal-text");
+  window.modalText = document.getElementById("modal-text");
+  modalText = window.modalText;
+  modalTextArrowUp = document.getElementById("modal-text-arrow-up");
+  modalTextArrowDown = document.getElementById("modal-text-arrow-down");
   modalLink = document.getElementById("modal-link");
   // → Contact
   contactSection = document.getElementById("contact");
   contactContent = document.getElementById("contact-content");
   contactTitle = document.querySelector("#contact-content h2");
+  contactText = document.getElementById("contact-text");
   window.contactForm = document.getElementById("contact-form");
   contactForm = window.contactForm;
   contactFormInputs = document.getElementById("contact-form-inputs");
@@ -354,12 +365,14 @@ document.addEventListener("DOMContentLoaded", () => {
         { element: example2, introClass: "example-2-intro" },
         { element: example3, introClass: "example-3-intro" },
         { element: example4, introClass: "example-4-intro" },
+        { element: example5, introClass: "example-5-intro" },
       ],
     },
     {
       slide: contactContent,
       elements: [
         { element: contactTitle, introClass: "contact-title-intro" },
+        { element: contactText, introClass: "contact-text-intro" },
         { element: contactFormInputs, introClass: "contact-form-inputs-intro" },
         { element: contactFormButton, introClass: "contact-form-button-intro" },
       ],
@@ -384,7 +397,7 @@ document.addEventListener("DOMContentLoaded", () => {
   infoBubbleOffsetX = parseInt(rootCSS.getPropertyValue("--bubble-offset-x"));
   infoBubbleOffsetY = parseInt(rootCSS.getPropertyValue("--bubble-offset-y"));
   infoBubbleOffsetYOnMobile = parseInt(rootCSS.getPropertyValue("--bubble-offset-y-on-mobile"));
-  infoBubbleWidthCSSValue = parseInt(rootCSS.getPropertyValue("--info-bubbles-width"));
+  infoBubbleWidth = parseInt(rootCSS.getPropertyValue("--info-bubbles-width"));
   infoBubbleTextsArray = window.infoBubblesDatas;
   isHoverSkillArray = new Array(skillsDivs.length).fill(false);
   textSpeed = parseInt(rootCSS.getPropertyValue("--info-bubbles-text-speed"));
@@ -409,11 +422,11 @@ function scrollToTop() {
 }
 
 function enableScroll() {
-  html.style.overflowY = "scroll";
+  root.style.overflowY = "scroll";
 }
 
 function disableScroll() {
-  html.style.overflowY = "hidden";
+  root.style.overflowY = "hidden";
 }
 
 function disableZoom(event) {
@@ -421,29 +434,13 @@ function disableZoom(event) {
   else if (event.type === "keydown" && event.ctrlKey && (event.key === "+" || event.key === "-" || event.key === "=")) event.preventDefault();
 }
 
-// function updateMediaQueries() {
-//   const styleSheets = document.styleSheets;
-//   for (let i = 0; i < styleSheets.length; i++) {
-//     const styleSheet = styleSheets[i];
-//     if (styleSheet.href && styleSheet.href.endsWith("-mq.css")) {
-//       const cssRules = styleSheet.cssRules;
-//       if (cssRules) {
-//         for (let j = 0; j < cssRules.length; j++) {
-//           const rule = cssRules[j];
-//           if (rule.media) {
-//             const mediaText = rule.media.mediaText;
-//             if (mediaText.includes("var(--mq-tablet)")) {
-//               rule.media.mediaText = `max-width: ${mqTabletBreakpoint}`;
-//             }
-//             if (mediaText.includes("var(--mq-mobile)")) {
-//               rule.media.mediaText = `max-width: 768px`;
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
+function checkIfSlideIsScrollable() {
+  if (root.scrollHeight > root.clientHeight) {
+    isSlideScrollable = true;
+  } else {
+    isSlideScrollable = false;
+  }
+}
 
 // → For mouse position and collision leave detection
 function getMousePosition(event) {
@@ -484,16 +481,14 @@ function checkIfCursorHoverTarget(collisionTarget, onHoverFunction, onOutsideFun
 
 // → For slides change
 function scrollSlideChange(event) {
-  if (!isWindowLoaded || isModalOpen || isOnMobile) return;
-  console.log("a");
+  if (!isWindowLoaded || isModalOpen || isOnMobile || isScrolling) return;
   const direction = event.deltaY > 0 ? 1 : -1;
   scrollToSlide(indexSlide, direction);
 }
 
 function arrowsSlideChange(event) {
-  if (isOnMobile) return;
   if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
-  if (!isWindowLoaded || isModalOpen || isFocusedOnInput()) return;
+  if (!isWindowLoaded || isModalOpen || isOnMobile || isScrolling || isFocusedOnInput()) return;
   const direction = event.key === "ArrowDown" ? 1 : -1;
   scrollToSlide(indexSlide, direction);
 }
@@ -665,6 +660,8 @@ function checkIfOnMobileAndActiveScroll(event) {
     removeNormalHeaderNavSate();
     if (indexSlide !== 0) toggleMarginTopMobileSlide(sectionMobileSlides[indexSlide]);
     updateCurrentMobileSlideLimit();
+    checkIfSlideIsScrollable();
+    if (isModalOpen) setImageOfActiveMobileModalButton();
     if (!isModalOpen) enableScroll();
   } else {
     isOnMobile = false;
@@ -695,32 +692,20 @@ function updateCurrentMobileSlideLimit() {
 }
 
 function ifMobileSlideLimitsAreReach() {
-  if (!isOnMobile) return;
+  if (isModalOpen || !isOnMobile || isScrolling) return;
   const scrollYValue = window.scrollY;
   const scrollYBottom = window.scrollY + window.innerHeight;
   if (scrollYValue <= topCurrentMobileSlideLimit) {
-    topMobileSlideLimitHitCount++;
-    console.log("top");
+    setTimeout(() => {
+      isTopMobileSlideLimitReach = true;
+    }, 250);
   } else if (scrollYBottom >= bottomCurrentMobileSlideLimit) {
-    bottomMobileSlideLimitHitCount++;
-    console.log("bottom");
+    setTimeout(() => {
+      isBottomMobileSlideLimitReach = true;
+    }, 250);
   } else {
-    console.log("reset");
-    if (topMobileSlideLimitHitCount < 3) topMobileSlideLimitHitCount = 0;
-    if (bottomMobileSlideLimitHitCount < 3) bottomMobileSlideLimitHitCount = 0;
-  }
-  if (topMobileSlideLimitHitCount >= 3) {
-    console.log("move top");
-    scrollToMobileSlide(indexSlide, -1);
-    setTimeout(() => {
-      topMobileSlideLimitHitCount = 0;
-    }, scrollDuration);
-  } else if (bottomMobileSlideLimitHitCount >= 3) {
-    console.log("move bottom");
-    scrollToMobileSlide(indexSlide, 1);
-    setTimeout(() => {
-      bottomMobileSlideLimitHitCount = 0;
-    }, scrollDuration);
+    isTopMobileSlideLimitReach = false;
+    isBottomMobileSlideLimitReach = false;
   }
 }
 
@@ -728,16 +713,40 @@ function updateStartScrollingPosition(event) {
   startMobileTouch = event.changedTouches[0].clientY;
 }
 
-function checkIfScrolling(event) {
+function checkIfSwipingToNextMobileSlide(event) {
+  if (!isWindowLoaded || isModalOpen || !isOnMobile || isScrolling) return;
+  if (isScrolling) return;
   endMobileTouch = event.changedTouches[0].clientY;
   const difference = startMobileTouch - endMobileTouch;
-  if (difference > 30) console.log("Glissement vers le bas détecté");
-  else if (difference < -30) console.log("Glissement vers le haut détecté");
+  if (difference < -40) {
+    if (!isSlideScrollable || isTopMobileSlideLimitReach || difference < -300) {
+      scrollToMobileSlide(indexSlide, -1);
+    }
+  } else if (difference > 40) {
+    if (!isSlideScrollable || isBottomMobileSlideLimitReach || difference > 300) {
+      scrollToMobileSlide(indexSlide, 1);
+      isBottomMobileSlideLimitReach = false;
+    }
+  }
+}
+
+function checkIfScrollingToNextMobileSlide(event) {
+  if (!isWindowLoaded || isModalOpen || !isOnMobile || isScrolling) return;
+  const direction = event.deltaY > 0 ? 1 : -1;
+  if (!isSlideScrollable) {
+    scrollToMobileSlide(indexSlide, direction);
+    isBottomMobileSlideLimitReach = false;
+  } else if (isTopMobileSlideLimitReach && direction === -1) {
+    scrollToMobileSlide(indexSlide, -1);
+  } else if (isBottomMobileSlideLimitReach && direction === 1) {
+    scrollToMobileSlide(indexSlide, direction);
+    isBottomMobileSlideLimitReach = false;
+  }
 }
 
 /**  @param {Number} direction (optional + or -1) only for scroll or arrow keys*/
 function scrollToMobileSlide(index, direction) {
-  if (isScrolling) return;
+  if (!isWindowLoaded || isScrolling || !isOnMobile) return;
   if (direction) {
     index += direction;
     index = Math.max(0, Math.min(index, maxIndexSlide));
@@ -775,6 +784,7 @@ function scrollToMobileSlide(index, direction) {
       if (previousIndexSlide !== 0) toggleMarginTopMobileSlide(sectionSlideToHide);
     }
     updateCurrentMobileSlideLimit();
+    checkIfSlideIsScrollable();
     enableScroll();
     isScrolling = false;
   }, scrollDuration);
@@ -1015,10 +1025,6 @@ function addEndingSkillAnimation(skillsDiv) {
 }
 
 // → Info-bubbles
-function updateSkillsInfoBubblesWidth() {
-  infoBubbleWidth = window.innerWidth * (infoBubbleWidthCSSValue / 100);
-}
-
 function fixingInfoBubbleZIndex(skillsDiv) {
   if (skillsDiv === previousAnimatedItem) return;
   parentTree = skillsDiv.parentElement.parentElement.parentElement;
@@ -1031,43 +1037,55 @@ function fixingInfoBubbleZIndex(skillsDiv) {
 
 function displayInfoBubble(skillsDiv, index) {
   const infoBubble = infoBubblesArray[index];
+  infoBubble.classList.remove(CLASS_INFO_BUBBLE_WIDTH_UNSET);
+  infoBubble.classList.remove(CLASS_INFO_BUBBLE_WIDTH_MAX);
   if (infoBubble.classList.contains(CLASS_INFO_BUBBLE_CLOSE_RIGHT)) infoBubble.classList.remove(CLASS_INFO_BUBBLE_CLOSE_RIGHT);
   else infoBubble.classList.remove(CLASS_INFO_BUBBLE_CLOSE_LEFT);
   // Determine if bubble should be on left or right side (desktop, tablet) + on top or bottom side (mobile)
   const skillSize = skillsDiv.getBoundingClientRect();
-
   if (isOnMobile) {
-    infoBubble.style.display = "flex";
-    infoBubble.style.visibility = "hidden";
-    infoBubble.classList.add(CLASS_INFO_BUBBLE_WIDTH_MAX);
+    infoBubble.classList.add(CLASS_INFO_BUBBLE_DISPLAY_AND_HIDE);
     const infoBubbleText = infoBubbleTextsArray[index];
     infoBubble.innerHTML = infoBubbleText;
     const infoBubbleSize = infoBubble.getBoundingClientRect();
-    const centerPosition = (skillSize.width - infoBubbleSize.width) / 2;
-    console.log(infoBubbleSize.height);
-    infoBubble.style.left = `${centerPosition}px`;
-    if (skillSize.top >= infoBubbleSize.height + infoBubbleOffsetYOnMobile + infoBubbleMargin) {
-      infoBubble.style.top = "";
+    if (skillSize.top >= infoBubbleSize.height + infoBubbleOffsetYOnMobile + infoBubbleMargin + headerHeightOnMobile) {
+      infoBubble.style.top = "auto";
       infoBubble.style.bottom = `${skillSize.height + infoBubbleOffsetYOnMobile}px`;
     } else {
-      infoBubble.style.bottom = "";
+      infoBubble.style.bottom = "auto";
       infoBubble.style.top = `${skillSize.height + infoBubbleOffsetYOnMobile}px`;
     }
+    const spaceRight = window.innerWidth - skillSize.right;
+    if (spaceRight >= infoBubbleWidth + infoBubbleOffsetX + infoBubbleMargin) {
+      infoBubbleAnimationsLeftDirection = false;
+      infoBubble.style.right = "auto";
+      infoBubble.style.left = "0";
+    } else if (skillSize.left >= infoBubbleWidth + infoBubbleOffsetX + infoBubbleMargin) {
+      infoBubbleAnimationsLeftDirection = true;
+      infoBubble.style.left = "auto";
+      infoBubble.style.right = "0";
+    } else {
+      infoBubbleAnimationsLeftDirection = false;
+      const centerPosition = (skillSize.width - infoBubbleWidth) / 2;
+      infoBubble.style.right = "auto";
+      infoBubble.style.left = `${centerPosition}px`;
+    }
+    infoBubble.classList.remove(CLASS_INFO_BUBBLE_DISPLAY_AND_HIDE);
     infoBubble.innerHTML = "";
-    infoBubble.style.display = "";
-    infoBubble.style.visibility = "";
-    infoBubbleAnimationsLeftDirection = false;
-    infoBubble.classList.add(CLASS_INFO_BUBBLE_OPEN_RIGHT);
+    if (!infoBubbleAnimationsLeftDirection) infoBubble.classList.add(CLASS_INFO_BUBBLE_OPEN_RIGHT);
+    else infoBubble.classList.add(CLASS_INFO_BUBBLE_OPEN_LEFT);
     animateInfoBubbleText(infoBubble, index, infoBubbleText);
   } else {
-    infoBubble.style.bottom = "";
+    infoBubble.style.bottom = "auto";
     infoBubble.style.top = `${infoBubbleOffsetY}px`;
     const spaceRight = window.innerWidth - skillSize.right;
     if (spaceRight >= infoBubbleWidth + infoBubbleOffsetX + infoBubbleMargin) {
       infoBubbleAnimationsLeftDirection = false;
+      infoBubble.style.right = "auto";
       infoBubble.style.left = `${skillSize.width + infoBubbleOffsetX}px`;
     } else {
       infoBubbleAnimationsLeftDirection = true;
+      infoBubble.style.left = "auto";
       infoBubble.style.right = `${skillSize.width + infoBubbleOffsetX}px`;
     }
     if (!infoBubbleAnimationsLeftDirection) infoBubble.classList.add(CLASS_INFO_BUBBLE_OPEN_RIGHT);
@@ -1085,7 +1103,10 @@ function animateInfoBubbleText(infoBubble, index, infoBubbleText) {
       infoBubble.innerHTML += infoBubbleText.charAt(indexChar);
       indexChar++;
       const bubbleSize = infoBubble.getBoundingClientRect();
-      if (bubbleSize.width >= infoBubbleWidth) infoBubble.classList.add(CLASS_INFO_BUBBLE_WIDTH_MAX);
+      if (bubbleSize.width >= infoBubbleWidth) {
+        infoBubble.classList.remove(CLASS_INFO_BUBBLE_WIDTH_UNSET);
+        infoBubble.classList.add(CLASS_INFO_BUBBLE_WIDTH_MAX);
+      }
     } else {
       clearInterval(textBubbleAnimation);
       removeAnimationFromArray(infoBubble, textInfoBubbleAnimationsArray);
@@ -1132,13 +1153,13 @@ function handleEnterExample(exampleFilter, index) {
 function resetPreviousExampleIfEnterNewExample() {
   if (isPreviousExampleAlreadyReset) return;
   previousExample.classList.remove(CLASS_EXAMPLE_FILTER_HOVER);
-  examplesDivs[previousIndexOfExample].classList.remove(CLASS_EXAMPLE_DIV_HOVER);
+  examplesDivs[previousIndexOfExample].classList.remove(CLASS_EXAMPLE_ARTICLE_HOVER);
   isHoverExamplesArray[previousIndexOfExample] = false;
 }
 
 function addExampleHoverAnimation(exampleFilter, index) {
   exampleFilter.classList.add(CLASS_EXAMPLE_FILTER_HOVER);
-  examplesDivs[index].classList.add(CLASS_EXAMPLE_DIV_HOVER);
+  examplesDivs[index].classList.add(CLASS_EXAMPLE_ARTICLE_HOVER);
   examplesH3[index].classList.add(CLASS_EXAMPLE_H3_HOVER);
   isHoverExamplesArray[index] = true;
 }
@@ -1173,7 +1194,7 @@ function resetExampleHoverTarget() {
 
 function removeExampleTargetHoverAnimation() {
   exampleTargetForLeaveDetection.classList.remove(CLASS_EXAMPLE_FILTER_HOVER);
-  examplesDivs[indexOfExampleTargetForLeaveDetection].classList.remove(CLASS_EXAMPLE_DIV_HOVER);
+  examplesDivs[indexOfExampleTargetForLeaveDetection].classList.remove(CLASS_EXAMPLE_ARTICLE_HOVER);
   examplesH3[indexOfExampleTargetForLeaveDetection].classList.remove(CLASS_EXAMPLE_H3_HOVER);
   isHoverExamplesArray[indexOfExampleTargetForLeaveDetection] = false;
 }
@@ -1192,6 +1213,7 @@ function openModalExample(event, index) {
     adjustModalPosition();
     addMobileNavCloseAnimation();
   } else resetModalPosition();
+  activeModalTextArrows();
   resetExampleHoverTarget();
   numberOfModalExampleToDisplay = index;
   addExampleFilterAnimationOnModalEvent("open");
@@ -1272,37 +1294,55 @@ function changeModalTextAndActiveButton(target) {
   switch (target) {
     case "description":
       if (modalPreviousActiveSection === modalDescriptionButtonH4) return;
-      if (isOnMobile) setImageOfActiveMobileModalButton("description");
+      if (isOnMobile) {
+        setImageOfActiveMobileModalButton("description");
+        removeImageOfPreviousActiveMobileModalButton();
+      }
       modalPreviousActiveSection.classList.remove(CLASS_MODAL_BUTTON_ACTIVE);
       modalPreviousActiveSection.classList.add(CLASS_MODAL_BUTTON_HOVER);
       modalDescriptionButtonH4.classList.remove(CLASS_MODAL_BUTTON_HOVER);
       modalDescriptionButtonH4.classList.add(CLASS_MODAL_BUTTON_ACTIVE);
-      modalText.innerHTML = `<p id="modal-description">${modalExampleToDisplay.description}</p>`;
+      modalText.innerHTML = `<h4 id="modal-text-title">Description de la mission&nbsp;:</h4><p id="modal-description">${modalExampleToDisplay.description}</p>`;
+      checkIfModalTextIsScrollable();
+      modalText.scrollTop = 0;
+      displayModalTextArrow();
       modalPreviousActiveSection = modalDescriptionButtonH4;
       break;
     case "difficulties":
       if (modalPreviousActiveSection === modalDifficultiesButtonH4) return;
-      if (isOnMobile) setImageOfActiveMobileModalButton("difficulties");
+      if (isOnMobile) {
+        setImageOfActiveMobileModalButton("difficulties");
+        removeImageOfPreviousActiveMobileModalButton();
+      }
       modalPreviousActiveSection.classList.remove(CLASS_MODAL_BUTTON_ACTIVE);
       modalPreviousActiveSection.classList.add(CLASS_MODAL_BUTTON_HOVER);
       modalDifficultiesButtonH4.classList.remove(CLASS_MODAL_BUTTON_HOVER);
       modalDifficultiesButtonH4.classList.add(CLASS_MODAL_BUTTON_ACTIVE);
+      if (modalExampleToDisplay.difficulties.length === 1) htmlContent += `<h4 id="modal-text-title">Difficulté rencontrée et solution&nbsp;:</h4>`;
+      else htmlContent += `<h4 id="modal-text-title">Difficultés rencontrées et solutions&nbsp;:</h4>`;
       for (let i = 0; i < modalExampleToDisplay.difficulties.length; i++) {
         const difficulty = modalExampleToDisplay.difficulties[i];
         htmlContent += `<p class="modal-problems-p"><img class="arrows-problems" src="./assets/svg/arrow-problem.svg" alt="Icône de flèche.">${difficulty.problems}</p><p class="modal-solutions-p"><span class="modal-difficulties-span">Solution :</span> ${difficulty.solutions}</p>`;
       }
       modalText.innerHTML = "";
       modalText.insertAdjacentHTML("beforeend", htmlContent);
+      checkIfModalTextIsScrollable();
+      modalText.scrollTop = 0;
+      displayModalTextArrow();
       modalPreviousActiveSection = modalDifficultiesButtonH4;
       break;
     case "skills":
       if (modalPreviousActiveSection === modalSkillsButtonH4) return;
-      if (isOnMobile) setImageOfActiveMobileModalButton("skills");
+      if (isOnMobile) {
+        setImageOfActiveMobileModalButton("skills");
+        removeImageOfPreviousActiveMobileModalButton();
+      }
       modalPreviousActiveSection.classList.remove(CLASS_MODAL_BUTTON_ACTIVE);
       modalPreviousActiveSection.classList.add(CLASS_MODAL_BUTTON_HOVER);
       modalSkillsButtonH4.classList.remove(CLASS_MODAL_BUTTON_HOVER);
       modalSkillsButtonH4.classList.add(CLASS_MODAL_BUTTON_ACTIVE);
-      htmlContent += `<ul id="modal-skills">`;
+      if (modalExampleToDisplay.difficulties.length === 1) htmlContent += `<h4 id="modal-text-title">Compétence acquise :</h4><ul id="modal-skills">`;
+      else htmlContent += `<h4 id="modal-text-title">Compétences acquises :</h4><ul id="modal-skills">`;
       for (let i = 0; i < modalExampleToDisplay.skills.length; i++) {
         const skill = modalExampleToDisplay.skills[i];
         htmlContent += `<li>${skill}</li>`;
@@ -1310,22 +1350,34 @@ function changeModalTextAndActiveButton(target) {
       htmlContent += `</ul>`;
       modalText.innerHTML = "";
       modalText.insertAdjacentHTML("beforeend", htmlContent);
+      checkIfModalTextIsScrollable();
+      modalText.scrollTop = 0;
+      displayModalTextArrow();
       modalPreviousActiveSection = modalSkillsButtonH4;
       break;
     case "default":
-      if (isOnMobile) setImageOfActiveMobileModalButton("description");
+      if (isOnMobile) {
+        setImageOfActiveMobileModalButton("description");
+      }
       if (modalPreviousActiveSection && modalPreviousActiveSection !== modalDescriptionButtonH4) {
+        if (isOnMobile) removeImageOfPreviousActiveMobileModalButton();
         modalPreviousActiveSection.classList.remove(CLASS_MODAL_BUTTON_ACTIVE);
         modalPreviousActiveSection.classList.add(CLASS_MODAL_BUTTON_HOVER);
         modalDescriptionButtonH4.classList.remove(CLASS_MODAL_BUTTON_HOVER);
         modalDescriptionButtonH4.classList.add(CLASS_MODAL_BUTTON_ACTIVE);
       }
-      modalText.innerHTML = `<p id="modal-description">${modalExampleToDisplay.description}</p>`;
+      modalText.innerHTML = `<h4 id="modal-text-title">Description de la mission&nbsp;:</h4><p id="modal-description">${modalExampleToDisplay.description}</p>`;
+      checkIfModalTextIsScrollable();
+      modalText.scrollTop = 0;
+      displayModalTextArrow();
       modalPreviousActiveSection = modalDescriptionButtonH4;
       break;
     case "reset":
       if (modalPreviousActiveSection && modalPreviousActiveSection !== modalDescriptionButtonH4) {
-        if (isOnMobile) setImageOfActiveMobileModalButton("description");
+        if (isOnMobile) {
+          setImageOfActiveMobileModalButton("description");
+          removeImageOfPreviousActiveMobileModalButton();
+        }
         modalPreviousActiveSection.classList.remove(CLASS_MODAL_BUTTON_ACTIVE);
         modalPreviousActiveSection.classList.add(CLASS_MODAL_BUTTON_HOVER);
         modalDescriptionButtonH4.classList.remove(CLASS_MODAL_BUTTON_HOVER);
@@ -1421,11 +1473,49 @@ function closeModal() {
   if (isOnMobile) enableScroll();
   modal.classList.remove(CLASS_MODAL_OPEN);
   modalScreen.classList.add(CLASS_MODAL_SCREEN_CLOSE);
+  disableModalTextArrows();
   resetModalSlideSystem();
   setTimeout(() => {
     modalScreen.style.display = "none";
     changeModalTextAndActiveButton("reset");
   }, modalClosingAnimationDuration);
+}
+
+function checkIfModalTextIsScrollable() {
+  if (!isModalOpen) return;
+  if (modalText.scrollHeight > modalText.clientHeight) {
+    isModalTextScrollable = true;
+    modalTextArrowDown.style.visibility = "visible";
+    modalTextArrowUp.style.visibility = "hidden";
+  } else {
+    isModalTextScrollable = false;
+    modalTextArrowDown.style.visibility = "hidden";
+    modalTextArrowUp.style.visibility = "hidden";
+  }
+}
+
+function displayModalTextArrow() {
+  if (!isModalOpen || !isModalTextScrollable) return;
+  if (modalText.scrollTop > 0) {
+    modalTextArrowUp.style.visibility = "visible";
+  } else {
+    modalTextArrowUp.style.visibility = "hidden";
+  }
+  if (modalText.scrollTop + modalText.clientHeight < modalText.scrollHeight) {
+    modalTextArrowDown.style.visibility = "visible";
+  } else {
+    modalTextArrowDown.style.visibility = "hidden";
+  }
+}
+
+function activeModalTextArrows() {
+  modalTextArrowUp.style.display = "flex";
+  modalTextArrowDown.style.display = "flex";
+}
+
+function disableModalTextArrows() {
+  modalTextArrowUp.style.display = "none";
+  modalTextArrowDown.style.display = "none";
 }
 
 // → Modal (Mobile)
@@ -1434,21 +1524,50 @@ function adjustModalPosition() {
 }
 
 function resetModalPosition() {
-  modalScreen.style.top = "";
+  modalScreen.style.top = "auto";
 }
 
 /**  @param {string} target "description", "difficulties" or "skills" */
 function setImageOfActiveMobileModalButton(target) {
-  switch (target) {
-    case "description":
-      console.log("message");
-      modalButtonsImages[0].setAttribute("src", "./skill/skills-svgrepo-com.svg");
+  if (target) {
+    switch (target) {
+      case "description":
+        modalButtonsImages[0].setAttribute("src", "./assets/svg/description-black.svg");
+        break;
+      case "difficulties":
+        modalButtonsImages[2].setAttribute("src", "./assets/svg/exclamation-mark-black.svg");
+        break;
+      case "skills":
+        modalButtonsImages[4].setAttribute("src", "./assets/svg/cog-black.svg");
+        break;
+      default:
+    }
+  } else {
+    switch (modalPreviousActiveSection) {
+      case modalDescriptionButtonH4:
+        modalButtonsImages[0].setAttribute("src", "./assets/svg/description-black.svg");
+        break;
+      case modalDifficultiesButtonH4:
+        modalButtonsImages[2].setAttribute("src", "./assets/svg/exclamation-mark-black.svg");
+        break;
+      case modalSkillsButtonH4:
+        modalButtonsImages[4].setAttribute("src", "./assets/svg/cog-black.svg");
+        break;
+      default:
+    }
+  }
+}
+
+function removeImageOfPreviousActiveMobileModalButton() {
+  switch (modalPreviousActiveSection) {
+    case modalDescriptionButtonH4:
+      modalButtonsImages[0].setAttribute("src", "./assets/svg/description-white.svg");
       break;
-    case "difficulties":
-      modalButtonsImages[2].setAttribute("src", "./skill/skills-svgrepo-com.svg");
+    case modalDifficultiesButtonH4:
+      modalButtonsImages[2].setAttribute("src", "./assets/svg/exclamation-mark-white.svg");
       break;
-    case "skills":
-      modalButtonsImages[4].setAttribute("src", "./skill/skills-svgrepo-com.svg");
+    case modalSkillsButtonH4:
+      modalButtonsImages[4].setAttribute("src", "./assets/svg/cog-white.svg");
       break;
     default:
   }

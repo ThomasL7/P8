@@ -2,13 +2,14 @@
   @media (max-width: 768px) {
     #examples {
       height: auto;
-      position: relative;
+      /* position: relative; */
+      min-height: var(--section-height);
     }
 
-    #examples .background {
+    /* #examples .background {
       position: absolute;
       height: 100%;
-    }
+    } */
 
     #examples-content {
       justify-content: start;

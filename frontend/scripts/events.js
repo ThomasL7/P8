@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
     checkIfOnMobileAndActiveScroll(window.mqMobileTrigger);
     addHeaderAndHomeIntroAnimations();
     createAllArraysOfBlocksCollision();
-    updateSkillsInfoBubblesWidth();
     setIsWindowLoadedTrue();
   };
 
@@ -21,18 +20,21 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", () => {
     updateCurrentSlideView();
     adjustModalPosition();
-    updateSkillsInfoBubblesWidth();
     updateAllArraysOfBlocksCollision();
+    checkIfModalTextIsScrollable();
+    displayModalTextArrow();
   });
 
-  // window.addEventListener("scroll", () => ifMobileSlideLimitsAreReach());
+  window.addEventListener("scroll", () => {
+    ifMobileSlideLimitsAreReach();
+  });
 
   window.addEventListener(
     "wheel",
     (event) => {
       disableZoom(event);
       scrollSlideChange(event);
-      ifMobileSlideLimitsAreReach();
+      checkIfScrollingToNextMobileSlide(event);
     },
     { passive: false }
   );
@@ -58,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ===== Mobile events =====
   window.addEventListener("touchstart", (event) => updateStartScrollingPosition(event));
-  window.addEventListener("touchend", (event) => checkIfScrolling(event));
+  window.addEventListener("touchend", (event) => checkIfSwipingToNextMobileSlide(event));
 
   // → Media query trigger (Mobile)
   window.mqMobileTrigger.addEventListener("change", (event) => checkIfOnMobileAndActiveScroll(event));
@@ -164,6 +166,10 @@ document.addEventListener("DOMContentLoaded", () => {
   window.modalDescriptionButtonH4.addEventListener("click", () => changeModalTextAndActiveButton("description"));
   window.modalDifficultiesButtonH4.addEventListener("click", () => changeModalTextAndActiveButton("difficulties"));
   window.modalSkillsButtonH4.addEventListener("click", () => changeModalTextAndActiveButton("skills"));
+
+  window.modalText.addEventListener("scroll", () => {
+    displayModalTextArrow();
+  });
 
   // ===== Contact =====
   window.contactForm.addEventListener("submit", (event) => contactPostRequest(event));

@@ -3,11 +3,16 @@
   justify-content: center;
   height: var(--section-height);
   width: 100%;
-  color: var(--black);
+  color: var(--white);
+  position: relative;
 }
 
-#examples .background {
-  background: radial-gradient(ellipse at center, rgb(233, 227, 227) 0%, rgb(212, 205, 205) 60%, rgb(214, 205, 205) 90%);
+#examples .background img {
+  /* filter: brightness(0.3) contrast(0.6); */
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  /* background: radial-gradient(ellipse at center, rgb(233, 227, 227) 0%, rgb(212, 205, 205) 60%, rgb(214, 205, 205) 90%); */
 }
 
 #examples-content {
@@ -27,34 +32,49 @@
   width: 175%;
 }
 
-#examples-content .slide-title-style::before,
+/* #examples-content .slide-title-style::before,
 #examples-content .slide-title-style::after {
   background-color: var(--black);
-}
+} */
 
 #examples-gallery {
   display: grid;
   grid-template-columns: repeat(3, 28%);
   grid-gap: 25px 3.25%;
+  /* display: flex;
+  flex-wrap: wrap; */
   justify-content: center;
+  /* gap: 25px 3.25%; */
   width: 100%;
+  /* margin: auto; */
 }
 
 #examples-gallery article {
+  /* flex-basis: 33%; */
+  /* scale: 1.2; */
+  /* transform: scale(1.2); */
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  /* width: 100%; */
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+
+  /* box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2); */
+  border-radius: 20px;
+  /* background-color: rgba(233, 233, 233, 0.829); */
+  /* box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.212); */
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.5) 100%);
 }
 
 #examples-gallery article > div {
   position: relative;
   width: 100%;
-  box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.212);
+  /* box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.212); */
   height: 150px;
 }
 
 .examples-images {
+  border-radius: 20px 20px 0px 0px;
   object-fit: cover;
   width: 100%;
   height: 100%;
@@ -63,10 +83,12 @@
 
 #examples-gallery h3 {
   margin-top: 12px;
+  margin-bottom: 12px;
   font-size: 18px;
   font-weight: 500;
   text-align: center;
   line-height: 1.1;
+  color: var(--black);
 }
 
 /* Filter */

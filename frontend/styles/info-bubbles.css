@@ -1,26 +1,36 @@
 :root {
   /* ==== Info bubbles ==== */
-  --info-bubbles-width: 15vw;
+  --info-bubbles-width: 300px;
   --bubble-offset-x: 6;
-  --bubble-offset-y: 2;
+  --bubble-offset-y: -5;
   --bubble-margin: 30;
 }
 
 .info-bubbles {
   position: absolute;
-  padding: 10px;
+  box-sizing: border-box;
+  padding: 12px;
   display: none;
   z-index: 1;
   white-space: nowrap;
-  border-radius: 5px;
-  background-color: rgba(20, 20, 20, 0.884);
+  border-radius: 6px;
+  background: radial-gradient(ellipse at center, rgb(20, 20, 20, 0.9) 0%, rgb(20, 20, 20, 0.85) 100%);
   color: rgb(235, 223, 223);
-  font-size: 14px;
-  font-weight: 200;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.info-bubble-display-and-hide {
+  display: block;
+  visibility: hidden;
+  white-space: normal;
+  width: var(--info-bubbles-width);
 }
 
 .info-bubble-width-unset {
-  width: "";
+  width: auto;
   white-space: nowrap;
 }
 

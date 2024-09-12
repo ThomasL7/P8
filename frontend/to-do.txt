@@ -1,13 +1,8 @@
 
-faire gif accueil et img
-ecrire contenu
-responisve
-opti + acessibiltié
-tester compatibilite navigateurs
-modifier police, 2 polices?
+faire  img
+opti images + acessibiltié
+mobil hover a test
+article example tranform
+scroll ou tactil tablette slide change
 
-bug skill hover
-modal icon mobile
-scroll method mobile
-fleche cligno modal
-couleur hover
+redimensionner imagesabout text scroll

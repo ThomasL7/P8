@@ -162,3 +162,17 @@
     opacity: 1;
   }
 }
+
+#modal-text-arrow-up,
+#modal-text-arrow-down {
+  animation: modal-text-arrows-blink 0.5s ease-in-out 0s infinite alternate none;
+}
+
+@keyframes modal-text-arrows-blink {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

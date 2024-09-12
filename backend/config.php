@@ -6,7 +6,7 @@ header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
 
 // ===== Session =====
-ini_set('session.gc_maxlifetime', 3600 * 24);
+// ini_set('session.gc_maxlifetime', 3600 * 24);
 ini_set('session.cookie_lifetime', 3600 * 24);
 session_start();
 

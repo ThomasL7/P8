@@ -4,13 +4,13 @@
   height: var(--section-height);
   width: 100%;
   color: var(--white);
+  position: relative;
 }
 
-#skills .background {
-  height: var(--section-height);
-  /* background: rgb(99, 182, 230); */
-  /* background: rgb(107, 176, 216); */
-  background: radial-gradient(circle at center, rgb(110, 190, 236) 0%, rgb(67, 129, 167) 100%);
+#skills .background img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 #skills-content {
@@ -63,7 +63,9 @@
 #skills-tree-center,
 #skills-tree-right {
   padding: 30px 10px 35px 10px;
-  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.192) 0%, rgba(255, 255, 255, 0.082) 100%);
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.25) 100%);
+
+  /* background: radial-gradient(circle at center, rgba(255, 255, 255, 0.192) 0%, rgba(255, 255, 255, 0.082) 100%); */
   border-radius: 18px;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.062);
 }

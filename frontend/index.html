@@ -2,13 +2,13 @@
 <html lang="fr" style="overflow-y: hidden;">
 
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
-  <title>Thomas LÉGER - Portfolio</title>
-  <meta name="description" content="" />
-  <link rel="icon" href="./favicon.ico" />
-  <meta name="theme-color" content="#000000" />
+  <title>Thomas LÉGER - Développeur Web</title>
+  <meta name="description" content="Passionné par le développement web, j'apprécie particulièrement l'aspect d'apprentissage continu qu'offre cet univers en perpétuelle évolution. Chaque jour étant une opportunité d'explorer de nouveaux langages, frameworks et bibliothèques. J'éprouve également une grande satisfaction à concevoir et optimiser des applications. La combinaison de créativité, de logique et de rigueur qu'exige ce domaine nourrit ma motivation, me permettant d’aborder chaque défi avec ardeur et de mener à bien mes missions avec efficacité.">
+  <link rel="icon" href="./favicon.ico">
+  <meta name="theme-color" content="#000000">
 
   <link rel="stylesheet" href="./styles/reset.css">
   <link rel="stylesheet" href="./styles/general.css">
@@ -41,8 +41,8 @@
   <link rel="stylesheet" href="./styles/modal-animations.css">
   <link rel="stylesheet" href="./styles/contact-animations.css">
 
-  <script src="./datas/info-bubbles.js"></script>
-  <script src="./datas/examples.js"></script>
+  <script defer src="./datas/info-bubbles-text.js"></script>
+  <script defer src="./datas/examples-infos.js"></script>
 
   <script src="./scripts/functions.js"></script>
   <script src="./scripts/events.js"></script>
@@ -51,8 +51,8 @@
 <body>
   <header>
     <div id="header-title-block">
-      <img loading="lazy" src="./assets/svg/flag-fr.svg" alt="Icône de téléchargement." />
-      <h1>Thomas LÉGER</h1>
+      <img loading="lazy" src="./assets/svg/flag-fr.svg" alt="Icône de téléchargement.">
+      <h1>Thomas LÉGER<span style="display: none;"> - Développeur Web (Full Stack)</span></h1>
     </div>
     <div id="nav-menu-burger">
       <img loading="lazy" src="./assets/svg/menu-burger.svg" alt="Menu de navigation.">
@@ -84,15 +84,18 @@
   <div id="home-link" class="anchors">
   </div>
   <section id="home">
-    <img id="home-gif" loading="lazy" src="./assets/gif/coding.webp" alt="Image animée d'écriture de code." class="mon-style">
-    <div id="home-filter"></div>
+    <!-- <img id="home-gif" src="./assets/gif/Animation10.gif" alt="Image animée d'écriture de code." class="mon-style"> -->
+    <div class="background"><img src="./assets/images/home-background.webp" alt="Image de fond."></div>
     <div id="home-content">
-      <h2>dev full stack</h2>
-      <p>ce que j’aime dans le dev prfinvirnvpkvfmknsmnvsmfknvksn msknvsmfknmvk nsfkvnsmknvsrinvpr cvbd dbtbe e </p>
+      <h2>Développeur Web (Full&nbsp;Stack)</h2>
+
+      <!-- <p>Passionné par le développement web, j'apprécie particulièrement l'aspect d'apprentissage continu qu'offre cet univers en perpétuelle évolution. Chaque jour étant une opportunité d'explorer de nouveaux langages, frameworks et technologies.</p> -->
+      <!-- <p>Passionné par le développement web, j'éprouve une véritable satisfaction à concevoir, tester et peaufiner des solutions innovantes. Ce processus nourrit ma motivation tout en répondant à mon besoin de logique et de réflexion structurée.<br><br>C'est cette combinaison entre créativité et rigueur qui me permet de relever chaque défi avec passion et de mener à bien mes missions avec efficacité.</p> -->
+      <p>Passionné par le développement web, j'éprouve une grande satisfaction à concevoir et optimiser des applications. La créativité, la logique et la rigueur qu'exige ce domaine nourrissent ma motivation et me permettent de mener à bien mes missions avec efficacité.</p>
       <div id="home-buttons">
         <a style="cursor: default;" id="home-contact-button" href="#contact-link">Contact</a>
         <a style="cursor: default;" id="home-CV-button" href="./datas/CV-Thomas-LEGER.pdf" download="CV - Thomas LÉGER.pdf">
-          <img loading="lazy" src="./assets/svg/download.svg" alt="Icône de téléchargement." />
+          <img loading="lazy" src="./assets/svg/download.svg" alt="Icône de téléchargement.">
           CV</a>
       </div>
     </div>
@@ -101,16 +104,18 @@
   <div id="about-link" class="anchors">
   </div>
   <section id="about">
-    <div class="background"></div>
-    <div id="texture-static"></div>
+    <div class="background"><img loading="lazy" src="./assets/images/about-background.webp" alt="Image de fond."></div>
+    <!-- <div id="texture-static"></div> -->
     <div id="about-content">
       <div id="about-block-photo">
-        <img loading="lazy" src="./assets/images/photo.jpg" alt="Photo profil." />
+        <img loading="lazy" src="./assets/images/photo.webp" alt="Photo profil.">
       </div>
       <div id="about-text">
         <h2>QUI SUIS-JE ?</h2>
-        <p>Ma reconversion, pourquoi personnalité + qualité sdvsdvsdknvdsjkvb dsbvksdvs dvbsdjkvbdsjb vkdsbvsjkdbvjsbdvjkbs</p> <br>
-        <p>vdjb jkvbsdjvbsbsjkvsbdjvdvsdvdinlvsdknldsknvlksn dkdsnvlksndlk nvlkdns lkvdsn dslnvl dskvndslk nldsnvldsk ndlsnv dslknvl ksndlkvnsdvsd</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;En quête d’épanouissement au travail, j'ai choisi de me reconvertir en tant que développeur web full stack, un métier qui correspond parfaitement à ma personnalité introspective, à mes qualités et à mes motivations.</p> <br>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Depuis mon enfance, j'ai exercé ma logique à travers les jeux de société et les énigmes. Cette réflexion structurée rend le codage particulièrement stimulant pour moi. Tester et ajuster différentes logiques est un véritable plaisir, et chaque challenge est une occasion de mettre en pratique ma capacité à résoudre des problèmes.</p> <br>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Curieux de nature, je suis particulièrement attiré par l'apprentissage continu que permet le développement informatique. Ce domaine en perpétuelle évolution me donne chaque jour l’opportunité de découvrir de nouvelles techniques, langages, frameworks et bibliothèques. Cette soif de connaissances me permet d’améliorer constamment mes compétences et de rester performant dans mon travail.</p> <br>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Passionné de musique assistée par ordinateur, je trouve une satisfaction comparable dans l'aspect créatif en développement web, où le plaisir de créer quelque chose de fonctionnel et plaisant est tout aussi gratifiant semblable à celle que j'éprouve en créant de la musique.</p> <br>
       </div>
     </div>
   </section>
@@ -118,7 +123,7 @@
   <div id="skills-link" class="anchors">
   </div>
   <section id="skills">
-    <div class="background"></div>
+    <div class="background"><img loading="lazy" src="./assets/images/skills-background.webp" alt="Image de fond."></div>
     <div id="skills-content">
       <h2 class="slide-title-style">COMPÉTENCES</h2>
       <div id="skills-trees">
@@ -225,14 +230,14 @@
           </ul>
         </div>
       </div>
-      <p>Ouvert à l’apprentisssage de nouveaux languagues, framework, lybraries, outil ..... zerozevrzvrz zervzevrzvbher zelr ezvrkjzelvlrzvr rzervkzelrkvzje rzevlkezvlrezknvlrezvnrkvznl zekrvlzkenrvlzenvkrznvlrnz</p>
+      <p>Animé par la curiosité et la passion, je suis toujours en quête de nouveaux langages, frameworks et bibliothèques pour élargir mes compétences.</p>
     </div>
   </section>
 
   <div id="examples-link" class="anchors">
   </div>
   <section id="examples">
-    <div class="background"></div>
+    <div class="background"><img loading="lazy" src="./assets/images/examples-background.webp" alt="Image de fond."></div>
     <div id="examples-content">
       <h2 class="slide-title-style">EXEMPLES</h2>
 
@@ -240,7 +245,7 @@
         <img loading="lazy" id="modal-previous-button" src="./assets/svg/next.svg" alt="Icône précédent.">
         <div id="modal">
           <div id="modal-header">
-            <h3 id="modal-title"></h3>
+            <h3 id="modal-title">Titre</h3>
             <img loading="lazy" id="modal-close-icon" src="./assets/svg/close2.svg" alt="Icône de fermeture de fenêtre.">
           </div>
           <div id="modal-image-section">
@@ -252,37 +257,52 @@
               <div>
                 <h4 id="modal-description-button-h4" class="modal-button-active">
                   <span class="modal-buttons-text">Description</span>
-                  <img loading="lazy" class="modal-buttons-images" src="./skill/skills-svgrepo-com2.svg" alt="Description.">
+                  <img loading="lazy" class="modal-buttons-images" src="./assets/svg/description-white.svg" alt="Description.">
                 </h4>
                 <p id="modal-description-button-p">
                   <span class="modal-buttons-text">Description</span>
-                  <img loading="lazy" class="modal-buttons-images" src="./skill/skills-svgrepo-com2.svg" alt="Description.">
+                  <img loading="lazy" class="modal-buttons-images" src="./assets/svg/description-white.svg" alt="Description.">
                 </p>
               </div>
               <div>
                 <h4 id="modal-difficulties-button-h4" class="modal-button-hover">
                   <span class="modal-buttons-text">Difficultés</span>
-                  <img loading="lazy" class="modal-buttons-images" src="./skill/skills-svgrepo-com2.svg" alt="Description.">
+                  <img loading="lazy" class="modal-buttons-images" src="./assets/svg/exclamation-mark-white.svg" alt="Description.">
                 </h4>
                 <p id="modal-difficulties-button-p">
                   <span class="modal-buttons-text">Difficultés</span>
-                  <img loading="lazy" class="modal-buttons-images" src="./skill/skills-svgrepo-com2.svg" alt="Description.">
+                  <img loading="lazy" class="modal-buttons-images" src="./assets/svg/exclamation-mark-white.svg" alt="Description.">
                 </p>
               </div>
               <div>
                 <h4 id="modal-skills-button-h4" class="modal-button-hover">
                   <span class="modal-buttons-text">Compétences</span>
-                  <img loading="lazy" class="modal-buttons-images" src="./skill/skills-svgrepo-com2.svg" alt="Description.">
+                  <img loading="lazy" class="modal-buttons-images" src="./assets/svg/cog-white.svg" alt="Description.">
                 </h4>
                 <p id="modal-skills-button-p">
                   <span class="modal-buttons-text">Compétences</span>
-                  <img loading="lazy" class="modal-buttons-images" src="./skill/skills-svgrepo-com2.svg" alt="Description.">
+                  <img loading="lazy" class="modal-buttons-images" src="./assets/svg/cog-white.svg" alt="Description.">
                 </p>
               </div>
             </div>
           </div>
-          <div id="modal-text"></div>
-          <a id="modal-link" href="#"></a>
+          <div id="modal-text-block">
+            <div id="modal-text-arrow-up" style="display: none;">
+              <div>
+                <img loading="lazy" src="./assets/svg/modal-text-arrow.svg" alt="Indication de texte supplémentaire au dessus.">
+              </div>
+            </div>
+            <div id="modal-text">
+              <h4 id="modal-text-title">Description :</h4>
+              <img class="arrows-problems" src="./assets/svg/arrow-problem.svg" alt="Icône de flèche.">
+            </div>
+            <div id="modal-text-arrow-down" style="display: none;">
+              <div>
+                <img loading="lazy" src="./assets/svg/modal-text-arrow.svg" alt="Indication de texte supplémentaire au dessus.">
+              </div>
+            </div>
+          </div>
+          <a id="modal-link" href="#">None</a>
         </div>
         <img loading="lazy" id="modal-next-button" src="./assets/svg/next.svg" alt="Icône suivant.">
       </div>
@@ -292,41 +312,51 @@
           <div>
             <div class="examples-filters" style="cursor: default;">
               <img loading="lazy" src="./assets/svg/lens.svg" alt="Icône de loupe.">
-              <p>Cliquez pour plus d'informations !</p>
+              <p>Cliquez pour plus d'informations&nbsp;!</p>
             </div>
             <img class="examples-images" loading="lazy" src="./assets/images/example-1.jpg" alt="Image projet - example.title.">
           </div>
-          <h3>sfjvskjn fnkj dnfjd</h3>
+          <h3>Créez la page d'accueil d'une agence de voyage avec HTML & CSS.</h3>
         </article>
         <article id="example-2">
           <div>
             <div class="examples-filters" style="cursor: default;">
               <img loading="lazy" src="./assets/svg/lens.svg" alt="Icône de loupe.">
-              <p>Cliquez pour plus d'informations !</p>
+              <p>Cliquez pour plus d'informations&nbsp;!</p>
             </div>
             <img class="examples-images" loading="lazy" src="./assets/images/example-2.jpg" alt="Image projet - example.title.">
           </div>
-          <h3>vfdjvndkj nfdjkvnjkdfnkfvjvjkd nfdj</h3>
+          <h3>Créez une page web dynamique d'un portfolio avec JavaScript.</h3>
         </article>
         <article id="example-3">
           <div>
             <div class="examples-filters" style="cursor: default;">
               <img loading="lazy" src="./assets/svg/lens.svg" alt="Icône de loupe.">
-              <p>Cliquez pour plus d'informations !</p>
+              <p>Cliquez pour plus d'informations&nbsp;!</p>
             </div>
             <img class="examples-images" loading="lazy" src="./assets/images/example-3.jpg" alt="Image projet - example.title.">
           </div>
-          <h3>df iji nidnoindf dudd fn</h3>
+          <h3>Créez une application web de location immobilière avec React.</h3>
         </article>
         <article id="example-4">
           <div>
             <div class="examples-filters" style="cursor: default;">
               <img loading="lazy" src="./assets/svg/lens.svg" alt="Icône de loupe.">
-              <p>Cliquez pour plus d'informations !</p>
+              <p>Cliquez pour plus d'informations&nbsp;!</p>
             </div>
             <img class="examples-images" loading="lazy" src="./assets/images/example-4.jpg" alt="Image projet - example.title.">
           </div>
-          <h3>df dino difn odfn fdi ndof n fdin dofi ndfi</h3>
+          <h3>Développez le back-end d'un site de notation de livres.</h3>
+        </article>
+        <article id="example-5">
+          <div>
+            <div class="examples-filters" style="cursor: default;">
+              <img loading="lazy" src="./assets/svg/lens.svg" alt="Icône de loupe.">
+              <p>Cliquez pour plus d'informations&nbsp;!</p>
+            </div>
+            <img class="examples-images" loading="lazy" src="./assets/images/example-4.jpg" alt="Image projet - example.title.">
+          </div>
+          <h3>Débuggez et optimisez un site de photographe.</h3>
         </article>
       </div>
     </div>
@@ -335,44 +365,44 @@
   <div id="contact-link" class="anchors">
   </div>
   <section id="contact">
-    <div class="background"></div>
+    <div class="background"><img loading="lazy" src="./assets/images/contact-background.webp" alt="Image de fond."></div>
     <div id="contact-content">
       <h2 class="slide-title-style">CONTACT</h2>
+      <p id="contact-text">Un projet, une idée ou une opportunité de job en développement web ?<br>N'hésitez pas à me contacter en remplissant le formulaire ci-dessous.</p>
       <form id="contact-form">
         <div id="contact-form-inputs">
           <div id="contact-full-name">
             <div class="flex-column">
               <label for="contact-family-name">Nom :</label>
-              <input type="text" id="contact-family-name" name="family-name" autocomplete="family-name" required maxlength="50" />
+              <input type="text" id="contact-family-name" name="family-name" autocomplete="family-name" required maxlength="50">
             </div>
             <div class="flex-column">
               <label for="contact-given-name">Prénom :</label>
-              <input type="text" id="contact-given-name" name="given-name" autocomplete="given-name" required maxlength="50" />
+              <input type="text" id="contact-given-name" name="given-name" autocomplete="given-name" required maxlength="50">
             </div>
           </div>
           <label for="contact-email">Email :</label>
-          <input type="email" id="contact-email" name="email" autocomplete="email" required maxlength="254" />
+          <input type="email" id="contact-email" name="email" autocomplete="email" required maxlength="254">
           <label for="contact-phone-number" class="contact-phone-number">Téléphone :</label>
-          <input type="text" id="contact-phone-number" name="phone-number" pattern="[0-9\-\s\(\)]+" autocomplete="off" maxlength="20" />
+          <input type="text" id="contact-phone-number" name="phone-number" pattern="[0-9\-\s\(\)]+" autocomplete="off" maxlength="20">
           <label for="contact-subject">Sujet :</label>
-          <input type="text" id="contact-subject" name="subject" required maxlength="100" />
+          <input type="text" id="contact-subject" name="subject" required maxlength="100">
           <label for="contact-message">Votre message :</label>
           <textarea id="contact-message" name="message" required maxlength="1000"></textarea>
-          <span id="contact-errors-form">
+          <div id="contact-errors-form">
             <img loading="lazy" src="./assets/svg/warning.svg" alt="Icône vigilant.">
             <p id="contact-errors-form-text"></p>
             <img loading="lazy" src="./assets/svg/warning.svg" alt="Icône vigilant.">
-          </span>
+          </div>
         </div>
         <button type="submit">Envoyez votre message</button>
-        <span id="contact-success-form">
+        <div id="contact-success-form">
           <img loading="lazy" src="./assets/svg/mail-send.svg" alt="Icône vigilant.">
           <p id="contact-success-form-text">Merci, votre message a été envoyé avec succès.</p>
-        </span>
+        </div>
       </form>
     </div>
   </section>
-  <!-- <div class="invisible-block-for-mobile" style="display: none;"> -->
 </body>
 
 </html>

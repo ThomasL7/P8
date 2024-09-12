@@ -4,25 +4,35 @@
 }
 
 #about {
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   height: var(--section-height);
-  color: var(--black);
+  color: var(--white);
+  /* color: var(--black); */
+  width: 100%;
+  position: relative;
+
   /* background: rgb(27, 27, 29); */
-  background: radial-gradient(ellipse at center, rgb(30, 30, 31) 0%, #2c2c2c 50%, rgb(24, 23, 23));
+  /* background: radial-gradient(ellipse at center, rgb(30, 30, 31) 0%, #2c2c2c 50%, rgb(24, 23, 23)); */
 }
 
-#about .background {
+#about .background img {
+  /* filter: brightness(0.3) contrast(0.6); */
+  /* filter: brightness(0.7) contrast(0.8); */
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
   /* background-color: rgb(241, 222, 47); */
-  background: radial-gradient(ellipse at center, rgb(245, 230, 98) 0%, rgb(207, 192, 56) 100%);
+  /* background: radial-gradient(ellipse at center, rgb(245, 230, 98) 0%, rgb(207, 192, 56) 100%); */
 }
 
-#about .background,
+/* #about .background,
 #texture-static {
   margin: var(--slide-bands-height) 0px;
   height: calc(var(--section-height) - 2 * var(--slide-bands-height));
-}
+} */
 
 #texture-static {
   position: absolute;
@@ -44,15 +54,19 @@
 
 #about-block-photo {
   transform: rotate(-5deg);
-  width: 238px;
-  height: 272px;
+  /* width: 238px;
+  height: 272px; */
+  width: 255px;
+  height: 290px;
   display: flex;
   justify-content: center;
-  background: radial-gradient(circle at center, rgb(238, 238, 238) 0%, rgb(236, 236, 236) 85%, rgb(209, 209, 209) 100%);
-  border-radius: 15px;
-  box-shadow: 3px 8px 15px rgba(0, 0, 0, 0.233);
+  /* background: radial-gradient(circle at center, rgb(238, 238, 238) 0%, rgb(236, 236, 236) 85%, rgb(209, 209, 209) 100%); */
+  background: radial-gradient(circle at center, rgb(230, 230, 230) 85%, rgb(158, 158, 158) 100%);
+  border-radius: 10px;
+  box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.25);
   margin-left: 20px;
-  margin-right: 65px;
+  margin-right: 95px;
+  border: 1px solid rgb(124, 124, 124);
 }
 
 #about-block-photo img {
@@ -61,8 +75,9 @@
   width: 90%;
   height: 81%;
   position: relative;
-  border-radius: 15px;
-  border: 1px solid rgb(204, 204, 204);
+  border-radius: 10px;
+  /* border: 1px solid rgb(204, 204, 204); */
+  border: 1px solid rgb(204, 203, 203);
 }
 
 #about-text {
@@ -70,7 +85,9 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  padding: 0 30px;
+  padding: 20px 30px;
+  border-radius: 20px;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.123) 0%, rgba(255, 255, 255, 0.075) 100%);
 }
 
 #about-text h2 {
@@ -86,11 +103,13 @@
   top: 10px;
   width: 100%;
   height: 6px;
-  background-color: var(--black);
+  background-color: var(--white);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.8) 0%, rgb(255, 255, 255) 50%, rgb(255, 255, 255, 0.8) 100%);
+  /* background-color: var(--black); */
 }
 
 #about-text p {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400;
   width: 100%;
   box-sizing: border-box;

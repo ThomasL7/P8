@@ -1,6 +1,6 @@
 :root {
   /* ==== Sizes ==== */
-  --header-height: 35px;
+  --header-height: 38px;
   --section-height: calc(100vh - var(--header-height));
 }
 
@@ -12,7 +12,8 @@ header {
   position: fixed;
   height: var(--header-height);
   z-index: 2;
-  background-color: rgb(31, 27, 27);
+  /* background-color: rgb(31, 27, 27); */
+  background-color: rgb(26, 25, 25);
 }
 
 #header-title-block {
@@ -23,10 +24,9 @@ header {
 }
 
 #header-title-block img {
-  height: 20px;
+  height: 15px;
   margin-left: 15px;
   margin-right: 14px;
-  border: 1px solid black;
 }
 
 h1 {
@@ -58,7 +58,7 @@ nav a {
   align-content: center;
   padding-left: 30px;
   padding-right: 30px;
-  border-left: 2px solid var(--white);
+  border-left: 2px solid rgb(226, 226, 226);
 }
 
 nav p {

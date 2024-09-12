@@ -18,6 +18,11 @@ html {
   background-color: rgb(65, 65, 65);
   font-size: 18px;
   font-family: "Arial";
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -26,10 +31,6 @@ body {
   min-width: 320px;
   min-height: 100vh;
   color: var(--white);
-}
-
-body::-webkit-scrollbar {
-  display: none;
 }
 
 /* Anchors offsetting */
@@ -49,6 +50,7 @@ body::-webkit-scrollbar {
   position: absolute;
   width: 100%;
   height: var(--section-height);
+  filter: brightness(0.3) contrast(0.6);
 }
 
 .slide-title-style::before,
@@ -66,8 +68,4 @@ body::-webkit-scrollbar {
 
 .slide-title-style::after {
   top: 38px;
-}
-
-.invisible-block-for-mobile {
-  height: 10px;
 }

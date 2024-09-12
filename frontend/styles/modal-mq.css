@@ -1,9 +1,9 @@
 @media (max-width: 768px) {
   #modal {
     height: 85%;
-    max-height: "";
+    max-height: none;
     width: 70%;
-    max-width: "";
+    max-width: none;
   }
 
   #modal-image-section {

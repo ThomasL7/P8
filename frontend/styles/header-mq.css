@@ -26,7 +26,7 @@
   nav a,
   nav p {
     border: none;
-    background-color: rgb(231, 231, 231);
+    background-color: rgb(235, 235, 235);
     color: var(--black);
     width: 100%;
     box-sizing: border-box;

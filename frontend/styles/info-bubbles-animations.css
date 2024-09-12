@@ -1,6 +1,6 @@
 :root {
   /* ==== Durations ==== */
-  --info-bubbles-text-speed: 15;
+  --info-bubbles-text-speed: 12;
 }
 
 .info-bubbles-open-right {
@@ -45,6 +45,7 @@
     transform: scale(1);
   }
   100% {
+    display: block;
     opacity: 0.1;
     transform: scale(0.2);
   }

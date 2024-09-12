@@ -17,7 +17,7 @@ header {
 
 #header-title-block,
 nav {
-  transform: scaleY(0%);
+  transform: scaleY(0);
 }
 
 .elements-header-intro {
@@ -26,10 +26,10 @@ nav {
 
 @keyframes elements-header-intro {
   0% {
-    transform: scaleY(0%);
+    transform: scaleY(0);
   }
   100% {
-    transform: scaleY(100%);
+    transform: scaleY(1);
   }
 }
 
@@ -49,21 +49,23 @@ nav {
 }
 
 .nav-normal-state {
-  transform: scaleY(100%);
+  transform: scaleY(1);
 }
 
 .nav-link-active {
   color: var(--black);
-  background-color: var(--white);
-  box-shadow: 0px 3px 10px rgba(238, 238, 238, 0.205);
+  background-color: rgb(235, 235, 235);
+  /* background: radial-gradient(ellipse at center, rgb(255, 255, 255) 0%, rgb(202, 202, 202) 100%); */
+  /* background: radial-gradient(ellipse at center, rgb(255, 255, 255) 0%, rgb(219, 219, 219) 100%); */
+  box-shadow: 0px 3px 10px rgba(238, 238, 238, 0.2);
   opacity: 1;
 }
 
 .nav-link-hover:hover {
   cursor: pointer;
   color: var(--black);
-  background-color: var(--white);
-  box-shadow: 0px 3px 10px rgba(238, 238, 238, 0.205);
+  background-color: rgb(235, 235, 235);
+  box-shadow: 0px 3px 10px rgba(238, 238, 238, 0.2);
   animation: nav-link-hover 0.5s ease-in-out 0s infinite alternate none;
 }
 
@@ -84,14 +86,14 @@ nav {
 
   .mobile-nav-open {
     display: flex;
-    transform: scaleY(100%);
+    transform: scaleY(1);
     animation: mobile-nav-open 0.25s ease-in-out 0s 1 normal none;
     transform-origin: top;
   }
 
   .mobile-nav-close {
     display: none;
-    transform: scaleY(100%);
+    transform: scaleY(1);
     animation: mobile-nav-close 0.25s ease-in-out 0s 1 normal none;
   }
 
@@ -114,10 +116,10 @@ nav {
 
 @keyframes mobile-nav-open {
   0% {
-    transform: scaleY(0%);
+    transform: scaleY(0);
   }
   100% {
-    transform: scaleY(100%);
+    transform: scaleY(1);
   }
 }
 

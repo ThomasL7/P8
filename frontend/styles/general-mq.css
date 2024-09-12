@@ -5,3 +5,7 @@
 .margin-top-mobile-slide {
   margin-top: var(--header-height-on-mobile);
 }
+
+.background {
+  height: 100%;
+}
