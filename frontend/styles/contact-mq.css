@@ -1,15 +1,16 @@
-@media (max-width: 768px) {
-  #contact {
-    height: auto;
-    /* position: relative; */
-    min-height: var(--section-height);
+@media (max-width: 1440px) {
+  .footer-margin-for-tablet-desktop {
+    margin-bottom: var(--footer-height-1440);
   }
+}
 
-  /* #contact .background {
-    position: absolute;
-    height: 100%;
-  } */
+@media (max-width: 1024px) {
+  .footer-margin-for-tablet-desktop {
+    margin-bottom: var(--footer-height-1024);
+  }
+}
 
+@media (max-height: 590px), (max-width: 768px) {
   #contact-content {
     width: 100%;
   }

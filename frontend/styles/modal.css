@@ -1,6 +1,6 @@
 #modal-screen {
   position: absolute;
-  height: var(--section-height);
+  height: var(--section-height-normal);
   width: 100vw;
   z-index: 1;
   display: none;
@@ -57,8 +57,10 @@
   height: 15px;
 }
 
-#modal-close-icon:hover {
-  cursor: pointer;
+@media (hover: hover) {
+  #modal-close-icon:hover {
+    cursor: pointer;
+  }
 }
 
 #modal-image-section {
@@ -108,8 +110,6 @@
   position: absolute;
   font-size: 16px;
   font-weight: 600;
-  /* background: radial-gradient(ellipse at center, rgb(114, 114, 114) 0%, rgb(102, 102, 102) 100%); */
-  color: var(--white);
   padding: 8px 32px;
   border: 2px solid black;
 }
@@ -124,7 +124,7 @@
   background: radial-gradient(ellipse at center, rgb(129, 108, 224) 0%, rgb(136, 109, 233) 100%);
 }
 
-#modal-difficulties-button-p {
+#modal-challenges-button-p {
   background: radial-gradient(ellipse at center, rgb(252, 53, 53) 0%, rgb(243, 44, 44) 100%);
 }
 
@@ -132,8 +132,10 @@
   background: radial-gradient(ellipse at center, rgb(87, 172, 221) 0%, rgb(75, 164, 219) 100%);
 }
 
-#modal-buttons-section h4:hover {
-  cursor: pointer;
+@media (hover: hover) {
+  #modal-buttons-section h4:hover {
+    cursor: pointer;
+  }
 }
 
 .modal-buttons-images {
@@ -162,48 +164,6 @@
   display: none;
 }
 
-#modal-text-arrow-down,
-#modal-text-arrow-up {
-  position: absolute;
-  z-index: 1;
-  display: flex;
-  width: 100%;
-  justify-content: center;
-}
-
-#modal-text-arrow-up {
-  align-items: flex-start;
-  top: 8px;
-}
-
-#modal-text-arrow-down {
-  align-items: flex-end;
-  bottom: 8px;
-}
-
-#modal-text-arrow-up div,
-#modal-text-arrow-down div {
-  background-color: rgb(190, 190, 190);
-  border-radius: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1px 10px;
-}
-
-#modal-text-arrow-up div {
-  visibility: hidden;
-}
-
-#modal-text-arrow-up img,
-#modal-text-arrow-down img {
-  height: 20px;
-}
-
-#modal-text-arrow-up img {
-  transform: rotate(180deg);
-}
-
 #modal-text-title {
   font-size: 20px;
   font-weight: 600;
@@ -225,7 +185,7 @@
   margin-bottom: 0px;
 }
 
-.modal-difficulties-span {
+.modal-challenges-span {
   font-weight: 600;
 }
 
@@ -247,6 +207,8 @@
   font-weight: 600;
 }
 
-#modal-link a:hover {
-  cursor: pointer;
+@media (hover: hover) {
+  #modal-link a:hover {
+    cursor: pointer;
+  }
 }

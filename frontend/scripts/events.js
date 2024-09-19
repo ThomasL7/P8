@@ -7,9 +7,14 @@ document.addEventListener("DOMContentLoaded", () => {
   window.onload = () => {
     scrollToTop();
     checkIfOnMobileAndActiveScroll(window.mqMobileTrigger);
+    checkIfUnderMQMaxHeight(window.mqMaxHeight);
+    checkToForceMobileMod(window.mqForceMobileMod);
     addHeaderAndHomeIntroAnimations();
     createAllArraysOfBlocksCollision();
+    checkIfAboutTextScrollable("delay");
+    setControlType();
     setIsWindowLoadedTrue();
+    detectIfPhone();
   };
 
   window.onbeforeunload = () => {
@@ -18,63 +23,135 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   window.addEventListener("resize", () => {
+    if (window.mobileDetected === true && window.isOnMobile) return;
     updateCurrentSlideView();
     adjustModalPosition();
     updateAllArraysOfBlocksCollision();
     checkIfModalTextIsScrollable();
+    checkIfAboutTextScrollable();
     displayModalTextArrow();
-  });
-
-  window.addEventListener("scroll", () => {
-    ifMobileSlideLimitsAreReach();
   });
 
   window.addEventListener(
     "wheel",
     (event) => {
-      disableZoom(event);
-      scrollSlideChange(event);
-      checkIfScrollingToNextMobileSlide(event);
+      if (!window.isTouchInsteadOfMouse) {
+        scrollSlideChange(event);
+        updateAboutTextArrow();
+        checkIfScrollingToNextMobileSlide(event);
+      }
     },
     { passive: false }
   );
 
-  document.addEventListener("keydown", (event) => {
-    disableZoom(event);
-    arrowsSlideChange(event);
+  window.addEventListener("keydown", (event) => {
+    updateAboutTextArrow(event);
   });
 
   document.addEventListener("click", (event) => {
-    checkIfClosingModal(event);
-    checkIfClosingMobileNav(event);
+    if (!window.isTouchInsteadOfMouse) {
+      checkIfClosingModal(event);
+      checkIfClosingMobileNav(event);
+    }
+  });
+  document.addEventListener("touchstart", (event) => {
+    if (window.isTouchInsteadOfMouse) {
+      checkIfClosingModal(event);
+      checkIfClosingMobileNav(event);
+    }
+  });
+
+  document.addEventListener("mousemove", () => {
+    activeMouseControl();
   });
 
   // → Custom events
   window.addEventListener("indexSlideChange", () => {
+    // disablePushToReload();
     addOutroAnimationsSlide();
     addIntroAnimationsSlide();
     setActiveClassToNavLink();
-    removeHeaderHoverAnimationForNewSlide();
+    removeNavHoverAnimationForNewSlide();
     resetPreviousSlide();
   });
 
-  // ===== Mobile events =====
-  window.addEventListener("touchstart", (event) => updateStartScrollingPosition(event));
-  window.addEventListener("touchend", (event) => checkIfSwipingToNextMobileSlide(event));
+  // ===== Mobile or Tablet touch events =====
+  window.addEventListener("touchstart", (event) => {
+    activeTouchControl();
+    setTouchStartVariables(event);
+    handleLeavingAboutText(event);
+    checkIfStillTouchingSameSkill(event);
+  });
+  window.addEventListener(
+    "touchmove",
+    (event) => {
+      if (window.isTouchInsteadOfMouse) {
+        // preventTouchEvents(event);
+        calculateScrollDistance(event);
+        swipeAboutText();
+        updateAboutTextArrow();
+        disablePushToReload(event);
+        // mobileScroll();
+      }
+    },
+    { passive: false }
+  );
+  window.addEventListener("touchend", (event) => {
+    if (window.isTouchInsteadOfMouse) {
+      calculateTouchDistance(event);
+      // mobileScrollGlide();
+      tabletSlideChange();
+      checkIfSwipingToNextMobileSlide();
+    }
+  });
+
+  // window.addEventListener("scroll", () => {
+  //   checkIfSwipingToNextMobileSlide();
+  // });
 
   // → Media query trigger (Mobile)
   window.mqMobileTrigger.addEventListener("change", (event) => checkIfOnMobileAndActiveScroll(event));
+  window.mqForceMobileMod.addEventListener("change", (event) => checkToForceMobileMod(event));
+  window.mqMaxHeight.addEventListener("change", (event) => checkIfUnderMQMaxHeight(event));
 
   // ===== Header =====
-  window.headerTitle.addEventListener("click", () => handleHeaderTitleClick());
+  window.headerTitleBlock.addEventListener("mouseenter", () => {
+    if (!window.isTouchInsteadOfMouse) addHeaderTitleHover();
+  });
+
+  window.headerTitleBlock.addEventListener("mouseleave", () => {
+    if (!window.isTouchInsteadOfMouse) removeHeaderTitleHover();
+  });
+
+  window.headerTitleBlock.addEventListener("click", () => {
+    if (!window.isTouchInsteadOfMouse) handleHeaderTitleClick();
+  });
+  window.headerTitleBlock.addEventListener("touchstart", () => {
+    if (window.isTouchInsteadOfMouse) handleHeaderTitleClick();
+  });
+
+  window.nav.addEventListener("animationend", (event) => hideNavAfterCloseAnimation(event));
 
   for (let i = 0; i < window.navLinks.length; i++) {
     const navLink = window.navLinks[i];
-    navLink.addEventListener("click", (event) => handleNavLinkClick(event, i));
+    navLink.addEventListener("click", (event) => {
+      event.preventDefault();
+      if (!window.isTouchInsteadOfMouse) handleNavLinkClick(event, i);
+    });
+    navLink.addEventListener("touchstart", (event) => {
+      if (window.isTouchInsteadOfMouse) handleNavLinkClick(event, i);
+    });
   }
 
   // ===== Header (Mobile) =====
-  window.navMenuBurger.addEventListener("click", (event) => addMobileNavOpenAnimation(event));
+  window.navMenuBurger.addEventListener("click", (event) => {
+    if (!window.isTouchInsteadOfMouse) addMobileNavOpenAnimation(event);
+  });
+  window.navMenuBurger.addEventListener("touchstart", (event) => {
+    if (window.isTouchInsteadOfMouse) {
+      addMobileNavOpenAnimation(event);
+    }
+  });
 
   // // ===== Home =====
   window.homeButtons.addEventListener("animationend", (event) => {
@@ -85,15 +162,42 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  homeContactButton.addEventListener("click", (event) => activeContactButtonAfterIntroAnimation(event));
-  window.homeContactButton.addEventListener("mouseenter", () => isHoverHomeButton("contact", true));
-  window.homeContactButton.addEventListener("mouseleave", () => isHoverHomeButton("contact", false));
+  homeContactButton.addEventListener("click", (event) => {
+    if (!window.isTouchInsteadOfMouse) activeContactButtonAfterIntroAnimation(event);
+  });
+  homeContactButton.addEventListener("touchstart", (event) => {
+    if (window.isTouchInsteadOfMouse) activeContactButtonAfterIntroAnimation(event);
+  });
+  window.homeContactButton.addEventListener("mouseenter", () => {
+    if (!window.isTouchInsteadOfMouse) isHoverHomeButton("contact", true);
+  });
+  window.homeContactButton.addEventListener("mouseleave", () => {
+    if (!window.isTouchInsteadOfMouse) isHoverHomeButton("contact", false);
+  });
 
-  homeCVButton.addEventListener("click", (event) => activeCVButtonAfterIntroAnimation(event));
-  window.homeCVButton.addEventListener("mouseenter", () => isHoverHomeButton("CV", true));
-  window.homeCVButton.addEventListener("mouseleave", () => isHoverHomeButton("CV", false));
+  homeCVButton.addEventListener("click", (event) => {
+    if (!window.isTouchInsteadOfMouse) activeCVButtonAfterIntroAnimation(event);
+  });
+  homeCVButton.addEventListener("touchstart", (event) => {
+    if (window.isTouchInsteadOfMouse) activeCVButtonAfterIntroAnimation(event);
+  });
+  window.homeCVButton.addEventListener("mouseenter", () => {
+    if (!window.isTouchInsteadOfMouse) isHoverHomeButton("CV", true);
+  });
+  window.homeCVButton.addEventListener("mouseleave", () => {
+    if (!window.isTouchInsteadOfMouse) isHoverHomeButton("CV", false);
+  });
 
   // ===== About =====
+  window.aboutText.addEventListener("mouseenter", () => {
+    if (!window.isTouchInsteadOfMouse) handleAboutTextScroll();
+  });
+  window.aboutText.addEventListener("touchstart", () => {
+    if (window.isTouchInsteadOfMouse) handleAboutTextScroll();
+  });
+  window.aboutText.addEventListener("mouseleave", () => {
+    if (!window.isTouchInsteadOfMouse) handleLeavingAboutText();
+  });
 
   // ===== Skills =====
   let skillIndexInSkillsTreeArray = [];
@@ -113,7 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const index = skillIndexInSkillsTreeArray.findIndex((item) => item.treeIndex === treeIndex && item.skillIndex === skillIndex);
           addStyleCursorForSkills(index);
           setIsSkillsIntroAnimationsEndedTrue(index);
-          checkIfHoverSkillAfterIntro(skillsDiv, index);
+          if (!window.isTouchInsteadOfMouse) checkIfHoverSkillAfterIntro(skillsDiv, index);
         }
       }
     });
@@ -122,12 +226,21 @@ document.addEventListener("DOMContentLoaded", () => {
   for (let i = 0; i < window.skills.length; i++) {
     const skill = window.skills[i];
     skill.addEventListener("mouseenter", (event) => {
-      getMousePosition(event);
-      handleEnterSkill(null, i);
+      if (!window.isTouchInsteadOfMouse) {
+        getMousePosition(event);
+        handleEnterSkill(null, i);
+      }
     });
     skill.addEventListener("mouseleave", (event) => {
-      getMousePosition(event);
-      handleLeaveSkill();
+      if (!window.isTouchInsteadOfMouse) {
+        getMousePosition(event);
+        handleLeaveSkill();
+      }
+    });
+    skill.addEventListener("touchstart", (event) => {
+      if (window.isTouchInsteadOfMouse) {
+        handleTouchingSkill(i);
+      }
     });
   }
 
@@ -143,32 +256,69 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   document.addEventListener("mousemove", (event) => {
-    getMousePosition(event);
+    if (!window.isTouchInsteadOfMouse) getMousePosition(event);
   });
 
-  for (let index = 0; index < window.examplesFilters.length; index++) {
-    const exampleFilter = window.examplesFilters[index];
-    exampleFilter.addEventListener("mouseenter", (event) => {
-      getMousePosition(event);
-      handleEnterExample(exampleFilter, index);
+  for (let index = 0; index < window.examples.length; index++) {
+    const example = window.examples[index];
+    example.addEventListener("mouseenter", (event) => {
+      if (!window.isTouchInsteadOfMouse) {
+        getMousePosition(event);
+        handleEnterExample(example, index);
+      }
     });
-    exampleFilter.addEventListener("mouseleave", (event) => {
-      getMousePosition(event);
-      handleLeaveExample();
+    example.addEventListener("mouseleave", (event) => {
+      if (!window.isTouchInsteadOfMouse) {
+        getMousePosition(event);
+        handleLeaveExample();
+      }
     });
-    exampleFilter.addEventListener("click", (event) => openModalExample(event, index));
+    example.addEventListener("click", (event) => {
+      if (!window.isTouchInsteadOfMouse) openModalExample(event, index);
+    });
+    example.addEventListener("touchstart", (event) => {
+      if (window.isTouchInsteadOfMouse) openModalExample(event, index);
+    });
   }
 
   // → Modal
-  window.modalPreviousButton.addEventListener("click", (event) => setModalPreviousExample(event));
-  window.modalNextButton.addEventListener("click", (event) => setModalNextExample(event));
+  window.modalPreviousButton.addEventListener("click", (event) => {
+    if (!window.isTouchInsteadOfMouse) setModalPreviousExample(event);
+  });
+  window.modalPreviousButton.addEventListener("touchstart", (event) => {
+    if (window.isTouchInsteadOfMouse) setModalPreviousExample(event);
+  });
+  window.modalNextButton.addEventListener("click", (event) => {
+    if (!window.isTouchInsteadOfMouse) setModalNextExample(event);
+  });
+  window.modalNextButton.addEventListener("touchstart", (event) => {
+    if (window.isTouchInsteadOfMouse) setModalNextExample(event);
+  });
 
-  window.modalDescriptionButtonH4.addEventListener("click", () => changeModalTextAndActiveButton("description"));
-  window.modalDifficultiesButtonH4.addEventListener("click", () => changeModalTextAndActiveButton("difficulties"));
-  window.modalSkillsButtonH4.addEventListener("click", () => changeModalTextAndActiveButton("skills"));
+  window.modalDescriptionButtonH4.addEventListener("click", () => {
+    if (!window.isTouchInsteadOfMouse) changeModalTextAndActiveButton("description");
+  });
+  window.modalDescriptionButtonH4.addEventListener("touchstart", () => {
+    if (window.isTouchInsteadOfMouse) changeModalTextAndActiveButton("description");
+  });
+  window.modalChallengesButtonH4.addEventListener("click", () => {
+    if (!window.isTouchInsteadOfMouse) changeModalTextAndActiveButton("challenges");
+  });
+  window.modalChallengesButtonH4.addEventListener("touchstart", () => {
+    if (window.isTouchInsteadOfMouse) changeModalTextAndActiveButton("challenges");
+  });
+  window.modalSkillsButtonH4.addEventListener("click", () => {
+    if (!window.isTouchInsteadOfMouse) changeModalTextAndActiveButton("skills");
+  });
+  window.modalSkillsButtonH4.addEventListener("touchstart", () => {
+    if (window.isTouchInsteadOfMouse) {
+      changeModalTextAndActiveButton("skills");
+      changeModalTextAndActiveButton("skills");
+    }
+  });
 
   window.modalText.addEventListener("scroll", () => {
-    displayModalTextArrow();
+    if (!window.isTouchInsteadOfMouse) displayModalTextArrow();
   });
 
   // ===== Contact =====

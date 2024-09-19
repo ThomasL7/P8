@@ -1,0 +1,40 @@
+.footer-intro {
+  animation: footer-intro var(--header-animation-duration) cubic-bezier(0.46, 0.01, 0.67, 0.86) 0s 1 normal forwards;
+}
+
+@keyframes footer-intro {
+  0% {
+    filter: blur(8px);
+  }
+  100% {
+    filter: none;
+  }
+}
+
+.elements-footer-intro {
+  animation: elements-footer-intro var(--header-animation-duration) ease-out 0s 1 normal forwards;
+}
+
+@keyframes elements-footer-intro {
+  0% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@media (hover: hover) {
+  #footer img:hover {
+    animation: footer-link-hover 0.525s ease-in 0s infinite alternate none;
+  }
+}
+
+@keyframes footer-link-hover {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
   <title>Thomas LÉGER - Développeur Web</title>
-  <meta name="description" content="Passionné par le développement web, j'apprécie particulièrement l'aspect d'apprentissage continu qu'offre cet univers en perpétuelle évolution. Chaque jour étant une opportunité d'explorer de nouveaux langages, frameworks et bibliothèques. J'éprouve également une grande satisfaction à concevoir et optimiser des applications. La combinaison de créativité, de logique et de rigueur qu'exige ce domaine nourrit ma motivation, me permettant d’aborder chaque défi avec ardeur et de mener à bien mes missions avec efficacité.">
+  <meta name="description" content="Passionné par le développement web, j'apprécie particulièrement l'aspect d'apprentissage continu qu'offre cet univers en perpétuelle évolution. Chaque jour étant une opportunité d'explorer de nouveaux langages, frameworks et bibliothèques. Je trouve également une grande satisfaction à concevoir et optimiser des applications. La combinaison de créativité, de logique et de rigueur qu'exige ce domaine nourrit ma motivation, me permettant d’aborder chaque défi avec ardeur et de mener à bien mes missions avec efficacité.">
   <link rel="icon" href="./favicon.ico">
   <meta name="theme-color" content="#000000">
 
@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="./styles/examples.css">
   <link rel="stylesheet" href="./styles/modal.css">
   <link rel="stylesheet" href="./styles/contact.css">
+  <link rel="stylesheet" href="./styles/footer.css">
 
   <link rel="stylesheet" href="./styles/general-mq.css">
   <link rel="stylesheet" href="./styles/header-mq.css">
@@ -30,6 +31,7 @@
   <link rel="stylesheet" href="./styles/examples-mq.css">
   <link rel="stylesheet" href="./styles/modal-mq.css">
   <link rel="stylesheet" href="./styles/contact-mq.css">
+  <link rel="stylesheet" href="./styles/footer-mq.css">
 
   <link rel="stylesheet" href="./styles/general-animations.css">
   <link rel="stylesheet" href="./styles/header-animations.css">
@@ -40,6 +42,7 @@
   <link rel="stylesheet" href="./styles/examples-animations.css">
   <link rel="stylesheet" href="./styles/modal-animations.css">
   <link rel="stylesheet" href="./styles/contact-animations.css">
+  <link rel="stylesheet" href="./styles/footer-animations.css">
 
   <script defer src="./datas/info-bubbles-text.js"></script>
   <script defer src="./datas/examples-infos.js"></script>
@@ -50,15 +53,16 @@
 
 <body>
   <header>
-    <div id="header-title-block">
-      <img loading="lazy" src="./assets/svg/flag-fr.svg" alt="Icône de téléchargement.">
+    <div id="header-title-block" style="display: none;">
+      <img src="./assets/svg/logo.svg" alt="Icône de téléchargement.">
       <h1>Thomas LÉGER<span style="display: none;"> - Développeur Web (Full Stack)</span></h1>
     </div>
-    <div id="nav-menu-burger">
-      <img loading="lazy" src="./assets/svg/menu-burger.svg" alt="Menu de navigation.">
+    <div id="nav-menu-burger" style="display: none;">
+      <img src="./assets/svg/menu-burger.svg" alt="Menu de navigation.">
     </div>
-    <nav>
-      <div>
+
+    <nav style="display: none;">
+      <div style="display: none;">
         <a href="#home-link" class="nav-link-active">Accueil</a>
         <p>Accueil</p>
       </div>
@@ -71,8 +75,8 @@
         <p>Compétences</p>
       </div>
       <div>
-        <a href="#examples-link" class="nav-link-hover">Exemples</a>
-        <p>Exemples</p>
+        <a href="#examples-link" class="nav-link-hover">Portfolio</a>
+        <p>Portfolio</p>
       </div>
       <div>
         <a href="#contact-link" class="nav-link-hover">Contact</a>
@@ -83,7 +87,7 @@
 
   <div id="home-link" class="anchors">
   </div>
-  <section id="home">
+  <section id="home" class="slide header-margin-for-tablet-desktop">
     <!-- <img id="home-gif" src="./assets/gif/Animation10.gif" alt="Image animée d'écriture de code." class="mon-style"> -->
     <div class="background"><img src="./assets/images/home-background.webp" alt="Image de fond."></div>
     <div id="home-content">
@@ -91,38 +95,64 @@
 
       <!-- <p>Passionné par le développement web, j'apprécie particulièrement l'aspect d'apprentissage continu qu'offre cet univers en perpétuelle évolution. Chaque jour étant une opportunité d'explorer de nouveaux langages, frameworks et technologies.</p> -->
       <!-- <p>Passionné par le développement web, j'éprouve une véritable satisfaction à concevoir, tester et peaufiner des solutions innovantes. Ce processus nourrit ma motivation tout en répondant à mon besoin de logique et de réflexion structurée.<br><br>C'est cette combinaison entre créativité et rigueur qui me permet de relever chaque défi avec passion et de mener à bien mes missions avec efficacité.</p> -->
-      <p>Passionné par le développement web, j'éprouve une grande satisfaction à concevoir et optimiser des applications. La créativité, la logique et la rigueur qu'exige ce domaine nourrissent ma motivation et me permettent de mener à bien mes missions avec efficacité.</p>
+      <p>Passionné par le développement web, j'éprouve une grande satisfaction à concevoir et optimiser des applications. La créativité, la logique
+        et la rigueur qu'exige ce domaine nourrissent ma motivation et me permettent de mener à bien mes missions&nbsp;avec&nbsp;efficacité.</p>
       <div id="home-buttons">
         <a style="cursor: default;" id="home-contact-button" href="#contact-link">Contact</a>
         <a style="cursor: default;" id="home-CV-button" href="./datas/CV-Thomas-LEGER.pdf" download="CV - Thomas LÉGER.pdf">
           <img loading="lazy" src="./assets/svg/download.svg" alt="Icône de téléchargement.">
-          CV</a>
+          CV
+        </a>
       </div>
     </div>
   </section>
-
   <div id="about-link" class="anchors">
   </div>
-  <section id="about">
-    <div class="background"><img loading="lazy" src="./assets/images/about-background.webp" alt="Image de fond."></div>
-    <!-- <div id="texture-static"></div> -->
+  <section id="about" class="slide">
+    <div class="background background-hidden"><img loading="lazy" src="./assets/images/about-background.webp" alt="Image de fond."></div>
     <div id="about-content">
       <div id="about-block-photo">
         <img loading="lazy" src="./assets/images/photo.webp" alt="Photo profil.">
       </div>
       <div id="about-text">
         <h2>QUI SUIS-JE ?</h2>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;En quête d’épanouissement au travail, j'ai choisi de me reconvertir en tant que développeur web full stack, un métier qui correspond parfaitement à ma personnalité introspective, à mes qualités et à mes motivations.</p> <br>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;Depuis mon enfance, j'ai exercé ma logique à travers les jeux de société et les énigmes. Cette réflexion structurée rend le codage particulièrement stimulant pour moi. Tester et ajuster différentes logiques est un véritable plaisir, et chaque challenge est une occasion de mettre en pratique ma capacité à résoudre des problèmes.</p> <br>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;Curieux de nature, je suis particulièrement attiré par l'apprentissage continu que permet le développement informatique. Ce domaine en perpétuelle évolution me donne chaque jour l’opportunité de découvrir de nouvelles techniques, langages, frameworks et bibliothèques. Cette soif de connaissances me permet d’améliorer constamment mes compétences et de rester performant dans mon travail.</p> <br>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;Passionné de musique assistée par ordinateur, je trouve une satisfaction comparable dans l'aspect créatif en développement web, où le plaisir de créer quelque chose de fonctionnel et plaisant est tout aussi gratifiant semblable à celle que j'éprouve en créant de la musique.</p> <br>
+        <div id="about-text-p">
+          <div id="about-p-1">
+            <img loading="lazy" src="./assets/svg/happy.svg" alt="Illustration d’épanouissement." class="left-img">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;En quête d’épanouissement au travail, j'ai choisi de me reconvertir en tant que développeur web full stack,
+              un métier qui correspond parfaitement à ma personnalité introspective, à mes qualités et à mes motivations.</p> <br>
+          </div>
+          <div id="about-p-2">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;Depuis mon enfance, j'ai exercé ma logique à travers les jeux de société et les énigmes.
+              Cette réflexion structurée rend le codage particulièrement stimulant pour moi.
+              Tester et ajuster différentes logiques est un véritable plaisir, et chaque challenge est une occasion de mettre en pratique ma
+              capacité à résoudre des problèmes.</p> <br>
+            <img loading="lazy" src="./assets/svg/logic.svg" alt="Illustration de logique." class="right-img">
+          </div>
+          <div id="about-p-3">
+            <img loading="lazy" src="./assets/svg/curious.svg" alt="Illustration de curiosité." class="left-img">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;Curieux de nature, je suis particulièrement attiré par l'apprentissage continu que permet le développement
+              informatique. Ce domaine en perpétuelle évolution me donne chaque jour l’opportunité de découvrir de nouvelles techniques, langages,
+              frameworks et bibliothèques.
+              Cette soif de connaissances me permet d’améliorer constamment mes compétences et de rester performant dans mon travail.</p> <br>
+          </div>
+          <div id="about-p-4">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;Je suis passionné par la musique assistée par ordinateur, et j'y trouve une grande satisfaction créative. Ce même plaisir, je le retrouve également dans le développement web, où l'acte de concevoir des applications fonctionnelles et esthétiques me procure un sentiment de gratification similaire. Créer quelque chose de concret, que ce soit en musique ou en code, est pour moi une source d'accomplissement personnel.</p> <br>
+            <img loading="lazy" src="./assets/svg/creativity.svg" alt="Illustration de créativité." class="right-img">
+          </div>
+        </div>
+        <div id="about-text-arrow-down" class="arrow-down" style="display: none;">
+          <div>
+            <img loading="lazy" src="./assets/svg/arrow-down.svg" alt="Faites défiler vers le bas pour voir plus de texte.">
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <div id="skills-link" class="anchors">
   </div>
-  <section id="skills">
+  <section id="skills" class="slide">
     <div class="background"><img loading="lazy" src="./assets/images/skills-background.webp" alt="Image de fond."></div>
     <div id="skills-content">
       <h2 class="slide-title-style">COMPÉTENCES</h2>
@@ -132,31 +162,31 @@
           <h3>Frontend</h3>
           <ul>
             <li>
-              <p class="info-bubbles"></p>
+              <p class="info-bubbles">HTML est le langage standard utilisé pour créer la structure des pages web. Il permet de définir les éléments tels que les titres, paragraphes, images, et liens.</p>
               <div class="skills-items-div"><img loading="lazy" src="./assets/svg/html.svg" alt="Icône - HTML.">
                 <h4>HTML</h4>
               </div>
             </li>
             <li>
-              <p class="info-bubbles"></p>
+              <p class="info-bubbles">CSS est utilisé pour styliser les pages web, en définissant l'apparence des éléments HTML comme les couleurs, polices, espacements, et mises en page.</p>
               <div class="skills-items-div"><img loading="lazy" src="./assets/svg/css.svg" alt="Icône - CSS.">
                 <h4>CSS</h4>
               </div>
             </li>
             <li>
-              <p class="info-bubbles"></p>
+              <p class="info-bubbles">SASS est une extension de CSS qui ajoute des fonctionnalités avancées comme les variables, fonctions, et mixins pour une gestion plus efficace des styles.</p>
               <div class="skills-items-div"><img loading="lazy" src="./assets/svg/sass.svg" alt="Icône - SASS.">
                 <h4>SASS</h4>
               </div>
             </li>
             <li>
-              <p class="info-bubbles"></p>
+              <p class="info-bubbles">JavaScript est un langage de programmation utilisé pour ajouter des fonctionnalités interactives et dynamiques aux sites web, comme les animations ou la validation de formulaires.</p>
               <div class="skills-items-div"><img loading="lazy" src="./assets/svg/javascript.svg" alt="Icône - JavaScript.">
                 <h4>JavaScript</h4>
               </div>
             </li>
             <li>
-              <p class="info-bubbles"></p>
+              <p class="info-bubbles">React est une bibliothèque JavaScript utilisée pour construire des interfaces utilisateur interactives et réactives grâce à des composants.</p>
               <div class="skills-items-div"><img loading="lazy" src="./assets/svg/react.svg" alt="Icône - React.">
                 <h4>React</h4>
               </div>
@@ -168,25 +198,25 @@
           <h3>Backend</h3>
           <ul>
             <li>
-              <p class="info-bubbles"></p>
+              <p class="info-bubbles">Node.JS est un environnement d'exécution JavaScript côté serveur qui permet de créer des applications web performantes et évolutives.</p>
               <div class="skills-items-div"><img loading="lazy" src="./assets/svg/node-js.svg" alt="Icône - Node.JS.">
                 <h4>Node.JS</h4>
               </div>
             </li>
             <li>
-              <p class="info-bubbles"></p>
+              <p class="info-bubbles">Express.JS est un framework minimaliste pour Node.JS qui facilite le développement d'applications web et d'API en fournissant des outils et des fonctionnalités simplifiées.</p>
               <div class="skills-items-div"><img loading="lazy" src="./assets/svg/express-js.svg" alt="Icône - Express.JS.">
                 <h4>Express.JS</h4>
               </div>
             </li>
             <li>
-              <p class="info-bubbles"></p>
+              <p class="info-bubbles">MongoDB est une base de données NoSQL qui stocke les données sous forme de documents JSON, offrant flexibilité et performance pour les applications modernes.</p>
               <div class="skills-items-div"><img loading="lazy" src="./assets/svg/mongodb.svg" alt="Icône - MongoDB.">
                 <h4>MongoDB</h4>
               </div>
             </li>
             <li>
-              <p class="info-bubbles"></p>
+              <p class="info-bubbles">PHP est un langage de programmation côté serveur largement utilisé pour le développement de sites web dynamiques et d'applications web.</p>
               <div class="skills-items-div"><img loading="lazy" src="./assets/svg/php.svg" alt="Icône - PHP.">
                 <h4>PHP</h4>
               </div>
@@ -198,31 +228,31 @@
           <h3>Outils</h3>
           <ul>
             <li>
-              <p class="info-bubbles"></p>
+              <p class="info-bubbles">Git est un système de contrôle de version distribué qui permet de suivre les modifications du code et de collaborer efficacement avec d'autres développeurs.</p>
               <div class="skills-items-div"><img loading="lazy" src="./assets/svg/git.svg" alt="Icône - Git.">
                 <h4>Git</h4>
               </div>
             </li>
             <li>
-              <p class="info-bubbles"></p>
-              <div class="skills-items-div"><img loading="lazy" src="./assets/svg/github.svg" alt="Icône - GitHub.">
+              <p class="info-bubbles">GitHub est une plateforme de gestion de code source et de collaboration, permettant de stocker, partager et gérer des projets Git en ligne.</p>
+              <div class="skills-items-div"><img loading="lazy" src="./assets/svg/github-black.svg" alt="Icône - GitHub.">
                 <h4>GitHub</h4>
               </div>
             </li>
             <li>
-              <p class="info-bubbles"></p>
+              <p class="info-bubbles">Figma est un outil de conception d'interface utilisateur basé sur le cloud, utilisé pour créer des maquettes interactives et collaborer en temps réel.</p>
               <div class="skills-items-div"><img loading="lazy" src="./assets/svg/figma.svg" alt="Icône - Figma.">
                 <h4>Figma</h4>
               </div>
             </li>
             <li>
-              <p class="info-bubbles"></p>
+              <p class="info-bubbles">Notion est un outil de gestion de projet et de prise de notes, permettant d'organiser des tâches, documents et informations au sein d'une interface flexible.</p>
               <div class="skills-items-div"><img loading="lazy" src="./assets/svg/notion.svg" alt="Icône - Notion.">
                 <h4>Notion</h4>
               </div>
             </li>
             <li>
-              <p class="info-bubbles"></p>
+              <p class="info-bubbles">Postman est un outil utilisé pour tester et documenter les API, permettant de simuler des requêtes et de visualiser les réponses de manière intuitive.</p>
               <div class="skills-items-div"><img loading="lazy" src="./assets/svg/postman.svg" alt="Icône - Postman.">
                 <h4>Postman</h4>
               </div>
@@ -236,10 +266,10 @@
 
   <div id="examples-link" class="anchors">
   </div>
-  <section id="examples">
+  <section id="examples" class="slide">
     <div class="background"><img loading="lazy" src="./assets/images/examples-background.webp" alt="Image de fond."></div>
     <div id="examples-content">
-      <h2 class="slide-title-style">EXEMPLES</h2>
+      <h2 class="slide-title-style">Portfolio</h2>
 
       <div id="modal-screen">
         <img loading="lazy" id="modal-previous-button" src="./assets/svg/next.svg" alt="Icône précédent.">
@@ -250,8 +280,8 @@
           </div>
           <div id="modal-image-section">
             <div id="image-images-slider">
-              <img loading="lazy" id="modal-image-A" src="./assets/images/example-1.jpg" alt="Image du projet.">
-              <img loading="lazy" id="modal-image-B" class="modal-slide-B-start-position" src="./assets/images/example-1.jpg" alt="Image du projet.">
+              <img loading="lazy" id="modal-image-A" src="./assets/images/example-1.png" alt="Image du projet.">
+              <img loading="lazy" id="modal-image-B" class="modal-slide-B-start-position" src="./assets/images/example-1.png" alt="Image du projet.">
             </div>
             <div id="modal-buttons-section">
               <div>
@@ -265,12 +295,12 @@
                 </p>
               </div>
               <div>
-                <h4 id="modal-difficulties-button-h4" class="modal-button-hover">
-                  <span class="modal-buttons-text">Difficultés</span>
+                <h4 id="modal-challenges-button-h4" class="modal-button-hover">
+                  <span class="modal-buttons-text">Challenges</span>
                   <img loading="lazy" class="modal-buttons-images" src="./assets/svg/exclamation-mark-white.svg" alt="Description.">
                 </h4>
-                <p id="modal-difficulties-button-p">
-                  <span class="modal-buttons-text">Difficultés</span>
+                <p id="modal-challenges-button-p">
+                  <span class="modal-buttons-text">Challenges</span>
                   <img loading="lazy" class="modal-buttons-images" src="./assets/svg/exclamation-mark-white.svg" alt="Description.">
                 </p>
               </div>
@@ -289,20 +319,20 @@
           <div id="modal-text-block">
             <div id="modal-text-arrow-up" style="display: none;">
               <div>
-                <img loading="lazy" src="./assets/svg/modal-text-arrow.svg" alt="Indication de texte supplémentaire au dessus.">
+                <img loading="lazy" src="./assets/svg/arrow-down.svg" alt="Indication de texte supplémentaire au dessus.">
               </div>
             </div>
             <div id="modal-text">
               <h4 id="modal-text-title">Description :</h4>
               <img class="arrows-problems" src="./assets/svg/arrow-problem.svg" alt="Icône de flèche.">
             </div>
-            <div id="modal-text-arrow-down" style="display: none;">
+            <div id="modal-text-arrow-down" class="arrow-down" style="display: none;">
               <div>
-                <img loading="lazy" src="./assets/svg/modal-text-arrow.svg" alt="Indication de texte supplémentaire au dessus.">
+                <img loading="lazy" src="./assets/svg/arrow-down.svg" alt="Faites défiler vers le bas pour voir plus de texte.">
               </div>
             </div>
           </div>
-          <a id="modal-link" href="#">None</a>
+          <a id="modal-link" href="#" target="_blank">None</a>
         </div>
         <img loading="lazy" id="modal-next-button" src="./assets/svg/next.svg" alt="Icône suivant.">
       </div>
@@ -314,9 +344,9 @@
               <img loading="lazy" src="./assets/svg/lens.svg" alt="Icône de loupe.">
               <p>Cliquez pour plus d'informations&nbsp;!</p>
             </div>
-            <img class="examples-images" loading="lazy" src="./assets/images/example-1.jpg" alt="Image projet - example.title.">
+            <img class="examples-images" loading="lazy" src="./assets/images/example-1-1.png" alt="Image projet - example.title.">
           </div>
-          <h3>Créez la page d'accueil d'une agence de voyage avec HTML & CSS.</h3>
+          <h3>Page d'accueil d'une agence de voyage<br>(HTML&nbsp;&&nbsp;CSS)</h3>
         </article>
         <article id="example-2">
           <div>
@@ -324,9 +354,9 @@
               <img loading="lazy" src="./assets/svg/lens.svg" alt="Icône de loupe.">
               <p>Cliquez pour plus d'informations&nbsp;!</p>
             </div>
-            <img class="examples-images" loading="lazy" src="./assets/images/example-2.jpg" alt="Image projet - example.title.">
+            <img class="examples-images" loading="lazy" src="./assets/images/example-2.png" alt="Image projet - example.title.">
           </div>
-          <h3>Créez une page web dynamique d'un portfolio avec JavaScript.</h3>
+          <h3>Portfolio dynamique<br>(JavaScript)</h3>
         </article>
         <article id="example-3">
           <div>
@@ -334,9 +364,9 @@
               <img loading="lazy" src="./assets/svg/lens.svg" alt="Icône de loupe.">
               <p>Cliquez pour plus d'informations&nbsp;!</p>
             </div>
-            <img class="examples-images" loading="lazy" src="./assets/images/example-3.jpg" alt="Image projet - example.title.">
+            <img class="examples-images" loading="lazy" src="./assets/images/example-3-1.png" alt="Image projet - example.title.">
           </div>
-          <h3>Créez une application web de location immobilière avec React.</h3>
+          <h3>Application web de location immobilière<br>(React)</h3>
         </article>
         <article id="example-4">
           <div>
@@ -344,9 +374,9 @@
               <img loading="lazy" src="./assets/svg/lens.svg" alt="Icône de loupe.">
               <p>Cliquez pour plus d'informations&nbsp;!</p>
             </div>
-            <img class="examples-images" loading="lazy" src="./assets/images/example-4.jpg" alt="Image projet - example.title.">
+            <img class="examples-images" loading="lazy" src="./assets/images/example-4-1.png" alt="Image projet - example.title.">
           </div>
-          <h3>Développez le back-end d'un site de notation de livres.</h3>
+          <h3>Back-end d'un site de notation de livres<br>(Node.js,&nbsp;&&nbsp;MongoDB)</h3>
         </article>
         <article id="example-5">
           <div>
@@ -354,9 +384,9 @@
               <img loading="lazy" src="./assets/svg/lens.svg" alt="Icône de loupe.">
               <p>Cliquez pour plus d'informations&nbsp;!</p>
             </div>
-            <img class="examples-images" loading="lazy" src="./assets/images/example-4.jpg" alt="Image projet - example.title.">
+            <img class="examples-images" loading="lazy" src="./assets/images/example-5-1.png" alt="Image projet - example.title.">
           </div>
-          <h3>Débuggez et optimisez un site de photographe.</h3>
+          <h3>Optimisation et débogage d'un site de photographe</h3>
         </article>
       </div>
     </div>
@@ -364,11 +394,12 @@
 
   <div id="contact-link" class="anchors">
   </div>
-  <section id="contact">
+  <section id="contact" class="slide">
     <div class="background"><img loading="lazy" src="./assets/images/contact-background.webp" alt="Image de fond."></div>
     <div id="contact-content">
       <h2 class="slide-title-style">CONTACT</h2>
-      <p id="contact-text">Un projet, une idée ou une opportunité de job en développement web ?<br>N'hésitez pas à me contacter en remplissant le formulaire ci-dessous.</p>
+      <p id="contact-text">Un projet, une idée ou une opportunité de job en développement web ?<br>
+        N'hésitez pas à me contacter en remplissant le formulaire ci-dessous.</p>
       <form id="contact-form">
         <div id="contact-form-inputs">
           <div id="contact-full-name">
@@ -403,6 +434,22 @@
       </form>
     </div>
   </section>
+  <div id="small-mobile-screen-message" style="display: none;">
+    <p>La hauteur de votre fenêtre de navigateur est trop petite pour afficher correctement ce site. <br>
+      Veuillez basculer en mode vertical, dézoomer ou agrandir la fenêtre.</p>
+  </div>
+  <div id="small-screen-message" style="display: none;">
+    <p>La hauteur de votre fenêtre de navigateur est insuffisante pour afficher correctement ce site, ou le zoom appliqué est trop important.<br>Veuillez agrandir la fenêtre ou réduire le niveau de zoom.</p>
+  </div>
+  <footer>
+    <div id="footer">
+      <div style="display: none;">
+        <a href="mailto:ton-email@example.com" target="_blank" title="Envoyer un e-mail via votre messagerie par default."><img src="./assets/svg/e-mail.svg" alt="Illustration d'un e-mail."></a>
+        <a href="https://github.com/ThomasL7?tab=repositories" target="_blank" title="Lien vers mon GitHub."><img src="./assets/svg/github-white.svg" alt="Icône GitHub."></a>
+        <a href="./datas/CV-Thomas-LEGER.pdf" download="CV - Thomas LÉGER.pdf" title="Cliquez pour télécharger mon CV."><img src="./assets/svg/CV.svg" alt="Illustration d'un CV."></a>
+      </div>
+    </div>
+  </footer>
 </body>
 
 </html>

@@ -8,6 +8,8 @@ let rootCSS;
 let body;
 let anchors;
 let invisibleBlockForMobile;
+let smallScreenMessage;
+let smallMobileScreenMessage;
 // → header
 let header;
 let headerTitleBlock;
@@ -25,10 +27,17 @@ let homeContactButton;
 let homeCVButton;
 // → About
 let aboutSection;
+let aboutBackground;
 let aboutContent;
 let aboutBlockPhoto;
 let aboutImagePhoto;
 let aboutText;
+let aboutTextP;
+let aboutP1;
+let aboutP2;
+let aboutP3;
+let aboutP4;
+let aboutTextArrowDown;
 // → Skills
 let skillsSection;
 let skillsContent;
@@ -67,11 +76,10 @@ let modalTitle;
 let modalImageA;
 let modalImageB;
 let modalDescriptionButtonH4;
-let modalDifficultiesButtonH4;
+let modalChallengesButtonH4;
 let modalSkillsButtonH4;
 let modalButtonsImages;
 let modalText;
-let modalTextArrowUp;
 let modalTextArrowDown;
 let modalLink;
 // → Contact
@@ -91,11 +99,15 @@ let contactErrorsFormText;
 let contactSuccessForm;
 let contactSuccessFormText;
 let contactFormButton;
+// → Footer
+let footer;
+let footerLinks;
 
 // ===== Classes =====
 const CLASS_HOME_BUTTONS_INTRO = "home-buttons-intro";
 const CLASS_HOME_TEXT_INTRO = "home-text-intro";
 const CLASS_HOME_TITLE_INTRO = "home-title-intro";
+const CLASS_ELEMENTS_FOOTER_INTRO = "elements-header-intro";
 const CLASS_ELEMENTS_HEADER_INTRO = "elements-header-intro";
 const CLASS_EXAMPLE_ARTICLE_HOVER = "example-article-hover";
 const CLASS_EXAMPLE_FILTER_HOVER = "example-filter-hover";
@@ -103,19 +115,30 @@ const CLASS_EXAMPLE_H3_HOVER = "example-h3-hover";
 const CLASS_FILTER_CHANGE = "active-example-filter-on-change";
 const CLASS_FILTER_CLOSE = "active-example-filter-close";
 const CLASS_FILTER_OPEN = "active-example-filter-open";
+const CLASS_FOOTER_INTRO = "footer-intro";
+const CLASS_FOOTER_MARGIN_FOR_TABLET_DESKTOP = "footer-margin-for-tablet-desktop";
 const CLASS_FRONT_Z_INDEX = "front-z-index";
 const CLASS_MODAL_OPEN = "modal-open";
 const CLASS_MODAL_SCREEN_CLOSE = "modal-screen-close";
 const CLASS_HEADER_INTRO = "header-intro";
+const CLASS_HEADER_MARGIN_FOR_TABLET_DESKTOP = "header-margin-for-tablet-desktop";
+const CLASS_HEADER_TITLE_BLOCK_HOVER = "header-title-block-hover";
+const CLASS_HEADER_TITLE_IMAGE_HOVER = "header-title-image-hover";
 const CLASS_HEADER_TITLE_HOVER = "header-title-hover";
 const CLASS_HOME_BUTTON_HOVER = "home-button-hover";
+const CLASS_INFO_BUBBLE_CLOSE_BOTTOM = "info-bubbles-close-bottom";
 const CLASS_INFO_BUBBLE_CLOSE_LEFT = "info-bubbles-close-left";
 const CLASS_INFO_BUBBLE_CLOSE_RIGHT = "info-bubbles-close-right";
+const CLASS_INFO_BUBBLE_CLOSE_TOP = "info-bubbles-close-top";
 const CLASS_INFO_BUBBLE_DISPLAY_AND_HIDE = "info-bubble-display-and-hide";
+const CLASS_INFO_BUBBLE_OPEN_BOTTOM = "info-bubbles-open-bottom";
 const CLASS_INFO_BUBBLE_OPEN_LEFT = "info-bubbles-open-left";
 const CLASS_INFO_BUBBLE_OPEN_RIGHT = "info-bubbles-open-right";
+const CLASS_INFO_BUBBLE_OPEN_TOP = "info-bubbles-open-top";
 const CLASS_INFO_BUBBLE_WIDTH_MAX = "info-bubble-width-max";
 const CLASS_INFO_BUBBLE_WIDTH_UNSET = "info-bubble-width-unset";
+const CLASS_MARGIN_BOTTOM_MOBILE_SLIDE = "margin-bottom-mobile-slide";
+const CLASS_MARGIN_TOP_MOBILE_SLIDE = "margin-top-mobile-slide";
 const CLASS_MODAL_BUTTON_ACTIVE = "modal-button-active";
 const CLASS_MODAL_BUTTON_HOVER = "modal-button-hover";
 const CLASS_MODAL_SLIDE_B_START_POSITION = "modal-slide-B-start-position";
@@ -126,9 +149,7 @@ const CLASS_MODAL_SLIDE_OUT_RIGHT = "modal-slide-out-right";
 const CLASS_NAV_LINK_HOVER = "nav-link-hover";
 const CLASS_NAV_LINK_ACTIVE = "nav-link-active";
 const CLASS_MOBILE_NAV_CLOSE = "mobile-nav-close";
-const CLASS_MOBILE_NAV_HIDE = "mobile-nav-hide";
 const CLASS_MOBILE_NAV_OPEN = "mobile-nav-open";
-const CLASS_NAV_NORMAL_STATE = "nav-normal-state";
 const CLASS_SKILL_HOVER = "skills-items-hover";
 const CLASS_OUTRO_BACKWARD = "slide-outro-backward";
 const CLASS_OUTRO_FORWARD = "slide-outro-forward";
@@ -137,26 +158,35 @@ const CLASS_OUTRO_FORWARD = "slide-outro-forward";
 // → General
 let bottomCurrentMobileSlideLimit;
 let contentSlidesAndIntroClassesArray;
+let hoverTarget = null;
 let indexSlide = 0;
 let isBottomMobileSlideLimitReach = false;
+let isForceToMobileMod = false;
+let isHoverScrollableContent = false;
+let isMobileScreenTooSmall = false;
 let isSlideScrollable = false;
 let isScrolling = false;
 let isTopMobileSlideLimitReach = false;
 let isWindowLoaded = false;
+let limitReachCount = 0;
 let maxIndexSlide = 0;
 let mouseX = 0;
 let mouseY = 0;
 let previousIndexSlide = null;
+let scrollDistance = 0;
 let scrollDuration = 0;
 let sectionMobileSlides;
-let startMobileTouch = 0;
-let endMobileTouch = 0;
+let startTouchTime = 0;
+let startTouchY = 0;
+let startTouchYInScrolling = 0;
+let endTouchY = 0;
 let topCurrentMobileSlideLimit;
+let touchDistance = 0;
+window.isTouchInsteadOfMouse = false;
+window.mobileDetected = false;
 // Media queries
 let isOnMobile = false;
-let mqMobileTrigger;
-let mqMobileBreakpoint;
-let mqTabletBreakpoint;
+window.isOnMobile = false;
 // → Header
 let headerAnimationDuration = 0;
 let headerHeightOnMobile;
@@ -165,6 +195,8 @@ let isHeaderTitleAnimationEnded = false;
 let isHomeButtonsAnimationEnded = false;
 let isHoverHomeContactButton = false;
 let isHoverHomeCVButton = false;
+// → About
+let isAboutTextScrollable = false;
 // → Skills
 const easingSkillsEndingAnimationDuration = "linear";
 let indexOfItemsDivsInSkillsTreesArray = [];
@@ -182,15 +214,16 @@ let skillsEndingHoverAnimationsArray = [];
 let skillsEndingAnimationDuration = 0;
 let skillTargetForLeaveDetection = null;
 // Info-bubbles
-let infoBubbleAnimationsLeftDirection = false;
+let indexOfInfoBubbleToReset;
+let infoBubbleAnimationsDirection = "";
 let infoBubbleMargin = 0;
 let infoBubbleOffsetX = 0;
 let infoBubbleOffsetY = 0;
 let infoBubbleOffsetYOnMobile = 0;
-let infoBubbleTextsArray = [];
-let infoBubbleWidth = 0;
+// let infoBubbleTextsArray = [];
+let infoBubbleMaxWidth = 0;
 let isHoverSkillArray = [];
-let textInfoBubbleAnimationsArray = [];
+// let textInfoBubbleAnimationsArray = [];
 let textSpeed = 0;
 // → Examples
 let numberOfModalExampleToDisplay = null;
@@ -228,14 +261,18 @@ document.addEventListener("DOMContentLoaded", () => {
   body = document.body;
   anchors = document.querySelectorAll(".anchors");
   invisibleBlockForMobile = document.querySelectorAll(".invisible-block-for-mobile");
+  smallMobileScreenMessage = document.getElementById("small-mobile-screen-message");
+  smallScreenMessage = document.getElementById("small-screen-message");
   // → header
   header = document.querySelector("header");
-  headerTitleBlock = document.getElementById("header-title-block");
-  window.headerTitle = document.querySelector("h1");
-  headerTitle = window.headerTitle;
+  window.headerTitleBlock = document.getElementById("header-title-block");
+  headerTitleBlock = window.headerTitleBlock;
+  headerTitleImage = document.querySelector("#header-title-block img");
+  headerTitle = document.querySelector("h1");
   window.navMenuBurger = document.getElementById("nav-menu-burger");
   navMenuBurger = window.navMenuBurger;
-  nav = document.querySelector("nav");
+  window.nav = document.querySelector("nav");
+  nav = window.nav;
   window.navLinks = document.querySelectorAll("nav a");
   navLinks = window.navLinks;
   // → Home
@@ -251,10 +288,18 @@ document.addEventListener("DOMContentLoaded", () => {
   homeCVButton = window.homeCVButton;
   // → About
   aboutSection = document.getElementById("about");
-  aboutContent = document.getElementById("about-content");
+  aboutBackground = document.getElementById("about");
+  aboutContent = document.querySelector("#about .background");
   aboutBlockPhoto = document.getElementById("about-block-photo");
   aboutImagePhoto = document.querySelector("#about-block-photo img");
-  aboutText = document.getElementById("about-text");
+  window.aboutText = document.getElementById("about-text");
+  aboutText = window.aboutText;
+  aboutTextP = document.getElementById("about-text-p");
+  aboutP1 = document.getElementById("about-p-1");
+  aboutP2 = document.getElementById("about-p-2");
+  aboutP3 = document.getElementById("about-p-3");
+  aboutP4 = document.getElementById("about-p-4");
+  aboutTextArrowDown = document.getElementById("about-text-arrow-down");
   // → Skills
   skillsSection = document.getElementById("skills");
   skillsContent = document.getElementById("skills-content");
@@ -299,14 +344,13 @@ document.addEventListener("DOMContentLoaded", () => {
   modalImageB = document.getElementById("modal-image-B");
   window.modalDescriptionButtonH4 = document.getElementById("modal-description-button-h4");
   modalDescriptionButtonH4 = window.modalDescriptionButtonH4;
-  window.modalDifficultiesButtonH4 = document.getElementById("modal-difficulties-button-h4");
-  modalDifficultiesButtonH4 = window.modalDifficultiesButtonH4;
+  window.modalChallengesButtonH4 = document.getElementById("modal-challenges-button-h4");
+  modalChallengesButtonH4 = window.modalChallengesButtonH4;
   window.modalSkillsButtonH4 = document.getElementById("modal-skills-button-h4");
   modalSkillsButtonH4 = window.modalSkillsButtonH4;
   modalButtonsImages = document.querySelectorAll(".modal-buttons-images");
   window.modalText = document.getElementById("modal-text");
   modalText = window.modalText;
-  modalTextArrowUp = document.getElementById("modal-text-arrow-up");
   modalTextArrowDown = document.getElementById("modal-text-arrow-down");
   modalLink = document.getElementById("modal-link");
   // → Contact
@@ -327,6 +371,9 @@ document.addEventListener("DOMContentLoaded", () => {
   contactSuccessForm = document.getElementById("contact-success-form");
   contactSuccessFormText = document.getElementById("contact-success-form-text");
   contactFormButton = document.querySelector("#contact-form button");
+  // → header
+  footer = document.getElementById("footer");
+  footerLinksDiv = document.querySelector("#footer div");
 
   // ===== Variables =====
   // → General
@@ -345,6 +392,10 @@ document.addEventListener("DOMContentLoaded", () => {
         { element: aboutBlockPhoto, introClass: "about-block-photo-intro" },
         { element: aboutImagePhoto, introClass: "about-image-photo-intro" },
         { element: aboutText, introClass: "about-text-intro" },
+        { element: aboutP1, introClass: "about-p-1-intro" },
+        { element: aboutP2, introClass: "about-p-2-intro" },
+        { element: aboutP3, introClass: "about-p-3-intro" },
+        { element: aboutP4, introClass: "about-p-4-intro" },
       ],
     },
     {
@@ -382,10 +433,9 @@ document.addEventListener("DOMContentLoaded", () => {
   scrollDuration = parseFloat(rootCSS.getPropertyValue("--delay-before-next-scroll")) * 1000;
   sectionMobileSlides = [homeSection, aboutSection, skillsSection, examplesSection, contactSection];
   // Media queries
-  mqMobileBreakpoint = rootCSS.getPropertyValue("--mq-mobile");
-  window.mqMobileTrigger = window.matchMedia(`(max-width: ${mqMobileBreakpoint})`);
-  mqMobileTrigger = window.mqMobileTrigger;
-  mqTabletBreakpoint = rootCSS.getPropertyValue("--mq-tablet");
+  window.mqMobileTrigger = window.matchMedia(`(max-width: ${rootCSS.getPropertyValue("--mq-mobile")})`);
+  window.mqForceMobileMod = window.matchMedia(`(max-height: 590px)`);
+  window.mqMaxHeight = window.matchMedia(`(max-height: 500px)`);
   // → Header
   headerAnimationDuration = parseFloat(rootCSS.getPropertyValue("--header-animation-duration")) * 1000;
   headerHeightOnMobile = parseInt(rootCSS.getPropertyValue("--header-height-on-mobile"));
@@ -397,8 +447,9 @@ document.addEventListener("DOMContentLoaded", () => {
   infoBubbleOffsetX = parseInt(rootCSS.getPropertyValue("--bubble-offset-x"));
   infoBubbleOffsetY = parseInt(rootCSS.getPropertyValue("--bubble-offset-y"));
   infoBubbleOffsetYOnMobile = parseInt(rootCSS.getPropertyValue("--bubble-offset-y-on-mobile"));
-  infoBubbleWidth = parseInt(rootCSS.getPropertyValue("--info-bubbles-width"));
-  infoBubbleTextsArray = window.infoBubblesDatas;
+  infoBubbleMaxWidth = parseInt(rootCSS.getPropertyValue("--info-bubbles-max-width"));
+  infoBubbleWidthPourcent = parseFloat(rootCSS.getPropertyValue("--info-bubbles-width-pourcent")) / 100;
+  // infoBubbleTextsArray = window.infoBubblesDatas;
   isHoverSkillArray = new Array(skillsDivs.length).fill(false);
   textSpeed = parseInt(rootCSS.getPropertyValue("--info-bubbles-text-speed"));
   // → Examples
@@ -429,11 +480,6 @@ function disableScroll() {
   root.style.overflowY = "hidden";
 }
 
-function disableZoom(event) {
-  if (event.type === "wheel" && event.ctrlKey) event.preventDefault();
-  else if (event.type === "keydown" && event.ctrlKey && (event.key === "+" || event.key === "-" || event.key === "=")) event.preventDefault();
-}
-
 function checkIfSlideIsScrollable() {
   if (root.scrollHeight > root.clientHeight) {
     isSlideScrollable = true;
@@ -441,6 +487,100 @@ function checkIfSlideIsScrollable() {
     isSlideScrollable = false;
   }
 }
+
+function setControlType() {
+  if (window.matchMedia("(pointer: coarse)").matches) {
+    window.isTouchInsteadOfMouse = true;
+  } else {
+    window.isTouchInsteadOfMouse = false;
+  }
+}
+
+function activeMouseControl() {
+  if (window.isTouchInsteadOfMouse) {
+    window.isTouchInsteadOfMouse = false;
+  }
+}
+
+function activeTouchControl() {
+  if (!window.isTouchInsteadOfMouse) {
+    window.isTouchInsteadOfMouse = true;
+  }
+}
+
+function checkIfTargetIsScrollable(target, arrowDown) {
+  if (target.scrollHeight - 1 > target.clientHeight) {
+    arrowDown.style.display = "flex";
+    return true;
+  } else {
+    arrowDown.style.display = "none";
+    return false;
+  }
+}
+
+function updateTargetDownArrow(target, isScrollable, arrowDown, margin) {
+  if (!isScrollable) return;
+  if (target.scrollTop + target.clientHeight < target.scrollHeight - margin) {
+    arrowDown.style.display = "flex";
+  } else {
+    arrowDown.style.display = "none";
+  }
+}
+
+function checkIfUnderMQMaxHeight(event) {
+  if (isOnMobile) {
+    if (event.matches) {
+      smallMobileScreenMessage.style.display = "flex";
+      isMobileScreenTooSmall = true;
+    } else {
+      smallMobileScreenMessage.style.display = "none";
+      isMobileScreenTooSmall = false;
+    }
+  } else {
+    smallMobileScreenMessage.style.display = "none";
+    isMobileScreenTooSmall = false;
+  }
+}
+
+function checkToForceMobileMod(event) {
+  if (event.matches && !isOnMobile) {
+    isForceToMobileMod = true;
+    checkIfOnMobileAndActiveScroll(window.mqMobileTrigger);
+  } else {
+    isForceToMobileMod = false;
+    checkIfOnMobileAndActiveScroll(window.mqMobileTrigger);
+  }
+}
+
+function detectIfPhone() {
+  const userAgent = navigator.userAgent;
+  if (/android/i.test(userAgent)) {
+    window.mobileDetected = true;
+    // } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+  } else if (/iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    window.mobileDetected = true;
+  } else if (/windows phone/i.test(userAgent)) {
+    window.mobileDetected = true;
+  } else window.mobileDetected = false;
+}
+
+// let startY = 0;
+// window.addEventListener("touchstart", function (e) {
+//   startY = e.touches[0].clientY;
+// });
+
+// window.addEventListener(
+//   "touchmove",
+//   function (e) {
+//     const currentY = e.touches[0].clientY;
+
+//     // Si l'utilisateur tire vers le bas depuis le haut de la page (scroll en haut)
+//     if (window.scrollY <= 0 && currentY > startY && indexSlide !== 0) {
+//       e.preventDefault(); // Empêche le pull-to-refresh
+//     }
+//   },
+//   { passive: false }
+// );
 
 // → For mouse position and collision leave detection
 function getMousePosition(event) {
@@ -481,17 +621,23 @@ function checkIfCursorHoverTarget(collisionTarget, onHoverFunction, onOutsideFun
 
 // → For slides change
 function scrollSlideChange(event) {
-  if (!isWindowLoaded || isModalOpen || isOnMobile || isScrolling) return;
+  if (event.ctrlKey || !isWindowLoaded || isModalOpen || isOnMobile || isScrolling || isHoverScrollableContent || isMobileScreenTooSmall) return;
   const direction = event.deltaY > 0 ? 1 : -1;
   scrollToSlide(indexSlide, direction);
 }
 
-function arrowsSlideChange(event) {
-  if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
-  if (!isWindowLoaded || isModalOpen || isOnMobile || isScrolling || isFocusedOnInput()) return;
-  const direction = event.key === "ArrowDown" ? 1 : -1;
-  scrollToSlide(indexSlide, direction);
+function tabletSlideChange() {
+  if (!isWindowLoaded || isOnMobile || isModalOpen || isScrolling || isHoverScrollableContent || isMobileScreenTooSmall) return;
+  if (touchDistance < -40) scrollToSlide(indexSlide, -1);
+  else if (touchDistance > 40) scrollToSlide(indexSlide, 1);
 }
+
+// function arrowsSlideChange(event) {
+//   if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+//   if (!isWindowLoaded || isModalOpen || isOnMobile || isScrolling || isFocusedOnInput()) return;
+//   const direction = event.key === "ArrowDown" ? 1 : -1;
+//   scrollToSlide(indexSlide, direction);
+// }
 
 function isFocusedOnInput() {
   const activeElement = document.activeElement;
@@ -523,6 +669,7 @@ function scrollToSlide(index, direction) {
   isScrolling = true;
   previousIndexSlide = indexSlide;
   indexSlide = index;
+  if (index === 0) disableHeaderTitleBlockHover();
   const scrollBehavior = Math.abs(indexSlide - previousIndexSlide) === 1 ? "smooth" : "auto";
   anchors[indexSlide].scrollIntoView({ behavior: scrollBehavior });
   window.dispatchEvent(new CustomEvent("indexSlideChange"));
@@ -530,29 +677,40 @@ function scrollToSlide(index, direction) {
 }
 
 function addHeaderAndHomeIntroAnimations() {
+  aboutContent.classList.remove("background-hidden");
   header.classList.add(CLASS_HEADER_INTRO);
   headerTitleBlock.classList.add(CLASS_ELEMENTS_HEADER_INTRO);
-  if (isOnMobile) hideHeaderNav();
-  nav.classList.add(CLASS_ELEMENTS_HEADER_INTRO);
+  headerTitleBlock.style.display = "flex";
+  if (isOnMobile) {
+    nav.style.display = "none";
+    navMenuBurger.classList.add(CLASS_ELEMENTS_HEADER_INTRO);
+    navMenuBurger.style.display = "flex";
+  } else {
+    nav.classList.add(CLASS_ELEMENTS_HEADER_INTRO);
+    nav.style.display = "flex";
+  }
+  footer.classList.add(CLASS_FOOTER_INTRO);
+  footerLinksDiv.classList.add(CLASS_ELEMENTS_FOOTER_INTRO);
+  footerLinksDiv.style.display = "flex";
   setTimeout(() => {
-    headerTitle.classList.add(CLASS_HEADER_TITLE_HOVER);
     homeTitle.classList.add(CLASS_HOME_TITLE_INTRO);
     homeText.classList.add(CLASS_HOME_TEXT_INTRO);
     homeButtons.classList.add(CLASS_HOME_BUTTONS_INTRO);
+    headerTitleBlock.classList.remove(CLASS_ELEMENTS_HEADER_INTRO);
+    navMenuBurger.classList.remove(CLASS_ELEMENTS_HEADER_INTRO);
     nav.classList.remove(CLASS_ELEMENTS_HEADER_INTRO);
-    if (!isOnMobile) nav.classList.add(CLASS_NAV_NORMAL_STATE);
+    footerLinksDiv.classList.remove(CLASS_ELEMENTS_FOOTER_INTRO);
     isHeaderTitleAnimationEnded = true;
   }, headerAnimationDuration);
 }
 
 function resetHomeBeforeReloading() {
   header.classList.remove(CLASS_HEADER_INTRO);
-  headerTitleBlock.classList.remove(CLASS_ELEMENTS_HEADER_INTRO);
-  if (!isOnMobile) nav.classList.remove(CLASS_NAV_NORMAL_STATE);
-  else {
-    hideHeaderNav();
-    navMenuBurger.style.display = "none";
-  }
+  footer.classList.remove(CLASS_FOOTER_INTRO);
+  headerTitleBlock.style.display = "none";
+  nav.style.display = "none";
+  footerLinksDiv.style.display = "none";
+  navMenuBurger.style.display = "none";
   homeTitle.classList.remove(CLASS_HOME_TITLE_INTRO);
   homeText.classList.remove(CLASS_HOME_TEXT_INTRO);
   homeButtons.classList.remove(CLASS_HOME_BUTTONS_INTRO);
@@ -590,6 +748,9 @@ function resetPreviousSlide() {
     case 0:
       resetHomeSlide();
       break;
+    case 1:
+      resetAboutSlide();
+      break;
     case 2:
       resetSkillsSlide();
       break;
@@ -610,6 +771,14 @@ function resetHomeSlide() {
     isHomeButtonsAnimationEnded = false;
   }, scrollDuration);
   removeStyleCursorForHomeButtons();
+}
+
+function resetAboutSlide() {
+  setTimeout(() => {
+    aboutTextP.scrollTop = 0;
+    updateTargetDownArrow(aboutTextP, isAboutTextScrollable, aboutTextArrowDown, 2);
+  }, scrollDuration);
+  isHoverScrollableContent = false;
 }
 
 function resetSkillsSlide() {
@@ -652,29 +821,51 @@ function resetContactSlide() {
 
 // ===== General (Mobile) =====
 function checkIfOnMobileAndActiveScroll(event) {
-  if (event.matches) {
+  if (event.matches || isForceToMobileMod) {
     isOnMobile = true;
+    window.isOnMobile = true;
+    const viewportMeta = document.querySelector('meta[name="viewport"]');
+    viewportMeta.setAttribute("content", "width=device-width, initial-scale=1.0");
+    checkIfUnderMQMaxHeight(window.mqMaxHeight);
+    isHoverScrollableContent = false;
     hideOrShowAllMobileSlides("none");
-    hideHeaderNav();
+    navMenuBurger.style.display = "flex";
+    nav.style.display = "none";
     adjustModalPosition();
-    removeNormalHeaderNavSate();
-    if (indexSlide !== 0) toggleMarginTopMobileSlide(sectionMobileSlides[indexSlide]);
+    homeSection.classList.remove(CLASS_HEADER_MARGIN_FOR_TABLET_DESKTOP);
+    contactSection.classList.remove(CLASS_FOOTER_MARGIN_FOR_TABLET_DESKTOP);
+    const currentSection = sectionMobileSlides[indexSlide];
+    currentSection.classList.add(CLASS_MARGIN_TOP_MOBILE_SLIDE);
+    currentSection.classList.add(CLASS_MARGIN_TOP_MOBILE_SLIDE);
     updateCurrentMobileSlideLimit();
     checkIfSlideIsScrollable();
     if (isModalOpen) setImageOfActiveMobileModalButton();
     if (!isModalOpen) enableScroll();
   } else {
     isOnMobile = false;
+    window.isOnMobile = false;
+    const viewportMeta = document.querySelector('meta[name="viewport"]');
+    viewportMeta.setAttribute("content", "width=device-width, initial-scale=1.0, user-scalable=no");
+    checkIfUnderMQMaxHeight(window.mqMaxHeight);
     disableScroll();
-    displayHeaderNav();
-    addNormalHeaderNavSate();
+    navMenuBurger.style.display = "none";
+    nav.style.display = "flex";
     removeMobileNavAnimations();
-    if (indexSlide !== 0) toggleMarginTopMobileSlide(sectionMobileSlides[indexSlide]);
+    homeSection.classList.add(CLASS_HEADER_MARGIN_FOR_TABLET_DESKTOP);
+    contactSection.classList.add(CLASS_FOOTER_MARGIN_FOR_TABLET_DESKTOP);
+    const currentSection = sectionMobileSlides[indexSlide];
+    currentSection.classList.remove(CLASS_MARGIN_TOP_MOBILE_SLIDE);
+    currentSection.classList.remove(CLASS_MARGIN_TOP_MOBILE_SLIDE);
     hideOrShowAllMobileSlides("flex");
     updateCurrentSlideView();
     if (isModalOpen) resetModalPosition();
   }
 }
+
+// function disablePushToReload() {
+//   if (indexSlide === 0) root.classList.remove("disablePushToReload");
+//   else root.classList.add("disablePushToReload");
+// }
 
 /**  @param {string} value "none" or "flex" */
 function hideOrShowAllMobileSlides(value) {
@@ -685,9 +876,124 @@ function hideOrShowAllMobileSlides(value) {
 }
 
 // For slides change (Mobile)
+function preventTouchEvents(event) {
+  if (!isOnMobile) event.preventDefault();
+  else if (indexSlide !== 0) event.preventDefault();
+}
+
+function setTouchStartVariables(event) {
+  startTouchY = event.touches[0].clientY;
+  startTouchYInScrolling = startTouchY;
+  startTouchTime = new Date().getTime();
+  initialScrollY = window.scrollY;
+}
+
+function disablePushToReload(event) {
+  if (window.scrollY <= 0 && endTouchY > startTouchY && indexSlide !== 0) {
+    event.preventDefault();
+  }
+}
+
+function calculateTouchDistance(event) {
+  if (!isWindowLoaded || isScrolling) return;
+  endTouchY = event.changedTouches[0].clientY;
+  touchDistance = startTouchY - endTouchY;
+}
+
+function calculateScrollDistance(event) {
+  const currentTouchY = event.touches[0].clientY;
+  const currentTime = new Date().getTime();
+  const distance = startTouchYInScrolling - currentTouchY;
+  const scrollSpeed = Math.max(0.1, 20 / (currentTime - startTouchTime));
+  scrollDistance = distance * scrollSpeed;
+  startTouchYInScrolling = currentTouchY;
+  startTouchTime = currentTime;
+}
+
+function mobileScroll() {
+  if (isScrolling) return;
+  if (isOnMobile && indexSlide !== 0) {
+    window.scrollBy(0, scrollDistance);
+  }
+}
+
+// let initialScrollY;
+// function mobileScrollGlide() {
+//   if (isScrolling) return;
+//   if (isOnMobile && indexSlide !== 0) {
+//     const currentTime = new Date().getTime();
+//     const elapsedTime = currentTime - startTouchTime;
+
+//     const finalScrollY = window.scrollY;
+//     const distanceScrolled = finalScrollY - initialScrollY;
+
+//     // Calculer la vitesse initiale
+//     velocity = (distanceScrolled / elapsedTime) * 0.2;
+
+//     // Définir une fonction pour appliquer la décélération
+//     function decelerateScroll() {
+//       if (Math.abs(velocity) > 0.1) {
+//         window.scrollBy(0, velocity);
+//         velocity *= 0.95; // Réduit la vitesse progressivement
+//         scrollTimeout = requestAnimationFrame(decelerateScroll);
+//       }
+//     }
+
+//     // Commence la décélération
+//     decelerateScroll();
+//   }
+// }
+
+function checkIfSwipingToNextMobileSlide() {
+  if (!isWindowLoaded || !isOnMobile || isModalOpen || isScrolling || isHoverScrollableContent || isMobileScreenTooSmall) return;
+  const direction = touchDistance > 200 ? 1 : touchDistance < -200 ? -1 : null;
+  if (!direction) return;
+  if (indexSlide === 0) {
+    scrollToMobileSlide(indexSlide, direction);
+    isBottomMobileSlideLimitReach = false;
+  } else {
+    if (!isSlideScrollable) {
+      scrollToMobileSlide(indexSlide, direction);
+      isBottomMobileSlideLimitReach = false;
+    } else {
+      if (isTopMobileSlideLimitReach && direction === -1) {
+        scrollToMobileSlide(indexSlide, -1);
+      } else if (isBottomMobileSlideLimitReach && direction === 1) {
+        scrollToMobileSlide(indexSlide, direction);
+        isBottomMobileSlideLimitReach = false;
+      }
+      setTimeout(() => {
+        ifMobileSlideLimitsAreReach();
+      }, 100);
+    }
+  }
+}
+
+function checkIfScrollingToNextMobileSlide(event) {
+  if (event.ctrlKey || !isWindowLoaded || isModalOpen || !isOnMobile || isScrolling || isHoverScrollableContent || isMobileScreenTooSmall) return;
+  const direction = event.deltaY > 0 ? 1 : -1;
+  if (indexSlide === 0) {
+    scrollToMobileSlide(indexSlide, direction);
+    isBottomMobileSlideLimitReach = false;
+  } else {
+    if (!isSlideScrollable) {
+      scrollToMobileSlide(indexSlide, direction);
+      isBottomMobileSlideLimitReach = false;
+    } else {
+      if (isTopMobileSlideLimitReach && direction === -1) {
+        scrollToMobileSlide(indexSlide, -1);
+      } else if (isBottomMobileSlideLimitReach && direction === 1) {
+        scrollToMobileSlide(indexSlide, direction);
+        isBottomMobileSlideLimitReach = false;
+      }
+      ifMobileSlideLimitsAreReachForScroll();
+    }
+  }
+}
+
 function updateCurrentMobileSlideLimit() {
   const currentSlide = sectionMobileSlides[indexSlide];
-  topCurrentMobileSlideLimit = currentSlide.offsetTop - headerHeightOnMobile;
+  topCurrentMobileSlideLimit = currentSlide.offsetTop;
   bottomCurrentMobileSlideLimit = currentSlide.offsetTop + currentSlide.offsetHeight;
 }
 
@@ -696,50 +1002,38 @@ function ifMobileSlideLimitsAreReach() {
   const scrollYValue = window.scrollY;
   const scrollYBottom = window.scrollY + window.innerHeight;
   if (scrollYValue <= topCurrentMobileSlideLimit) {
-    setTimeout(() => {
-      isTopMobileSlideLimitReach = true;
-    }, 250);
-  } else if (scrollYBottom >= bottomCurrentMobileSlideLimit) {
-    setTimeout(() => {
-      isBottomMobileSlideLimitReach = true;
-    }, 250);
-  } else {
+    isTopMobileSlideLimitReach = true;
+  }
+  if (scrollYBottom >= bottomCurrentMobileSlideLimit) {
+    isBottomMobileSlideLimitReach = true;
+  }
+  if (scrollYValue > topCurrentMobileSlideLimit && scrollYBottom < bottomCurrentMobileSlideLimit) {
     isTopMobileSlideLimitReach = false;
     isBottomMobileSlideLimitReach = false;
   }
 }
 
-function updateStartScrollingPosition(event) {
-  startMobileTouch = event.changedTouches[0].clientY;
-}
-
-function checkIfSwipingToNextMobileSlide(event) {
-  if (!isWindowLoaded || isModalOpen || !isOnMobile || isScrolling) return;
-  if (isScrolling) return;
-  endMobileTouch = event.changedTouches[0].clientY;
-  const difference = startMobileTouch - endMobileTouch;
-  if (difference < -40) {
-    if (!isSlideScrollable || isTopMobileSlideLimitReach || difference < -300) {
-      scrollToMobileSlide(indexSlide, -1);
+function ifMobileSlideLimitsAreReachForScroll() {
+  if (isModalOpen || !isOnMobile || isScrolling) return;
+  const scrollYValue = window.scrollY;
+  const scrollYBottom = window.scrollY + window.innerHeight;
+  if (scrollYValue <= topCurrentMobileSlideLimit) {
+    if (limitReachCount > 0) limitReachCount = -1;
+    else if (limitReachCount > -2) limitReachCount--;
+    if (limitReachCount <= -2) {
+      isTopMobileSlideLimitReach = true;
+      limitReachCount = 0;
     }
-  } else if (difference > 40) {
-    if (!isSlideScrollable || isBottomMobileSlideLimitReach || difference > 300) {
-      scrollToMobileSlide(indexSlide, 1);
-      isBottomMobileSlideLimitReach = false;
+  } else if (scrollYBottom >= bottomCurrentMobileSlideLimit) {
+    if (limitReachCount < 0) limitReachCount = 1;
+    else if (limitReachCount < 2) limitReachCount++;
+    if (limitReachCount >= 2) {
+      isBottomMobileSlideLimitReach = true;
+      limitReachCount = 0;
     }
-  }
-}
-
-function checkIfScrollingToNextMobileSlide(event) {
-  if (!isWindowLoaded || isModalOpen || !isOnMobile || isScrolling) return;
-  const direction = event.deltaY > 0 ? 1 : -1;
-  if (!isSlideScrollable) {
-    scrollToMobileSlide(indexSlide, direction);
-    isBottomMobileSlideLimitReach = false;
-  } else if (isTopMobileSlideLimitReach && direction === -1) {
-    scrollToMobileSlide(indexSlide, -1);
-  } else if (isBottomMobileSlideLimitReach && direction === 1) {
-    scrollToMobileSlide(indexSlide, direction);
+  } else {
+    limitReachCount = 0;
+    isTopMobileSlideLimitReach = false;
     isBottomMobileSlideLimitReach = false;
   }
 }
@@ -761,27 +1055,26 @@ function scrollToMobileSlide(index, direction) {
   const sectionSlideToDisplay = sectionMobileSlides[indexSlide];
   const sectionSlideToHide = sectionMobileSlides[previousIndexSlide];
   displayNewMobileSlide(sectionSlideToDisplay);
-  if (indexDifference === -1) {
-    if (indexSlide !== 0) toggleMarginTopMobileSlide(sectionSlideToDisplay);
-    if (previousIndexSlide !== 0) toggleMarginTopMobileSlide(sectionSlideToHide);
+  if (indexDifference >= 1) {
+    toggleMarginBottomMobileSlide(sectionSlideToHide);
+    toggleMarginBottomMobileSlide(sectionSlideToDisplay);
+  }
+  if (indexDifference <= -1) {
+    toggleMarginTopMobileSlide(sectionSlideToDisplay);
+    toggleMarginTopMobileSlide(sectionSlideToHide);
     anchors[previousIndexSlide].scrollIntoView({ behavior: "auto" });
   }
-  if (indexDifference < -1) {
-    if (indexSlide !== 0) toggleMarginTopMobileSlide(sectionSlideToDisplay);
-    if (previousIndexSlide !== 0) toggleMarginTopMobileSlide(sectionSlideToHide);
-  }
   anchors[indexSlide].scrollIntoView({ behavior: scrollBehavior });
+  if (indexDifference >= 1) {
+    toggleMarginTopMobileSlide(sectionSlideToHide);
+    toggleMarginTopMobileSlide(sectionSlideToDisplay);
+  }
   window.dispatchEvent(new CustomEvent("indexSlideChange"));
   setTimeout(() => {
     hidePreviousMobileSlide(sectionSlideToHide);
-    updateCurrentSlideView();
-    if (indexDifference === 1) {
-      if (indexSlide !== 0) toggleMarginTopMobileSlide(sectionSlideToDisplay);
-      if (previousIndexSlide !== 0) toggleMarginTopMobileSlide(sectionSlideToHide);
-    }
-    if (indexDifference > 1) {
-      if (indexSlide !== 0) toggleMarginTopMobileSlide(sectionSlideToDisplay);
-      if (previousIndexSlide !== 0) toggleMarginTopMobileSlide(sectionSlideToHide);
+    if (indexDifference <= -1) {
+      toggleMarginBottomMobileSlide(sectionSlideToDisplay);
+      toggleMarginBottomMobileSlide(sectionSlideToHide);
     }
     updateCurrentMobileSlideLimit();
     checkIfSlideIsScrollable();
@@ -800,20 +1093,45 @@ function displayNewMobileSlide(target) {
 }
 
 function toggleMarginTopMobileSlide(target) {
-  target.classList.toggle("margin-top-mobile-slide");
+  target.classList.toggle(CLASS_MARGIN_TOP_MOBILE_SLIDE);
+}
+
+function toggleMarginBottomMobileSlide(target) {
+  target.classList.toggle(CLASS_MARGIN_BOTTOM_MOBILE_SLIDE);
 }
 
 // ===== Header =====
 function handleHeaderTitleClick() {
   if (!isHeaderTitleAnimationEnded) return;
-  if (!isOnMobile) scrollToSlide(1);
-  else scrollToMobileSlide(1);
+  if (!isOnMobile) scrollToSlide(0);
+  else scrollToMobileSlide(0);
+}
+
+function addHeaderTitleHover() {
+  if (indexSlide === 0 || isOnMobile) return;
+  headerTitleBlock.classList.add(CLASS_HEADER_TITLE_BLOCK_HOVER);
+  headerTitleImage.classList.add(CLASS_HEADER_TITLE_IMAGE_HOVER);
+  headerTitle.classList.add(CLASS_HEADER_TITLE_HOVER);
+}
+
+function removeHeaderTitleHover() {
+  if (isOnMobile) return;
+  if (indexSlide === 0) return;
+  headerTitleBlock.classList.remove(CLASS_HEADER_TITLE_BLOCK_HOVER);
+  headerTitleImage.classList.remove(CLASS_HEADER_TITLE_IMAGE_HOVER);
+  headerTitle.classList.remove(CLASS_HEADER_TITLE_HOVER);
+}
+
+function disableHeaderTitleBlockHover() {
+  headerTitleBlock.classList.remove(CLASS_HEADER_TITLE_BLOCK_HOVER);
+  headerTitleImage.classList.remove(CLASS_HEADER_TITLE_IMAGE_HOVER);
+  headerTitle.classList.remove(CLASS_HEADER_TITLE_HOVER);
 }
 
 function handleNavLinkClick(event, index) {
+  activeTouchControl();
   event.stopPropagation();
-  event.preventDefault();
-  if (!isWindowLoaded || index === indexSlide) return;
+  if (!isWindowLoaded || isScrolling || index === indexSlide) return;
   if (!isOnMobile) scrollToSlide(index);
   else {
     addMobileNavCloseAnimation();
@@ -826,32 +1144,14 @@ function setActiveClassToNavLink() {
   navLinks[indexSlide].classList.add(CLASS_NAV_LINK_ACTIVE);
 }
 
-function removeHeaderHoverAnimationForNewSlide() {
+function removeNavHoverAnimationForNewSlide() {
   navLinks[previousIndexSlide].classList.add(CLASS_NAV_LINK_HOVER);
   navLinks[indexSlide].classList.remove(CLASS_NAV_LINK_HOVER);
-  if (previousIndexSlide === 1) headerTitle.classList.add(CLASS_HEADER_TITLE_HOVER);
-  else if (indexSlide === 1) headerTitle.classList.remove(CLASS_HEADER_TITLE_HOVER);
-}
-
-function addNormalHeaderNavSate() {
-  nav.classList.add(CLASS_NAV_NORMAL_STATE);
-}
-
-function removeNormalHeaderNavSate() {
-  nav.classList.remove(CLASS_NAV_NORMAL_STATE);
 }
 
 // ===== Header (Mobile) =====
-function displayHeaderNav() {
-  nav.classList.remove(CLASS_MOBILE_NAV_HIDE);
-}
-
-function hideHeaderNav() {
-  nav.classList.add(CLASS_MOBILE_NAV_HIDE);
-}
-
 function checkIfClosingMobileNav(event) {
-  if (!isOnMobile) return;
+  // if (!isOnMobile) return;
   if (event.target !== nav && event.target !== navMenuBurger) {
     addMobileNavCloseAnimation();
   }
@@ -859,7 +1159,8 @@ function checkIfClosingMobileNav(event) {
 
 function addMobileNavOpenAnimation(event) {
   event.stopPropagation();
-  nav.classList.remove(CLASS_MOBILE_NAV_HIDE);
+  // startTouchY = 0;
+  nav.style.display = "flex";
   nav.classList.remove(CLASS_MOBILE_NAV_CLOSE);
   nav.classList.add(CLASS_MOBILE_NAV_OPEN);
 }
@@ -867,6 +1168,12 @@ function addMobileNavOpenAnimation(event) {
 function addMobileNavCloseAnimation() {
   nav.classList.remove(CLASS_MOBILE_NAV_OPEN);
   nav.classList.add(CLASS_MOBILE_NAV_CLOSE);
+}
+
+function hideNavAfterCloseAnimation(event) {
+  if (event.animationName === "mobile-nav-close") {
+    nav.style.display = "none";
+  }
 }
 
 function removeMobileNavAnimations() {
@@ -925,6 +1232,39 @@ function activeCVButtonAfterIntroAnimation(event) {
 }
 
 // ===== About =====
+function handleAboutTextScroll() {
+  if (isOnMobile || !isAboutTextScrollable) return;
+  isHoverScrollableContent = true;
+}
+
+function handleLeavingAboutText(event) {
+  if (isOnMobile || !isAboutTextScrollable) return;
+  if (!event) isHoverScrollableContent = false;
+  else if (!aboutText.contains(event.target)) {
+    isHoverScrollableContent = false;
+  }
+}
+
+/**  @param {string} delay if should be "delay" or not */
+function checkIfAboutTextScrollable(delay) {
+  if (delay)
+    setTimeout(() => {
+      isAboutTextScrollable = checkIfTargetIsScrollable(aboutTextP, aboutTextArrowDown);
+    }, scrollDuration);
+  else isAboutTextScrollable = checkIfTargetIsScrollable(aboutTextP, aboutTextArrowDown);
+}
+
+function updateAboutTextArrow(event) {
+  if (event) {
+    if (event.type === "keydown") updateTargetDownArrow(aboutTextP, isAboutTextScrollable, aboutTextArrowDown, 2);
+  } else updateTargetDownArrow(aboutTextP, isAboutTextScrollable, aboutTextArrowDown, 2);
+}
+
+function swipeAboutText() {
+  if (isHoverScrollableContent && indexSlide === 1) {
+    aboutTextP.scrollBy(0, scrollDistance * 0.4);
+  }
+}
 
 // ===== Skills =====
 function setIsSkillsIntroAnimationsEndedTrue(index) {
@@ -958,6 +1298,16 @@ function handleEnterSkill(skillsDiv, index) {
   setPreviousSkill(skillsDiv, index);
 }
 
+function handleTouchingSkill(index) {
+  console.log("message");
+  hoverTarget = skillsDivs[index];
+  resetPreviousSkillIfEnterNewSkill();
+  addSkillHoverAnimation(hoverTarget, index);
+  setSkillTargetForLeaveDetection(hoverTarget, index);
+  isPreviousSkillsAlreadyReset = false;
+  setPreviousSkill(hoverTarget, index);
+}
+
 function resetPreviousSkillIfEnterNewSkill() {
   if (isPreviousSkillsAlreadyReset) return;
   addEndingSkillAnimation(previousSkill);
@@ -975,6 +1325,11 @@ function addSkillHoverAnimation(skillsDiv, index) {
 function setSkillTargetForLeaveDetection(skillsDiv, index) {
   skillTargetForLeaveDetection = skillsDiv;
   indexOfSkillTargetForLeaveDetection = index;
+}
+
+function checkIfStillTouchingSameSkill(event) {
+  if (!hoverTarget || hoverTarget.contains(event.target) || !skillTargetForLeaveDetection) return;
+  resetSkillHoverTarget();
 }
 
 function setPreviousSkill(skillsDiv, index) {
@@ -1036,96 +1391,111 @@ function fixingInfoBubbleZIndex(skillsDiv) {
 }
 
 function displayInfoBubble(skillsDiv, index) {
+  indexOfInfoBubbleToReset = index;
   const infoBubble = infoBubblesArray[index];
-  infoBubble.classList.remove(CLASS_INFO_BUBBLE_WIDTH_UNSET);
-  infoBubble.classList.remove(CLASS_INFO_BUBBLE_WIDTH_MAX);
-  if (infoBubble.classList.contains(CLASS_INFO_BUBBLE_CLOSE_RIGHT)) infoBubble.classList.remove(CLASS_INFO_BUBBLE_CLOSE_RIGHT);
-  else infoBubble.classList.remove(CLASS_INFO_BUBBLE_CLOSE_LEFT);
+  infoBubble.classList.remove(CLASS_INFO_BUBBLE_CLOSE_BOTTOM);
+  infoBubble.classList.remove(CLASS_INFO_BUBBLE_CLOSE_LEFT);
+  infoBubble.classList.remove(CLASS_INFO_BUBBLE_CLOSE_RIGHT);
+  infoBubble.classList.remove(CLASS_INFO_BUBBLE_CLOSE_TOP);
   // Determine if bubble should be on left or right side (desktop, tablet) + on top or bottom side (mobile)
+  infoBubble.classList.add(CLASS_INFO_BUBBLE_DISPLAY_AND_HIDE);
+  const infoBubbleSize = infoBubble.getBoundingClientRect();
+  infoBubble.classList.remove(CLASS_INFO_BUBBLE_DISPLAY_AND_HIDE);
   const skillSize = skillsDiv.getBoundingClientRect();
+  const fullInfoBubbleWidth = infoBubbleMaxWidth + infoBubbleOffsetX + infoBubbleMargin;
   if (isOnMobile) {
-    infoBubble.classList.add(CLASS_INFO_BUBBLE_DISPLAY_AND_HIDE);
-    const infoBubbleText = infoBubbleTextsArray[index];
-    infoBubble.innerHTML = infoBubbleText;
-    const infoBubbleSize = infoBubble.getBoundingClientRect();
-    if (skillSize.top >= infoBubbleSize.height + infoBubbleOffsetYOnMobile + infoBubbleMargin + headerHeightOnMobile) {
+    const realInfoBubbleWidth = window.innerWidth * infoBubbleWidthPourcent;
+    if (realInfoBubbleWidth <= infoBubbleMaxWidth) {
+      const centerPosition = window.innerWidth / 2 - skillSize.left - realInfoBubbleWidth / 2;
+      infoBubble.style.right = "auto";
+      infoBubble.style.left = `${centerPosition}px`;
+    } else {
+      const spaceLeftFromCenter = skillSize.left + skillSize.width / 2;
+      const spaceRightFromCenter = window.innerWidth - skillSize.right + skillSize.width / 2;
+      if (infoBubbleMaxWidth / 2 <= spaceLeftFromCenter && infoBubbleMaxWidth / 2 <= spaceRightFromCenter) {
+        const centerPosition = skillSize.width / 2 - infoBubbleMaxWidth / 2;
+        infoBubble.style.right = "auto";
+        infoBubble.style.left = `${centerPosition}px`;
+      } else {
+        const centerPosition = window.innerWidth / 2 - skillSize.left - infoBubbleMaxWidth / 2;
+        infoBubble.style.right = "auto";
+        infoBubble.style.left = `${centerPosition}px`;
+      }
+    }
+    const fullInfoBubbleHeight = infoBubbleSize.height + infoBubbleOffsetYOnMobile + infoBubbleMargin;
+    if (fullInfoBubbleHeight <= skillSize.top - headerHeightOnMobile) {
       infoBubble.style.top = "auto";
       infoBubble.style.bottom = `${skillSize.height + infoBubbleOffsetYOnMobile}px`;
+      infoBubble.classList.add(CLASS_INFO_BUBBLE_OPEN_TOP);
+      infoBubbleAnimationsDirection = "top";
     } else {
       infoBubble.style.bottom = "auto";
       infoBubble.style.top = `${skillSize.height + infoBubbleOffsetYOnMobile}px`;
+      infoBubble.classList.add(CLASS_INFO_BUBBLE_OPEN_BOTTOM);
+      infoBubbleAnimationsDirection = "bottom";
     }
-    const spaceRight = window.innerWidth - skillSize.right;
-    if (spaceRight >= infoBubbleWidth + infoBubbleOffsetX + infoBubbleMargin) {
-      infoBubbleAnimationsLeftDirection = false;
-      infoBubble.style.right = "auto";
-      infoBubble.style.left = "0";
-    } else if (skillSize.left >= infoBubbleWidth + infoBubbleOffsetX + infoBubbleMargin) {
-      infoBubbleAnimationsLeftDirection = true;
-      infoBubble.style.left = "auto";
-      infoBubble.style.right = "0";
-    } else {
-      infoBubbleAnimationsLeftDirection = false;
-      const centerPosition = (skillSize.width - infoBubbleWidth) / 2;
-      infoBubble.style.right = "auto";
-      infoBubble.style.left = `${centerPosition}px`;
-    }
-    infoBubble.classList.remove(CLASS_INFO_BUBBLE_DISPLAY_AND_HIDE);
-    infoBubble.innerHTML = "";
-    if (!infoBubbleAnimationsLeftDirection) infoBubble.classList.add(CLASS_INFO_BUBBLE_OPEN_RIGHT);
-    else infoBubble.classList.add(CLASS_INFO_BUBBLE_OPEN_LEFT);
-    animateInfoBubbleText(infoBubble, index, infoBubbleText);
   } else {
+    const spaceRight = window.innerWidth - skillSize.right;
     infoBubble.style.bottom = "auto";
     infoBubble.style.top = `${infoBubbleOffsetY}px`;
-    const spaceRight = window.innerWidth - skillSize.right;
-    if (spaceRight >= infoBubbleWidth + infoBubbleOffsetX + infoBubbleMargin) {
-      infoBubbleAnimationsLeftDirection = false;
+    if (fullInfoBubbleWidth <= spaceRight) {
       infoBubble.style.right = "auto";
       infoBubble.style.left = `${skillSize.width + infoBubbleOffsetX}px`;
+      infoBubble.classList.add(CLASS_INFO_BUBBLE_OPEN_RIGHT);
+      infoBubbleAnimationsDirection = "right";
     } else {
-      infoBubbleAnimationsLeftDirection = true;
       infoBubble.style.left = "auto";
       infoBubble.style.right = `${skillSize.width + infoBubbleOffsetX}px`;
+      infoBubble.classList.add(CLASS_INFO_BUBBLE_OPEN_LEFT);
+      infoBubbleAnimationsDirection = "left";
     }
-    if (!infoBubbleAnimationsLeftDirection) infoBubble.classList.add(CLASS_INFO_BUBBLE_OPEN_RIGHT);
-    else infoBubble.classList.add(CLASS_INFO_BUBBLE_OPEN_LEFT);
-    animateInfoBubbleText(infoBubble, index);
   }
 }
 
-function animateInfoBubbleText(infoBubble, index, infoBubbleText) {
-  if (!infoBubbleText) infoBubbleText = infoBubbleTextsArray[index];
-  let indexChar = 0;
-  infoBubble.classList.add(CLASS_INFO_BUBBLE_WIDTH_UNSET);
-  const textBubbleAnimation = setInterval(() => {
-    if (indexChar < infoBubbleText.length) {
-      infoBubble.innerHTML += infoBubbleText.charAt(indexChar);
-      indexChar++;
-      const bubbleSize = infoBubble.getBoundingClientRect();
-      if (bubbleSize.width >= infoBubbleWidth) {
-        infoBubble.classList.remove(CLASS_INFO_BUBBLE_WIDTH_UNSET);
-        infoBubble.classList.add(CLASS_INFO_BUBBLE_WIDTH_MAX);
-      }
-    } else {
-      clearInterval(textBubbleAnimation);
-      removeAnimationFromArray(infoBubble, textInfoBubbleAnimationsArray);
-    }
-  }, textSpeed);
-  textInfoBubbleAnimationsArray.push({ name: infoBubble, animation: textBubbleAnimation });
-}
+// function animateInfoBubbleText(infoBubble, index, infoBubbleText) {
+// function animateInfoBubbleText(infoBubble, index) {
+//   // if (!infoBubbleText) infoBubbleText = infoBubbleTextsArray[index];
+//   let indexChar = 0;
+//   infoBubble.classList.add(CLASS_INFO_BUBBLE_WIDTH_UNSET);
+//   const textBubbleAnimation = setInterval(() => {
+//     if (indexChar < infoBubbleText.length) {
+//       infoBubble.innerHTML += infoBubbleText.charAt(indexChar);
+//       indexChar++;
+//       const bubbleSize = infoBubble.getBoundingClientRect();
+//       if (bubbleSize.width >= infoBubbleWidth) {
+//         infoBubble.classList.remove(CLASS_INFO_BUBBLE_WIDTH_UNSET);
+//         infoBubble.classList.add(CLASS_INFO_BUBBLE_WIDTH_MAX);
+//       }
+//     } else {
+//       clearInterval(textBubbleAnimation);
+//       removeAnimationFromArray(infoBubble, textInfoBubbleAnimationsArray);
+//     }
+//   }, textSpeed);
+//   textInfoBubbleAnimationsArray.push({ name: infoBubble, animation: textBubbleAnimation });
+// }
 
 function hideAndResetInfoBubble(index) {
+  //indexOfInfoBubbleToReset
   const infoBubble = infoBubblesArray[index];
-  if (!infoBubbleAnimationsLeftDirection) {
-    infoBubble.classList.remove(CLASS_INFO_BUBBLE_OPEN_RIGHT);
-    infoBubble.classList.add(CLASS_INFO_BUBBLE_CLOSE_RIGHT);
-  } else {
-    infoBubble.classList.remove(CLASS_INFO_BUBBLE_OPEN_LEFT);
-    infoBubble.classList.add(CLASS_INFO_BUBBLE_CLOSE_LEFT);
+  switch (infoBubbleAnimationsDirection) {
+    case "top":
+      infoBubble.classList.remove(CLASS_INFO_BUBBLE_OPEN_TOP);
+      infoBubble.classList.add(CLASS_INFO_BUBBLE_CLOSE_TOP);
+      break;
+    case "bottom":
+      infoBubble.classList.remove(CLASS_INFO_BUBBLE_OPEN_BOTTOM);
+      infoBubble.classList.add(CLASS_INFO_BUBBLE_CLOSE_BOTTOM);
+      break;
+    case "left":
+      infoBubble.classList.remove(CLASS_INFO_BUBBLE_OPEN_LEFT);
+      infoBubble.classList.add(CLASS_INFO_BUBBLE_CLOSE_LEFT);
+      break;
+    case "right":
+      infoBubble.classList.remove(CLASS_INFO_BUBBLE_OPEN_RIGHT);
+      infoBubble.classList.add(CLASS_INFO_BUBBLE_CLOSE_RIGHT);
+      break;
+    default:
   }
-  removeAnimationFromArray(infoBubble, textInfoBubbleAnimationsArray, "interval");
-  infoBubble.innerHTML = "";
 }
 
 // ===== Examples =====
@@ -1141,13 +1511,13 @@ function removeStyleCursorForExamples(exampleFilter) {
   exampleFilter.style.cursor = "default";
 }
 
-function handleEnterExample(exampleFilter, index) {
-  if (exampleTargetForLeaveDetection === exampleFilter) return;
+function handleEnterExample(example, index) {
+  if (exampleTargetForLeaveDetection === example) return;
   resetPreviousExampleIfEnterNewExample();
-  addExampleHoverAnimation(exampleFilter, index);
-  setExampleTargetForLeaveDetection(exampleFilter, index);
+  addExampleHoverAnimation(example, index);
+  setExampleTargetForLeaveDetection(example, index);
   isPreviousExampleAlreadyReset = false;
-  setPreviousExample(exampleFilter, index);
+  setPreviousExample(example, index);
 }
 
 function resetPreviousExampleIfEnterNewExample() {
@@ -1157,20 +1527,21 @@ function resetPreviousExampleIfEnterNewExample() {
   isHoverExamplesArray[previousIndexOfExample] = false;
 }
 
-function addExampleHoverAnimation(exampleFilter, index) {
+function addExampleHoverAnimation(example, index) {
+  const exampleFilter = example.querySelector(".examples-filters");
   exampleFilter.classList.add(CLASS_EXAMPLE_FILTER_HOVER);
-  examplesDivs[index].classList.add(CLASS_EXAMPLE_ARTICLE_HOVER);
+  example.classList.add(CLASS_EXAMPLE_ARTICLE_HOVER);
   examplesH3[index].classList.add(CLASS_EXAMPLE_H3_HOVER);
   isHoverExamplesArray[index] = true;
 }
 
-function setExampleTargetForLeaveDetection(exampleFilter, index) {
-  exampleTargetForLeaveDetection = exampleFilter;
+function setExampleTargetForLeaveDetection(example, index) {
+  exampleTargetForLeaveDetection = example;
   indexOfExampleTargetForLeaveDetection = index;
 }
 
-function setPreviousExample(exampleFilter, index) {
-  previousExample = exampleFilter;
+function setPreviousExample(example, index) {
+  previousExample = example;
   previousIndexOfExample = index;
 }
 
@@ -1194,7 +1565,7 @@ function resetExampleHoverTarget() {
 
 function removeExampleTargetHoverAnimation() {
   exampleTargetForLeaveDetection.classList.remove(CLASS_EXAMPLE_FILTER_HOVER);
-  examplesDivs[indexOfExampleTargetForLeaveDetection].classList.remove(CLASS_EXAMPLE_ARTICLE_HOVER);
+  examples[indexOfExampleTargetForLeaveDetection].classList.remove(CLASS_EXAMPLE_ARTICLE_HOVER);
   examplesH3[indexOfExampleTargetForLeaveDetection].classList.remove(CLASS_EXAMPLE_H3_HOVER);
   isHoverExamplesArray[indexOfExampleTargetForLeaveDetection] = false;
 }
@@ -1213,7 +1584,7 @@ function openModalExample(event, index) {
     adjustModalPosition();
     addMobileNavCloseAnimation();
   } else resetModalPosition();
-  activeModalTextArrows();
+  // activeModalTextArrows();
   resetExampleHoverTarget();
   numberOfModalExampleToDisplay = index;
   addExampleFilterAnimationOnModalEvent("open");
@@ -1288,7 +1659,7 @@ function updateModalExampleToDisplay() {
   }, modalSlideChangeDuration / 2);
 }
 
-/**  @param {string} target "reset", "description", "difficulties" or "skills" */
+/**  @param {string} target "reset", "description", "challenges" or "skills" */
 function changeModalTextAndActiveButton(target) {
   let htmlContent = "";
   switch (target) {
@@ -1308,28 +1679,28 @@ function changeModalTextAndActiveButton(target) {
       displayModalTextArrow();
       modalPreviousActiveSection = modalDescriptionButtonH4;
       break;
-    case "difficulties":
-      if (modalPreviousActiveSection === modalDifficultiesButtonH4) return;
+    case "challenges":
+      if (modalPreviousActiveSection === modalChallengesButtonH4) return;
       if (isOnMobile) {
-        setImageOfActiveMobileModalButton("difficulties");
+        setImageOfActiveMobileModalButton("challenges");
         removeImageOfPreviousActiveMobileModalButton();
       }
       modalPreviousActiveSection.classList.remove(CLASS_MODAL_BUTTON_ACTIVE);
       modalPreviousActiveSection.classList.add(CLASS_MODAL_BUTTON_HOVER);
-      modalDifficultiesButtonH4.classList.remove(CLASS_MODAL_BUTTON_HOVER);
-      modalDifficultiesButtonH4.classList.add(CLASS_MODAL_BUTTON_ACTIVE);
-      if (modalExampleToDisplay.difficulties.length === 1) htmlContent += `<h4 id="modal-text-title">Difficulté rencontrée et solution&nbsp;:</h4>`;
-      else htmlContent += `<h4 id="modal-text-title">Difficultés rencontrées et solutions&nbsp;:</h4>`;
-      for (let i = 0; i < modalExampleToDisplay.difficulties.length; i++) {
-        const difficulty = modalExampleToDisplay.difficulties[i];
-        htmlContent += `<p class="modal-problems-p"><img class="arrows-problems" src="./assets/svg/arrow-problem.svg" alt="Icône de flèche.">${difficulty.problems}</p><p class="modal-solutions-p"><span class="modal-difficulties-span">Solution :</span> ${difficulty.solutions}</p>`;
+      modalChallengesButtonH4.classList.remove(CLASS_MODAL_BUTTON_HOVER);
+      modalChallengesButtonH4.classList.add(CLASS_MODAL_BUTTON_ACTIVE);
+      if (modalExampleToDisplay.challenges.length === 1) htmlContent += `<h4 id="modal-text-title">Challenge rencontrée et solution&nbsp;:</h4>`;
+      else htmlContent += `<h4 id="modal-text-title">Challenges rencontrées et solutions&nbsp;:</h4>`;
+      for (let i = 0; i < modalExampleToDisplay.challenges.length; i++) {
+        const challenge = modalExampleToDisplay.challenges[i];
+        htmlContent += `<p class="modal-problems-p"><img class="arrows-problems" src="./assets/svg/arrow-problem.svg" alt="Icône de flèche.">${challenge.problems}</p><p class="modal-solutions-p"><span class="modal-challenges-span">Solution :</span> ${challenge.solutions}</p>`;
       }
       modalText.innerHTML = "";
       modalText.insertAdjacentHTML("beforeend", htmlContent);
       checkIfModalTextIsScrollable();
       modalText.scrollTop = 0;
       displayModalTextArrow();
-      modalPreviousActiveSection = modalDifficultiesButtonH4;
+      modalPreviousActiveSection = modalChallengesButtonH4;
       break;
     case "skills":
       if (modalPreviousActiveSection === modalSkillsButtonH4) return;
@@ -1341,7 +1712,7 @@ function changeModalTextAndActiveButton(target) {
       modalPreviousActiveSection.classList.add(CLASS_MODAL_BUTTON_HOVER);
       modalSkillsButtonH4.classList.remove(CLASS_MODAL_BUTTON_HOVER);
       modalSkillsButtonH4.classList.add(CLASS_MODAL_BUTTON_ACTIVE);
-      if (modalExampleToDisplay.difficulties.length === 1) htmlContent += `<h4 id="modal-text-title">Compétence acquise :</h4><ul id="modal-skills">`;
+      if (modalExampleToDisplay.challenges.length === 1) htmlContent += `<h4 id="modal-text-title">Compétence acquise :</h4><ul id="modal-skills">`;
       else htmlContent += `<h4 id="modal-text-title">Compétences acquises :</h4><ul id="modal-skills">`;
       for (let i = 0; i < modalExampleToDisplay.skills.length; i++) {
         const skill = modalExampleToDisplay.skills[i];
@@ -1473,7 +1844,7 @@ function closeModal() {
   if (isOnMobile) enableScroll();
   modal.classList.remove(CLASS_MODAL_OPEN);
   modalScreen.classList.add(CLASS_MODAL_SCREEN_CLOSE);
-  disableModalTextArrows();
+  // disableModalTextArrows();
   resetModalSlideSystem();
   setTimeout(() => {
     modalScreen.style.display = "none";
@@ -1485,37 +1856,20 @@ function checkIfModalTextIsScrollable() {
   if (!isModalOpen) return;
   if (modalText.scrollHeight > modalText.clientHeight) {
     isModalTextScrollable = true;
-    modalTextArrowDown.style.visibility = "visible";
-    modalTextArrowUp.style.visibility = "hidden";
+    modalTextArrowDown.style.display = "flex";
   } else {
     isModalTextScrollable = false;
-    modalTextArrowDown.style.visibility = "hidden";
-    modalTextArrowUp.style.visibility = "hidden";
+    modalTextArrowDown.style.display = "none";
   }
 }
 
 function displayModalTextArrow() {
   if (!isModalOpen || !isModalTextScrollable) return;
-  if (modalText.scrollTop > 0) {
-    modalTextArrowUp.style.visibility = "visible";
-  } else {
-    modalTextArrowUp.style.visibility = "hidden";
-  }
   if (modalText.scrollTop + modalText.clientHeight < modalText.scrollHeight) {
-    modalTextArrowDown.style.visibility = "visible";
+    modalTextArrowDown.style.display = "flex";
   } else {
-    modalTextArrowDown.style.visibility = "hidden";
+    modalTextArrowDown.style.display = "none";
   }
-}
-
-function activeModalTextArrows() {
-  modalTextArrowUp.style.display = "flex";
-  modalTextArrowDown.style.display = "flex";
-}
-
-function disableModalTextArrows() {
-  modalTextArrowUp.style.display = "none";
-  modalTextArrowDown.style.display = "none";
 }
 
 // → Modal (Mobile)
@@ -1527,14 +1881,14 @@ function resetModalPosition() {
   modalScreen.style.top = "auto";
 }
 
-/**  @param {string} target "description", "difficulties" or "skills" */
+/**  @param {string} target "description", "challenges" or "skills" */
 function setImageOfActiveMobileModalButton(target) {
   if (target) {
     switch (target) {
       case "description":
         modalButtonsImages[0].setAttribute("src", "./assets/svg/description-black.svg");
         break;
-      case "difficulties":
+      case "challenges":
         modalButtonsImages[2].setAttribute("src", "./assets/svg/exclamation-mark-black.svg");
         break;
       case "skills":
@@ -1547,7 +1901,7 @@ function setImageOfActiveMobileModalButton(target) {
       case modalDescriptionButtonH4:
         modalButtonsImages[0].setAttribute("src", "./assets/svg/description-black.svg");
         break;
-      case modalDifficultiesButtonH4:
+      case modalChallengesButtonH4:
         modalButtonsImages[2].setAttribute("src", "./assets/svg/exclamation-mark-black.svg");
         break;
       case modalSkillsButtonH4:
@@ -1563,7 +1917,7 @@ function removeImageOfPreviousActiveMobileModalButton() {
     case modalDescriptionButtonH4:
       modalButtonsImages[0].setAttribute("src", "./assets/svg/description-white.svg");
       break;
-    case modalDifficultiesButtonH4:
+    case modalChallengesButtonH4:
       modalButtonsImages[2].setAttribute("src", "./assets/svg/exclamation-mark-white.svg");
       break;
     case modalSkillsButtonH4:

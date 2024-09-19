@@ -1,8 +1,25 @@
 
-faire  img
-opti images + acessibiltié
-mobil hover a test
+opti images
+DEUX DERNIER DIAPO
+fit modal design
 article example tranform
-scroll ou tactil tablette slide change
+acessibiltié a test
 
-redimensionner imagesabout text scroll
+
+@media (max-width: 1440px) {}
+@media (max-width: 1024px) {}
+@media (max-height: 590px), (max-width: 768px) {}
+
+tablet 
+push to reload
+hide nav bar mobile pb resize
+limit height force mobile mod
+footer
+infobulle
+
+
+tablette no zoom bizar
+bon emulateur safari
+apple ios safari (img align justify)
+auto adapt compil?
+annuler coach 2 mois

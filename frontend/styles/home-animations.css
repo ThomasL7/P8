@@ -68,3 +68,9 @@
     transform: scale(1.055);
   }
 }
+
+@media (max-height: 590px), (max-width: 768px) {
+  .home-buttons-intro {
+    animation: home-buttons-intro 2.5s cubic-bezier(0.72, -0.98, 0.69, 1.32) 0s 1 normal forwards;
+  }
+}

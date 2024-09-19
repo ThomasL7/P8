@@ -1,0 +1,29 @@
+@media (max-width: 1440px) {
+  footer {
+    height: var(--footer-height-1440);
+  }
+
+  #footer img {
+    height: 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  footer {
+    height: var(--footer-height-1024);
+  }
+
+  #footer img {
+    height: 18px;
+  }
+}
+
+@media (max-height: 590px), (max-width: 768px) {
+  footer {
+    height: var(--footer-height-on-mobile);
+  }
+
+  #footer img {
+    height: 16px;
+  }
+}

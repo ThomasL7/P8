@@ -1,18 +1,30 @@
 :root {
   /* ==== Durations ==== */
-  --info-bubbles-text-speed: 12;
+  --info-bubbles-text-speed: 1;
 }
 
 .info-bubbles-open-right {
-  display: block;
+  display: flex;
   animation: info-bubbles-open 0.35s cubic-bezier(0.3, 0.85, 0.57, 0.9) 0s 1 normal none;
-  transform-origin: 0% 100%;
+  transform-origin: 0% 0%;
 }
 
 .info-bubbles-open-left {
-  display: block;
+  display: flex;
   animation: info-bubbles-open 0.35s cubic-bezier(0.3, 0.85, 0.57, 0.9) 0s 1 normal none;
   transform-origin: 100% 0%;
+}
+
+.info-bubbles-open-top {
+  display: flex;
+  animation: info-bubbles-open 0.35s cubic-bezier(0.3, 0.85, 0.57, 0.9) 0s 1 normal none;
+  transform-origin: bottom;
+}
+
+.info-bubbles-open-bottom {
+  display: flex;
+  animation: info-bubbles-open 0.35s cubic-bezier(0.3, 0.85, 0.57, 0.9) 0s 1 normal none;
+  transform-origin: top;
 }
 
 @keyframes info-bubbles-open {
@@ -29,7 +41,7 @@
 .info-bubbles-close-right {
   display: none;
   animation: info-bubbles-close 0.1s cubic-bezier(0.3, 0.85, 0.6, 0.98) 0s 1 normal none;
-  transform-origin: 0% 100%;
+  transform-origin: 0% 0%;
 }
 
 .info-bubbles-close-left {
@@ -38,14 +50,26 @@
   transform-origin: 100% 0%;
 }
 
+.info-bubbles-close-top {
+  display: none;
+  animation: info-bubbles-close 0.1s cubic-bezier(0.3, 0.85, 0.6, 0.98) 0s 1 normal none;
+  transform-origin: bottom;
+}
+
+.info-bubbles-close-bottom {
+  display: none;
+  animation: info-bubbles-close 0.1s cubic-bezier(0.3, 0.85, 0.6, 0.98) 0s 1 normal none;
+  transform-origin: top;
+}
+
 @keyframes info-bubbles-close {
   0% {
-    display: block;
+    display: flex;
     opacity: 1;
     transform: scale(1);
   }
   100% {
-    display: block;
+    display: flex;
     opacity: 0.1;
     transform: scale(0.2);
   }

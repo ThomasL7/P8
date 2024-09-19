@@ -40,3 +40,16 @@
     transform: translateY(+100px);
   }
 }
+
+.arrow-down {
+  animation: arrow-down-blink 1s ease-in-out 0s infinite alternate none;
+}
+
+@keyframes arrow-down-blink {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.08;
+  }
+}

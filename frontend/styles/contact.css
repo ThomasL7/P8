@@ -1,22 +1,5 @@
 #contact {
-  display: flex;
   flex-direction: column;
-  height: var(--section-height);
-  align-items: center;
-  width: 100%;
-  justify-content: center;
-  color: var(--white);
-  position: relative;
-}
-
-#contact .background img {
-  /* background-color: rgb(52, 95, 160); */
-  /* background-color: #2d57a0; */
-  /* background: radial-gradient(ellipse at center, #4073ca 0%, #305ca8 100%); */
-  /* filter: brightness(0.3) contrast(0.6); */
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
 }
 
 #contact-content {
@@ -161,4 +144,8 @@
   margin-left: 10px;
   font-size: 16px;
   font-weight: 600;
+}
+
+.footer-margin-for-tablet-desktop {
+  margin-bottom: var(--footer-height-normal);
 }

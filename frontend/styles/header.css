@@ -1,19 +1,12 @@
-:root {
-  /* ==== Sizes ==== */
-  --header-height: 38px;
-  --section-height: calc(100vh - var(--header-height));
-}
-
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   position: fixed;
-  height: var(--header-height);
+  height: var(--header-height-normal);
   z-index: 2;
-  /* background-color: rgb(31, 27, 27); */
-  background-color: rgb(26, 25, 25);
+  background-color: var(--header-footer-color);
 }
 
 #header-title-block {
@@ -21,22 +14,25 @@ header {
   align-items: center;
   height: 100%;
   position: relative;
+  padding-left: 15px;
 }
 
 #header-title-block img {
-  height: 15px;
-  margin-left: 15px;
+  height: 18px;
   margin-right: 14px;
 }
 
 h1 {
-  font-size: 13px;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
   font-weight: 600;
   text-decoration: underline;
+  height: 100%;
 }
 
 nav {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   height: 100%;
   display: flex;
@@ -48,16 +44,12 @@ nav div {
   position: relative;
 }
 
-#nav-menu-burger {
-  display: none;
-}
-
 nav p,
 nav a {
   height: 100%;
   align-content: center;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 35px;
+  padding-right: 35px;
   border-left: 2px solid rgb(226, 226, 226);
 }
 
