@@ -10,15 +10,20 @@
   box-sizing: border-box;
 }
 
+#examples-content .slide-title-style {
+  margin-bottom: 43px;
+  top: -25px;
+}
+
 #examples-content .slide-title-style::before,
 #examples-content .slide-title-style::after {
-  width: 175%;
+  width: 163%;
 }
 
 #examples-gallery {
   display: grid;
   grid-template-columns: repeat(3, 28%);
-  grid-gap: 25px 3.25%;
+  grid-gap: 42px 42px;
   justify-content: center;
   width: 100%;
 }
@@ -27,32 +32,42 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
-  border-radius: 20px;
-  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.5) 100%);
+  /* box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3); */
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+
+  /* border-radius: 30px 30px 20px 20px; */
+  /* background: radial-gradient(circle at center, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.5) 100%); */
+  /* overflow: hidden; */
+  /* background: rgb(212, 212, 212); */
+  background-color: rgb(185, 185, 185);
 }
 
 #examples-gallery article > div {
   position: relative;
   width: 100%;
-  height: 150px;
+  height: 155px;
+  /* overflow: hidden; */
+  /* border-radius: 20px 20px 0px 0px; */
 }
 
 .examples-images {
-  border-radius: 20px 20px 0px 0px;
+  /* border-radius: 20px 20px 0px 0px; */
   object-fit: cover;
+  /* filter: brightness(0.2); */
   width: 100%;
   height: 100%;
   aspect-ratio: 16/9;
 }
 
 #examples-gallery h3 {
-  margin-top: 12px;
-  margin-bottom: 12px;
+  /* margin-top: 12px;
+  margin-bottom: 12px; */
+  padding: 13px 16px;
+  box-sizing: border-box;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 600;
   text-align: center;
-  line-height: 1.1;
+  line-height: 1.2;
   color: var(--black);
 }
 
@@ -61,22 +76,25 @@
   position: absolute;
   width: 100%;
   height: 100%;
+  object-fit: contain;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  background-color: rgba(0, 0, 0, 0.747);
+  z-index: 1;
+
+  /* background-color: rgba(0, 0, 0, 0.747); */
 }
 
 .examples-filters img {
-  height: 20px;
+  height: 22px;
   margin-bottom: 8px;
 }
 
 .examples-filters p {
   padding: 0px 10px;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 600;
   text-align: center;
 }

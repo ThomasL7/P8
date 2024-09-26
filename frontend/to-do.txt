@@ -1,25 +1,27 @@
 
 opti images
-DEUX DERNIER DIAPO
 fit modal design
-article example tranform
-acessibiltié a test
 
+
+BUG SCROLL INTERACTION TEXT
+bug push to reload
+bug scroll for nothing
+bug limit not reach
+bug no anim
+
+bug hover examples
+bug hover skills ?
+
+bug skill p resize
+
+
+acessibiltié a test
+ADD EVENT lsitenern animation end last element for mobile + caculate limit && auth swiping
 
 @media (max-width: 1440px) {}
 @media (max-width: 1024px) {}
+@media (max-height: 768px) {}
 @media (max-height: 590px), (max-width: 768px) {}
 
-tablet 
-push to reload
-hide nav bar mobile pb resize
-limit height force mobile mod
-footer
-infobulle
 
-
-tablette no zoom bizar
-bon emulateur safari
-apple ios safari (img align justify)
-auto adapt compil?
-annuler coach 2 mois
+<meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">

@@ -18,6 +18,16 @@
   }
 }
 
+@media (max-height: 768px) {
+  footer {
+    height: var(--footer-height-768-H);
+  }
+
+  #footer img {
+    height: 16px;
+  }
+}
+
 @media (max-height: 590px), (max-width: 768px) {
   footer {
     height: var(--footer-height-on-mobile);

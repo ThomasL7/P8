@@ -1,16 +1,18 @@
 :root {
   /* ==== Colors ==== */
-  --white: rgb(245, 245, 245);
+  --white: rgb(255, 255, 255);
+  /* --black: #1e1d1d;
+  --general-background-color: rgb(65, 65, 65);
+  --header-footer-color: #1e1d1d; */
   --black: #141313;
   --general-background-color: rgb(65, 65, 65);
   --header-footer-color: rgb(26, 25, 25);
-
   /* ==== Sizes ==== */
   --slide-max-width: 1360px;
   --slide-side-margin: 35px;
   --header-height-normal: 52px;
   --footer-height-normal: 52px;
-  --section-height-normal: calc(100dvh - var(--header-height-normal) - var(--footer-height-normal) + 2px);
+  --section-height-normal: calc(100dvh - var(--header-height-normal) - var(--footer-height-normal) + 4px);
 }
 
 html {
@@ -30,7 +32,7 @@ html::-webkit-scrollbar {
 body {
   display: flex;
   flex-direction: column;
-  min-width: 320px;
+  /* min-width: 320px; */
   min-height: 100dvh;
   color: var(--white);
 }
@@ -49,7 +51,7 @@ body {
 
 /* Classes */
 .slide {
-  top: -1px;
+  top: -2px;
   display: flex;
   position: relative;
   justify-content: center;
@@ -61,7 +63,7 @@ body {
 .background {
   position: absolute;
   width: 100%;
-  height: var(--section-height-normal);
+  height: 100%;
   filter: brightness(0.3) contrast(0.6);
 }
 
@@ -94,7 +96,6 @@ body {
   position: relative;
   font-size: 22px;
   font-weight: 800;
-  margin-bottom: 72px;
 }
 
 .slide-title-style::before,
@@ -127,7 +128,7 @@ body {
 }
 
 .arrow-down div {
-  background-color: rgb(206, 206, 206);
+  background-color: var(--white);
   border-radius: 25px;
   display: flex;
   width: 12%;
@@ -140,7 +141,6 @@ body {
   height: 20px;
 }
 
-#small-screen-message,
 #small-mobile-screen-message {
   display: flex;
   justify-content: center;
@@ -148,7 +148,7 @@ body {
   width: 100%;
   position: fixed;
   z-index: 2;
-  background-color: rgb(26, 25, 25);
+  background-color: rgb(29, 27, 27);
 
   height: 100%;
   bottom: 0px;
@@ -157,7 +157,7 @@ body {
   text-align: center;
   font-size: 18px;
   font-weight: 600;
-  color: rgb(253, 159, 159);
+  color: rgb(252, 188, 188);
   padding: 35px;
   box-sizing: border-box;
 }

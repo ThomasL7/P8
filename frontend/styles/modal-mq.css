@@ -1,4 +1,21 @@
+@media (max-width: 1440px) {
+  #modal-screen {
+    height: var(--section-height-1440);
+  }
+}
+
+@media (max-width: 1024px) {
+  #modal-screen {
+    height: var(--section-height-1024);
+  }
+}
+
 @media (max-height: 590px), (max-width: 768px) {
+  #modal-screen {
+    height: var(--section-height-on-mobile);
+    margin-top: var(--header-height-on-mobile);
+  }
+
   #modal {
     height: 85%;
     max-height: none;

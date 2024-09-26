@@ -22,7 +22,7 @@
 
 .about-image-photo-intro {
   filter: grayscale(100%) brightness(2%);
-  animation: about-image-photo-intro 2.6s cubic-bezier(0.57, 0.21, 0.51, 0.86) 0.25s 1 normal forwards;
+  animation: about-image-photo-intro 1.25s cubic-bezier(0.57, 0.21, 0.51, 0.86) 0.25s 1 normal forwards;
 }
 
 @keyframes about-image-photo-intro {

@@ -18,6 +18,9 @@
 @media (max-width: 1024px) {
 }
 
+@media (max-height: 768px) {
+}
+
 @media (max-height: 590px), (max-width: 768px) {
   #examples-content {
     justify-content: start;

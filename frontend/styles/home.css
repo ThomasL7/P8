@@ -33,20 +33,22 @@
 }
 
 #home-buttons a {
-  height: 32px;
-  width: 110px;
+  height: 34px;
+  width: 120px;
   justify-content: center;
   align-items: center;
   display: flex;
   border: none;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
-  background: radial-gradient(ellipse at center, #ff4848 0%, #ee3838 100%);
+  /* background: radial-gradient(ellipse at center, #ff4848 0%, #ee3838 100%); */
+  /* background: radial-gradient(ellipse at center, #dd3737 0%, #e63535 100%); */
+  background: radial-gradient(ellipse at center, #df5050 0%, #e63838 100%);
   border-radius: 30px;
 }
 
 #home-contact-button {
-  margin-right: 25px;
+  margin-right: 24px;
 }
 
 #home-CV-button img {
@@ -55,5 +57,5 @@
   height: 16px;
   margin-right: 6px;
   top: -1px;
-  left: -1px;
+  /* left: -1px; */
 }

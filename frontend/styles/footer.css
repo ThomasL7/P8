@@ -22,9 +22,9 @@ footer {
 
 #footer div {
   display: flex;
-  gap: 0px 42px;
+  gap: 0px 54px;
 }
 
 #footer img {
-  height: 22px;
+  height: 24px;
 }

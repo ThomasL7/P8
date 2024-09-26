@@ -46,6 +46,22 @@
   }
 }
 
+@media (max-height: 768px) {
+  header {
+    height: var(--header-height-768-H);
+  }
+
+  #header-title-block img {
+    height: 13px;
+  }
+
+  nav p,
+  nav a {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
 @media (max-height: 590px), (max-width: 768px) {
   header {
     height: var(--header-height-on-mobile);
@@ -86,7 +102,8 @@
   nav a,
   nav p {
     border: none;
-    background-color: rgb(235, 235, 235);
+    /* background-color: rgb(235, 235, 235); */
+    background-color: rgb(243, 243, 243);
     color: var(--black);
     width: 100%;
     box-sizing: border-box;

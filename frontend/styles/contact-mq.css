@@ -10,10 +10,22 @@
   }
 }
 
+@media (max-height: 768px) {
+  .footer-margin-for-tablet-desktop {
+    margin-bottom: var(--footer-height-768-H);
+  }
+}
+
 @media (max-height: 590px), (max-width: 768px) {
+  .footer-margin-for-tablet-desktop {
+    /* margin-bottom: var(--footer-height-on-mobile); */
+    margin-bottom: 0;
+  }
+
   #contact-content {
     width: 100%;
   }
+
   #contact-form {
     width: 100%;
     max-width: 425px;

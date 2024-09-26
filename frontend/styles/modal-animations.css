@@ -110,7 +110,8 @@
 }
 
 .modal-slide-in-left {
-  animation: modal-slide-in-left var(--modal-slide-change-duration) cubic-bezier(0.65, 0.27, 0.87, 0.68) 0s 1 normal forwards;
+  animation: modal-slide-in-left var(--modal-slide-change-duration) ease-in-out 0s 1 normal forwards;
+  /* animation: modal-slide-in-left var(--modal-slide-change-duration) cubic-bezier(0.65, 0.27, 0.87, 0.68) 0s 1 normal forwards; */
 }
 
 @keyframes modal-slide-in-left {
@@ -123,7 +124,7 @@
 }
 
 .modal-slide-out-left {
-  animation: modal-slide-out-left var(--modal-slide-change-duration) cubic-bezier(0.65, 0.27, 0.87, 0.68) 0s 1 normal none;
+  animation: modal-slide-out-left var(--modal-slide-change-duration) ease-in-out 0s 1 normal none;
   opacity: 0;
 }
 
