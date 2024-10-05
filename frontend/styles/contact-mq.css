@@ -2,46 +2,359 @@
   .footer-margin-for-tablet-desktop {
     margin-bottom: var(--footer-height-1440);
   }
+
+  #contact-content .slide-title-style {
+    margin-bottom: 62px;
+  }
+
+  /* #contact-content .slide-title-style::before,
+  #contact-content .slide-title-style::after {
+    width: 172%;
+  } */
+
+  #contact-form {
+    width: 512px;
+    font-size: 18px;
+  }
+
+  #contact-full-name {
+    gap: 0px 30px;
+  }
+
+  /* #contact-form-inputs label {
+    margin-bottom: 10px;
+  } */
+
+  #contact-form-inputs input,
+  #contact-message {
+    font-size: 16px;
+  }
+
+  /* #contact-form-inputs input {
+    padding: 1px 6px;
+    height: 35px;
+    margin-bottom: 24px;
+  } */
+
+  /* #contact-message {
+    padding: 6px 6px;
+  } */
+
+  #contact-form button {
+    padding: 8px 21px;
+    font-size: 15px;
+    /* margin-top: 39px; */
+  }
+
+  /* #contact-errors-form,
+  #contact-success-form {
+    margin-top: 32px;
+    width: 85%;
+    padding: 12px;
+    top: calc(-100% - 15px);
+  }
+
+  #contact-errors-form img,
+  #contact-success-form img {
+    height: 24px;
+    margin-right: 12px;
+  }
+
+  #contact-errors-form hr,
+  #contact-success-form hr {
+    width: 4px;
+  }
+
+  #contact-errors-form-text,
+  #contact-success-form-text {
+    font-size: 16px;
+    margin-right: 10px;
+    padding-left: 12px;
+  } */
+
+  #contact-errors-form,
+  #contact-success-form {
+    padding: 12px 16px;
+    /* bottom: 52px; */
+  }
+
+  #contact-errors-form img,
+  #contact-success-form img {
+    height: 19px;
+    /* margin-right: 8px; */
+  }
+
+  #contact-errors-form-text,
+  #contact-success-form-text {
+    font-size: 16px;
+  }
 }
 
 @media (max-width: 1024px) {
   .footer-margin-for-tablet-desktop {
     margin-bottom: var(--footer-height-1024);
   }
+
+  #contact-content .slide-title-style {
+    margin-bottom: 61px;
+  }
+
+  #contact-form {
+    width: 492px;
+    font-size: 17px;
+  }
+
+  #contact-full-name {
+    gap: 0px 24px;
+  }
+
+  /* #contact-form-inputs label {
+    margin-bottom: 10px;
+  } */
+
+  #contact-form-inputs input,
+  #contact-message {
+    font-size: 15px;
+  }
+
+  /* #contact-form-inputs input {
+    padding: 1px 6px;
+    height: 35px;
+    margin-bottom: 24px;
+  } */
+
+  /* #contact-message {
+    padding: 6px 6px;
+  } */
+
+  #contact-form button {
+    padding: 8px 20px;
+    font-size: 14px;
+    margin-top: 37px;
+  }
 }
+/* #contact-errors-form,
+  #contact-success-form {
+    padding: 12px 16px;
+    font-size: 10px;
+  } */
+
+/* 
+@media (max-width: 950px) {
+  #contact-form {
+    width: 420px;
+  }
+} */
 
 @media (max-height: 768px) {
   .footer-margin-for-tablet-desktop {
-    margin-bottom: var(--footer-height-768-H);
+    margin-bottom: var(--footer-height-1024);
+  }
+
+  #contact-content .slide-title-style {
+    margin-bottom: 58px;
+  }
+
+  #contact-form {
+    width: 488px;
+    /* font-size: 17px; */
+  }
+
+  /* #contact-full-name {
+    gap: 0px 24px;
+  } */
+
+  /* #contact-form-inputs label {
+    margin-bottom: 8px;
+  } */
+
+  /* #contact-form-inputs input,
+  #contact-message {
+    font-size: 14px;
+  } */
+
+  #contact-form-inputs input {
+    padding: 1px 6px;
+    /* height: 34px; */
+    margin-bottom: 18px;
+  }
+
+  #contact-message {
+    padding: 6px 6px;
+    height: 98px;
+  }
+
+  #contact-form button {
+    /* padding: 7px 20px; */
+    /* font-size: 14px; */
+    margin-top: 34px;
+  }
+
+  #contact-errors-form,
+  #contact-success-form {
+    padding: 10px 15px;
+    bottom: 48px;
+    max-width: 85%;
+  }
+}
+
+@media (max-height: 750px) {
+  #contact-content .slide-title-style {
+    margin-bottom: 44px;
+  }
+
+  #contact-form {
+    width: 475px;
+    font-size: 18px;
+  }
+
+  #contact-full-name {
+    gap: 0px 24px;
+  }
+
+  #contact-form-inputs input,
+  #contact-message {
+    font-size: 14px;
+  }
+
+  #contact-form-inputs input {
+    padding: 1px 6px;
+    height: 28px;
+    margin-bottom: 16px;
+  }
+
+  #contact-message {
+    padding: 6px 6px;
+    height: 64px;
+  }
+
+  #contact-form button {
+    padding: 6px 18px;
+    margin-top: 30px;
+  }
+
+  #contact-errors-form,
+  #contact-success-form {
+    bottom: 46px;
+  }
+}
+
+@media (max-width: 950px) and (max-height: 768px) {
+  #contact-form {
+    width: 425px;
   }
 }
 
 @media (max-height: 590px), (max-width: 768px) {
   .footer-margin-for-tablet-desktop {
-    /* margin-bottom: var(--footer-height-on-mobile); */
     margin-bottom: 0;
+  }
+
+  #contact {
+    justify-content: start;
   }
 
   #contact-content {
     width: 100%;
+    margin-bottom: 42px;
+  }
+
+  #contact-content .slide-title-style {
+    margin-top: 124px;
+    margin-bottom: 66px;
   }
 
   #contact-form {
-    width: 100%;
+    width: 73.2%;
     max-width: 425px;
-    padding: 0 60px;
-    box-sizing: border-box;
+    font-size: 18px;
+  }
+
+  #contact-full-name {
+    gap: 0px 24px;
+  }
+
+  #contact-form-inputs label {
+    margin-bottom: 11px;
+  }
+
+  #contact-form-inputs input,
+  #contact-message {
+    font-size: 18px;
+  }
+
+  #contact-form-inputs input {
+    height: 34px;
+    margin-bottom: 26px;
+  }
+
+  #contact-message {
+    height: 120px;
   }
 
   #contact-form button {
-    width: auto;
-    margin-bottom: 50px;
-    padding: 7px 20px;
+    padding: 10px 16px;
+    margin-top: 40px;
+    margin-bottom: 58px;
+    font-size: 16px;
+  }
+
+  /* #submit-block {
+    flex-direction: column;
+  } */
+
+  /* #contact-errors-form,
+  #contact-success-form {
+    position: relative;
+  } */
+
+  #contact-errors-form,
+  #contact-success-form {
+    padding: 12px 18px;
+    bottom: 115px;
+    /* width: 80%; */
+  }
+
+  #contact-errors-form img,
+  #contact-success-form img {
+    height: 22px;
+    /* margin-right: 8px; */
+  }
+
+  #contact-errors-form-text,
+  #contact-success-form-text {
+    /* font-size: 16px; */
+  }
+}
+
+@media (max-width: 550px) {
+  #contact-errors-form {
+    width: 90%;
+    max-width: none;
   }
 }
 
 @media (max-width: 475px) {
   #contact-full-name {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 450px) {
+  #contact-errors-form,
+  #contact-success-form {
+    flex-direction: column;
+  }
+
+  #contact-errors-form img,
+  #contact-success-form img {
+    margin-right: 0px;
+    margin-bottom: 7px;
+  }
+
+  #contact-errors-form-text,
+  #contact-success-form-text {
+    text-align: center;
+    text-align: justify;
   }
 }

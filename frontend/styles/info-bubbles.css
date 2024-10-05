@@ -10,7 +10,7 @@
 .info-bubbles {
   position: absolute;
   box-sizing: border-box;
-  padding: 14px 17px;
+  padding: 13px 17px;
   display: none;
   z-index: 1;
   /* white-space: nowrap; */

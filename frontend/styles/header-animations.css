@@ -1,6 +1,6 @@
-header {
+/* header {
   filter: blur(8px);
-}
+} */
 
 .header-intro {
   animation: header-intro var(--header-animation-duration) cubic-bezier(0.46, 0.01, 0.67, 0.86) 0s 1 normal forwards;
@@ -71,19 +71,21 @@ header {
 @media (hover: hover) {
   .nav-link-hover:hover {
     cursor: pointer;
-    color: var(--black);
     background-color: rgb(241, 241, 241);
-    box-shadow: 0px 3px 10px rgba(238, 238, 238, 0.2);
+
     animation: nav-link-hover 0.5s ease-in-out 0s infinite alternate none;
   }
 }
 
 @keyframes nav-link-hover {
   0% {
-    opacity: 0;
+    background-color: var(--header-footer-color);
+    color: var(--white);
   }
   100% {
-    opacity: 1;
+    background-color: rgb(241, 241, 241);
+    box-shadow: 0px 3px 10px rgba(238, 238, 238, 0.2);
+    color: var(--black);
   }
 }
 

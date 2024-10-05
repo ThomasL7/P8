@@ -75,10 +75,10 @@
   }
 }
 
-.skills-text-visible {
+/* .skills-text-visible {
   display: flex;
   opacity: 1;
-}
+} */
 
 @media (max-height: 590px), (max-width: 768px) {
   .skills-title-intro {

@@ -1,12 +1,23 @@
 header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 100%;
   position: fixed;
-  height: var(--header-height-normal);
+  z-index: 2;
+  background-color: var(--general-background-color);
+  height: var(--footer-height-normal);
+}
+
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
   z-index: 2;
   background-color: var(--header-footer-color);
+  filter: blur(8px);
 }
 
 #header-title-block {
@@ -38,28 +49,11 @@ nav {
   display: flex;
 }
 
-nav div {
-  height: 100%;
-  display: flex;
-  position: relative;
-}
-
-nav p,
 nav a {
+  cursor: default;
   height: 100%;
   align-content: center;
   padding-left: 35px;
   padding-right: 35px;
   border-left: 2px solid rgb(226, 226, 226);
-}
-
-nav p {
-  position: absolute;
-}
-
-nav a {
-  cursor: default;
-  position: relative;
-  z-index: 1;
-  opacity: 0;
 }

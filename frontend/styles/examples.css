@@ -11,8 +11,8 @@
 }
 
 #examples-content .slide-title-style {
-  margin-bottom: 43px;
-  top: -25px;
+  margin-bottom: 45px;
+  top: -15px;
 }
 
 #examples-content .slide-title-style::before,
@@ -22,8 +22,8 @@
 
 #examples-gallery {
   display: grid;
-  grid-template-columns: repeat(3, 28%);
-  grid-gap: 42px 42px;
+  grid-template-columns: repeat(3, 25.5%);
+  grid-gap: 42px;
   justify-content: center;
   width: 100%;
 }
@@ -45,7 +45,7 @@
 #examples-gallery article > div {
   position: relative;
   width: 100%;
-  height: 155px;
+  height: 138px;
   /* overflow: hidden; */
   /* border-radius: 20px 20px 0px 0px; */
 }

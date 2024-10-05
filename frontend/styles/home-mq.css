@@ -20,10 +20,16 @@
   #home-buttons a {
     height: 30px;
     width: 105px;
+    font-size: 16px;
+  }
+
+  #home-contact-button {
+    margin-right: 22px;
   }
 
   #home-CV-button img {
     height: 14px;
+    /* margin-right: 8px; */
   }
 }
 
@@ -48,6 +54,15 @@
     height: 28px;
     width: 98px;
   }
+
+  #home-contact-button {
+    margin-right: 18px;
+  }
+
+  /* #home-CV-button img {
+    height: 14px;
+    margin-right: 7px;
+  } */
 }
 
 @media (max-height: 768px) {
@@ -92,5 +107,12 @@
 
   #home p {
     font-size: 18px;
+    margin-bottom: 22px;
   }
 }
+
+/* @media (max-height: 600px) {
+  #home-content {
+    max-width: none;
+  }
+} */

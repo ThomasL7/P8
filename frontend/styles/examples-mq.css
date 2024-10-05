@@ -1,7 +1,111 @@
 @media (max-width: 1440px) {
   #examples-gallery {
+    grid-template-columns: repeat(3, 25.2%);
+    grid-gap: 32px;
+  }
+
+  #examples-gallery article > div {
+    height: 120px;
+  }
+
+  #examples-gallery h3 {
+    padding: 13px 14px;
+    font-size: 17px;
+  }
+
+  .examples-filters img {
+    height: 21px;
+  }
+
+  .examples-filters p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 1024px) {
+  #examples-content .slide-title-style {
+    top: -13px;
+  }
+
+  #examples-gallery {
     grid-template-columns: repeat(3, 28%);
-    grid-gap: 25px 3.25%;
+    grid-gap: 25px;
+  }
+
+  /* #examples-gallery article > div {
+    height: 128px;
+  } */
+
+  #examples-gallery h3 {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .examples-filters img {
+    height: 20px;
+    margin-bottom: 5px;
+  }
+
+  .examples-filters p {
+    font-size: 15px;
+  }
+}
+
+@media (max-height: 768px) {
+  #examples-gallery {
+    grid-template-columns: repeat(3, 25%);
+    /* grid-gap: 24px; */
+  }
+
+  #examples-gallery article > div {
+    height: 100px;
+  }
+
+  #examples-gallery h3 {
+    padding: 11px 12px;
+  }
+}
+
+@media (max-height: 700px) {
+  #examples-content .slide-title-style {
+    margin-bottom: 42px;
+    top: -13px;
+  }
+
+  #examples-gallery article > div {
+    height: 88px;
+  }
+
+  #examples-gallery {
+    grid-template-columns: repeat(3, 23.2%);
+    /* grid-gap: 23px; */
+  }
+
+  /* #examples-gallery h3 {
+    padding: 10px;
+  } */
+}
+
+@media (max-height: 590px), (max-width: 768px) {
+  #examples-content {
+    justify-content: start;
+    padding: 0px;
+    margin-top: 15px;
+    margin-bottom: 45px;
+  }
+
+  #examples-content .slide-title-style {
+    margin-bottom: 60px;
+    top: 0px;
+  }
+
+  #examples-gallery {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+    gap: 30px;
+    width: 94%;
+    max-width: 485px;
   }
 
   #examples-gallery article > div {
@@ -9,27 +113,22 @@
   }
 
   #examples-gallery h3 {
-    margin-top: 12px;
-    margin-bottom: 12px;
-    font-size: 18px;
+    padding: 10px 14px;
+    font-size: 17px;
+  }
+
+  .examples-filters img {
+    height: 20px;
+    margin-bottom: 5px;
+  }
+
+  .examples-filters p {
+    font-size: 15px;
   }
 }
 
-@media (max-width: 1024px) {
-}
-
-@media (max-height: 768px) {
-}
-
-@media (max-height: 590px), (max-width: 768px) {
-  #examples-content {
-    justify-content: start;
-    padding: 0px;
+/* @media (max-width: 600px) {
+  #examples-gallery article > div {
+    height: 175px;
   }
-
-  #examples-gallery {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 50px;
-  }
-}
+} */

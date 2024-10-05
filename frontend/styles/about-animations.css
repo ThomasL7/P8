@@ -96,7 +96,8 @@
 
   .about-text-intro {
     opacity: 0;
-    animation: about-text-intro-mobile 1.5s cubic-bezier(0.18, 0.62, 0.62, 0.88) 0.15s 1 normal forwards;
+    animation: about-text-intro-mobile 1.25s cubic-bezier(0.18, 0.62, 0.62, 0.88) 0.15s 1 normal forwards;
+    /* animation: about-text-intro-mobile 1s ease-out 0.15s 1 normal forwards; */
   }
 }
 
@@ -115,10 +116,14 @@
     transform: rotateX(100deg);
     transform-origin: bottom;
     opacity: 0;
+    /* transform-origin: top;
+    transform: scaleY(0); */
   }
   100% {
     transform: rotateX(0);
     transform-origin: bottom;
     opacity: 1;
+    /* transform-origin: top;
+    transform: scaleY(1); */
   }
 }

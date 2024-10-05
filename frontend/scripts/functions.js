@@ -26,7 +26,7 @@ let homeContactButton;
 let homeCVButton;
 // → About
 let aboutSection;
-let aboutBackground;
+// let aboutBackground;
 let aboutContent;
 let aboutBlockPhoto;
 let aboutImagePhoto;
@@ -37,7 +37,6 @@ let aboutP2;
 let aboutP3;
 let aboutP4;
 let aboutTextArrowDownDiv;
-let aboutTextArrowDownImage;
 // → Skills
 let skillsSection;
 let skillsContent;
@@ -48,6 +47,7 @@ let skillsTreeCenter;
 let skillsTreeRight;
 let skills;
 let skillsDivs;
+let skillsIcons;
 let skillsText;
 // Info-bubbles
 let infoBubblesArray;
@@ -82,13 +82,11 @@ let modalSkillsButtonH4;
 let modalButtonsImages;
 let modalText;
 let modalTextArrowDownDiv;
-let modalTextArrowDownImage;
 let modalLink;
 // → Contact
 let contactSection;
 let contactContent;
 let contactTitle;
-let contactText;
 let contactForm;
 let contactFormInputs;
 let contactFamilyName;
@@ -147,7 +145,7 @@ const CLASS_MOBILE_NAV_CLOSE = "mobile-nav-close";
 const CLASS_MOBILE_NAV_OPEN = "mobile-nav-open";
 const CLASS_SKILL_HOVER = "skills-items-hover";
 const CLASS_SKILLS_TEXT_INTRO = "skills-text-intro";
-const CLASS_SKILLS_TEXT_VISIBLE = "skills-text-visible";
+// const CLASS_SKILLS_TEXT_VISIBLE = "skills-text-visible";
 const CLASS_OUTRO_BACKWARD = "slide-outro-backward";
 const CLASS_OUTRO_FORWARD = "slide-outro-forward";
 
@@ -162,6 +160,7 @@ let isBottomMobileSlideLimitReach = false;
 let isForceToMobileMod = false;
 let isHoverScrollableContent = false;
 let isMobileScreenTooSmall = false;
+let isReloading = false;
 let isSlideScrollable = false;
 let isScrolling = false;
 let isTopMobileSlideLimitReach = false;
@@ -181,6 +180,7 @@ let startTouchYInScrolling = 0;
 let endTouchY = 0;
 let topCurrentMobileSlideLimit;
 let touchDistance = 0;
+let touchDistanceToChangeSlide = 50;
 window.isTouchInsteadOfMouse = false;
 window.mobileDetected = false;
 // Media queries
@@ -207,7 +207,7 @@ let isPreviousSkillsAlreadyReset = true;
 let isSkillsIntroAnimationsEndedArray = [];
 let parentTree = null;
 let previousAnimatedItem = null;
-let previousIndexOfSkill = 0;
+let previousIndexOfSkill = null;
 let previousParentTree = null;
 let previousSkill = null;
 let skillsBlocksCollisionsArray = [];
@@ -227,10 +227,11 @@ let isHoverSkillArray = [];
 // let textInfoBubbleAnimationsArray = [];
 let textSpeed = 0;
 // → Examples
-let currentHoverExampleIndex;
+let currentHoverExampleIndex = null;
 let examplesBlocksCollisionsArray = [];
 let isHoverExamplesArray = [];
 let isExamplesIntroAnimationsEnded = [];
+let isExamplesIntroAnimationsStarted = [];
 // Modal
 let isModalOpen = false;
 let isModalSlideChanging = false;
@@ -261,7 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
   invisibleBlockForMobile = document.querySelectorAll(".invisible-block-for-mobile");
   smallMobileScreenMessage = document.getElementById("small-mobile-screen-message");
   // → header
-  header = document.querySelector("header");
+  header = document.getElementById("header");
   window.headerTitleBlock = document.getElementById("header-title-block");
   headerTitleBlock = window.headerTitleBlock;
   headerTitleImage = document.querySelector("#header-title-block img");
@@ -285,7 +286,7 @@ document.addEventListener("DOMContentLoaded", () => {
   homeCVButton = window.homeCVButton;
   // → About
   aboutSection = document.getElementById("about");
-  aboutBackground = document.querySelector("#about .background");
+  // aboutBackground = document.querySelector("#about .background");
   aboutContent = document.getElementById("about-content");
   aboutBlockPhoto = document.getElementById("about-block-photo");
   aboutImagePhoto = document.querySelector("#about-block-photo img");
@@ -297,10 +298,8 @@ document.addEventListener("DOMContentLoaded", () => {
   aboutP3 = document.getElementById("about-p-3");
   window.aboutP4 = document.getElementById("about-p-4");
   aboutP4 = window.aboutP4;
-  aboutTextArrowDownDiv = document.getElementById("about-text-arrow-down");
-  window.aboutTextArrowDownImage = document.querySelector("#about-text-arrow-down div");
-  aboutTextArrowDownImage = window.aboutTextArrowDownImage;
-
+  window.aboutTextArrowDownDiv = document.getElementById("about-text-arrow-down");
+  aboutTextArrowDownDiv = window.aboutTextArrowDownDiv;
   // → Skills
   skillsSection = document.getElementById("skills");
   skillsContent = document.getElementById("skills-content");
@@ -314,8 +313,8 @@ document.addEventListener("DOMContentLoaded", () => {
   skills = window.skills;
   window.skillsDivs = document.querySelectorAll(".skills-items-div");
   skillsDivs = window.skillsDivs;
+  skillsIcons = document.querySelectorAll(".skills-items-div > img");
   window.skillsText = document.querySelector("#skills-content > p");
-  // window.skillsText = document.getElementById("skills-p");
   skillsText = window.skillsText;
   // Info-bubbles
   infoBubblesArray = document.querySelectorAll(".info-bubbles");
@@ -355,15 +354,13 @@ document.addEventListener("DOMContentLoaded", () => {
   modalButtonsImages = document.querySelectorAll(".modal-buttons-images");
   window.modalText = document.getElementById("modal-text");
   modalText = window.modalText;
-  modalTextArrowDownDiv = document.getElementById("modal-text-arrow-down");
-  window.modalTextArrowDownImage = document.querySelector("#modal-text-arrow-down div");
-  modalTextArrowDownImage = window.modalTextArrowDownImage;
+  window.modalTextArrowDownDiv = document.getElementById("modal-text-arrow-down");
+  modalTextArrowDownDiv = window.modalTextArrowDownDiv;
   modalLink = document.getElementById("modal-link");
   // → Contact
   contactSection = document.getElementById("contact");
   contactContent = document.getElementById("contact-content");
   contactTitle = document.querySelector("#contact-content h2");
-  contactText = document.getElementById("contact-text");
   window.contactForm = document.getElementById("contact-form");
   contactForm = window.contactForm;
   contactFormInputs = document.getElementById("contact-form-inputs");
@@ -429,7 +426,6 @@ document.addEventListener("DOMContentLoaded", () => {
       slide: contactContent,
       elements: [
         { element: contactTitle, introClass: "contact-title-intro" },
-        { element: contactText, introClass: "contact-text-intro" },
         { element: contactFormInputs, introClass: "contact-form-inputs-intro" },
         { element: contactFormButton, introClass: "contact-form-button-intro" },
       ],
@@ -441,7 +437,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Media queries
   window.mqMobileTrigger = window.matchMedia(`(max-width: ${rootCSS.getPropertyValue("--mq-mobile")})`);
   window.mqForceMobileMod = window.matchMedia(`(max-height: 590px)`);
-  window.mqMaxHeight = window.matchMedia(`(max-height: 500px)`);
+  window.mqMaxHeight = window.matchMedia(`(max-height: 450px)`);
   // → Header
   headerAnimationDuration = parseFloat(rootCSS.getPropertyValue("--header-animation-duration")) * 1000;
   headerHeightOnMobile = parseInt(rootCSS.getPropertyValue("--header-height-on-mobile"));
@@ -461,6 +457,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // → Examples
   examplesModalDatasArray = window.examplesModalDatas;
   isExamplesIntroAnimationsEnded = new Array(examplesDivs.length).fill(false);
+  isExamplesIntroAnimationsStarted = new Array(examplesDivs.length).fill(false);
   // Modal
   modalClosingAnimationDuration = parseFloat(rootCSS.getPropertyValue("--modal-closing-animation-duration")) * 1000;
   modalSlideChangeDuration = parseFloat(rootCSS.getPropertyValue("--modal-slide-change-duration")) * 1000;
@@ -526,7 +523,10 @@ function checkIfTargetIsScrollable(target, arrowDown) {
 }
 
 function updateTargetDownArrow(target, isScrollable, arrowDown, margin) {
-  if (!isScrollable) return;
+  if (!isScrollable) {
+    arrowDown.style.display = "none";
+    return;
+  }
   if (target.scrollTop + target.clientHeight < target.scrollHeight - margin) {
     arrowDown.style.display = "flex";
   } else {
@@ -639,6 +639,26 @@ function checkIfCursorHoverTarget(collisionTarget, onHoverFunction, onOutsideFun
   else if (!isCurrentlyHoverBlock) onOutsideFunction();
 }
 
+function handleEnterForAccessibility(event) {
+  // event.stopPropagation();
+  if (event.key === "Enter" || event.keyCode === 13) {
+    const focusedElement = document.activeElement;
+    // if (indexSlide === 2) {
+    // console.log("Focused element:", focusedElement);
+    const skillsDivsArray = [...skillsDivs];
+    if (focusedElement && skillsDivsArray.includes(focusedElement)) {
+      const index = skillsDivsArray.indexOf(focusedElement);
+      handleTouchingSkill(index);
+    }
+    const skillsIconsArray = [...skillsIcons];
+    if (focusedElement && skillsIconsArray.includes(focusedElement)) {
+      const index = skillsIconsArray.indexOf(focusedElement);
+      handleTouchingSkill(index);
+    }
+    // }
+  }
+}
+
 // → For slides change
 function scrollSlideChange(event) {
   if (event.ctrlKey || !isWindowLoaded || isModalOpen || isOnMobile || isScrolling || isHoverScrollableContent || isMobileScreenTooSmall) return;
@@ -702,7 +722,7 @@ function scrollToSlide(index, direction) {
 }
 
 function addHeaderAndHomeIntroAnimations() {
-  aboutBackground.classList.remove("background-hidden");
+  // aboutBackground.classList.remove("background-hidden");
   header.classList.add(CLASS_HEADER_INTRO);
   headerTitleBlock.classList.add(CLASS_ELEMENTS_HEADER_INTRO);
   headerTitleBlock.style.display = "flex";
@@ -726,10 +746,15 @@ function addHeaderAndHomeIntroAnimations() {
     nav.classList.remove(CLASS_ELEMENTS_HEADER_INTRO);
     footerLinksDiv.classList.remove(CLASS_ELEMENTS_FOOTER_INTRO);
     isHeaderTitleAnimationEnded = true;
+    // enableScroll();
   }, headerAnimationDuration);
+  // setTimeout(() => {
+  //   enableScroll();
+  // }, 1000);
 }
 
 function resetHomeBeforeReloading() {
+  isReloading = true;
   header.classList.remove(CLASS_HEADER_INTRO);
   footer.classList.remove(CLASS_FOOTER_INTRO);
   headerTitleBlock.style.display = "none";
@@ -819,6 +844,7 @@ function resetExamplesSlide() {
   removeExamplesHover();
   for (let i = 0; i < examplesFilters.length; i++) {
     removeStyleCursorForExamples(examples[i]);
+    isExamplesIntroAnimationsStarted[i] = false;
     isExamplesIntroAnimationsEnded[i] = false;
   }
   if (!isModalOpen) return;
@@ -853,13 +879,15 @@ function checkIfOnMobileAndActiveScroll(event) {
     checkIfUnderMQMaxHeight(window.mqMaxHeight);
     isHoverScrollableContent = false;
     hideOrShowAllMobileSlides("none");
+    // hideOrShowAllMobileSlides("flex");
     navMenuBurger.style.display = "flex";
     nav.style.display = "none";
     adjustModalPosition();
+    enableScroll();
     updateCurrentMobileSlideLimit();
     checkIfSlideIsScrollable();
     if (isModalOpen) setImageOfActiveMobileModalButton();
-    if (!isModalOpen) enableScroll();
+    if (!isModalOpen && isWindowLoaded) enableScroll();
     updateAllArraysOfBlocksCollision();
   } else {
     isOnMobile = false;
@@ -871,6 +899,7 @@ function checkIfOnMobileAndActiveScroll(event) {
     navMenuBurger.style.display = "none";
     nav.style.display = "flex";
     // if (isHoverAboutText) isHoverScrollableContent = true;
+    removeImageOfPreviousActiveMobileModalButton();
     removeMobileNavAnimations();
     hideOrShowAllMobileSlides("flex");
     updateCurrentSlideView();
@@ -921,6 +950,7 @@ function calculateTouchDistance(event) {
   if (!isWindowLoaded || isScrolling) return;
   endTouchY = event.changedTouches[0].clientY;
   touchDistance = startTouchY - endTouchY;
+  direction = touchDistance > touchDistanceToChangeSlide ? 1 : touchDistance < -touchDistanceToChangeSlide ? -1 : null;
 }
 
 function calculateScrollDistance(event) {
@@ -967,11 +997,146 @@ function mobileScroll() {
 //   }
 // }
 
+function updateDirection(event) {
+  direction = event.deltaY > 0 ? 1 : -1;
+}
+
+let direction;
+let limitTopTimeout;
+let limitBottomTimeout;
+
+function handleWheelScroll(event) {
+  if (isReloading || event.ctrlKey || !isWindowLoaded || isModalOpen || !isOnMobile || isScrolling || isHoverScrollableContent || isMobileScreenTooSmall) return;
+
+  const currentSection = sectionMobileSlides[indexSlide];
+  const sectionTop = currentSection.offsetTop;
+  const sectionBottom = sectionTop + currentSection.offsetHeight;
+  const scrollPosition = window.scrollY + window.innerHeight;
+  if (!isSlideScrollable) {
+    if (direction === -1) {
+      scrollToMobileSlide(indexSlide, -1);
+    }
+    if (direction === 1) {
+      scrollToMobileSlide(indexSlide, 1);
+    }
+  } else {
+    if (isTopMobileSlideLimitReach && direction === -1 && window.scrollY <= sectionTop) {
+      event.preventDefault();
+      window.scrollTo(0, sectionBottom - window.innerHeight);
+      scrollToMobileSlide(indexSlide, direction);
+      clearTimeout(limitTopTimeout);
+      // enableScroll();
+    } else if (isBottomMobileSlideLimitReach && direction === 1 && scrollPosition >= sectionBottom) {
+      event.preventDefault();
+      window.scrollTo(0, sectionBottom - window.innerHeight);
+      // window.scrollTo({
+      //   top: sectionBottom - window.innerHeight,
+      //   behavior: "smooth",
+      // });
+
+      scrollToMobileSlide(indexSlide, direction);
+      clearTimeout(limitBottomTimeout);
+      // enableScroll();
+    } else if (window.scrollY <= sectionTop) {
+      event.preventDefault();
+      window.scrollTo(0, sectionTop);
+      // window.scrollTo({
+      //   top: sectionTop,
+      //   behavior: "smooth",
+      // });
+      disableScroll();
+      limitTopTimeout = setTimeout(() => {
+        isTopMobileSlideLimitReach = true;
+      }, 500);
+    } else if (scrollPosition >= sectionBottom) {
+      disableScroll();
+      event.preventDefault();
+      window.scrollTo(0, sectionBottom - window.innerHeight);
+      limitBotTimeout = setTimeout(() => {
+        isBottomMobileSlideLimitReach = true;
+      }, 500);
+    } else {
+      isTopMobileSlideLimitReach = false;
+      isBottomMobileSlideLimitReach = false;
+    }
+  }
+}
+
+function handleSwipe(event) {
+  if (event.ctrlKey || !isWindowLoaded || isModalOpen || !isOnMobile || isScrolling || isHoverScrollableContent || isMobileScreenTooSmall) return;
+
+  const currentSection = sectionMobileSlides[indexSlide];
+  const sectionTop = currentSection.offsetTop;
+  const sectionBottom = sectionTop + currentSection.offsetHeight;
+  const scrollPosition = window.scrollY + window.innerHeight;
+
+  if (isTopMobileSlideLimitReach && direction === -1) {
+    event.preventDefault();
+    window.scrollTo(0, sectionBottom - window.innerHeight);
+    scrollToMobileSlide(indexSlide, direction);
+    clearTimeout(limitTopTimeout);
+    // setTimeout(() => {
+    //   isTopMobileSlideLimitReach = false;
+    // }, scrollDuration);
+  }
+  if (isBottomMobileSlideLimitReach && direction === 1) {
+    event.preventDefault();
+    window.scrollTo(0, sectionBottom - window.innerHeight);
+    scrollToMobileSlide(indexSlide, direction);
+    clearTimeout(limitBotTimeout);
+    // setTimeout(() => {
+    //   isBottomMobileSlideLimitReach = false;
+    // }, scrollDuration);
+  }
+  if (!isTopMobileSlideLimitReach) {
+    if (window.scrollY <= sectionTop) {
+      event.preventDefault();
+      window.scrollTo(0, sectionTop);
+      limitTopTimeout = setTimeout(() => {
+        isTopMobileSlideLimitReach = true;
+      }, 500);
+    }
+  }
+  if (!isBottomMobileSlideLimitReach) {
+    if (scrollPosition >= sectionBottom) {
+      event.preventDefault();
+      window.scrollTo(0, sectionBottom - window.innerHeight);
+      limitBotTimeout = setTimeout(() => {
+        isBottomMobileSlideLimitReach = true;
+      }, 500);
+    }
+  }
+}
+
+// Par exemple, tu peux autoriser le scroll à un moment précis :
+function allowScrollToNextSection() {
+  isScrollAllowed = true;
+}
+
+function preventScrollToNextSection() {
+  isScrollAllowed = false;
+}
+
+// // let currentSectionIndex = 0;
+// let isTransitionAllowed = false;
+
+// window.addEventListener("wheel", (event) => {
+//   if (isTransitionAllowed) {
+//     // Si on scrolle vers le bas
+//     if (event.deltaY > 0 && currentSectionIndex < aboutSection.length - 1) {
+//       // scrollToSection(currentSectionIndex + 1);
+//     }
+//     // Si on scrolle vers le haut
+//     else if (event.deltaY < 0 && currentSectionIndex > 0) {
+//       // scrollToSection(currentSectionIndex - 1);
+//     }
+//   }
+// });
+
 function checkIfSwipingToNextMobileSlide() {
   // !isAuthorizeToSlideChange
-  // console.log(isAuthorizeToSlideChange);
-  if (!isWindowLoaded || !isAuthorizeToSlideChange || !isOnMobile || isModalOpen || isScrolling || isHoverScrollableContent || isMobileScreenTooSmall) return;
-  const direction = touchDistance > 150 ? 1 : touchDistance < -150 ? -1 : null;
+  if (!isWindowLoaded || !isOnMobile || !isAuthorizeToSlideChange || isModalOpen || isScrolling || isHoverScrollableContent || isMobileScreenTooSmall) return;
+  const direction = touchDistance > touchDistanceToChangeSlide ? 1 : touchDistance < -touchDistanceToChangeSlide ? -1 : null;
   if (!direction) return;
   if (indexSlide === 0) {
     scrollToMobileSlide(indexSlide, direction);
@@ -995,8 +1160,7 @@ function checkIfSwipingToNextMobileSlide() {
 }
 
 function checkIfScrollingToNextMobileSlide(event) {
-  console.log(isBottomMobileSlideLimitReach);
-  if (event.ctrlKey || !isWindowLoaded || !isAuthorizeToSlideChange || isModalOpen || !isOnMobile || isScrolling || isHoverScrollableContent || isMobileScreenTooSmall) return;
+  if (event.ctrlKey || !isWindowLoaded || isModalOpen || !isAuthorizeToSlideChange || !isOnMobile || isScrolling || isHoverScrollableContent || isMobileScreenTooSmall) return;
   const direction = event.deltaY > 0 ? 1 : -1;
   if (indexSlide === 0) {
     scrollToMobileSlide(indexSlide, direction);
@@ -1020,12 +1184,18 @@ function checkIfScrollingToNextMobileSlide(event) {
 }
 
 function updateCurrentMobileSlideLimit() {
-  // const currentSlide = sectionMobileSlides[indexSlide];
+  const currentSection = sectionMobileSlides[indexSlide];
+  const sectionTop = currentSection.offsetTop;
+  const sectionBottom = sectionTop + currentSection.offsetHeight - 1;
+  const scrollPosition = window.scrollY + window.innerHeight;
+  topCurrentMobileSlideLimit = sectionTop;
+  bottomCurrentMobileSlideLimit = sectionBottom;
 
-  topCurrentMobileSlideLimit = 0;
   const zoomRatio = window.innerWidth / document.documentElement.clientWidth;
+
+  // topCurrentMobileSlideLimit = 0;
+  // bottomCurrentMobileSlideLimit = window.innerHeight / zoomRatio;
   // bottomCurrentMobileSlideLimit = window.screen.height / zoomRatio;
-  bottomCurrentMobileSlideLimit = window.innerHeight / zoomRatio;
   // bottomCurrentMobileSlideLimit = window.innerHeight;
   // bottomCurrentMobileSlideLimit = window.scrollYBottom;
 }
@@ -1103,13 +1273,18 @@ function scrollToMobileSlide(index, direction) {
     hidePreviousMobileSlide(sectionSlideToHide);
     updateCurrentSlideView();
     if (indexSlide === 0 || indexSlide === 4) {
-      updateCurrentMobileSlideLimit();
+      // updateCurrentMobileSlideLimit();
       checkIfSlideIsScrollable();
+      updateCurrentMobileSlideLimit();
       authorizeSlideChange();
     }
     // checkIfSlideIsScrollable();
     // updateCurrentMobileSlideLimit();
     // authorizeSlideChange();
+    // updateCurrentSlideView();
+    isTopMobileSlideLimitReach = false;
+    isBottomMobileSlideLimitReach = false;
+    // checkIfSlideIsScrollable();
     enableScroll();
     isScrolling = false;
   }, scrollDuration);
@@ -1352,7 +1527,6 @@ function checkIfHoverSkillAfterIntro(skillsDiv, index) {
   if (previousSkill !== null) return;
   // updateAllArraysOfBlocksCollision;
   updateMousePosition();
-
   checkIfCursorHoverTarget(
     skillsBlocksCollisionsArray[index],
     () => {
@@ -1365,8 +1539,8 @@ function checkIfHoverSkillAfterIntro(skillsDiv, index) {
 function handleEnterSkill(skillsDiv, index) {
   // if (isSkillsIntroAnimationsEndedArray[index]) isSkillsIntroAnimationsEndedArray[index] = false;
   if (!skillsDiv) skillsDiv = skillsDivs[index];
-  console.log(isSkillsIntroAnimationsEndedArray[index]);
   if (previousSkill === skillsDiv || !isSkillsIntroAnimationsEndedArray[index]) return;
+  // if (previousSkill === skillsDiv || !isSkillsIntroAnimationsEndedArray[index]) return;
   resetPreviousSkillIfEnterNewSkill();
   // setSkillTargetForLeaveDetection(skillsDiv, index);
   addSkillHoverAnimation(skillsDiv, index);
@@ -1377,12 +1551,10 @@ function handleEnterSkill(skillsDiv, index) {
 
 function handleTouchingSkill(index) {
   const skillsDiv = skillsDivs[index];
-  // if (skillsDiv === hoverTarget) return;
   if (skillsDiv === previousSkill) return;
   resetPreviousSkillIfEnterNewSkill();
   setPreviousSkill(skillsDiv, index);
   addSkillHoverAnimation(skillsDiv, index);
-  // setSkillTargetForLeaveDetection(hoverTarget, index);
   isPreviousSkillsAlreadyReset = false;
 }
 
@@ -1417,14 +1589,19 @@ function setPreviousSkill(skillsDiv, index) {
 }
 
 function handleLeaveSkill(index) {
-  // if (indexOfSkillTargetForLeaveDetection === null) return;
-  // if (previousSkill === null) return;
-  checkIfCursorHoverTarget(
-    skillsBlocksCollisionsArray[index],
-    () => {},
-    () => resetSkillHoverTarget()
-  );
+  if (isSkillsIntroAnimationsEndedArray[index]) {
+    resetSkillHoverTarget();
+  }
 }
+
+// function handleLeaveSkillBeforeEndAnimation() {
+//   if (indexSlide !== 2 || isSkillsIntroAnimationsEndedArray[previousIndexOfSkill] || previousIndexOfSkill === null) return;
+//   checkIfCursorHoverTarget(
+//     skillsBlocksCollisionsArray[previousIndexOfSkill],
+//     () => {},
+//     () => resetSkillHoverTarget()
+//   );
+// }
 
 function resetSkillHoverTarget() {
   if (isPreviousSkillsAlreadyReset) return;
@@ -1581,6 +1758,10 @@ function hideAndResetInfoBubble(index) {
 }
 
 // ===== Examples =====
+function setIsExamplesIntroAnimationsStartedTrue(index) {
+  isExamplesIntroAnimationsStarted[index] = true;
+}
+
 function setIsExamplesIntroAnimationsEndedTrue(index) {
   isExamplesIntroAnimationsEnded[index] = true;
 }
@@ -1593,23 +1774,65 @@ function removeStyleCursorForExamples(example) {
   example.style.cursor = "default";
 }
 
-function handleEnterExample(example, index) {
+function handleEnterExample(index) {
+  // if (isExamplesIntroAnimationsEnded[index])
   if (currentHoverExampleIndex === index) return;
-  addExampleHoverAnimation(example, index);
-  currentHoverExampleIndex = index;
+  // if (isExamplesIntroAnimationsEnded[index]) {
+  //   addExampleHoverAnimation(index);
+  //   currentHoverExampleIndex = index;
+  // } else {
+  if (isExamplesIntroAnimationsEnded[index]) {
+    addExampleHoverAnimation(index);
+    currentHoverExampleIndex = index;
+  } else {
+    console.log("a");
+    checkIfCursorHoverTarget(
+      examplesBlocksCollisionsArray[index],
+      () => {
+        console.log("b");
+        addExampleHoverAnimation(index);
+        currentHoverExampleIndex = index;
+      },
+      () => {}
+    );
+  }
+  // checkIfCursorHoverTarget(
+  //   examplesBlocksCollisionsArray[index],
+  //   () => {
+  //     addExampleHoverAnimation(index);
+  //     currentHoverExampleIndex = index;
+  //   },
+  //   () => {}
+  // );
+  // }
 }
 
-function addExampleHoverAnimation(example, index) {
-  const exampleFilter = example.querySelector(".examples-filters");
+function addExampleHoverAnimation(index) {
   examplesImages[index].classList.add(CLASS_EXAMPLE_FILTER_IMAGE_HOVER);
-  exampleFilter.classList.add(CLASS_EXAMPLE_FILTER_HOVER);
+  examplesFilters[index].classList.add(CLASS_EXAMPLE_FILTER_HOVER);
   examplesH3[index].classList.add(CLASS_EXAMPLE_H3_HOVER);
   isHoverExamplesArray[index] = true;
 }
 
 function handleLeaveExample(index) {
+  if (!isExamplesIntroAnimationsEnded[index]) return;
+  // if (isScrolling) return;
+  // if (!isExamplesIntroAnimationsEnded[index]) return;
+  removeExamplesHover();
+  // checkIfCursorHoverTarget(
+  //   examplesBlocksCollisionsArray[index],
+  //   () => {},
+  //   () => {
+  //     removeExamplesHover();
+  //   }
+  // );
+}
+
+function handleLeaveExampleBeforeEndAnimation() {
+  if (indexSlide !== 3 || isExamplesIntroAnimationsEnded[currentHoverExampleIndex] || currentHoverExampleIndex === null) return;
+  // if (isScrolling) return;
   checkIfCursorHoverTarget(
-    examplesBlocksCollisionsArray[index],
+    examplesBlocksCollisionsArray[currentHoverExampleIndex],
     () => {},
     () => {
       removeExamplesHover();
@@ -1635,7 +1858,7 @@ function removeExamplesHover() {
 // → Modal
 function openModalExample(event, index) {
   event.stopPropagation();
-  if (!isExamplesIntroAnimationsEnded[index]) return;
+  if (!isExamplesIntroAnimationsStarted[index]) return;
   if (isOnMobile) {
     disableScroll();
     adjustModalPosition();
@@ -1711,7 +1934,7 @@ function updateModalExampleToDisplay() {
     modalTitle.innerHTML = `N°${numberOfModalExampleToDisplay + 1} - ${modalExampleToDisplay.title}`;
     changeModalTextAndActiveButton("default");
     modalLink.setAttribute("href", modalExampleToDisplay.link);
-    modalLink.innerHTML = `<p><span>Lien : </span>${modalExampleToDisplay.link}</p>`;
+    // modalLink.innerHTML = `<p>${modalExampleToDisplay.link}</p>`;
   }, modalSlideChangeDuration / 2);
 }
 
@@ -1732,7 +1955,7 @@ function changeModalTextAndActiveButton(target) {
       modalText.innerHTML = `<h4 id="modal-text-title">Description de la mission&nbsp;:</h4><p id="modal-description">${modalExampleToDisplay.description}</p>`;
       modalText.scrollTop = 0;
       checkIfModalTextScrollable();
-      updateModalTextArrow;
+      updateModalTextArrow();
       modalPreviousActiveSection = modalDescriptionButtonH4;
       break;
     case "challenges":
@@ -1755,7 +1978,7 @@ function changeModalTextAndActiveButton(target) {
       modalText.insertAdjacentHTML("beforeend", htmlContent);
       modalText.scrollTop = 0;
       checkIfModalTextScrollable();
-      updateModalTextArrow;
+      updateModalTextArrow();
       modalPreviousActiveSection = modalChallengesButtonH4;
       break;
     case "skills":
@@ -1779,7 +2002,7 @@ function changeModalTextAndActiveButton(target) {
       modalText.insertAdjacentHTML("beforeend", htmlContent);
       modalText.scrollTop = 0;
       checkIfModalTextScrollable();
-      updateModalTextArrow;
+      updateModalTextArrow();
       modalPreviousActiveSection = modalSkillsButtonH4;
       break;
     case "default":
@@ -1796,7 +2019,7 @@ function changeModalTextAndActiveButton(target) {
       modalText.innerHTML = `<h4 id="modal-text-title">Description de la mission&nbsp;:</h4><p id="modal-description">${modalExampleToDisplay.description}</p>`;
       modalText.scrollTop = 0;
       checkIfModalTextScrollable();
-      updateModalTextArrow;
+      updateModalTextArrow();
       modalPreviousActiveSection = modalDescriptionButtonH4;
       break;
     case "reset":
@@ -1911,7 +2134,7 @@ function closeModal() {
 
 function checkIfModalTextScrollable() {
   if (!isModalOpen) return;
-  isModalTextScrollable = checkIfTargetIsScrollable(modalText, modalTextArrowDownDiv);
+  isModalTextScrollable = checkIfTargetIsScrollable(modalText, aboutTextArrowDownDiv);
 }
 
 function updateModalTextArrow(event) {
@@ -1948,10 +2171,10 @@ function setImageOfActiveMobileModalButton(target) {
         modalButtonsImages[0].setAttribute("src", "./assets/svg/description-black.svg");
         break;
       case "challenges":
-        modalButtonsImages[2].setAttribute("src", "./assets/svg/exclamation-mark-black.svg");
+        modalButtonsImages[1].setAttribute("src", "./assets/svg/exclamation-mark-black.svg");
         break;
       case "skills":
-        modalButtonsImages[4].setAttribute("src", "./assets/svg/cog-black.svg");
+        modalButtonsImages[2].setAttribute("src", "./assets/svg/cog-black.svg");
         break;
       default:
     }
@@ -1961,10 +2184,10 @@ function setImageOfActiveMobileModalButton(target) {
         modalButtonsImages[0].setAttribute("src", "./assets/svg/description-black.svg");
         break;
       case modalChallengesButtonH4:
-        modalButtonsImages[2].setAttribute("src", "./assets/svg/exclamation-mark-black.svg");
+        modalButtonsImages[1].setAttribute("src", "./assets/svg/exclamation-mark-black.svg");
         break;
       case modalSkillsButtonH4:
-        modalButtonsImages[4].setAttribute("src", "./assets/svg/cog-black.svg");
+        modalButtonsImages[2].setAttribute("src", "./assets/svg/cog-black.svg");
         break;
       default:
     }
@@ -1977,10 +2200,10 @@ function removeImageOfPreviousActiveMobileModalButton() {
       modalButtonsImages[0].setAttribute("src", "./assets/svg/description-white.svg");
       break;
     case modalChallengesButtonH4:
-      modalButtonsImages[2].setAttribute("src", "./assets/svg/exclamation-mark-white.svg");
+      modalButtonsImages[1].setAttribute("src", "./assets/svg/exclamation-mark-white.svg");
       break;
     case modalSkillsButtonH4:
-      modalButtonsImages[4].setAttribute("src", "./assets/svg/cog-white.svg");
+      modalButtonsImages[2].setAttribute("src", "./assets/svg/cog-white.svg");
       break;
     default:
   }
@@ -2039,7 +2262,7 @@ function contactPostRequest(event) {
       }
       return response.json();
     })
-    .then((data) => {
+    .then(() => {
       isMailAlreadySend = true;
       contactErrorsForm.style.display = "none";
       contactSuccessForm.style.display = "flex";

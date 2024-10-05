@@ -25,6 +25,14 @@ footer {
   gap: 0px 54px;
 }
 
+/* #footer a {
+  margin-right: 54px;
+}
+
+#footer a:last-child {
+  margin-right: 0px;
+} */
+
 #footer img {
   height: 24px;
 }

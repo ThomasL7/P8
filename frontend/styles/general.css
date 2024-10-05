@@ -1,6 +1,6 @@
 :root {
   /* ==== Colors ==== */
-  --white: rgb(255, 255, 255);
+  --white: #ffffff;
   /* --black: #1e1d1d;
   --general-background-color: rgb(65, 65, 65);
   --header-footer-color: #1e1d1d; */
@@ -19,7 +19,7 @@ html {
   overflow-x: hidden;
   scroll-behavior: auto;
   cursor: default;
-  background-color: var(--general-background-color);
+  /* background-color: var(--general-background-color); */
   font-size: 18px;
   font-family: "Arial";
   scrollbar-width: none;
@@ -62,15 +62,10 @@ body {
 
 .background {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  filter: brightness(0.3) contrast(0.6);
-}
-
-.background img {
   object-fit: cover;
   width: 100%;
   height: 100%;
+  filter: brightness(0.3) contrast(0.6);
 }
 
 /* .slide-title-style::before,
@@ -118,23 +113,16 @@ body {
 
 .arrow-down {
   position: absolute;
+  background-color: var(--white);
   z-index: 1;
   display: flex;
-  width: 100%;
   justify-content: center;
-  align-items: flex-end;
-  bottom: 10px;
-  left: 0;
-}
-
-.arrow-down div {
-  background-color: var(--white);
-  border-radius: 25px;
-  display: flex;
-  width: 12%;
   align-items: center;
-  justify-content: center;
+  bottom: 10px;
+  left: calc(50% - 6% - 10px);
+  width: 12%;
   padding: 2px 10px;
+  border-radius: 25px;
 }
 
 .arrow-down img {
@@ -149,7 +137,6 @@ body {
   position: fixed;
   z-index: 2;
   background-color: rgb(29, 27, 27);
-
   height: 100%;
   bottom: 0px;
   z-index: 3;
@@ -157,7 +144,7 @@ body {
   text-align: center;
   font-size: 18px;
   font-weight: 600;
-  color: rgb(252, 188, 188);
+  color: rgb(223, 117, 117);
   padding: 35px;
   box-sizing: border-box;
 }
@@ -165,3 +152,11 @@ body {
 /* .disablePushToReload {
   overscroll-behavior-y: none;
 } */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}

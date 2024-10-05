@@ -2,7 +2,7 @@ window.examplesModalDatas = [
   {
     title: "Créez la page d'accueil d'une agence de voyage avec HTML & CSS.",
     image: "example-1-1.png",
-    link: "lien1",
+    link: "https://github.com/ThomasL7/P2.git",
     description: "Création de la page d'accueil d'une agence de voyage en HTML et CSS, en respectant fidèlement les maquettes Figma fournies et en assurant un design responsive pour les appareils mobiles, tablettes et ordinateurs de bureau.",
     challenges: [
       {
@@ -15,7 +15,7 @@ window.examplesModalDatas = [
   {
     title: "Créez une page web dynamique d'un portfolio avec JavaScript.",
     image: "example-2.png",
-    link: "lien2",
+    link: "https://github.com/ThomasL7/P3.git",
     description: "Conception de l'interface Front-End d'un portfolio interactif, intégrant la gestion des événements utilisateurs avec JavaScript, ainsi qu'une connexion à une API pour authentifier les utilisateurs et gérer les données affichées dynamiquement dans la galerie.",
     challenges: [
       {
@@ -28,7 +28,7 @@ window.examplesModalDatas = [
   {
     title: "Créez une application web de location immobilière avec React.",
     image: "example-3-1.png",
-    link: "lien3",
+    link: "https://github.com/ThomasL7/P5.git",
     description: "Développement de l'interface utilisateur d'une application single-page (SPA) en utilisant React, tout en gérant les styles avec Sass et en implémentant des animations pour améliorer l'expérience utilisateur.",
     challenges: [
       {
@@ -45,7 +45,7 @@ window.examplesModalDatas = [
   {
     title: "Développez le back-end d'un site de notation de livres.",
     image: "example-4-1.png",
-    link: "lien4",
+    link: "https://github.com/ThomasL7/P6.git",
     description: "Création d'un serveur back-end avec Node.js et Express.js, utilisant MongoDB pour une base de données noSQL. Le projet est conçu pour un site de notation de livres, incluant la gestion sécurisée des données, des fonctionnalités de CRUD (Créer, Lire, Mettre à jour, Supprimer) pour les livres et leurs notations, ainsi que l'authentification des utilisateurs et l'optimisation des images. Le tout est réalisé en respectant les bonnes pratiques du Green Code.",
     challenges: [
       {
@@ -66,7 +66,7 @@ window.examplesModalDatas = [
   {
     title: "Débuggez et optimisez un site de photographe.",
     image: "example-5-1.png",
-    link: "lien4",
+    link: "https://github.com/ThomasL7/P4.git",
     description: "Analyse et optimisation d'un site web pour améliorer les performances, le référencement sur les moteurs de recherche (SEO) et l'accessibilité, en utilisant des outils tels que Lighthouse et Wave. Un débogage a également été réalisé pour restaurer des fonctionnalités défaillantes.",
     challenges: [
       {
