@@ -1,3 +1,30 @@
+// (function () {
+//   let logs = [];
+//   function showPrompt(type, message) {
+//     logs.push(`[${type}] ${message}`);
+//     const allLogs = logs.join("\n");
+//     alert(allLogs);
+//   }
+
+//   const originalLog = console.log;
+//   console.log = function (message) {
+//     showPrompt("LOG", message);
+//     originalLog.apply(console, arguments);
+//   };
+
+//   const originalError = console.error;
+//   console.error = function (message) {
+//     showPrompt("ERROR", message);
+//     originalError.apply(console, arguments);
+//   };
+
+//   const originalWarn = console.warn;
+//   console.warn = function (message) {
+//     showPrompt("WARN", message);
+//     originalWarn.apply(console, arguments);
+//   };
+// })();
+
 // =====================================================================================================================================================
 // -------- Variables ----------------------------------------------------------------------------------------------------------------------------------
 // =====================================================================================================================================================
@@ -26,7 +53,6 @@ let homeContactButton;
 let homeCVButton;
 // → About
 let aboutSection;
-// let aboutBackground;
 let aboutContent;
 let aboutBlockPhoto;
 let aboutImagePhoto;
@@ -104,6 +130,8 @@ let footer;
 let footerLinks;
 
 // ===== Classes =====
+const CLASS_CONTACT_INFO_BUBBLE_CLOSE = "contact-info-bubble-close";
+const CLASS_CONTACT_INFO_BUBBLE_OPEN = "contact-info-bubble-open";
 const CLASS_HOME_BUTTONS_INTRO = "home-buttons-intro";
 const CLASS_HOME_TEXT_INTRO = "home-text-intro";
 const CLASS_HOME_TITLE_INTRO = "home-title-intro";
@@ -145,7 +173,6 @@ const CLASS_MOBILE_NAV_CLOSE = "mobile-nav-close";
 const CLASS_MOBILE_NAV_OPEN = "mobile-nav-open";
 const CLASS_SKILL_HOVER = "skills-items-hover";
 const CLASS_SKILLS_TEXT_INTRO = "skills-text-intro";
-// const CLASS_SKILLS_TEXT_VISIBLE = "skills-text-visible";
 const CLASS_OUTRO_BACKWARD = "slide-outro-backward";
 const CLASS_OUTRO_FORWARD = "slide-outro-forward";
 
@@ -157,6 +184,7 @@ let hoverTarget = null;
 let indexSlide = 0;
 let isAuthorizeToSlideChange = true;
 let isBottomMobileSlideLimitReach = false;
+let isContactInfoBubbleOpen = false;
 let isForceToMobileMod = false;
 let isHoverScrollableContent = false;
 let isMobileScreenTooSmall = false;
@@ -170,14 +198,14 @@ let maxIndexSlide = 0;
 let mouseX = 0;
 let mouseY = 0;
 let mouseYFinal = 0;
+let isNavIsOpen = false;
 let previousIndexSlide = null;
 let scrollDistance = 0;
 let scrollDuration = 0;
-let sectionMobileSlides;
-let startTouchTime = 0;
+let sectionSlides;
 let startTouchY = 0;
-let startTouchYInScrolling = 0;
 let endTouchY = 0;
+let timeBeforeCheckingMobileLimits = 25;
 let topCurrentMobileSlideLimit;
 let touchDistance = 0;
 let touchDistanceToChangeSlide = 50;
@@ -185,6 +213,9 @@ window.isTouchInsteadOfMouse = false;
 window.mobileDetected = false;
 // Media queries
 let isOnMobile = false;
+let wasForceMobile = false;
+let wasMaxHeight = false;
+let wasMobile = false;
 // → Header
 let headerAnimationDuration = 0;
 let headerHeightOnMobile;
@@ -322,9 +353,9 @@ document.addEventListener("DOMContentLoaded", () => {
   examplesSection = document.getElementById("examples");
   examplesContent = document.getElementById("examples-content");
   examplesTitle = document.querySelector("#examples-content h2");
-  window.examples = document.querySelectorAll("#examples-gallery article");
+  window.examples = document.querySelectorAll("#examples-gallery li");
   examples = window.examples;
-  examplesDivs = document.querySelectorAll("#examples-gallery article > div");
+  examplesDivs = document.querySelectorAll("#examples-gallery li > div");
   example1 = document.getElementById("example-1");
   example2 = document.getElementById("example-2");
   example3 = document.getElementById("example-3");
@@ -333,7 +364,9 @@ document.addEventListener("DOMContentLoaded", () => {
   window.examplesFilters = document.querySelectorAll(".examples-filters");
   examplesFilters = window.examplesFilters;
   examplesImages = document.querySelectorAll(".examples-images");
-  examplesH3 = document.querySelectorAll("#examples-gallery article h3");
+  examplesH3 = document.querySelectorAll("#examples-gallery li h3");
+  // window.examplesH3 = document.querySelectorAll("#examples-gallery li h3");
+  // examplesH3 = window.examplesH3;
   // Modal
   modalScreen = document.getElementById("modal-screen");
   modal = document.getElementById("modal");
@@ -341,15 +374,16 @@ document.addEventListener("DOMContentLoaded", () => {
   modalPreviousButton = window.modalPreviousButton;
   window.modalNextButton = document.getElementById("modal-next-button");
   modalNextButton = window.modalPreviousButton;
-  modalCloseIcon = document.getElementById("modal-close-icon");
+  window.modalCloseIcon = document.getElementById("modal-close-icon");
+  modalCloseIcon = window.modalCloseIcon;
   modalTitle = document.getElementById("modal-title");
   modalImageA = document.getElementById("modal-image-A");
   modalImageB = document.getElementById("modal-image-B");
-  window.modalDescriptionButtonH4 = document.getElementById("modal-description-button-h4");
+  window.modalDescriptionButtonH4 = document.getElementById("modal-description-button");
   modalDescriptionButtonH4 = window.modalDescriptionButtonH4;
-  window.modalChallengesButtonH4 = document.getElementById("modal-challenges-button-h4");
+  window.modalChallengesButtonH4 = document.getElementById("modal-challenges-button");
   modalChallengesButtonH4 = window.modalChallengesButtonH4;
-  window.modalSkillsButtonH4 = document.getElementById("modal-skills-button-h4");
+  window.modalSkillsButtonH4 = document.getElementById("modal-skills-button");
   modalSkillsButtonH4 = window.modalSkillsButtonH4;
   modalButtonsImages = document.querySelectorAll(".modal-buttons-images");
   window.modalText = document.getElementById("modal-text");
@@ -433,11 +467,11 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
   maxIndexSlide = anchors.length - 1;
   scrollDuration = parseFloat(rootCSS.getPropertyValue("--delay-before-next-scroll")) * 1000;
-  sectionMobileSlides = [homeSection, aboutSection, skillsSection, examplesSection, contactSection];
+  sectionSlides = [homeSection, aboutSection, skillsSection, examplesSection, contactSection];
   // Media queries
-  window.mqMobileTrigger = window.matchMedia(`(max-width: ${rootCSS.getPropertyValue("--mq-mobile")})`);
-  window.mqForceMobileMod = window.matchMedia(`(max-height: 590px)`);
-  window.mqMaxHeight = window.matchMedia(`(max-height: 450px)`);
+  mqMobileTrigger = window.matchMedia(`(max-width: ${rootCSS.getPropertyValue("--mq-mobile")})`);
+  mqForceMobileMod = window.matchMedia(`(max-height: 590px)`);
+  mqMaxHeight = window.matchMedia(`(max-height: 450px)`);
   // → Header
   headerAnimationDuration = parseFloat(rootCSS.getPropertyValue("--header-animation-duration")) * 1000;
   headerHeightOnMobile = parseInt(rootCSS.getPropertyValue("--header-height-on-mobile"));
@@ -451,7 +485,6 @@ document.addEventListener("DOMContentLoaded", () => {
   infoBubbleOffsetYOnMobile = parseInt(rootCSS.getPropertyValue("--bubble-offset-y-on-mobile"));
   infoBubbleMaxWidth = parseInt(rootCSS.getPropertyValue("--info-bubbles-max-width"));
   infoBubbleWidthPourcent = parseFloat(rootCSS.getPropertyValue("--info-bubbles-width-pourcent")) / 100;
-  // infoBubbleTextsArray = window.infoBubblesDatas;
   isHoverSkillArray = new Array(skillsDivs.length).fill(false);
   textSpeed = parseInt(rootCSS.getPropertyValue("--info-bubbles-text-speed"));
   // → Examples
@@ -468,7 +501,6 @@ document.addEventListener("DOMContentLoaded", () => {
 // =====================================================================================================================================================
 // ===== General =====
 function setIsWindowLoadedTrue() {
-  // if (isOnMobile) setTimeout(() => (isWindowLoaded = true), headerAnimationDuration * 4);
   setTimeout(() => (isWindowLoaded = true), headerAnimationDuration);
 }
 
@@ -482,6 +514,14 @@ function enableScroll() {
 
 function disableScroll() {
   root.style.overflowY = "hidden";
+}
+
+function relativeHTML() {
+  root.style.position = "relative";
+}
+
+function fixedHTML() {
+  root.style.position = "fixed";
 }
 
 function checkIfSlideIsScrollable() {
@@ -536,9 +576,9 @@ function updateTargetDownArrow(target, isScrollable, arrowDown, margin) {
   }
 }
 
-function checkIfUnderMQMaxHeight(event) {
+function checkIfUnderMQMaxHeight() {
   if (isOnMobile) {
-    if (event.matches) {
+    if (mqMaxHeight.matches) {
       smallMobileScreenMessage.style.display = "flex";
       isMobileScreenTooSmall = true;
     } else {
@@ -551,47 +591,78 @@ function checkIfUnderMQMaxHeight(event) {
   }
 }
 
-function checkToForceMobileMod(event) {
-  if (event.matches && !isOnMobile) {
+function checkToForceMobileMod() {
+  if (mqForceMobileMod.matches && !isOnMobile) {
     isForceToMobileMod = true;
-    checkIfOnMobileAndActiveScroll(window.mqMobileTrigger);
+    checkIfOnMobileAndActiveScroll();
   } else {
     isForceToMobileMod = false;
-    checkIfOnMobileAndActiveScroll(window.mqMobileTrigger);
+    checkIfOnMobileAndActiveScroll();
   }
 }
 
-function detectIfPhone() {
-  const userAgent = navigator.userAgent;
-  if (/android/i.test(userAgent)) {
-    window.mobileDetected = true;
-    // } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-  } else if (/iPhone|iPod/.test(userAgent) && !window.MSStream) {
-    window.mobileDetected = true;
-  } else if (/windows phone/i.test(userAgent)) {
-    window.mobileDetected = true;
-  } else window.mobileDetected = false;
+function checkMediaQueries() {
+  if (mqMobileTrigger.matches && !isOnMobile) checkIfOnMobileAndActiveScroll({ matches: true });
+  else if (!mqMobileTrigger.matches && isOnMobile) checkIfOnMobileAndActiveScroll({ matches: false });
+  if (mqForceMobileMod.matches && !isForceToMobileMod) checkToForceMobileMod({ matches: true });
+  else if (!mqForceMobileMod.matches && isForceToMobileMod) checkToForceMobileMod({ matches: false });
+  if (mqMaxHeight.matches && !isMobileScreenTooSmall) checkIfUnderMQMaxHeight({ matches: true });
+  else if (!mqMaxHeight.matches && isMobileScreenTooSmall) checkIfUnderMQMaxHeight({ matches: false });
 }
 
-// let startY = 0;
-// window.addEventListener("touchstart", function (e) {
-//   startY = e.touches[0].clientY;
-// });
+function disableTab(event) {
+  if (event.key !== "Tab" || isFocusedOnInput()) return;
+  event.preventDefault();
+}
 
-// window.addEventListener(
-//   "touchmove",
-//   function (e) {
-//     const currentY = e.touches[0].clientY;
+function settingObservers() {
+  const observerSections = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (indexSlide !== 0 && entry.target === homeSection) {
+            scrollToSlide(0);
+          }
+          if (indexSlide !== 1 && entry.target === aboutSection) {
+            scrollToSlide(1);
+          }
+          if (indexSlide !== 2 && entry.target === skillsSection) {
+            scrollToSlide(2);
+          }
+          if (indexSlide !== 3 && entry.target === examplesSection) {
+            scrollToSlide(3);
+          }
+          if (indexSlide !== 4 && entry.target === contactSection) {
+            scrollToSlide(4);
+          }
+        }
+      });
+    },
+    {
+      threshold: 0.15,
+    }
+  );
 
-//     // Si l'utilisateur tire vers le bas depuis le haut de la page (scroll en haut)
-//     if (window.scrollY <= 0 && currentY > startY && indexSlide !== 0) {
-//       e.preventDefault(); // Empêche le pull-to-refresh
-//     }
-//   },
-//   { passive: false }
-// );
+  for (let i = 0; i < sectionSlides.length; i++) {
+    const section = sectionSlides[i];
+    observerSections.observe(section);
+  }
+}
 
 // → For mouse position and collision leave detection
+function adjustHeight() {
+  if (!CSS.supports("height", "100dvh")) {
+    root.style.setProperty("--screen-height", `${window.innerHeight}px`);
+  } else {
+    root.style.setProperty("--screen-height", "100dvh");
+  }
+  root.style.setProperty("--section-height-normal", `calc(var(--screen-height) - var(--header-height-normal) - var(--footer-height-normal) + 4px)`);
+  root.style.setProperty("--section-height-1440", `calc(var(--screen-height) - var(--header-height-1440) - var(--footer-height-1440) + 4px)`);
+  root.style.setProperty("--section-height-1024", `calc(var(--screen-height) - var(--header-height-1024) - var(--footer-height-1024) + 4px)`);
+  root.style.setProperty("--section-height-768-H", `calc(var(--screen-height) - var(--header-height-768-H) - var(--footer-height-768-H) + 4px)`);
+  root.style.setProperty("--section-height-on-mobile", `calc(var(--screen-height) - var(--header-height-on-mobile) - var(--footer-height-on-mobile))`);
+}
+
 function getMousePosition(event) {
   mouseX = event.clientX;
   mouseY = event.clientY;
@@ -639,27 +710,33 @@ function checkIfCursorHoverTarget(collisionTarget, onHoverFunction, onOutsideFun
   else if (!isCurrentlyHoverBlock) onOutsideFunction();
 }
 
-function handleEnterForAccessibility(event) {
-  // event.stopPropagation();
-  if (event.key === "Enter" || event.keyCode === 13) {
-    const focusedElement = document.activeElement;
-    // if (indexSlide === 2) {
-    // console.log("Focused element:", focusedElement);
-    const skillsDivsArray = [...skillsDivs];
-    if (focusedElement && skillsDivsArray.includes(focusedElement)) {
-      const index = skillsDivsArray.indexOf(focusedElement);
-      handleTouchingSkill(index);
-    }
-    const skillsIconsArray = [...skillsIcons];
-    if (focusedElement && skillsIconsArray.includes(focusedElement)) {
-      const index = skillsIconsArray.indexOf(focusedElement);
-      handleTouchingSkill(index);
-    }
-    // }
+// → For slides change
+function scrolling(target, behavior) {
+  switch (behavior) {
+    case "auto":
+      target.scrollIntoView({ behavior: "auto" });
+      break;
+    case "smooth":
+      const startY = window.scrollY;
+      const targetY = target.getBoundingClientRect().top + startY;
+      const distance = targetY - startY;
+      const duration = scrollDuration * 0.61;
+      let start = null;
+      function step(timestamp) {
+        if (!start) start = timestamp;
+        const progress = timestamp - start;
+        const ease = Math.min(progress / duration, 1);
+        window.scrollTo(0, startY + distance * ease);
+        if (progress < duration) {
+          window.requestAnimationFrame(step);
+        }
+      }
+      window.requestAnimationFrame(step);
+      break;
+    default:
   }
 }
 
-// → For slides change
 function scrollSlideChange(event) {
   if (event.ctrlKey || !isWindowLoaded || isModalOpen || isOnMobile || isScrolling || isHoverScrollableContent || isMobileScreenTooSmall) return;
   const direction = event.deltaY > 0 ? 1 : -1;
@@ -671,13 +748,6 @@ function tabletSlideChange() {
   if (touchDistance < -40) scrollToSlide(indexSlide, -1);
   else if (touchDistance > 40) scrollToSlide(indexSlide, 1);
 }
-
-// function arrowsSlideChange(event) {
-//   if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
-//   if (!isWindowLoaded || isModalOpen || isOnMobile || isScrolling || isFocusedOnInput()) return;
-//   const direction = event.key === "ArrowDown" ? 1 : -1;
-//   scrollToSlide(indexSlide, direction);
-// }
 
 function isFocusedOnInput() {
   const activeElement = document.activeElement;
@@ -695,12 +765,12 @@ function removeAnimationFromArray(elementToTarget, array, isAnimationOrIntervalT
 }
 
 function updateCurrentSlideView() {
-  anchors[indexSlide].scrollIntoView({ behavior: "auto" });
+  scrolling(anchors[indexSlide], "auto");
 }
 
 function updateCurrentSlideViewForResize() {
   if (isOnMobile) return;
-  anchors[indexSlide].scrollIntoView({ behavior: "auto" });
+  scrolling(anchors[indexSlide], "auto");
 }
 
 /**  @param {Number} direction (optional + or -1) only for scroll or arrow keys*/
@@ -716,13 +786,12 @@ function scrollToSlide(index, direction) {
   indexSlide = index;
   if (index === 0) disableHeaderTitleBlockHover();
   const scrollBehavior = Math.abs(indexSlide - previousIndexSlide) === 1 ? "smooth" : "auto";
-  anchors[indexSlide].scrollIntoView({ behavior: scrollBehavior });
+  scrolling(anchors[indexSlide], scrollBehavior);
   window.dispatchEvent(new CustomEvent("indexSlideChange"));
   setTimeout(() => (isScrolling = false), scrollDuration);
 }
 
 function addHeaderAndHomeIntroAnimations() {
-  // aboutBackground.classList.remove("background-hidden");
   header.classList.add(CLASS_HEADER_INTRO);
   headerTitleBlock.classList.add(CLASS_ELEMENTS_HEADER_INTRO);
   headerTitleBlock.style.display = "flex";
@@ -746,11 +815,7 @@ function addHeaderAndHomeIntroAnimations() {
     nav.classList.remove(CLASS_ELEMENTS_HEADER_INTRO);
     footerLinksDiv.classList.remove(CLASS_ELEMENTS_FOOTER_INTRO);
     isHeaderTitleAnimationEnded = true;
-    // enableScroll();
   }, headerAnimationDuration);
-  // setTimeout(() => {
-  //   enableScroll();
-  // }, 1000);
 }
 
 function resetHomeBeforeReloading() {
@@ -837,7 +902,6 @@ function resetSkillsSlide() {
     removeStyleCursorForSkills(skills[i]);
     isSkillsIntroAnimationsEndedArray[i] = false;
   }
-  // skillsText.classList.remove(CLASS_SKILLS_TEXT_VISIBLE);
 }
 
 function resetExamplesSlide() {
@@ -870,35 +934,30 @@ function resetContactSlide() {
 }
 
 // ===== General (Mobile) =====
-function checkIfOnMobileAndActiveScroll(event) {
-  if (event.matches || isForceToMobileMod) {
+function checkIfOnMobileAndActiveScroll() {
+  if (mqMobileTrigger.matches || isForceToMobileMod) {
     isOnMobile = true;
-    window.isOnMobile = true;
     const viewportMeta = document.querySelector('meta[name="viewport"]');
     viewportMeta.setAttribute("content", "width=device-width, initial-scale=1.0");
-    checkIfUnderMQMaxHeight(window.mqMaxHeight);
+    checkIfUnderMQMaxHeight(mqMaxHeight);
     isHoverScrollableContent = false;
     hideOrShowAllMobileSlides("none");
-    // hideOrShowAllMobileSlides("flex");
     navMenuBurger.style.display = "flex";
     nav.style.display = "none";
     adjustModalPosition();
-    enableScroll();
     updateCurrentMobileSlideLimit();
     checkIfSlideIsScrollable();
     if (isModalOpen) setImageOfActiveMobileModalButton();
-    if (!isModalOpen && isWindowLoaded) enableScroll();
+    if (!isModalOpen) enableScroll();
     updateAllArraysOfBlocksCollision();
   } else {
     isOnMobile = false;
-    window.isOnMobile = false;
     const viewportMeta = document.querySelector('meta[name="viewport"]');
     viewportMeta.setAttribute("content", "width=device-width, initial-scale=1.0, user-scalable=no");
-    checkIfUnderMQMaxHeight(window.mqMaxHeight);
+    checkIfUnderMQMaxHeight(mqMaxHeight);
     disableScroll();
     navMenuBurger.style.display = "none";
     nav.style.display = "flex";
-    // if (isHoverAboutText) isHoverScrollableContent = true;
     removeImageOfPreviousActiveMobileModalButton();
     removeMobileNavAnimations();
     hideOrShowAllMobileSlides("flex");
@@ -908,37 +967,20 @@ function checkIfOnMobileAndActiveScroll(event) {
   }
 }
 
-// function disablePushToReload() {
-//   if (indexSlide === 0) root.classList.remove("disablePushToReload");
-//   else root.classList.add("disablePushToReload");
-// }
-
 /**  @param {string} value "none" or "flex" */
 function hideOrShowAllMobileSlides(value) {
-  for (let i = 0; i < sectionMobileSlides.length; i++) {
+  for (let i = 0; i < sectionSlides.length; i++) {
     if (i === indexSlide) continue;
-    sectionMobileSlides[i].style.display = `${value}`;
+    sectionSlides[i].style.display = `${value}`;
   }
 }
 
 // For slides change (Mobile)
-function preventTouchEvents(event) {
-  if (!isOnMobile) event.preventDefault();
-  else if (indexSlide !== 0) event.preventDefault();
-}
-
 function setTouchStartVariables(event) {
   startTouchY = event.touches[0].clientY;
-  startTouchYInScrolling = startTouchY;
-  // startTouchTime = new Date().getTime();
-  // initialScrollY = window.scrollY;
 }
 
 function disablePushToReload(event) {
-  // if (isScrolling) {
-  //   event.preventDefault();
-  // }
-
   if (event.cancelable) {
     if (window.scrollY <= 0 && endTouchY > startTouchY && indexSlide !== 0) {
       event.preventDefault();
@@ -953,189 +995,8 @@ function calculateTouchDistance(event) {
   direction = touchDistance > touchDistanceToChangeSlide ? 1 : touchDistance < -touchDistanceToChangeSlide ? -1 : null;
 }
 
-function calculateScrollDistance(event) {
-  // const currentTouchY = event.touches[0].clientY;
-  // const currentTime = new Date().getTime();
-  // const distance = startTouchYInScrolling - currentTouchY;
-  // const scrollSpeed = Math.max(0.1, 20 / (currentTime - startTouchTime));
-  // scrollDistance = distance * scrollSpeed;
-  // startTouchYInScrolling = currentTouchY;
-  // startTouchTime = currentTime;
-}
-
-function mobileScroll() {
-  if (isScrolling) return;
-  if (isOnMobile && indexSlide !== 0) {
-    window.scrollBy(0, scrollDistance);
-  }
-}
-
-// let initialScrollY;
-// function mobileScrollGlide() {
-//   if (isScrolling) return;
-//   if (isOnMobile && indexSlide !== 0) {
-//     const currentTime = new Date().getTime();
-//     const elapsedTime = currentTime - startTouchTime;
-
-//     const finalScrollY = window.scrollY;
-//     const distanceScrolled = finalScrollY - initialScrollY;
-
-//     // Calculer la vitesse initiale
-//     velocity = (distanceScrolled / elapsedTime) * 0.2;
-
-//     // Définir une fonction pour appliquer la décélération
-//     function decelerateScroll() {
-//       if (Math.abs(velocity) > 0.1) {
-//         window.scrollBy(0, velocity);
-//         velocity *= 0.95; // Réduit la vitesse progressivement
-//         scrollTimeout = requestAnimationFrame(decelerateScroll);
-//       }
-//     }
-
-//     // Commence la décélération
-//     decelerateScroll();
-//   }
-// }
-
-function updateDirection(event) {
-  direction = event.deltaY > 0 ? 1 : -1;
-}
-
-let direction;
-let limitTopTimeout;
-let limitBottomTimeout;
-
-function handleWheelScroll(event) {
-  if (isReloading || event.ctrlKey || !isWindowLoaded || isModalOpen || !isOnMobile || isScrolling || isHoverScrollableContent || isMobileScreenTooSmall) return;
-
-  const currentSection = sectionMobileSlides[indexSlide];
-  const sectionTop = currentSection.offsetTop;
-  const sectionBottom = sectionTop + currentSection.offsetHeight;
-  const scrollPosition = window.scrollY + window.innerHeight;
-  if (!isSlideScrollable) {
-    if (direction === -1) {
-      scrollToMobileSlide(indexSlide, -1);
-    }
-    if (direction === 1) {
-      scrollToMobileSlide(indexSlide, 1);
-    }
-  } else {
-    if (isTopMobileSlideLimitReach && direction === -1 && window.scrollY <= sectionTop) {
-      event.preventDefault();
-      window.scrollTo(0, sectionBottom - window.innerHeight);
-      scrollToMobileSlide(indexSlide, direction);
-      clearTimeout(limitTopTimeout);
-      // enableScroll();
-    } else if (isBottomMobileSlideLimitReach && direction === 1 && scrollPosition >= sectionBottom) {
-      event.preventDefault();
-      window.scrollTo(0, sectionBottom - window.innerHeight);
-      // window.scrollTo({
-      //   top: sectionBottom - window.innerHeight,
-      //   behavior: "smooth",
-      // });
-
-      scrollToMobileSlide(indexSlide, direction);
-      clearTimeout(limitBottomTimeout);
-      // enableScroll();
-    } else if (window.scrollY <= sectionTop) {
-      event.preventDefault();
-      window.scrollTo(0, sectionTop);
-      // window.scrollTo({
-      //   top: sectionTop,
-      //   behavior: "smooth",
-      // });
-      disableScroll();
-      limitTopTimeout = setTimeout(() => {
-        isTopMobileSlideLimitReach = true;
-      }, 500);
-    } else if (scrollPosition >= sectionBottom) {
-      disableScroll();
-      event.preventDefault();
-      window.scrollTo(0, sectionBottom - window.innerHeight);
-      limitBotTimeout = setTimeout(() => {
-        isBottomMobileSlideLimitReach = true;
-      }, 500);
-    } else {
-      isTopMobileSlideLimitReach = false;
-      isBottomMobileSlideLimitReach = false;
-    }
-  }
-}
-
-function handleSwipe(event) {
-  if (event.ctrlKey || !isWindowLoaded || isModalOpen || !isOnMobile || isScrolling || isHoverScrollableContent || isMobileScreenTooSmall) return;
-
-  const currentSection = sectionMobileSlides[indexSlide];
-  const sectionTop = currentSection.offsetTop;
-  const sectionBottom = sectionTop + currentSection.offsetHeight;
-  const scrollPosition = window.scrollY + window.innerHeight;
-
-  if (isTopMobileSlideLimitReach && direction === -1) {
-    event.preventDefault();
-    window.scrollTo(0, sectionBottom - window.innerHeight);
-    scrollToMobileSlide(indexSlide, direction);
-    clearTimeout(limitTopTimeout);
-    // setTimeout(() => {
-    //   isTopMobileSlideLimitReach = false;
-    // }, scrollDuration);
-  }
-  if (isBottomMobileSlideLimitReach && direction === 1) {
-    event.preventDefault();
-    window.scrollTo(0, sectionBottom - window.innerHeight);
-    scrollToMobileSlide(indexSlide, direction);
-    clearTimeout(limitBotTimeout);
-    // setTimeout(() => {
-    //   isBottomMobileSlideLimitReach = false;
-    // }, scrollDuration);
-  }
-  if (!isTopMobileSlideLimitReach) {
-    if (window.scrollY <= sectionTop) {
-      event.preventDefault();
-      window.scrollTo(0, sectionTop);
-      limitTopTimeout = setTimeout(() => {
-        isTopMobileSlideLimitReach = true;
-      }, 500);
-    }
-  }
-  if (!isBottomMobileSlideLimitReach) {
-    if (scrollPosition >= sectionBottom) {
-      event.preventDefault();
-      window.scrollTo(0, sectionBottom - window.innerHeight);
-      limitBotTimeout = setTimeout(() => {
-        isBottomMobileSlideLimitReach = true;
-      }, 500);
-    }
-  }
-}
-
-// Par exemple, tu peux autoriser le scroll à un moment précis :
-function allowScrollToNextSection() {
-  isScrollAllowed = true;
-}
-
-function preventScrollToNextSection() {
-  isScrollAllowed = false;
-}
-
-// // let currentSectionIndex = 0;
-// let isTransitionAllowed = false;
-
-// window.addEventListener("wheel", (event) => {
-//   if (isTransitionAllowed) {
-//     // Si on scrolle vers le bas
-//     if (event.deltaY > 0 && currentSectionIndex < aboutSection.length - 1) {
-//       // scrollToSection(currentSectionIndex + 1);
-//     }
-//     // Si on scrolle vers le haut
-//     else if (event.deltaY < 0 && currentSectionIndex > 0) {
-//       // scrollToSection(currentSectionIndex - 1);
-//     }
-//   }
-// });
-
 function checkIfSwipingToNextMobileSlide() {
-  // !isAuthorizeToSlideChange
-  if (!isWindowLoaded || !isOnMobile || !isAuthorizeToSlideChange || isModalOpen || isScrolling || isHoverScrollableContent || isMobileScreenTooSmall) return;
+  if (!isWindowLoaded || !isOnMobile || !isAuthorizeToSlideChange || isModalOpen || isScrolling || isMobileScreenTooSmall) return;
   const direction = touchDistance > touchDistanceToChangeSlide ? 1 : touchDistance < -touchDistanceToChangeSlide ? -1 : null;
   if (!direction) return;
   if (indexSlide === 0) {
@@ -1154,13 +1015,13 @@ function checkIfSwipingToNextMobileSlide() {
       }
       setTimeout(() => {
         ifMobileSlideLimitsAreReach();
-      }, 200);
+      }, timeBeforeCheckingMobileLimits);
     }
   }
 }
 
 function checkIfScrollingToNextMobileSlide(event) {
-  if (event.ctrlKey || !isWindowLoaded || isModalOpen || !isAuthorizeToSlideChange || !isOnMobile || isScrolling || isHoverScrollableContent || isMobileScreenTooSmall) return;
+  if (event.ctrlKey || !isWindowLoaded || isModalOpen || !isAuthorizeToSlideChange || !isOnMobile || isScrolling || isMobileScreenTooSmall) return;
   const direction = event.deltaY > 0 ? 1 : -1;
   if (indexSlide === 0) {
     scrollToMobileSlide(indexSlide, direction);
@@ -1178,26 +1039,17 @@ function checkIfScrollingToNextMobileSlide(event) {
       }
       setTimeout(() => {
         ifMobileSlideLimitsAreReach();
-      }, 200);
+      }, timeBeforeCheckingMobileLimits);
     }
   }
 }
 
 function updateCurrentMobileSlideLimit() {
-  const currentSection = sectionMobileSlides[indexSlide];
+  const currentSection = sectionSlides[indexSlide];
   const sectionTop = currentSection.offsetTop;
   const sectionBottom = sectionTop + currentSection.offsetHeight - 1;
-  const scrollPosition = window.scrollY + window.innerHeight;
   topCurrentMobileSlideLimit = sectionTop;
   bottomCurrentMobileSlideLimit = sectionBottom;
-
-  const zoomRatio = window.innerWidth / document.documentElement.clientWidth;
-
-  // topCurrentMobileSlideLimit = 0;
-  // bottomCurrentMobileSlideLimit = window.innerHeight / zoomRatio;
-  // bottomCurrentMobileSlideLimit = window.screen.height / zoomRatio;
-  // bottomCurrentMobileSlideLimit = window.innerHeight;
-  // bottomCurrentMobileSlideLimit = window.scrollYBottom;
 }
 
 function authorizeSlideChange() {
@@ -1207,7 +1059,6 @@ function authorizeSlideChange() {
 function ifMobileSlideLimitsAreReach() {
   if (isModalOpen || !isOnMobile || isScrolling) return;
   const scrollYValue = window.scrollY;
-  const zoomRatio = window.innerWidth / document.documentElement.clientWidth;
   const scrollYBottom = window.scrollY + window.innerHeight;
   if (scrollYValue <= topCurrentMobileSlideLimit) {
     isTopMobileSlideLimitReach = true;
@@ -1216,31 +1067,6 @@ function ifMobileSlideLimitsAreReach() {
     isBottomMobileSlideLimitReach = true;
   }
   if (scrollYValue > topCurrentMobileSlideLimit && scrollYBottom < bottomCurrentMobileSlideLimit) {
-    isTopMobileSlideLimitReach = false;
-    isBottomMobileSlideLimitReach = false;
-  }
-}
-
-function ifMobileSlideLimitsAreReachForScroll() {
-  if (isModalOpen || !isOnMobile || isScrolling) return;
-  const scrollYValue = window.scrollY;
-  const scrollYBottom = window.scrollY + window.innerHeight;
-  if (scrollYValue <= topCurrentMobileSlideLimit) {
-    if (limitReachCount > 0) limitReachCount = -1;
-    else if (limitReachCount > -2) limitReachCount--;
-    if (limitReachCount <= -2) {
-      isTopMobileSlideLimitReach = true;
-      limitReachCount = 0;
-    }
-  } else if (scrollYBottom >= bottomCurrentMobileSlideLimit) {
-    if (limitReachCount < 0) limitReachCount = 1;
-    else if (limitReachCount < 2) limitReachCount++;
-    if (limitReachCount >= 2) {
-      isBottomMobileSlideLimitReach = true;
-      limitReachCount = 0;
-    }
-  } else {
-    limitReachCount = 0;
     isTopMobileSlideLimitReach = false;
     isBottomMobileSlideLimitReach = false;
   }
@@ -1257,35 +1083,31 @@ function scrollToMobileSlide(index, direction) {
   isScrolling = true;
   isAuthorizeToSlideChange = false;
   disableScroll();
+  if (!isOnMobile) relativeHTML();
   previousIndexSlide = indexSlide;
   indexSlide = index;
   const indexDifference = indexSlide - previousIndexSlide;
   const scrollBehavior = Math.abs(indexDifference) === 1 ? "smooth" : "auto";
-  const sectionSlideToDisplay = sectionMobileSlides[indexSlide];
-  const sectionSlideToHide = sectionMobileSlides[previousIndexSlide];
+  const sectionSlideToDisplay = sectionSlides[indexSlide];
+  const sectionSlideToHide = sectionSlides[previousIndexSlide];
   displayNewMobileSlide(sectionSlideToDisplay);
   if (indexDifference <= -1) {
-    anchors[previousIndexSlide].scrollIntoView({ behavior: "auto" });
+    scrolling(anchors[previousIndexSlide], "auto");
   }
-  anchors[indexSlide].scrollIntoView({ behavior: scrollBehavior });
+  scrolling(anchors[indexSlide], scrollBehavior);
   window.dispatchEvent(new CustomEvent("indexSlideChange"));
   setTimeout(() => {
     hidePreviousMobileSlide(sectionSlideToHide);
     updateCurrentSlideView();
     if (indexSlide === 0 || indexSlide === 4) {
-      // updateCurrentMobileSlideLimit();
       checkIfSlideIsScrollable();
       updateCurrentMobileSlideLimit();
       authorizeSlideChange();
     }
-    // checkIfSlideIsScrollable();
-    // updateCurrentMobileSlideLimit();
-    // authorizeSlideChange();
-    // updateCurrentSlideView();
     isTopMobileSlideLimitReach = false;
     isBottomMobileSlideLimitReach = false;
-    // checkIfSlideIsScrollable();
     enableScroll();
+    if (!isOnMobile) fixedHTML();
     isScrolling = false;
   }, scrollDuration);
 }
@@ -1300,7 +1122,8 @@ function displayNewMobileSlide(target) {
 }
 
 // ===== Header =====
-function handleHeaderTitleClick() {
+function handleHeaderTitleClick(event) {
+  event.preventDefault();
   if (!isHeaderTitleAnimationEnded) return;
   if (!isOnMobile) scrollToSlide(0);
   else scrollToMobileSlide(0);
@@ -1328,12 +1151,12 @@ function disableHeaderTitleBlockHover() {
 }
 
 function handleNavLinkClick(event, index) {
-  // activeTouchControl();
   event.stopPropagation();
   if (!isWindowLoaded || isScrolling || index === indexSlide) return;
   if (!isOnMobile) scrollToSlide(index);
   else {
     addMobileNavCloseAnimation();
+    isNavIsOpen = false;
     scrollToMobileSlide(index);
   }
 }
@@ -1350,16 +1173,17 @@ function removeNavHoverAnimationForNewSlide() {
 
 // ===== Header (Mobile) =====
 function checkIfClosingMobileNav(event) {
-  // if (!isOnMobile) return;
+  if (!isNavIsOpen) return;
   if (event.target !== nav && event.target !== navMenuBurger) {
     addMobileNavCloseAnimation();
+    isNavIsOpen = false;
   }
 }
 
 function addMobileNavOpenAnimation(event) {
   event.stopPropagation();
-  // startTouchY = 0;
   nav.style.display = "flex";
+  isNavIsOpen = true;
   nav.classList.remove(CLASS_MOBILE_NAV_CLOSE);
   nav.classList.add(CLASS_MOBILE_NAV_OPEN);
 }
@@ -1432,13 +1256,11 @@ function activeCVButtonAfterIntroAnimation(event) {
 
 // ===== About =====
 function handleAboutTextScroll() {
-  // isHoverAboutText = true;
   if (isOnMobile || !isAboutTextScrollable) return;
   isHoverScrollableContent = true;
 }
 
 function handleLeavingAboutText(event) {
-  // isHoverAboutText = false;
   if (isOnMobile || !isAboutTextScrollable) return;
   if (!event) isHoverScrollableContent = false;
   else if (!aboutText.contains(event.target)) {
@@ -1448,7 +1270,7 @@ function handleLeavingAboutText(event) {
 
 /**  @param {string} delay if should be "delay" or not */
 function checkIfAboutTextScrollable(delay) {
-  if ((isOnMobile && !isForceToMobileMod) || indexSlide !== 1) return;
+  if (indexSlide !== 1) return;
   if (delay)
     setTimeout(() => {
       isAboutTextScrollable = checkIfTargetIsScrollable(aboutTextP, aboutTextArrowDownDiv);
@@ -1457,7 +1279,7 @@ function checkIfAboutTextScrollable(delay) {
 }
 
 function updateAboutTextArrow(event) {
-  if ((isOnMobile && !isForceToMobileMod) || indexSlide !== 1) return;
+  if (indexSlide !== 1) return;
   if (event) {
     if (event.type === "keydown") updateTargetDownArrow(aboutTextP, isAboutTextScrollable, aboutTextArrowDownDiv, 2);
   } else updateTargetDownArrow(aboutTextP, isAboutTextScrollable, aboutTextArrowDownDiv, 2);
@@ -1482,11 +1304,6 @@ function stopAboutTextScroll() {
 
 function checkIfHoverAboutText() {
   if (indexSlide !== 1) return;
-  // isHoverScrollableContent = true;
-  // updateMousePosition();
-
-  // if (indexSlide !== 1) return;
-  // setTimeout(() => {
   updateMousePosition();
   checkIfCursorHoverTarget(
     aboutTextBlockCollisionArray[0],
@@ -1497,19 +1314,9 @@ function checkIfHoverAboutText() {
       isHoverScrollableContent = false;
     }
   );
-  // }, scrollDuration);
 }
 
 // ===== Skills =====
-// function setSkillPVisible() {
-//   setTimeout(() => {
-//     skillsText.classList.add(CLASS_SKILLS_TEXT_VISIBLE);
-//     // skillsText.style.opacity = 1;
-//     skillsText.style.display = "flex";
-//     skillsText.classList.remove(CLASS_SKILLS_TEXT_INTRO);
-//   }, 10);
-// }
-
 function setIsSkillsIntroAnimationsEndedTrue(index) {
   isSkillsIntroAnimationsEndedArray[index] = true;
 }
@@ -1523,9 +1330,7 @@ function removeStyleCursorForSkills(skill) {
 }
 
 function checkIfHoverSkillAfterIntro(skillsDiv, index) {
-  // if (index !== 1) return;
   if (previousSkill !== null) return;
-  // updateAllArraysOfBlocksCollision;
   updateMousePosition();
   checkIfCursorHoverTarget(
     skillsBlocksCollisionsArray[index],
@@ -1537,21 +1342,20 @@ function checkIfHoverSkillAfterIntro(skillsDiv, index) {
 }
 
 function handleEnterSkill(skillsDiv, index) {
-  // if (isSkillsIntroAnimationsEndedArray[index]) isSkillsIntroAnimationsEndedArray[index] = false;
   if (!skillsDiv) skillsDiv = skillsDivs[index];
   if (previousSkill === skillsDiv || !isSkillsIntroAnimationsEndedArray[index]) return;
-  // if (previousSkill === skillsDiv || !isSkillsIntroAnimationsEndedArray[index]) return;
   resetPreviousSkillIfEnterNewSkill();
-  // setSkillTargetForLeaveDetection(skillsDiv, index);
   addSkillHoverAnimation(skillsDiv, index);
   isPreviousSkillsAlreadyReset = false;
   setPreviousSkill(skillsDiv, index);
-  // currentHoverSkill = skillsDiv;
 }
 
 function handleTouchingSkill(index) {
   const skillsDiv = skillsDivs[index];
-  if (skillsDiv === previousSkill) return;
+  if (skillsDiv === previousSkill) {
+    resetSkillHoverTarget();
+    return;
+  }
   resetPreviousSkillIfEnterNewSkill();
   setPreviousSkill(skillsDiv, index);
   addSkillHoverAnimation(skillsDiv, index);
@@ -1572,15 +1376,9 @@ function addSkillHoverAnimation(skillsDiv, index) {
   displayInfoBubble(skillsDiv, index);
 }
 
-// function setSkillTargetForLeaveDetection(skillsDiv, index) {
-//   skillTargetForLeaveDetection = skillsDiv;
-//   indexOfSkillTargetForLeaveDetection = index;
-// }
-
 function checkIfStillTouchingSameSkill(event) {
   if (previousSkill === null || previousSkill.contains(event.target)) return;
   resetSkillHoverTarget();
-  // previousSkill = null;
 }
 
 function setPreviousSkill(skillsDiv, index) {
@@ -1594,24 +1392,12 @@ function handleLeaveSkill(index) {
   }
 }
 
-// function handleLeaveSkillBeforeEndAnimation() {
-//   if (indexSlide !== 2 || isSkillsIntroAnimationsEndedArray[previousIndexOfSkill] || previousIndexOfSkill === null) return;
-//   checkIfCursorHoverTarget(
-//     skillsBlocksCollisionsArray[previousIndexOfSkill],
-//     () => {},
-//     () => resetSkillHoverTarget()
-//   );
-// }
-
 function resetSkillHoverTarget() {
   if (isPreviousSkillsAlreadyReset) return;
-  // if (skillTargetForLeaveDetection === null) return;
-  // if (isPreviousSkillsAlreadyReset) return;
   isPreviousSkillsAlreadyReset = true;
   removeSkillTargetHoverAnimation();
   previousSkill = null;
   previousIndexOfSkill = null;
-  // removeSkillTargetForLeaveDetection();
 }
 
 function removeSkillTargetHoverAnimation() {
@@ -1620,22 +1406,19 @@ function removeSkillTargetHoverAnimation() {
   hideAndResetInfoBubble(previousIndexOfSkill);
 }
 
-// function removeSkillTargetForLeaveDetection() {
-//   skillTargetForLeaveDetection = null;
-//   indexOfSkillTargetForLeaveDetection = null;
-// }
-
 function addEndingSkillAnimation(skillsDiv) {
   const matrixValues = getComputedStyle(skillsDiv).transform.match(/matrix\(([^)]+)\)/);
   skillsDiv.classList.remove(CLASS_SKILL_HOVER);
   if (!matrixValues) return;
   const yPosition = parseFloat(matrixValues[1].split(", ")[5]);
-  const endingAnimation = skillsDiv.animate([{ transform: `translateY(${yPosition}px)` }, { transform: "translateY(0)" }], {
-    duration: skillsEndingAnimationDuration,
-    easing: easingSkillsEndingAnimationDuration,
-  });
-  skillsEndingHoverAnimationsArray.push({ name: skillsDiv, animation: endingAnimation });
-  endingAnimation.onfinish = () => removeAnimationFromArray(skillsDiv, skillsEndingHoverAnimationsArray);
+  if (skillsDiv.animate) {
+    const endingAnimation = skillsDiv.animate([{ transform: `translateY(${yPosition}px)` }, { transform: "translateY(0)" }], {
+      duration: skillsEndingAnimationDuration,
+      easing: easingSkillsEndingAnimationDuration,
+    });
+    skillsEndingHoverAnimationsArray.push({ name: skillsDiv, animation: endingAnimation });
+    endingAnimation.onfinish = () => removeAnimationFromArray(skillsDiv, skillsEndingHoverAnimationsArray);
+  }
 }
 
 // → Info-bubbles
@@ -1711,30 +1494,7 @@ function displayInfoBubble(skillsDiv, index) {
   }
 }
 
-// function animateInfoBubbleText(infoBubble, index, infoBubbleText) {
-// function animateInfoBubbleText(infoBubble, index) {
-//   // if (!infoBubbleText) infoBubbleText = infoBubbleTextsArray[index];
-//   let indexChar = 0;
-//   infoBubble.classList.add(CLASS_INFO_BUBBLE_WIDTH_UNSET);
-//   const textBubbleAnimation = setInterval(() => {
-//     if (indexChar < infoBubbleText.length) {
-//       infoBubble.innerHTML += infoBubbleText.charAt(indexChar);
-//       indexChar++;
-//       const bubbleSize = infoBubble.getBoundingClientRect();
-//       if (bubbleSize.width >= infoBubbleWidth) {
-//         infoBubble.classList.remove(CLASS_INFO_BUBBLE_WIDTH_UNSET);
-//         infoBubble.classList.add(CLASS_INFO_BUBBLE_WIDTH_MAX);
-//       }
-//     } else {
-//       clearInterval(textBubbleAnimation);
-//       removeAnimationFromArray(infoBubble, textInfoBubbleAnimationsArray);
-//     }
-//   }, textSpeed);
-//   textInfoBubbleAnimationsArray.push({ name: infoBubble, animation: textBubbleAnimation });
-// }
-
 function hideAndResetInfoBubble(index) {
-  //indexOfInfoBubbleToReset
   const infoBubble = infoBubblesArray[index];
   switch (infoBubbleAnimationsDirection) {
     case "top":
@@ -1775,36 +1535,20 @@ function removeStyleCursorForExamples(example) {
 }
 
 function handleEnterExample(index) {
-  // if (isExamplesIntroAnimationsEnded[index])
   if (currentHoverExampleIndex === index) return;
-  // if (isExamplesIntroAnimationsEnded[index]) {
-  //   addExampleHoverAnimation(index);
-  //   currentHoverExampleIndex = index;
-  // } else {
   if (isExamplesIntroAnimationsEnded[index]) {
     addExampleHoverAnimation(index);
     currentHoverExampleIndex = index;
   } else {
-    console.log("a");
     checkIfCursorHoverTarget(
       examplesBlocksCollisionsArray[index],
       () => {
-        console.log("b");
         addExampleHoverAnimation(index);
         currentHoverExampleIndex = index;
       },
       () => {}
     );
   }
-  // checkIfCursorHoverTarget(
-  //   examplesBlocksCollisionsArray[index],
-  //   () => {
-  //     addExampleHoverAnimation(index);
-  //     currentHoverExampleIndex = index;
-  //   },
-  //   () => {}
-  // );
-  // }
 }
 
 function addExampleHoverAnimation(index) {
@@ -1816,21 +1560,11 @@ function addExampleHoverAnimation(index) {
 
 function handleLeaveExample(index) {
   if (!isExamplesIntroAnimationsEnded[index]) return;
-  // if (isScrolling) return;
-  // if (!isExamplesIntroAnimationsEnded[index]) return;
   removeExamplesHover();
-  // checkIfCursorHoverTarget(
-  //   examplesBlocksCollisionsArray[index],
-  //   () => {},
-  //   () => {
-  //     removeExamplesHover();
-  //   }
-  // );
 }
 
 function handleLeaveExampleBeforeEndAnimation() {
   if (indexSlide !== 3 || isExamplesIntroAnimationsEnded[currentHoverExampleIndex] || currentHoverExampleIndex === null) return;
-  // if (isScrolling) return;
   checkIfCursorHoverTarget(
     examplesBlocksCollisionsArray[currentHoverExampleIndex],
     () => {},
@@ -1842,10 +1576,6 @@ function handleLeaveExampleBeforeEndAnimation() {
 
 function removeExamplesHover() {
   if (currentHoverExampleIndex === null) return;
-  // examplesImages[currentHoverExampleIndex].classList.remove(CLASS_EXAMPLE_FILTER_IMAGE_HOVER);
-  // examplesFilters[currentHoverExampleIndex].classList.remove(CLASS_EXAMPLE_FILTER_HOVER);
-  // examplesH3[currentHoverExampleIndex].classList.remove(CLASS_EXAMPLE_H3_HOVER);
-  // isHoverExamplesArray[currentHoverExampleIndex] = false;
   currentHoverExampleIndex = null;
   for (let i = 0; i < examplesFilters.length; i++) {
     examplesImages[i].classList.remove(CLASS_EXAMPLE_FILTER_IMAGE_HOVER);
@@ -1861,10 +1591,11 @@ function openModalExample(event, index) {
   if (!isExamplesIntroAnimationsStarted[index]) return;
   if (isOnMobile) {
     disableScroll();
+    fixedHTML();
     adjustModalPosition();
     addMobileNavCloseAnimation();
+    isNavIsOpen = false;
   } else resetModalPosition();
-  // activeModalTextArrows();
   removeExamplesHover();
   numberOfModalExampleToDisplay = index;
   addExampleFilterAnimationOnModalEvent("open");
@@ -1934,13 +1665,13 @@ function updateModalExampleToDisplay() {
     modalTitle.innerHTML = `N°${numberOfModalExampleToDisplay + 1} - ${modalExampleToDisplay.title}`;
     changeModalTextAndActiveButton("default");
     modalLink.setAttribute("href", modalExampleToDisplay.link);
-    // modalLink.innerHTML = `<p>${modalExampleToDisplay.link}</p>`;
   }, modalSlideChangeDuration / 2);
 }
 
 /**  @param {string} target "reset", "description", "challenges" or "skills" */
 function changeModalTextAndActiveButton(target) {
   let htmlContent = "";
+  let htmlContentAriaLabel = "";
   switch (target) {
     case "description":
       if (modalPreviousActiveSection === modalDescriptionButtonH4) return;
@@ -1952,7 +1683,7 @@ function changeModalTextAndActiveButton(target) {
       modalPreviousActiveSection.classList.add(CLASS_MODAL_BUTTON_HOVER);
       modalDescriptionButtonH4.classList.remove(CLASS_MODAL_BUTTON_HOVER);
       modalDescriptionButtonH4.classList.add(CLASS_MODAL_BUTTON_ACTIVE);
-      modalText.innerHTML = `<h4 id="modal-text-title">Description de la mission&nbsp;:</h4><p id="modal-description">${modalExampleToDisplay.description}</p>`;
+      modalText.innerHTML = `<h4 id="modal-text-title" role="presentation">Description de la mission&nbsp;:</h4><span class="sr-only">${modalExampleToDisplay.description}</span><p id="modal-description" aria-hidden="true">${modalExampleToDisplay.description}</p>`;
       modalText.scrollTop = 0;
       checkIfModalTextScrollable();
       updateModalTextArrow();
@@ -1968,13 +1699,15 @@ function changeModalTextAndActiveButton(target) {
       modalPreviousActiveSection.classList.add(CLASS_MODAL_BUTTON_HOVER);
       modalChallengesButtonH4.classList.remove(CLASS_MODAL_BUTTON_HOVER);
       modalChallengesButtonH4.classList.add(CLASS_MODAL_BUTTON_ACTIVE);
-      if (modalExampleToDisplay.challenges.length === 1) htmlContent += `<h4 id="modal-text-title">Challenge rencontrée et solution&nbsp;:</h4>`;
-      else htmlContent += `<h4 id="modal-text-title">Challenges rencontrées et solutions&nbsp;:</h4>`;
+      if (modalExampleToDisplay.challenges.length === 1) htmlContentAriaLabel += `<h4 id="modal-text-title" role="presentation">Challenge rencontrée et solution&nbsp;:</h4>`;
+      else htmlContentAriaLabel += `<h4 id="modal-text-title" role="presentation">Challenges rencontrées et solutions&nbsp;:</h4>`;
       for (let i = 0; i < modalExampleToDisplay.challenges.length; i++) {
         const challenge = modalExampleToDisplay.challenges[i];
-        htmlContent += `<p class="modal-problems-p"><img class="arrows-problems" src="./assets/svg/arrow-problem.svg" alt="Icône de flèche.">${challenge.problems}</p><p class="modal-solutions-p"><span class="modal-challenges-span">Solution :</span> ${challenge.solutions}</p>`;
+        htmlContentAriaLabel += `<span class="sr-only">Challenge : ${challenge.problems}</span><span class="sr-only">Solution : ${challenge.solutions}</span>`;
+        htmlContent += `<p class="modal-problems-p" aria-hidden="true"><img class="arrows-problems" src="./assets/svg/arrow-problem.svg" alt="Icône de flèche.">${challenge.problems}</p><p class="modal-solutions-p" aria-hidden="true"><span class="modal-challenges-span">Solution :</span> ${challenge.solutions}</p>`;
       }
       modalText.innerHTML = "";
+      modalText.insertAdjacentHTML("beforeend", htmlContentAriaLabel);
       modalText.insertAdjacentHTML("beforeend", htmlContent);
       modalText.scrollTop = 0;
       checkIfModalTextScrollable();
@@ -1991,14 +1724,16 @@ function changeModalTextAndActiveButton(target) {
       modalPreviousActiveSection.classList.add(CLASS_MODAL_BUTTON_HOVER);
       modalSkillsButtonH4.classList.remove(CLASS_MODAL_BUTTON_HOVER);
       modalSkillsButtonH4.classList.add(CLASS_MODAL_BUTTON_ACTIVE);
-      if (modalExampleToDisplay.challenges.length === 1) htmlContent += `<h4 id="modal-text-title">Compétence acquise :</h4><ul id="modal-skills">`;
-      else htmlContent += `<h4 id="modal-text-title">Compétences acquises :</h4><ul id="modal-skills">`;
+      if (modalExampleToDisplay.challenges.length === 1) htmlContentAriaLabel += `<h4 id="modal-text-title" role="presentation">Compétence acquise :</h4><ul id="modal-skills">`;
+      else htmlContentAriaLabel += `<h4 id="modal-text-title" role="presentation">Compétences acquises :</h4><ul id="modal-skills">`;
       for (let i = 0; i < modalExampleToDisplay.skills.length; i++) {
         const skill = modalExampleToDisplay.skills[i];
+        htmlContentAriaLabel += `<span class="sr-only">${skill}</span>`;
         htmlContent += `<li>${skill}</li>`;
       }
       htmlContent += `</ul>`;
       modalText.innerHTML = "";
+      modalText.insertAdjacentHTML("beforeend", htmlContentAriaLabel);
       modalText.insertAdjacentHTML("beforeend", htmlContent);
       modalText.scrollTop = 0;
       checkIfModalTextScrollable();
@@ -2016,7 +1751,7 @@ function changeModalTextAndActiveButton(target) {
         modalDescriptionButtonH4.classList.remove(CLASS_MODAL_BUTTON_HOVER);
         modalDescriptionButtonH4.classList.add(CLASS_MODAL_BUTTON_ACTIVE);
       }
-      modalText.innerHTML = `<h4 id="modal-text-title">Description de la mission&nbsp;:</h4><p id="modal-description">${modalExampleToDisplay.description}</p>`;
+      modalText.innerHTML = `<h4 id="modal-text-title" role="presentation">Description de la mission&nbsp;:</h4><span class="sr-only">${modalExampleToDisplay.description}</span><p id="modal-description" aria-hidden="true">${modalExampleToDisplay.description}</p>`;
       modalText.scrollTop = 0;
       checkIfModalTextScrollable();
       updateModalTextArrow();
@@ -2113,7 +1848,13 @@ function resetModalSlideSystem() {
 function checkIfClosingModal(event) {
   if (!isModalOpen) return;
   const isClickInsideModal = modal.contains(event.target) || modalPreviousButton.contains(event.target) || modalNextButton.contains(event.target);
-  if (isClickInsideModal && event.target !== modalCloseIcon) return;
+  if (isClickInsideModal) return;
+  closeModal();
+  addExampleFilterAnimationOnModalEvent("close");
+  isModalOpen = false;
+}
+
+function handleCloseModalButton() {
   closeModal();
   addExampleFilterAnimationOnModalEvent("close");
   isModalOpen = false;
@@ -2121,10 +1862,10 @@ function checkIfClosingModal(event) {
 
 function closeModal() {
   if (isOnMobile) enableScroll();
+  relativeHTML();
   clearInterval(scrollModalTextInterval);
   modal.classList.remove(CLASS_MODAL_OPEN);
   modalScreen.classList.add(CLASS_MODAL_SCREEN_CLOSE);
-  // disableModalTextArrows();
   resetModalSlideSystem();
   setTimeout(() => {
     modalScreen.style.display = "none";
@@ -2265,10 +2006,27 @@ function contactPostRequest(event) {
     .then(() => {
       isMailAlreadySend = true;
       contactErrorsForm.style.display = "none";
-      contactSuccessForm.style.display = "flex";
+      openContactInfoBubble(contactSuccessForm);
     })
     .catch((error) => {
       contactErrorsFormText.innerHTML = error.message;
-      contactErrorsForm.style.display = "flex";
+      openContactInfoBubble(contactErrorsForm);
     });
+}
+
+function openContactInfoBubble(target) {
+  isContactInfoBubbleOpen = true;
+  contactErrorsForm.classList.remove(CLASS_CONTACT_INFO_BUBBLE_CLOSE);
+  contactSuccessForm.classList.remove(CLASS_CONTACT_INFO_BUBBLE_CLOSE);
+  target.classList.add(CLASS_CONTACT_INFO_BUBBLE_OPEN);
+  target.style.display = "flex";
+}
+
+function closeContactInfoBubble() {
+  if (!isContactInfoBubbleOpen) return;
+  contactErrorsForm.classList.remove(CLASS_CONTACT_INFO_BUBBLE_OPEN);
+  contactErrorsForm.classList.add(CLASS_CONTACT_INFO_BUBBLE_CLOSE);
+  contactSuccessForm.classList.remove(CLASS_CONTACT_INFO_BUBBLE_OPEN);
+  contactSuccessForm.classList.add(CLASS_CONTACT_INFO_BUBBLE_CLOSE);
+  isContactInfoBubbleOpen = false;
 }

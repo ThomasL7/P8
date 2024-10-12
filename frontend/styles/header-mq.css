@@ -26,18 +26,6 @@
     height: var(--header-height-1024);
   }
 
-  /* #header-title-block img {
-    height: 16px;
-  }
-
-  h1 {
-    font-size: 14px;
-  }
-
-  nav {
-    font-size: 14px;
-  } */
-
   nav a {
     padding-left: 25px;
     padding-right: 25px;
@@ -99,7 +87,6 @@
 
   nav a {
     border: none;
-    /* background-color: rgb(235, 235, 235); */
     background-color: rgb(243, 243, 243);
     color: var(--black);
     width: 100%;
@@ -112,5 +99,11 @@
     justify-content: flex-end;
     font-weight: 400;
     font-size: 14px;
+  }
+}
+
+@media (max-width: 475px) {
+  nav a {
+    padding: 16px 6px 16px 18px;
   }
 }

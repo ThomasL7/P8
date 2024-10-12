@@ -44,7 +44,6 @@
   <link rel="stylesheet" href="./styles/contact-animations.css">
   <link rel="stylesheet" href="./styles/footer-animations.css">
 
-  <script defer src="./datas/info-bubbles-text.js"></script>
   <script defer src="./datas/examples-infos.js"></script>
 
   <script src="./scripts/functions.js"></script>
@@ -54,15 +53,15 @@
 <body>
   <header>
     <div id="header">
-      <div id="header-title-block" style="display: none;">
+      <a href="#home-link" id="header-title-block" style="display: none;">
         <img src="./assets/svg/logo.svg" alt="Logo.">
         <h1>Thomas LÉGER<span style="display: none;"> - Développeur Web (Full Stack)</span></h1>
-      </div>
+      </a>
       <div id="nav-menu-burger" style="display: none;">
         <img src="./assets/svg/menu-burger.svg" alt="Menu de navigation.">
       </div>
       <nav style="display: none;">
-        <a href="#about-link" class="nav-link-hover" style="display: none;">Accueil</a>
+        <a href="#home-link" class="nav-link-hover" style="display: none;">Accueil</a>
         <a href="#about-link" class="nav-link-hover">Qui suis-je ?</a>
         <a href="#skills-link" class="nav-link-hover">Compétences</a>
         <a href="#examples-link" class="nav-link-hover">Portfolio</a>
@@ -113,22 +112,32 @@
               Cette réflexion structurée rend le codage particulièrement stimulant pour moi.
               Tester et ajuster différentes logiques est un véritable plaisir, et chaque challenge est une occasion de mettre en pratique ma
               capacité à résoudre des problèmes.</p> <br>
+            <span class="sr-only">Curieux de nature, je suis particulièrement attiré par l'apprentissage continu que permet le développement
+              informatique. Ce domaine en perpétuelle évolution me donne chaque jour l’opportunité de découvrir de nouvelles techniques, langages,
+              frameworks et bibliothèques.
+              Cette soif de connaissances me permet d’améliorer constamment mes compétences et de rester performant dans mon travail.
+            </span>
+            <span class="sr-only">Je suis passionné par la musique assistée par ordinateur, et j'y trouve une grande satisfaction créative.
+              Ce même plaisir, je le retrouve également dans le développement web, où l'acte de concevoir des applications fonctionnelles et esthétiques
+              me procure un sentiment de gratification similaire. Créer quelque chose de concret, que ce soit en musique ou en code, est pour moi une
+              source d'accomplissement personnel.</span>
           </div>
-          <div id="about-p-3">
+          <div id="about-p-3" aria-hidden="true">
             <p>&nbsp;&nbsp;&nbsp;&nbsp;Curieux de nature, je suis particulièrement attiré par l'apprentissage continu que permet le développement
               informatique. Ce domaine en perpétuelle évolution me donne chaque jour l’opportunité de découvrir de nouvelles techniques, langages,
               frameworks et bibliothèques.
               Cette soif de connaissances me permet d’améliorer constamment mes compétences et de rester performant dans mon travail.</p> <br>
           </div>
-          <div id="about-p-4">
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;Je suis passionné par la musique assistée par ordinateur, et j'y trouve une grande satisfaction créative. Ce même plaisir, je le retrouve également dans le développement web, où l'acte de concevoir des applications fonctionnelles et esthétiques me procure un sentiment de gratification similaire. Créer quelque chose de concret, que ce soit en musique ou en code, est pour moi une source d'accomplissement personnel.</p> <br>
+          <div id="about-p-4" aria-hidden="true">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;Je suis passionné par la musique assistée par ordinateur, et j'y trouve une grande satisfaction créative.
+              Ce même plaisir, je le retrouve également dans le développement web, où l'acte de concevoir des applications fonctionnelles et esthétiques
+              me procure un sentiment de gratification similaire. Créer quelque chose de concret, que ce soit en musique ou en code, est pour moi une
+              source d'accomplissement personnel.</p>
           </div>
         </div>
-        <!-- <div id="about-text-arrow-down" class="arrow-down" style="display: none;"> -->
         <div id="about-text-arrow-down" class="arrow-down" style="display: none;">
           <img src="./assets/svg/arrow-down.svg" alt="Icône pour le défilement du texte vers le bas." aria-hidden="true">
         </div>
-        <!-- </div> -->
       </div>
     </div>
   </section>
@@ -142,41 +151,40 @@
     <div id="skills-content">
       <h2 class="slide-title-style">COMPÉTENCES</h2>
       <div id="skills-trees">
-
         <div id="skills-tree-left">
+          <span class="sr-only">Cliquez pour obtenir plus d'informations sur les différentes compétences.</span>
           <h3>Frontend</h3>
           <ul>
             <li>
-              <!-- <span aria-label="HTML, cliquez pour plus d'informations."></span> -->
-              <p class="info-bubbles">HTML est le langage standard utilisé pour créer la structure des pages web. Il permet de définir les éléments tels que les titres, paragraphes, images, et liens.</p>
               <div class="skills-items-div">
                 <img src="./assets/svg/html.svg" alt="Icône d'HTML." aria-hidden="true">
-                <h4 aria-hidden="true">HTML</h4>
+                <h4>HTML</h4>
               </div>
+              <p class="info-bubbles">HTML est le langage standard utilisé pour créer la structure des pages web. Il permet de définir les éléments tels que les titres, paragraphes, images, et liens.</p>
             </li>
             <li>
+              <div class="skills-items-div">
+                <img src="./assets/svg/css.svg" alt="Icône de CSS." aria-hidden="true">
+                <h4>CSS</h4>
+              </div>
               <p class="info-bubbles">CSS est utilisé pour styliser les pages web, en définissant l'apparence des éléments HTML comme les couleurs, polices, espacements, et mises en page.</p>
-              <div class="skills-items-div" tabindex="0">
-                <img src="./assets/svg/css.svg" alt="Icône de CSS." aria-label="CSS, cliquez pour plus d'informations.">
-                <h4 aria-hidden="true">CSS</h4>
-              </div>
             </li>
             <li>
-              <p class="info-bubbles">SASS est une extension de CSS qui ajoute des fonctionnalités avancées comme les variables, fonctions, et mixins pour une gestion plus efficace des styles.</p>
-              <div class="skills-items-div"><img src="./assets/svg/sass.svg" alt="Icône de SASS." aria-label="SASS, cliquez pour plus d'informations." tabindex="0">
-                <h4 aria-hidden="true">SASS</h4>
+              <div class="skills-items-div"><img src="./assets/svg/sass.svg" alt="Icône de SASS." aria-hidden="true">
+                <h4>SASS</h4>
               </div>
+              <p class="info-bubbles">SASS est une extension de CSS qui ajoute des fonctionnalités avancées comme les variables, fonctions, et mixins pour une gestion plus efficace des styles.</p>
             </li>
             <li>
               <p class="info-bubbles">JavaScript est un langage de programmation utilisé pour ajouter des fonctionnalités interactives et dynamiques aux sites web, comme les animations ou la validation de formulaires.</p>
-              <div class="skills-items-div"><img src="./assets/svg/javascript.svg" alt="Icône de JavaScript." aria-label="JavaScript, cliquez pour plus d'informations.">
-                <h4 aria-hidden="true">JavaScript</h4>
+              <div class="skills-items-div"><img src="./assets/svg/javascript.svg" alt="Icône de JavaScript." aria-hidden="true">
+                <h4>JavaScript</h4>
               </div>
             </li>
             <li>
               <p class="info-bubbles">React est une bibliothèque JavaScript utilisée pour construire des interfaces utilisateur interactives et réactives grâce à des composants.</p>
-              <div class="skills-items-div"><img src="./assets/svg/react.svg" alt="Icône de React." aria-label="React, cliquez pour plus d'informations.">
-                <h4 aria-hidden="true">React</h4>
+              <div class="skills-items-div"><img src="./assets/svg/react.svg" alt="Icône de React." aria-hidden="true">
+                <h4>React</h4>
               </div>
             </li>
           </ul>
@@ -187,26 +195,26 @@
           <ul>
             <li>
               <p class="info-bubbles">Node.JS est un environnement d'exécution JavaScript côté serveur qui permet de créer des applications web performantes et évolutives.</p>
-              <div class="skills-items-div"><img src="./assets/svg/node-js.svg" alt="Icône de Node.JS." aria-label="Node.JS, cliquez pour plus d'informations.">
-                <h4 aria-hidden="true">Node.JS</h4>
+              <div class="skills-items-div"><img src="./assets/svg/node-js.svg" alt="Icône de Node.JS." aria-hidden="true">
+                <h4>Node.JS</h4>
               </div>
             </li>
             <li>
               <p class="info-bubbles">Express.JS est un framework minimaliste pour Node.JS qui facilite le développement d'applications web et d'API en fournissant des outils et des fonctionnalités simplifiées.</p>
-              <div class="skills-items-div"><img src="./assets/svg/express-js.svg" alt="Icône d'Express.JS." aria-label="Express.JS, cliquez pour plus d'informations.">
-                <h4 aria-hidden="true">Express.JS</h4>
+              <div class="skills-items-div"><img src="./assets/svg/express-js.svg" alt="Icône d'Express.JS." aria-hidden="true">
+                <h4>Express.JS</h4>
               </div>
             </li>
             <li>
               <p class="info-bubbles">MongoDB est une base de données NoSQL qui stocke les données sous forme de documents JSON, offrant flexibilité et performance pour les applications modernes.</p>
-              <div class="skills-items-div"><img src="./assets/svg/mongodb.svg" alt="Icône de MongoDB." aria-label="MongoDB, cliquez pour plus d'informations.">
-                <h4 aria-hidden="true">MongoDB</h4>
+              <div class="skills-items-div"><img src="./assets/svg/mongodb.svg" alt="Icône de MongoDB." aria-hidden="true">
+                <h4>MongoDB</h4>
               </div>
             </li>
             <li>
               <p class="info-bubbles">PHP est un langage de programmation côté serveur largement utilisé pour le développement de sites web dynamiques et d'applications web.</p>
-              <div class="skills-items-div"><img src="./assets/svg/php.svg" alt="Icône de PHP." aria-label="PHP, cliquez pour plus d'informations.">
-                <h4 aria-hidden="true">PHP</h4>
+              <div class="skills-items-div"><img src="./assets/svg/php.svg" alt="Icône de PHP." aria-hidden="true">
+                <h4>PHP</h4>
               </div>
             </li>
           </ul>
@@ -217,32 +225,32 @@
           <ul>
             <li>
               <p class="info-bubbles">Git est un système de contrôle de version distribué qui permet de suivre les modifications du code et de collaborer efficacement avec d'autres développeurs.</p>
-              <div class="skills-items-div"><img src="./assets/svg/git.svg" alt="Icône de Git." aria-label="Git, cliquez pour plus d'informations.">
-                <h4 aria-hidden="true">Git</h4>
+              <div class="skills-items-div"><img src="./assets/svg/git.svg" alt="Icône de Git." aria-hidden="true">
+                <h4>Git</h4>
               </div>
             </li>
             <li>
               <p class="info-bubbles">GitHub est une plateforme de gestion de code source et de collaboration, permettant de stocker, partager et gérer des projets Git en ligne.</p>
-              <div class="skills-items-div"><img src="./assets/svg/github-black.svg" alt="Icône de GitHub." aria-label="GitHub, cliquez pour plus d'informations.">
-                <h4 aria-hidden="true">GitHub</h4>
+              <div class="skills-items-div"><img src="./assets/svg/github-black.svg" alt="Icône de GitHub." aria-hidden="true">
+                <h4>GitHub</h4>
               </div>
             </li>
             <li>
               <p class="info-bubbles">Figma est un outil de conception d'interface utilisateur basé sur le cloud, utilisé pour créer des maquettes interactives et collaborer en temps réel.</p>
-              <div class="skills-items-div"><img src="./assets/svg/figma.svg" alt="Icône de Figma." aria-label="Figma, cliquez pour plus d'informations.">
-                <h4 aria-hidden="true">Figma</h4>
+              <div class="skills-items-div"><img src="./assets/svg/figma.svg" alt="Icône de Figma." aria-hidden="true">
+                <h4>Figma</h4>
               </div>
             </li>
             <li>
               <p class="info-bubbles">Notion est un outil de gestion de projet et de prise de notes, permettant d'organiser des tâches, documents et informations au sein d'une interface flexible.</p>
-              <div class="skills-items-div"><img src="./assets/svg/notion.svg" alt="Icône de Notion." aria-label="Notion, cliquez pour plus d'informations.">
-                <h4 aria-hidden="true">Notion</h4>
+              <div class="skills-items-div"><img src="./assets/svg/notion.svg" alt="Icône de Notion." aria-hidden="true">
+                <h4>Notion</h4>
               </div>
             </li>
             <li>
               <p class="info-bubbles">Postman est un outil utilisé pour tester et documenter les API, permettant de simuler des requêtes et de visualiser les réponses de manière intuitive.</p>
-              <div class="skills-items-div"><img src="./assets/svg/postman.svg" alt="Icône de Postman." aria-label="Postman, cliquez pour plus d'informations.">
-                <h4 aria-hidden="true">Postman</h4>
+              <div class="skills-items-div"><img src="./assets/svg/postman.svg" alt="Icône de Postman." aria-hidden="true">
+                <h4>Postman</h4>
               </div>
             </li>
           </ul>
@@ -260,100 +268,109 @@
      (max-width: 1440px) 1440px" alt="Illustration de fond.">
     <div id="examples-content">
       <h2 class="slide-title-style">PORTFOLIO</h2>
+      <span class="sr-only">Cliquez pour obtenir plus d'informations sur les différents projets.</span>
+
+      <ul id="examples-gallery">
+        <li id="example-1">
+          <div aria-hidden="true">
+            <div class="examples-filters">
+              <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
+              <p>Cliquez pour plus d'informations&nbsp;!</p>
+            </div>
+            <img class="examples-images" src="./assets/images/example-1-1.png" alt="Image du site.">
+          </div>
+          <h3>Page d'accueil d'une agence de voyage (HTML & CSS)</h3>
+        </li>
+        <li id="example-2">
+          <div aria-hidden="true">
+            <div class="examples-filters">
+              <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
+              <p>Cliquez pour plus d'informations&nbsp;!</p>
+            </div>
+            <img class="examples-images" src="./assets/images/example-2.png" alt="Image du site.">
+          </div>
+          <h3>Portfolio dynamique (JavaScript)</h3>
+        </li>
+        <li id="example-3">
+          <div aria-hidden="true">
+            <div class="examples-filters">
+              <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
+              <p>Cliquez pour plus d'informations&nbsp;!</p>
+            </div>
+            <img class="examples-images" src="./assets/images/example-3-1.png" alt="Image du site.">
+          </div>
+          <h3>Application web de location immobilière (React)</h3>
+        </li>
+        <li id="example-4">
+          <div aria-hidden="true">
+            <div class="examples-filters">
+              <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
+              <p>Cliquez pour plus d'informations&nbsp;!</p>
+            </div>
+            <img class="examples-images" src="./assets/images/example-4-1.png" alt="Image du site.">
+          </div>
+          <h3>Back-end d'un site de notation de livres (Node.js & MongoDB)</h3>
+        </li>
+        <li id="example-5">
+          <div aria-hidden="true">
+            <div class="examples-filters">
+              <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
+              <p>Cliquez pour plus d'informations&nbsp;!</p>
+            </div>
+            <img class="examples-images" src="./assets/images/example-5-1.png" alt="Image du site.">
+          </div>
+          <h3>Optimisation et débogage d'un site de photographe</h3>
+        </li>
+      </ul>
 
       <div id="modal-screen">
-        <img id="modal-previous-button" src="./assets/svg/next.svg" alt="Icône précédent.">
+        <img id="modal-previous-button" src="./assets/svg/next.svg" alt="Bouton projet précédent.">
         <div id="modal">
           <div id="modal-header">
-            <h3 id="modal-title">Titre</h3>
-            <img id="modal-close-icon" src="./assets/svg/close2.svg" alt="Icône de fermeture de fenêtre.">
+            <h3 id="modal-title" role="presentation">Titre</h3>
+            <img id="modal-close-icon" src="./assets/svg/close2.svg" alt="Bouton pour la fermeture de fenêtre modale.">
           </div>
           <div id="modal-image-section">
-            <div id="image-images-slider">
+            <div id="image-images-slider" aria-hidden="true">
               <img id="modal-image-A" src="./assets/images/example-1.png" alt="Image du projet.">
               <img loading="lazy" id="modal-image-B" class="modal-slide-B-start-position" src="./assets/images/example-1.png" alt="Image du projet.">
             </div>
             <div id="modal-buttons-section">
-              <h4 id="modal-description-button-h4" class="modal-button-active">
-                <span class="modal-buttons-text">Description</span>
-                <img class="modal-buttons-images" src="./assets/svg/description-white.svg" alt="Description.">
-              </h4>
-              <h4 id="modal-challenges-button-h4" class="modal-button-hover">
-                <span class="modal-buttons-text">Challenges</span>
-                <img class="modal-buttons-images" src="./assets/svg/exclamation-mark-white.svg" alt="Description.">
-              </h4>
-              <h4 id="modal-skills-button-h4" class="modal-button-hover">
-                <span class="modal-buttons-text">Compétences</span>
-                <img class="modal-buttons-images" src="./assets/svg/cog-white.svg" alt="Description.">
-              </h4>
+              <button id="modal-description-button" class="modal-button-active">
+                <span class="sr-only">Bouton pour afficher la description du projet.</span>
+                <span class="modal-buttons-text" aria-hidden="true">Description</span>
+                <img class="modal-buttons-images" src="./assets/svg/description-white.svg" alt="Bouton pour afficher la description du projet." aria-hidden="true">
+              </button>
+              <button id="modal-challenges-button" class="modal-button-hover" aria-label="Bouton pour afficher les challenges rencontrés au cours du projet.">
+                <span class="sr-only">Bouton pour afficher les challenges rencontrés au cours du projet.</span>
+                <span class="modal-buttons-text" aria-hidden="true">Challenges</span>
+                <img class="modal-buttons-images" src="./assets/svg/exclamation-mark-white.svg" alt="Bouton pour afficher les challenges rencontrés au cours du projet." aria-hidden="true">
+              </button>
+              <button id="modal-skills-button" class="modal-button-hover" aria-label="Bouton pour afficher les compétences acquises au cours du projet.">
+                <span class="sr-only">Bouton pour afficher les compétences acquises au cours du projet.</span>
+                <span class="modal-buttons-text" aria-hidden="true">Compétences</span>
+                <img class="modal-buttons-images" src="./assets/svg/cog-white.svg" alt="Bouton pour afficher les compétences acquises au cours du projet." aria-hidden="true">
+              </button>
             </div>
           </div>
           <div id="modal-text-block">
             <div id="modal-text">
-              <h4 id="modal-text-title">Description :</h4>
+              <h4 id="modal-text-title" role="presentation">Description :</h4>
               <img class="arrows-problems" src="./assets/svg/arrow-problem.svg" alt="Icône de flèche.">
             </div>
-            <div id="modal-text-arrow-down" class="arrow-down" style="display: none;">
+            <div id="modal-text-arrow-down" class="arrow-down" style="display: none;" aria-hidden="true">
               <img src="./assets/svg/arrow-down.svg" alt="Faites défiler vers le bas pour voir plus de texte.">
             </div>
           </div>
-          <!-- <a id="modal-link" href="#" target="_blank">Lien du projet : GitHub</a> -->
-          <a id="modal-link" href="#" target="_blank"><span>Lien du projet : </span>&nbsp;GitHub</a>
+          <a id="modal-link" href="#" target="_blank">
+            <span class="sr-only">Lien Github du projet.</span>
+            <div aria-hidden="true">
+              <span>Lien du projet : </span>&nbsp;GitHub
+            </div>
+          </a>
         </div>
-        <img id="modal-next-button" src="./assets/svg/next.svg" alt="Icône suivant.">
-      </div>
-
-      <div id="examples-gallery">
-        <article id="example-1">
-          <div>
-            <div class="examples-filters" aria-hidden="true">
-              <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
-              <p>Cliquez pour plus d'informations&nbsp;!</p>
-            </div>
-            <img class="examples-images" src="./assets/images/example-1-1.png" alt="Image du site." aria-label="Image du site, cliquez pour plus d'informations.">
-          </div>
-          <h3>Page d'accueil d'une agence de voyage (HTML & CSS)</h3>
-        </article>
-        <article id="example-2">
-          <div>
-            <div class="examples-filters" aria-hidden="true">
-              <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
-              <p>Cliquez pour plus d'informations&nbsp;!</p>
-            </div>
-            <img class="examples-images" src="./assets/images/example-2.png" alt="Image du site." aria-label="Image du site, cliquez pour plus d'informations.">
-          </div>
-          <h3>Portfolio dynamique (JavaScript)</h3>
-        </article>
-        <article id="example-3">
-          <div>
-            <div class="examples-filters" aria-hidden="true">
-              <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
-              <p>Cliquez pour plus d'informations&nbsp;!</p>
-            </div>
-            <img class="examples-images" src="./assets/images/example-3-1.png" alt="Image du site." aria-label="Image du site, cliquez pour plus d'informations.">
-          </div>
-          <h3>Application web de location immobilière (React)</h3>
-        </article>
-        <article id="example-4">
-          <div>
-            <div class="examples-filters" aria-hidden="true">
-              <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
-              <p>Cliquez pour plus d'informations&nbsp;!</p>
-            </div>
-            <img class="examples-images" src="./assets/images/example-4-1.png" alt="Image du site." aria-label="Image du site, cliquez pour plus d'informations.">
-          </div>
-          <h3>Back-end d'un site de notation de livres (Node.js & MongoDB)</h3>
-        </article>
-        <article id="example-5">
-          <div>
-            <div class="examples-filters" aria-hidden="true">
-              <img src="./assets/svg/lens.svg" alt="Icône de loupe.">
-              <p>Cliquez pour plus d'informations&nbsp;!</p>
-            </div>
-            <img class="examples-images" src="./assets/images/example-5-1.png" alt="Image du site." aria-label="Image du site, cliquez pour plus d'informations.">
-          </div>
-          <h3>Optimisation et débogage d'un site de photographe</h3>
-        </article>
+        <img id="modal-next-button" src="./assets/svg/next.svg" alt="Bouton projet suivant.">
+        <span class="sr-only">Continuer pour passer à la section suivante.</span>
       </div>
     </div>
   </section>
@@ -366,8 +383,6 @@
      (max-width: 1440px) 1440px" alt="Illustration de fond.">
     <div id="contact-content">
       <h2 class="slide-title-style">CONTACT</h2>
-      <!-- <p id="contact-text">Un projet, une idée ou une opportunité de job en développement web ?<br>
-        N'hésitez pas à me contacter en remplissant le formulaire ci-dessous.</p> -->
       <form id="contact-form">
         <div id="contact-form-inputs">
           <div id="contact-full-name">
@@ -392,12 +407,10 @@
         <div id="submit-block">
           <div id="contact-errors-form" style="display: none;">
             <img src="./assets/svg/warning.svg" alt="Icône vigilant.">
-            <!-- <hr> -->
             <p id="contact-errors-form-text">Un ou plusieurs champs dépassent la longueur maximale autorisée de caractères.</p>
           </div>
           <div id="contact-success-form" style="display: none;">
             <img src="./assets/svg/mail-send.svg" alt="Icône vigilant.">
-            <!-- <hr> -->
             <p id="contact-success-form-text">Merci, votre message a été envoyé avec succès.</p>
           </div>
           <button type="submit">Envoyez votre message</button>
@@ -412,9 +425,18 @@
   <footer>
     <div id="footer">
       <div style="display: none;">
-        <a href="mailto:ton-email@example.com" target="_blank" title="Envoyer un e-mail via votre messagerie par default." aria-label="Cliquez pour m'envoyer un e-mail via votre messagerie par default."><img src="./assets/svg/e-mail.svg" alt="Icône d'un e-mail." aria-hidden="true"></a>
-        <a href="https://github.com/ThomasL7?tab=repositories" target="_blank" title="Lien vers mon GitHub." aria-label="Lien vers mon GitHub."><img src="./assets/svg/github-white.svg" alt="Icône de GitHub." aria-hidden="true"></a>
-        <a href="./datas/CV-Thomas-LEGER.pdf" download="CV - Thomas LÉGER.pdf" title="Cliquez pour télécharger mon curriculum vitæ." aria-label="Cliquez pour télécharger mon CV"><img src="./assets/svg/CV.svg" alt="Icône d'un CV." aria-hidden="true"></a>
+        <a href="mailto:ton-email@example.com" target="_blank" title="Envoyer un e-mail via votre messagerie par default.">
+          <img src="./assets/svg/e-mail.svg" alt="Icône d'un e-mail." aria-hidden="true">
+          <span class="sr-only">Cliquez pour m'envoyer un e-mail via votre messagerie par default.</span>
+        </a>
+        <a href="https://github.com/ThomasL7?tab=repositories" target="_blank" title="Lien vers mon GitHub.">
+          <img src="./assets/svg/github-white.svg" alt="Icône de GitHub." aria-hidden="true">
+          <span class="sr-only">Lien vers mon GitHub.</span>
+        </a>
+        <a href="./datas/CV-Thomas-LEGER.pdf" download="CV - Thomas LÉGER.pdf" title="Cliquez pour télécharger mon curriculum vitæ.">
+          <img src="./assets/svg/CV.svg" alt="Icône d'un CV." aria-hidden="true">
+          <span class="sr-only">Cliquez pour télécharger mon CV.</span>
+        </a>
       </div>
     </div>
   </footer>

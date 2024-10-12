@@ -3,9 +3,9 @@
     margin-bottom: var(--footer-height-1440);
   }
 
-  #contact-content .slide-title-style {
-    margin-bottom: 62px;
-  }
+  /* #contact-content .slide-title-style {
+    margin-bottom: 44px;
+  } */
 
   /* #contact-content .slide-title-style::before,
   #contact-content .slide-title-style::after {
@@ -17,8 +17,12 @@
     font-size: 18px;
   }
 
-  #contact-full-name {
+  /* #contact-full-name {
     gap: 0px 30px;
+  } */
+
+  .contact-name-sections:first-child {
+    margin-right: 30px;
   }
 
   /* #contact-form-inputs label {
@@ -96,7 +100,7 @@
   }
 
   #contact-content .slide-title-style {
-    margin-bottom: 61px;
+    margin-bottom: 40px;
   }
 
   #contact-form {
@@ -104,8 +108,12 @@
     font-size: 17px;
   }
 
-  #contact-full-name {
+  /* #contact-full-name {
     gap: 0px 24px;
+  } */
+
+  .contact-name-sections:first-child {
+    margin-right: 24px;
   }
 
   /* #contact-form-inputs label {
@@ -152,7 +160,8 @@
   }
 
   #contact-content .slide-title-style {
-    margin-bottom: 58px;
+    margin-bottom: 32px;
+    top: -20px;
   }
 
   #contact-form {
@@ -200,7 +209,9 @@
 
 @media (max-height: 750px) {
   #contact-content .slide-title-style {
-    margin-bottom: 44px;
+    /* margin-bottom: 34px; */
+    /* padding: 20px 42px; */
+    margin-bottom: 20px;
   }
 
   #contact-form {
@@ -208,9 +219,9 @@
     font-size: 18px;
   }
 
-  #contact-full-name {
+  /* #contact-full-name {
     gap: 0px 24px;
-  }
+  } */
 
   #contact-form-inputs input,
   #contact-message {
@@ -260,8 +271,9 @@
   }
 
   #contact-content .slide-title-style {
-    margin-top: 124px;
-    margin-bottom: 66px;
+    margin-top: 117px;
+    margin-bottom: 22px;
+    padding: 16px 30px;
   }
 
   #contact-form {
@@ -270,9 +282,9 @@
     font-size: 18px;
   }
 
-  #contact-full-name {
+  /* #contact-full-name {
     gap: 0px 24px;
-  }
+  } */
 
   #contact-form-inputs label {
     margin-bottom: 11px;
@@ -337,6 +349,10 @@
 @media (max-width: 475px) {
   #contact-full-name {
     flex-direction: column;
+  }
+
+  .contact-name-sections:first-child {
+    margin-right: 0px;
   }
 }
 

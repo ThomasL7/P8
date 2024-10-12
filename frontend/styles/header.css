@@ -52,7 +52,8 @@ nav {
 nav a {
   cursor: default;
   height: 100%;
-  align-content: center;
+  display: flex;
+  align-items: center;
   padding-left: 35px;
   padding-right: 35px;
   border-left: 2px solid rgb(226, 226, 226);

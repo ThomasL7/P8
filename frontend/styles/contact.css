@@ -18,27 +18,13 @@
 }
 
 #contact-content .slide-title-style {
-  margin-bottom: 64px;
+  margin-bottom: 44px;
 }
-
-#contact-content .slide-title-style::before,
-#contact-content .slide-title-style::after {
-  width: 172%;
-}
-
-/* #contact-text {
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 1.3;
-  margin-bottom: 42px;
-  display: none;
-} */
 
 #contact-form {
   display: flex;
   flex-direction: column;
   width: 525px;
-  /* width: 55%; */
   font-size: 20px;
   font-weight: 600;
 }
@@ -52,7 +38,10 @@
 #contact-full-name {
   display: flex;
   width: 100%;
-  gap: 0px 32px;
+}
+
+.contact-name-sections:first-child {
+  margin-right: 32px;
 }
 
 .contact-name-sections {
@@ -88,12 +77,10 @@
 
 #contact-message {
   padding: 6px 6px;
-  /* padding: 1px 6px; */
   height: 110px;
   line-height: 1.2;
   font-family: "Arial";
   resize: none;
-  /* font-size: 18px; */
 }
 
 #submit-block {
@@ -104,49 +91,36 @@
 
 #contact-form button {
   color: var(--black);
-  /* width: 55%; */
   border: none;
   background: radial-gradient(ellipse at center, rgb(255, 255, 255) 0%, rgb(240, 239, 239) 100%);
   padding: 8px 26px;
   font-size: 16px;
   font-weight: 600;
   margin: auto;
-  /* margin-left: auto; */
   margin-top: 42px;
   border-radius: 60px;
-  /* height: 34px; */
 }
 
 #contact-errors-form,
 #contact-success-form {
   position: absolute;
   display: flex;
-  /* margin-top: 32px; */
   align-items: center;
   justify-content: center;
-  /* width: 80%; */
   box-sizing: border-box;
   padding: 12px 18px;
   border-radius: 12px;
-  /* top: calc(-100% - 15px); */
-  /* height: min-content; */
-  /* max-height: 100%; */
-  /* height: 75%; */
   z-index: 1;
   bottom: 52px;
   line-height: 1.4;
-  /* max-width: 80%; */
 }
 
 #contact-errors-form {
-  /* background: radial-gradient(ellipse at center, rgba(238, 71, 71, 0.85) 0%, rgba(238, 71, 71, 0.85) 100%); */
   background: radial-gradient(ellipse at center, rgba(219, 68, 68, 0.85) 0%, rgba(187, 55, 55, 0.8) 100%);
   width: 80%;
 }
 
 #contact-success-form {
-  /* background: radial-gradient(ellipse at center, rgba(69, 212, 128, 0.85) 0%, rgba(69, 212, 128, 0.85) 100%); */
-  /* background-color: rgba(96, 143, 96, 0.9); */
   background: radial-gradient(ellipse at center, rgba(122, 179, 122, 0.88) 0%, rgba(93, 148, 93, 0.85) 100%);
 }
 
@@ -158,8 +132,6 @@
 
 #contact-errors-form hr,
 #contact-success-form hr {
-  /* height: 33px; */
-  /* height: 50%; */
   width: 3px;
   border: none;
   border-radius: 12px;
@@ -174,7 +146,4 @@
   font-size: 17px;
   font-weight: 600;
   line-height: 1.2;
-  /* width: 100%; */
-  /* margin-right: 10px; */
-  /* padding-left: 12px; */
 }

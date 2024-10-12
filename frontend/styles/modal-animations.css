@@ -1,7 +1,7 @@
 :root {
   /* ==== Durations ==== */
   --modal-closing-animation-duration: 0.15s;
-  --modal-slide-change-duration: 0.2s;
+  --modal-slide-change-duration: 0.265s;
 }
 
 .modal-open {
@@ -65,16 +65,8 @@
 }
 
 #modal-buttons-section .modal-button-active {
-  /* background-color: #d36499; */
-  /* color: var(--white); */
-  /* background: radial-gradient(ellipse at center, rgb(255, 255, 255) 0%, 50%, rgb(238, 238, 238) 100%); */
-  /* background-color: #e7e7e7; */
   background: radial-gradient(ellipse at center, rgb(241, 239, 239) 0%, rgb(224, 224, 224) 100%);
   color: var(--black);
-
-  /* border: 1px solid black;
-  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1); */
-  /* opacity: 1; */
 }
 
 @media (hover: hover) {
@@ -83,7 +75,6 @@
   }
 
   #modal-buttons-section .modal-button-hover:hover {
-    /* background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.493) 0%, rgba(255, 255, 255, 0.178) 100%); */
     animation: modal-button-hover 0.375s ease-in-out 0s infinite alternate none;
   }
 
@@ -116,7 +107,6 @@
 
 .modal-slide-in-left {
   animation: modal-slide-in-left var(--modal-slide-change-duration) ease-in-out 0s 1 normal forwards;
-  /* animation: modal-slide-in-left var(--modal-slide-change-duration) cubic-bezier(0.65, 0.27, 0.87, 0.68) 0s 1 normal forwards; */
 }
 
 @keyframes modal-slide-in-left {

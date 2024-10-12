@@ -37,3 +37,13 @@
     height: 18px;
   }
 }
+
+@media (max-width: 475px) {
+  #footer a {
+    margin-right: 38px;
+  }
+
+  #footer a:last-child {
+    margin-right: 0px;
+  }
+}

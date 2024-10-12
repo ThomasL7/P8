@@ -9,22 +9,24 @@
 }
 
 #skills-content .slide-title-style {
-  margin-bottom: 68px;
+  margin-bottom: 54px;
 }
 
 #skills-trees {
   width: 95%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0 35px;
+}
+
+#skills-tree-left,
+#skills-tree-center {
+  margin-right: 35px;
 }
 
 #skills-tree-left,
 #skills-tree-center,
 #skills-tree-right {
   padding: 30px 5px 40px 5px;
-  /* background: radial-gradient(circle at center, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.25) 100%); */
-  /* background: radial-gradient(circle at center, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.25) 100%); */
   background: radial-gradient(circle at center, rgba(255, 255, 255, 0.64) 0%, rgba(255, 255, 255, 0.22) 100%);
   border-radius: 18px;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.062);
@@ -48,7 +50,8 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 30px 15px;
+  margin-right: -15px;
+  margin-bottom: -30px;
 }
 
 #skills-trees li {
@@ -56,6 +59,8 @@
   text-align: center;
   position: relative;
   box-sizing: border-box;
+  margin-right: 15px;
+  margin-bottom: 30px;
 }
 
 .skills-items-div img {

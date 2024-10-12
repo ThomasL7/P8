@@ -1,19 +1,23 @@
 
 refaire imag eprojet
-accessibility a finir
 
-bug limit not reach
-bug scroll for nothing
-bug no anim
+
 bug push to reload
 
+bug animation transi
 
+gap
+element.animate
+addevenetlistener change media query
+100dvh
+overflow-y html
 
+PB IMG COVER 100% ????????????
 
-gap non pris charge safari, margin et - margin pr grid
+bug limit not reach
 
-bug update arrow modal text
-but couleur modal pc vers mobile
-BUG SCROLL INTERACTION TEXT
-bug update modal screen
-bug hover examples
+Passive event prevent default ????
+
+authorizeSlideChange
+
+tablette vdh a test

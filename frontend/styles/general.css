@@ -1,9 +1,6 @@
 :root {
   /* ==== Colors ==== */
   --white: #ffffff;
-  /* --black: #1e1d1d;
-  --general-background-color: rgb(65, 65, 65);
-  --header-footer-color: #1e1d1d; */
   --black: #141313;
   --general-background-color: rgb(65, 65, 65);
   --header-footer-color: rgb(26, 25, 25);
@@ -12,17 +9,19 @@
   --slide-side-margin: 35px;
   --header-height-normal: 52px;
   --footer-height-normal: 52px;
-  --section-height-normal: calc(100dvh - var(--header-height-normal) - var(--footer-height-normal) + 4px);
+  --screen-height: 0;
+  --section-height-normal: calc(var(--screen-height) - var(--header-height-normal) - var(--footer-height-normal) + 4px);
 }
 
 html {
   overflow-x: hidden;
   scroll-behavior: auto;
   cursor: default;
-  /* background-color: var(--general-background-color); */
   font-size: 18px;
   font-family: "Arial";
   scrollbar-width: none;
+  height: 100%;
+  width: 100%;
 }
 
 html::-webkit-scrollbar {
@@ -32,7 +31,6 @@ html::-webkit-scrollbar {
 body {
   display: flex;
   flex-direction: column;
-  /* min-width: 320px; */
   min-height: 100dvh;
   color: var(--white);
 }
@@ -68,47 +66,15 @@ body {
   filter: brightness(0.3) contrast(0.6);
 }
 
-/* .slide-title-style::before,
-.slide-title-style::after {
-  content: "";
-  display: block;
-  position: absolute;
-  width: 125%;
-  height: 5px;
-}
-
-.slide-title-style::before {
-  top: -12px;
-}
-
-.slide-title-style::after {
-  top: 38px;
-} */
-
 .slide-title-style {
   display: flex;
   justify-content: center;
   position: relative;
   font-size: 22px;
   font-weight: 800;
-}
-
-.slide-title-style::before,
-.slide-title-style::after {
-  content: "";
-  display: block;
-  position: absolute;
-  width: 250px;
-  height: 5px;
-  background-color: var(--white);
-}
-
-.slide-title-style::before {
-  top: -20px;
-}
-
-.slide-title-style::after {
-  bottom: -20px;
+  padding: 24px 50px;
+  border: 5px solid var(--white);
+  border-width: 5px 0px;
 }
 
 .arrow-down {
@@ -136,7 +102,7 @@ body {
   width: 100%;
   position: fixed;
   z-index: 2;
-  background-color: rgb(29, 27, 27);
+  background-color: rgb(24, 23, 23);
   height: 100%;
   bottom: 0px;
   z-index: 3;
@@ -144,19 +110,15 @@ body {
   text-align: center;
   font-size: 18px;
   font-weight: 600;
-  color: rgb(223, 117, 117);
+  color: rgb(211, 124, 124);
   padding: 35px;
   box-sizing: border-box;
 }
 
-/* .disablePushToReload {
-  overscroll-behavior-y: none;
-} */
 .sr-only {
   position: absolute;
   width: 1px;
-  height: 1px;
-  margin: -1px;
+  white-space: nowrap;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
 }
