@@ -1,3 +1,7 @@
+/* scroll-snap-type: x mandatory; */
+/* scroll-snap-align: center; */
+/* env(safe-area-inset-top) */
+
 // (function () {
 //   let logs = [];
 //   function showPrompt(type, message) {
@@ -227,7 +231,6 @@ let isHoverHomeCVButton = false;
 // → About
 let aboutTextBlockCollisionArray = [];
 let isAboutTextScrollable = false;
-// let isHoverAboutText;
 let scrollAboutTextInterval;
 // → Skills
 const easingSkillsEndingAnimationDuration = "linear";
@@ -252,10 +255,8 @@ let infoBubbleMargin = 0;
 let infoBubbleOffsetX = 0;
 let infoBubbleOffsetY = 0;
 let infoBubbleOffsetYOnMobile = 0;
-// let infoBubbleTextsArray = [];
 let infoBubbleMaxWidth = 0;
 let isHoverSkillArray = [];
-// let textInfoBubbleAnimationsArray = [];
 let textSpeed = 0;
 // → Examples
 let currentHoverExampleIndex = null;
@@ -317,7 +318,6 @@ document.addEventListener("DOMContentLoaded", () => {
   homeCVButton = window.homeCVButton;
   // → About
   aboutSection = document.getElementById("about");
-  // aboutBackground = document.querySelector("#about .background");
   aboutContent = document.getElementById("about-content");
   aboutBlockPhoto = document.getElementById("about-block-photo");
   aboutImagePhoto = document.querySelector("#about-block-photo img");
@@ -365,8 +365,6 @@ document.addEventListener("DOMContentLoaded", () => {
   examplesFilters = window.examplesFilters;
   examplesImages = document.querySelectorAll(".examples-images");
   examplesH3 = document.querySelectorAll("#examples-gallery li h3");
-  // window.examplesH3 = document.querySelectorAll("#examples-gallery li h3");
-  // examplesH3 = window.examplesH3;
   // Modal
   modalScreen = document.getElementById("modal-screen");
   modal = document.getElementById("modal");
@@ -650,12 +648,9 @@ function settingObservers() {
 }
 
 // → For mouse position and collision leave detection
-function adjustHeight() {
-  if (!CSS.supports("height", "100dvh")) {
-    root.style.setProperty("--screen-height", `${window.innerHeight}px`);
-  } else {
-    root.style.setProperty("--screen-height", "100dvh");
-  }
+function adjustHeightIfVDHNotSupported() {
+  if (CSS.supports("height", "100dvh")) return;
+  root.style.setProperty("--screen-height", `${window.innerHeight}px`);
   root.style.setProperty("--section-height-normal", `calc(var(--screen-height) - var(--header-height-normal) - var(--footer-height-normal) + 4px)`);
   root.style.setProperty("--section-height-1440", `calc(var(--screen-height) - var(--header-height-1440) - var(--footer-height-1440) + 4px)`);
   root.style.setProperty("--section-height-1024", `calc(var(--screen-height) - var(--header-height-1024) - var(--footer-height-1024) + 4px)`);

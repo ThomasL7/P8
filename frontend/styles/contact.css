@@ -117,7 +117,7 @@
 
 #contact-errors-form {
   background: radial-gradient(ellipse at center, rgba(219, 68, 68, 0.85) 0%, rgba(187, 55, 55, 0.8) 100%);
-  width: 80%;
+  max-width: 80%;
 }
 
 #contact-success-form {

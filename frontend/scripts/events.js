@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===== General =====
   // → window
   window.onload = () => {
-    adjustHeight();
+    adjustHeightIfVDHNotSupported();
     scrollToTop();
     settingObservers();
     setControlType();
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   window.addEventListener("resize", () => {
-    adjustHeight();
+    adjustHeightIfVDHNotSupported();
     updateCurrentSlideViewForResize();
     updateAllArraysOfBlocksCollision();
     checkIfAboutTextScrollable();
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   window.addEventListener(
-    "wheel",
+    "mousewheel",
     (event) => {
       {
         updateAboutTextArrow();
@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
     addMobileNavOpenAnimation(event);
   });
 
-  // // ===== Home =====
+  // ===== Home =====
   window.homeButtons.addEventListener("animationend", (event) => {
     if (event.animationName === "home-buttons-intro") {
       addStyleCursorForHomeButtons();

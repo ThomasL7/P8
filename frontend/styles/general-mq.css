@@ -11,8 +11,8 @@
   --footer-height-1024: 42px;
   --footer-height-768-H: 38px;
   --footer-height-on-mobile: 40px;
-  --section-height-1440: calc(var(--screen-height)- var(--header-height-1440) - var(--footer-height-1440) + 4px);
-  --section-height-1024: calc(var(--screen-height)- var(--header-height-1024) - var(--footer-height-1024) + 4px);
+  --section-height-1440: calc(var(--screen-height) - var(--header-height-1440) - var(--footer-height-1440) + 4px);
+  --section-height-1024: calc(var(--screen-height) - var(--header-height-1024) - var(--footer-height-1024) + 4px);
   --section-height-768-H: calc(var(--screen-height) - var(--header-height-768-H) - var(--footer-height-768-H) + 4px);
   --section-height-on-mobile: calc(var(--screen-height) - var(--header-height-on-mobile) - var(--footer-height-on-mobile));
 }

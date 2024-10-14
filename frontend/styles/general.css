@@ -9,7 +9,7 @@
   --slide-side-margin: 35px;
   --header-height-normal: 52px;
   --footer-height-normal: 52px;
-  --screen-height: 0;
+  --screen-height: 100dvh;
   --section-height-normal: calc(var(--screen-height) - var(--header-height-normal) - var(--footer-height-normal) + 4px);
 }
 

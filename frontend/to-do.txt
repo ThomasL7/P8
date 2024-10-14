@@ -1,23 +1,4 @@
 
 refaire imag eprojet
 
-
-bug push to reload
-
-bug animation transi
-
-gap
-element.animate
-addevenetlistener change media query
-100dvh
-overflow-y html
-
-PB IMG COVER 100% ????????????
-
-bug limit not reach
-
-Passive event prevent default ????
-
-authorizeSlideChange
-
 tablette vdh a test
