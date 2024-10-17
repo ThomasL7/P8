@@ -1,0 +1,5 @@
+Capture size 1880x926
+
+Delete duplicates if not a pause and reduce or increase time
+Set width 700 px and 350 px for the small one
+Max color 64 instead of 256

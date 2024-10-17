@@ -921,6 +921,8 @@ function resetExamplesSlide() {
 }
 
 function resetContactSlide() {
+  closeContactInfoBubble(false);
+  closeContactInfoBubble(true);
   setTimeout(() => {
     contactErrorsForm.style.display = "none";
     contactSuccessForm.style.display = "none";
@@ -1654,7 +1656,7 @@ function addExampleFilterAnimationOnModalEvent(animationType) {
 
 function updateModalExampleToDisplay() {
   modalExampleToDisplay = examplesModalDatas[numberOfModalExampleToDisplay];
-  if (!modalSlideChangeDirection) modalImageA.setAttribute("src", `./assets/images/${modalExampleToDisplay.image}`);
+  if (!modalSlideChangeDirection) modalImageA.setAttribute("src", `./assets/gif/${modalExampleToDisplay.image}`);
   else changeModalSlide();
   setTimeout(() => {
     modalTitle.innerHTML = `N°${numberOfModalExampleToDisplay + 1} - ${modalExampleToDisplay.title}`;
@@ -1719,7 +1721,7 @@ function changeModalTextAndActiveButton(target) {
       modalPreviousActiveSection.classList.add(CLASS_MODAL_BUTTON_HOVER);
       modalSkillsButtonH4.classList.remove(CLASS_MODAL_BUTTON_HOVER);
       modalSkillsButtonH4.classList.add(CLASS_MODAL_BUTTON_ACTIVE);
-      if (modalExampleToDisplay.challenges.length === 1) htmlContentAriaLabel += `<h4 id="modal-text-title" role="presentation">Compétence acquise :</h4><ul id="modal-skills">`;
+      if (modalExampleToDisplay.skills.length === 1) htmlContentAriaLabel += `<h4 id="modal-text-title" role="presentation">Compétence acquise :</h4><ul id="modal-skills">`;
       else htmlContentAriaLabel += `<h4 id="modal-text-title" role="presentation">Compétences acquises :</h4><ul id="modal-skills">`;
       for (let i = 0; i < modalExampleToDisplay.skills.length; i++) {
         const skill = modalExampleToDisplay.skills[i];
@@ -1776,12 +1778,12 @@ function changeModalSlide() {
   switch (modalSlideChangeDirection) {
     case "previous":
       if (modalSlideChangeCount % 2 === 0) {
-        modalImageA.setAttribute("src", `./assets/images/${modalExampleToDisplay.image}`);
+        modalImageA.setAttribute("src", `./assets/gif/${modalExampleToDisplay.image}`);
         modalImageB.classList.add(CLASS_MODAL_SLIDE_OUT_RIGHT);
         modalImageA.classList.add(CLASS_MODAL_SLIDE_IN_LEFT);
         modalPreviousSlideChangeDirection = "previous-A";
       } else {
-        modalImageB.setAttribute("src", `./assets/images/${modalExampleToDisplay.image}`);
+        modalImageB.setAttribute("src", `./assets/gif/${modalExampleToDisplay.image}`);
         modalImageA.classList.add(CLASS_MODAL_SLIDE_OUT_RIGHT);
         modalImageB.classList.add(CLASS_MODAL_SLIDE_IN_LEFT);
         modalPreviousSlideChangeDirection = "previous-B";
@@ -1789,12 +1791,12 @@ function changeModalSlide() {
       break;
     case "next":
       if (modalSlideChangeCount % 2 === 0) {
-        modalImageA.setAttribute("src", `./assets/images/${modalExampleToDisplay.image}`);
+        modalImageA.setAttribute("src", `./assets/gif/${modalExampleToDisplay.image}`);
         modalImageB.classList.add(CLASS_MODAL_SLIDE_OUT_LEFT);
         modalImageA.classList.add(CLASS_MODAL_SLIDE_IN_RIGHT);
         modalPreviousSlideChangeDirection = "next-A";
       } else {
-        modalImageB.setAttribute("src", `./assets/images/${modalExampleToDisplay.image}`);
+        modalImageB.setAttribute("src", `./assets/gif/${modalExampleToDisplay.image}`);
         modalImageA.classList.add(CLASS_MODAL_SLIDE_OUT_LEFT);
         modalImageB.classList.add(CLASS_MODAL_SLIDE_IN_RIGHT);
         modalPreviousSlideChangeDirection = "next-B";
@@ -1949,7 +1951,7 @@ function removeImageOfPreviousActiveMobileModalButton() {
 function isABot() {
   if (contactPhoneNumber.value) {
     contactErrorsFormText.innerHTML = `Désolé, une erreur est survenue, veuillez revenir à la section contact.`;
-    contactErrorsForm.style.display = "flex";
+    closeContactInfoBubble(contactErrorsForm);
     return true;
   }
 }
@@ -1957,10 +1959,10 @@ function isABot() {
 function validateFields() {
   if (/^\s*$/.test(contactFamilyName.value) || /^\s*$/.test(contactGivenName.value) || /^\s*$/.test(contactSubject.value) || /^\s*$/.test(contactMessage.value)) {
     contactErrorsFormText.innerHTML = `Les champs ne doivent pas contenir que des espaces ou être vides !`;
-    contactErrorsForm.style.display = "flex";
+    openContactInfoBubble(contactErrorsForm);
     return false;
   } else {
-    contactErrorsForm.style.display = "none";
+    closeContactInfoBubble(contactErrorsForm);
     return true;
   }
 }
@@ -1970,7 +1972,7 @@ function contactPostRequest(event) {
   if (isABot()) return;
   if (isMailAlreadySend) {
     contactSuccessFormText.innerHTML = `Vous avez déjà envoyé un message avec succès.`;
-    contactSuccessForm.style.display = "flex";
+    openContactInfoBubble(contactSuccessForm);
     return;
   }
   if (!validateFields()) return;
@@ -1983,7 +1985,8 @@ function contactPostRequest(event) {
     data[key] = value;
   }
 
-  fetch("http://localhost:3000/backend/requests.php", {
+  // fetch("http://localhost:4000/backend/requests.php", {
+  fetch("https://thomas-leger-developpeur.fr/backend/requests.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -2017,11 +2020,15 @@ function openContactInfoBubble(target) {
   target.style.display = "flex";
 }
 
-function closeContactInfoBubble() {
+/**  @param {boolean} target if contactErrorsForm false / if contactSuccessForm true */
+function closeContactInfoBubble(isContactSuccessForm) {
   if (!isContactInfoBubbleOpen) return;
-  contactErrorsForm.classList.remove(CLASS_CONTACT_INFO_BUBBLE_OPEN);
-  contactErrorsForm.classList.add(CLASS_CONTACT_INFO_BUBBLE_CLOSE);
-  contactSuccessForm.classList.remove(CLASS_CONTACT_INFO_BUBBLE_OPEN);
-  contactSuccessForm.classList.add(CLASS_CONTACT_INFO_BUBBLE_CLOSE);
+  if (isContactSuccessForm) {
+    contactSuccessForm.classList.remove(CLASS_CONTACT_INFO_BUBBLE_OPEN);
+    contactSuccessForm.classList.add(CLASS_CONTACT_INFO_BUBBLE_CLOSE);
+  } else {
+    contactErrorsForm.classList.remove(CLASS_CONTACT_INFO_BUBBLE_OPEN);
+    contactErrorsForm.classList.add(CLASS_CONTACT_INFO_BUBBLE_CLOSE);
+  }
   isContactInfoBubbleOpen = false;
 }

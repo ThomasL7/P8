@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       checkIfClosingModal(event);
       checkIfClosingMobileNav(event);
-      closeContactInfoBubble();
+      closeContactInfoBubble(false);
     }
   });
 

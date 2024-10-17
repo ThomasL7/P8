@@ -1,20 +1,12 @@
 <?php
-// ===== Session =====
-function isOverLimitOfRequests($userCountRequest, $limitOfRequests)
-{
-    if (!isset($_SESSION[$userCountRequest])) {
-        $_SESSION[$userCountRequest] = 0;
-    }
-    if ($_SESSION[$userCountRequest] < $limitOfRequests) {
-        $_SESSION[$userCountRequest]++;
-        return null;
-    } else {
-        return [
-            'status' => 429,
-            'message' => "Limite de requêtes atteinte !",
-        ];
-    }
-}
+// ===== Dependencies =====
+require 'vendor/autoload.php';
+
+// $dotenv = Dotenv\Dotenv::createImmutable(__DIR__)->load();
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__))->load();
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 // ===== Email sending =====
 function validateData($data)

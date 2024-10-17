@@ -93,7 +93,7 @@
   color: var(--black);
   border: none;
   background: radial-gradient(ellipse at center, rgb(255, 255, 255) 0%, rgb(240, 239, 239) 100%);
-  padding: 8px 26px;
+  padding: 8px 15px;
   font-size: 16px;
   font-weight: 600;
   margin: auto;

@@ -18,7 +18,7 @@
   }
 
   #contact-form button {
-    padding: 8px 21px;
+    padding: 8px 14px;
     font-size: 15px;
   }
 
@@ -62,7 +62,6 @@
   }
 
   #contact-form button {
-    padding: 8px 20px;
     font-size: 14px;
     margin-top: 37px;
   }
@@ -131,7 +130,7 @@
   }
 
   #contact-form button {
-    padding: 6px 18px;
+    padding: 6px 14px;
     margin-top: 30px;
   }
 
@@ -142,6 +141,10 @@
 }
 
 @media (max-width: 950px) and (max-height: 768px) {
+  #contact-content .slide-title-style {
+    margin-bottom: 12px;
+  }
+
   #contact-form {
     width: 425px;
   }
@@ -192,10 +195,10 @@
   }
 
   #contact-form button {
-    padding: 10px 16px;
+    padding: 7px 13px;
     margin-top: 40px;
     margin-bottom: 58px;
-    font-size: 16px;
+    font-size: 15px;
   }
 
   #contact-errors-form,

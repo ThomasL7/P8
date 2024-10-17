@@ -72,7 +72,7 @@
   }
 
   #examples-gallery {
-    grid-template-columns: repeat(3, 25%);
+    grid-template-columns: repeat(3, 26%);
     margin-right: -24px;
     margin-bottom: 32px;
   }
@@ -86,7 +86,7 @@
   }
 
   #examples-gallery li > div {
-    height: 100px;
+    height: 115px;
   }
 
   #examples-gallery h3 {

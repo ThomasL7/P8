@@ -17,7 +17,7 @@
 
 #examples-gallery {
   display: grid;
-  grid-template-columns: repeat(3, 25.5%);
+  grid-template-columns: repeat(3, 27.75%);
   justify-content: center;
   width: 100%;
   margin-right: -42px;
