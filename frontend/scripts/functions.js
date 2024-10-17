@@ -2005,8 +2005,8 @@ function contactPostRequest(event) {
     data[key] = value;
   }
 
-  // fetch("http://localhost:4000/backend/requests.php", {
-  fetch("https://thomas-leger-developpeur.fr/backend/requests.php", {
+  fetch("http://localhost:4000/backend/requests.php", {
+    // fetch("https://thomas-leger-developpeur.fr/backend/requests.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -2,8 +2,7 @@
 // ===== Dependencies =====
 require 'vendor/autoload.php';
 
-// $dotenv = Dotenv\Dotenv::createImmutable(__DIR__)->load();
-$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__))->load();
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__)->load();
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
