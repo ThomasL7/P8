@@ -1514,6 +1514,26 @@ function hideAndResetInfoBubble(index) {
   }
 }
 
+// function animateInfoBubbleText(infoBubble, index) {
+//   let indexChar = 0;
+//   infoBubble.classList.add(CLASS_INFO_BUBBLE_WIDTH_UNSET);
+//   const textBubbleAnimation = setInterval(() => {
+//     if (indexChar < infoBubbleText.length) {
+//       infoBubble.innerHTML += infoBubbleText.charAt(indexChar);
+//       indexChar++;
+//       const bubbleSize = infoBubble.getBoundingClientRect();
+//       if (bubbleSize.width >= infoBubbleWidth) {
+//         infoBubble.classList.remove(CLASS_INFO_BUBBLE_WIDTH_UNSET);
+//         infoBubble.classList.add(CLASS_INFO_BUBBLE_WIDTH_MAX);
+//       }
+//     } else {
+//       clearInterval(textBubbleAnimation);
+//       removeAnimationFromArray(infoBubble, textInfoBubbleAnimationsArray);
+//     }
+//   }, textSpeed);
+//   textInfoBubbleAnimationsArray.push({ name: infoBubble, animation: textBubbleAnimation });
+// }
+
 // ===== Examples =====
 function setIsExamplesIntroAnimationsStartedTrue(index) {
   isExamplesIntroAnimationsStarted[index] = true;
