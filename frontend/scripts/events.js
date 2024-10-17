@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   window.addEventListener(
-    "mousewheel",
+    "wheel",
     (event) => {
       {
         updateAboutTextArrow();
