@@ -84,7 +84,7 @@
   }
 
   #modal-image-section {
-    max-height: 135px;
+    max-height: 180px;
   }
 
   #modal-previous-button,
@@ -168,6 +168,10 @@
     padding: 0px 19px 15px 8px;
   }
 
+  #modal-image-section {
+    max-height: 130px;
+  }
+
   #modal-buttons-section button {
     border-radius: 20px;
     padding: 7px 24px;
@@ -223,7 +227,7 @@
   }
 
   #modal-image-section {
-    max-height: 110px;
+    max-height: 155px;
   }
 }
 
@@ -237,7 +241,7 @@
   }
 
   #modal-image-section {
-    max-height: 100px;
+    max-height: 135px;
   }
 
   #modal-text-block {
@@ -270,7 +274,7 @@
   }
 
   #modal-image-section {
-    max-height: 85px;
+    max-height: 130px;
   }
 
   .modal-buttons-images {
@@ -323,7 +327,7 @@
   }
 
   #modal-image-section {
-    max-height: 70px;
+    max-height: 100px;
   }
 
   #modal-text-block {

@@ -1,6 +1,6 @@
 @media (max-width: 1440px) {
   #examples-gallery {
-    grid-template-columns: repeat(3, 25.2%);
+    grid-template-columns: repeat(3, 27%);
     margin-right: -32px;
   }
 
@@ -37,7 +37,7 @@
   }
 
   #examples-gallery {
-    grid-template-columns: repeat(3, 28%);
+    grid-template-columns: repeat(3, 29%);
     margin-right: -25px;
   }
 
@@ -72,7 +72,7 @@
   }
 
   #examples-gallery {
-    grid-template-columns: repeat(3, 26%);
+    grid-template-columns: repeat(3, 28%);
     margin-right: -24px;
     margin-bottom: 32px;
   }
@@ -106,7 +106,7 @@
   }
 
   #examples-gallery {
-    grid-template-columns: repeat(3, 23.2%);
+    grid-template-columns: repeat(3, 27%);
   }
 
   #examples-gallery li:nth-child(-n + 3) {
@@ -156,7 +156,7 @@
   }
 
   #examples-gallery li > div {
-    height: 150px;
+    height: 175px;
   }
 
   #examples-gallery h3 {
