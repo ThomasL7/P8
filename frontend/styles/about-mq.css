@@ -10,8 +10,8 @@
   }
 
   #about-text h2 {
-    margin-bottom: 33px;
-    font-size: 22px;
+    margin-bottom: 30px;
+    font-size: 21px;
   }
 
   #about-text h2::after {
@@ -23,7 +23,7 @@
   }
 
   #about-text p {
-    font-size: 17px;
+    font-size: 18px;
   }
 }
 
