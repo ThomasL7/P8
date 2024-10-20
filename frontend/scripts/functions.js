@@ -898,6 +898,7 @@ function resetAboutSlide() {
 }
 
 function resetSkillsSlide() {
+  resetSkillsTextOpacity();
   resetSkillHoverTarget();
   for (let i = 0; i < skills.length; i++) {
     removeStyleCursorForSkills(skills[i]);
@@ -1354,6 +1355,16 @@ function checkIfHoverAboutText() {
       isHoverScrollableContent = false;
     }
   );
+}
+
+function forceSkillsTextToDisplay() {
+  if (indexSlide !== 2) return;
+  skillsText.style.opacity = "0";
+  skillsText.style.opacity = "1";
+}
+
+function resetSkillsTextOpacity() {
+  skillsText.removeAttribute("style");
 }
 
 // ===== Skills =====

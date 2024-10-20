@@ -120,7 +120,6 @@
 
 @media (max-height: 590px), (max-width: 768px) {
   #examples-content {
-    justify-content: start;
     padding: 0px;
     margin-top: 15px;
     margin-bottom: 48px;

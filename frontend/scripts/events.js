@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     checkIfModalTextScrollable();
     updateModalTextArrow();
     adjustModalPosition();
+    forceSkillsTextToDisplay();
     updateCurrentMobileSlideLimit();
     checkIfSlideIsScrollable();
     resetSkillHoverTarget();

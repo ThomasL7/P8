@@ -50,10 +50,6 @@
   display: none;
 }
 
-#about-text-p div {
-  display: block;
-}
-
 #about-text h2 {
   margin-bottom: 30px;
   font-size: 24px;
@@ -91,10 +87,10 @@
 }
 
 #about-text-p div {
-  display: flex;
+  display: block;
   align-items: center;
   text-align: justify;
-  margin-bottom: 25px;
+  margin-bottom: 22px;
   line-height: 1.2;
 }
 

@@ -18,6 +18,10 @@
     height: 5px;
   }
 
+  #about-text-p div {
+    margin-bottom: 19px;
+  }
+
   #about-text p {
     font-size: 17px;
   }
@@ -43,12 +47,12 @@
     height: 4px;
   }
 
-  #about-text p {
-    font-size: 16px;
+  #about-text-p div {
+    margin-bottom: 17px;
   }
 
-  #about-text-p div {
-    margin-bottom: 20px;
+  #about-text p {
+    font-size: 16px;
   }
 }
 
@@ -93,6 +97,10 @@
   #about-text h2 {
     width: 100%;
     font-size: 19px;
+  }
+
+  #about-text-p div {
+    margin-bottom: 18px;
   }
 
   #about-text p {

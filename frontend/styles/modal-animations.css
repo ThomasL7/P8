@@ -5,7 +5,7 @@
 }
 
 .modal-open {
-  animation: modal-open 0.75s cubic-bezier(0.18, 0.41, 0.4, 1) 0s 1 normal none;
+  animation: modal-open 1.425s cubic-bezier(0.18, 0.41, 0.4, 1) 0s 1 normal none;
 }
 
 @keyframes modal-open {
