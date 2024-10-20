@@ -13,20 +13,17 @@
 }
 
 #skills-trees {
+  margin-right: -35px;
   width: 95%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
 
 #skills-tree-left,
-#skills-tree-center {
-  margin-right: 35px;
-}
-
-#skills-tree-left,
 #skills-tree-center,
 #skills-tree-right {
-  padding: 30px 5px 40px 5px;
+  margin-right: 35px;
+  padding: 30px 12px 40px 12px;
   background: radial-gradient(circle at center, rgba(255, 255, 255, 0.64) 0%, rgba(255, 255, 255, 0.22) 100%);
   border-radius: 18px;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.062);

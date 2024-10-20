@@ -2,6 +2,7 @@
   position: absolute;
   height: var(--section-height-normal);
   top: -2px;
+  width: 100vw;
   width: 100dvw;
   z-index: 1;
   display: none;

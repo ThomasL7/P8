@@ -186,6 +186,7 @@ let bottomCurrentMobileSlideLimit;
 let contentSlidesAndIntroClassesArray;
 let hoverTarget = null;
 let indexSlide = 0;
+let isActiveMouseControlFromWheel = false;
 let isAuthorizeToSlideChange = true;
 let isBottomMobileSlideLimitReach = false;
 let isContactInfoBubbleOpen = false;
@@ -196,6 +197,7 @@ let isReloading = false;
 let isSlideScrollable = false;
 let isScrolling = false;
 let isTopMobileSlideLimitReach = false;
+let nameOfTheTouchedScrollableContent = null;
 let isWindowLoaded = false;
 let limitReachCount = 0;
 let maxIndexSlide = 0;
@@ -207,7 +209,9 @@ let previousIndexSlide = null;
 let scrollDistance = 0;
 let scrollDuration = 0;
 let sectionSlides;
+let startTouchTime = 0;
 let startTouchY = 0;
+let startTouchYInScrolling = 0;
 let endTouchY = 0;
 let timeBeforeCheckingMobileLimits = 25;
 let topCurrentMobileSlideLimit;
@@ -538,8 +542,10 @@ function setControlType() {
   }
 }
 
-function activeMouseControl() {
+function activeMouseControl(isFromWheel) {
   if (window.isTouchInsteadOfMouse) {
+    if (isFromWheel) isActiveMouseControlFromWheel = true;
+    else isActiveMouseControlFromWheel = false;
     window.isTouchInsteadOfMouse = false;
   }
 }
@@ -648,7 +654,7 @@ function settingObservers() {
 }
 
 // → For mouse position and collision leave detection
-function adjustHeightIfVDHNotSupported() {
+function adjustHeightIfDVHNotSupported() {
   if (CSS.supports("height", "100dvh")) return;
   root.style.setProperty("--screen-height", `${window.innerHeight}px`);
   root.style.setProperty("--section-height-normal", `calc(var(--screen-height) - var(--header-height-normal) - var(--footer-height-normal) + 4px)`);
@@ -945,7 +951,10 @@ function checkIfOnMobileAndActiveScroll() {
     updateCurrentMobileSlideLimit();
     checkIfSlideIsScrollable();
     if (isModalOpen) setImageOfActiveMobileModalButton();
-    if (!isModalOpen) enableScroll();
+    else {
+      enableScroll();
+      relativeHTML();
+    }
     updateAllArraysOfBlocksCollision();
   } else {
     isOnMobile = false;
@@ -953,6 +962,7 @@ function checkIfOnMobileAndActiveScroll() {
     viewportMeta.setAttribute("content", "width=device-width, initial-scale=1.0, user-scalable=no");
     checkIfUnderMQMaxHeight(mqMaxHeight);
     disableScroll();
+    relativeHTML();
     navMenuBurger.style.display = "none";
     nav.style.display = "flex";
     removeImageOfPreviousActiveMobileModalButton();
@@ -972,9 +982,44 @@ function hideOrShowAllMobileSlides(value) {
   }
 }
 
+function disableTouchMoveScroll(event) {
+  if (isScrolling || !isOnMobile) event.preventDefault();
+}
+
+function checkIfTouchingScrollableContent(event) {
+  if (isOnMobile) return;
+  if (aboutText.contains(event.target)) nameOfTheTouchedScrollableContent = "about";
+  else if (modalText.contains(event.target)) nameOfTheTouchedScrollableContent = "modal";
+  else nameOfTheTouchedScrollableContent = null;
+}
+
+function scrollScrollableContentIfTouched(event) {
+  if (nameOfTheTouchedScrollableContent === null) return;
+  const currentTouchY = event.touches[0].clientY;
+  const currentTime = new Date().getTime();
+  const distance = startTouchYInScrolling - currentTouchY;
+  const scrollSpeed = Math.max(0.1, 10 / (currentTime - startTouchTime));
+  scrollDistance = distance * scrollSpeed;
+  startTouchYInScrolling = currentTouchY;
+  startTouchTime = currentTime;
+  switch (nameOfTheTouchedScrollableContent) {
+    case "about":
+      aboutTextP.scrollBy(0, scrollDistance);
+      break;
+    case "modal":
+      modalText.scrollBy(0, scrollDistance);
+      break;
+    default:
+  }
+}
+
 // For slides change (Mobile)
 function setTouchStartVariables(event) {
   startTouchY = event.touches[0].clientY;
+  if (nameOfTheTouchedScrollableContent !== null) {
+    startTouchYInScrolling = startTouchY;
+    startTouchTime = new Date().getTime();
+  }
 }
 
 function disablePushToReload(event) {
@@ -1080,7 +1125,6 @@ function scrollToMobileSlide(index, direction) {
   isScrolling = true;
   isAuthorizeToSlideChange = false;
   disableScroll();
-  if (!isOnMobile) relativeHTML();
   previousIndexSlide = indexSlide;
   indexSlide = index;
   const indexDifference = indexSlide - previousIndexSlide;
@@ -1104,7 +1148,6 @@ function scrollToMobileSlide(index, direction) {
     isTopMobileSlideLimitReach = false;
     isBottomMobileSlideLimitReach = false;
     enableScroll();
-    if (!isOnMobile) fixedHTML();
     isScrolling = false;
   }, scrollDuration);
 }
@@ -1290,7 +1333,7 @@ function swipeAboutText() {
 
 function scrollAboutText() {
   scrollAboutTextInterval = setInterval(() => {
-    aboutTextP.scrollBy(0, 1);
+    aboutTextP.scrollBy(0, 2);
     updateAboutTextArrow();
   }, 1);
 }
@@ -1903,7 +1946,7 @@ function updateModalTextArrow(event) {
 
 function scrollModalText() {
   scrollModalTextInterval = setInterval(() => {
-    modalText.scrollBy(0, 1);
+    modalText.scrollBy(0, 2);
     updateModalTextArrow();
   }, 1);
 }
@@ -2005,8 +2048,8 @@ function contactPostRequest(event) {
     data[key] = value;
   }
 
-  fetch("http://localhost:4000/backend/requests.php", {
-    // fetch("https://thomas-leger-developpeur.fr/backend/requests.php", {
+  // fetch("http://localhost:4000/backend/requests.php", {
+  fetch("https://thomas-leger-developpeur.fr/backend/requests.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -106,7 +106,7 @@
   }
 
   #examples-gallery {
-    grid-template-columns: repeat(3, 27%);
+    grid-template-columns: repeat(3, 25%);
   }
 
   #examples-gallery li:nth-child(-n + 3) {

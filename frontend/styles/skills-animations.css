@@ -97,7 +97,7 @@
   }
 
   .skills-text-intro {
-    opacity: 1;
-    animation: skills-text-intro 1.75s cubic-bezier(0.31, -0.39, 0.95, 0.7) 0.9s 1 normal forwards;
+    /* opacity: 1;
+    animation: skills-text-intro 1.75s cubic-bezier(0.31, -0.39, 0.95, 0.7) 0.9s 1 normal forwards; */
   }
 }

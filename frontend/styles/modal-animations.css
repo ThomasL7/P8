@@ -1,7 +1,7 @@
 :root {
   /* ==== Durations ==== */
   --modal-closing-animation-duration: 0.15s;
-  --modal-slide-change-duration: 0.265s;
+  --modal-slide-change-duration: 0.5s;
 }
 
 .modal-open {
@@ -106,7 +106,7 @@
 }
 
 .modal-slide-in-left {
-  animation: modal-slide-in-left var(--modal-slide-change-duration) ease-in-out 0s 1 normal forwards;
+  animation: modal-slide-in-left var(--modal-slide-change-duration) ease-out 0s 1 normal forwards;
 }
 
 @keyframes modal-slide-in-left {
@@ -119,7 +119,7 @@
 }
 
 .modal-slide-out-left {
-  animation: modal-slide-out-left var(--modal-slide-change-duration) ease-in-out 0s 1 normal none;
+  animation: modal-slide-out-left var(--modal-slide-change-duration) ease-out 0s 1 normal none;
   opacity: 0;
 }
 
@@ -135,7 +135,7 @@
 }
 
 .modal-slide-in-right {
-  animation: modal-slide-in-right var(--modal-slide-change-duration) cubic-bezier(0.65, 0.27, 0.87, 0.68) 0s 1 normal forwards;
+  animation: modal-slide-in-right var(--modal-slide-change-duration) ease-out 0s 1 normal forwards;
 }
 
 @keyframes modal-slide-in-right {
@@ -148,7 +148,7 @@
 }
 
 .modal-slide-out-right {
-  animation: modal-slide-out-right var(--modal-slide-change-duration) cubic-bezier(0.65, 0.27, 0.87, 0.68) 0s 1 normal none;
+  animation: modal-slide-out-right var(--modal-slide-change-duration) ease-out 0s 1 normal none;
   opacity: 0;
 }
 

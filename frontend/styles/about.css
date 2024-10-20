@@ -1,7 +1,3 @@
-/* .background-hidden {
-  visibility: hidden;
-} */
-
 #about-content {
   z-index: 1;
   width: var(--slide-max-width);
@@ -54,6 +50,10 @@
   display: none;
 }
 
+#about-text-p div {
+  display: block;
+}
+
 #about-text h2 {
   margin-bottom: 30px;
   font-size: 24px;
@@ -79,6 +79,7 @@
 }
 
 #about-text p {
+  height: 100%;
   font-size: 20px;
   font-weight: 400;
   width: 100%;
