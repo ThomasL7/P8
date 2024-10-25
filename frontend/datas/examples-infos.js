@@ -40,7 +40,7 @@ window.examplesModalDatas = [
         solutions: "Utilisation des hooks, notamment useState et useEffect, pour assurer une mise à jour fluide et cohérente des composants React.",
       },
     ],
-    skills: ["Développement de composants React.", "Gestion des états et effets avec les hooks React,", "Gestion de la navigation dans une application single-page (SPA).", "Implémentation d'animations CSS.", "Utilisation de Sass."],
+    skills: ["Développement de composants React.", "Gestion des états et effets avec les hooks React.", "Gestion de la navigation dans une application single-page (SPA).", "Implémentation d'animations CSS.", "Utilisation de Sass."],
   },
   {
     title: "Développez le back-end d'un site de notation de livres.",
