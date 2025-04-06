@@ -7,14 +7,14 @@
 }
 
 #contact-content {
-  z-index: 1;
-  width: var(--slide-max-width);
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height: 100%;
+  justify-content: center;
   margin: 0px var(--slide-side-margin);
+  width: var(--slide-max-width);
+  z-index: 1;
 }
 
 #contact-content .slide-title-style {
@@ -24,9 +24,9 @@
 #contact-form {
   display: flex;
   flex-direction: column;
-  width: 525px;
   font-size: 20px;
   font-weight: 600;
+  width: 525px;
 }
 
 #contact-form-inputs {
@@ -56,18 +56,19 @@
 
 #contact-form-inputs input,
 #contact-message {
-  width: 100%;
+  background: radial-gradient(ellipse at center, rgb(255, 255, 255) 0%, rgb(238, 238, 238));
+  border: 1px solid rgb(156, 156, 156);
+  border-radius: 10px;
+  box-sizing: border-box;
   font-size: 18px;
   font-weight: 400;
-  box-sizing: border-box;
-  border: 1px solid rgb(156, 156, 156);
-  background: radial-gradient(ellipse at center, rgb(255, 255, 255) 0%, rgb(238, 238, 238));
+  width: 100%;
 }
 
 #contact-form-inputs input {
-  padding: 1px 6px;
   height: 35px;
   margin-bottom: 24px;
+  padding: 1px 6px;
 }
 
 .contact-phone-number,
@@ -76,10 +77,10 @@
 }
 
 #contact-message {
-  padding: 6px 6px;
+  font-family: "Arial";
   height: 110px;
   line-height: 1.2;
-  font-family: "Arial";
+  padding: 6px 6px;
   resize: none;
 }
 
@@ -90,29 +91,29 @@
 }
 
 #contact-form button {
-  color: var(--black);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0, 0.1) 100%), rgb(255, 255, 255);
   border: none;
-  background: radial-gradient(ellipse at center, rgb(255, 255, 255) 0%, rgb(240, 239, 239) 100%);
-  padding: 8px 15px;
+  border-radius: 60px;
+  color: var(--black);
   font-size: 16px;
   font-weight: 600;
   margin: auto;
   margin-top: 44px;
-  border-radius: 60px;
+  padding: 10px 14px;
 }
 
 #contact-errors-form,
 #contact-success-form {
-  position: absolute;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  padding: 12px 18px;
   border-radius: 12px;
-  z-index: 1;
   bottom: 52px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
   line-height: 1.4;
+  padding: 12px 18px;
+  position: absolute;
+  z-index: 1;
 }
 
 #contact-errors-form {
@@ -132,18 +133,18 @@
 
 #contact-errors-form hr,
 #contact-success-form hr {
-  width: 3px;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.8) 100%);
   border: none;
   border-radius: 12px;
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.8) 100%);
+  width: 3px;
 }
 
 #contact-errors-form-text,
 #contact-success-form-text {
-  text-align: left;
-  overflow-wrap: break-word;
-  hyphens: auto;
   font-size: 17px;
   font-weight: 600;
+  hyphens: auto;
   line-height: 1.2;
+  overflow-wrap: break-word;
+  text-align: left;
 }

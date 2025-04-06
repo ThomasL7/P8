@@ -139,7 +139,8 @@ const CLASS_CONTACT_INFO_BUBBLE_OPEN = "contact-info-bubble-open";
 const CLASS_HOME_BUTTONS_INTRO = "home-buttons-intro";
 const CLASS_HOME_TEXT_INTRO = "home-text-intro";
 const CLASS_HOME_TITLE_INTRO = "home-title-intro";
-const CLASS_ELEMENTS_FOOTER_INTRO = "elements-header-intro";
+const CLASS_ELEMENTS_FOOTER_INTRO = "elements-footer-intro";
+const CLASS_ELEMENTS_FOOTER_INTRO_MOBILE = "elements-footer-intro-mobile";
 const CLASS_ELEMENTS_HEADER_INTRO = "elements-header-intro";
 const CLASS_EXAMPLE_FILTER_HOVER = "example-filter-hover";
 const CLASS_EXAMPLE_H3_HOVER = "example-h3-hover";
@@ -150,6 +151,7 @@ const CLASS_MODAL_OPEN = "modal-open";
 const CLASS_MODAL_SCREEN_CLOSE = "modal-screen-close";
 const CLASS_HEADER_INTRO = "header-intro";
 const CLASS_HEADER_TITLE_BLOCK_HOVER = "header-title-block-hover";
+const CLASS_HEADER_TITLE_BLOCK_HOVER_DEFAULT = "header-title-block-hover-default";
 const CLASS_HEADER_TITLE_IMAGE_HOVER = "header-title-image-hover";
 const CLASS_HEADER_TITLE_HOVER = "header-title-hover";
 const CLASS_HOME_BUTTON_HOVER = "home-button-hover";
@@ -797,15 +799,17 @@ function addHeaderAndHomeIntroAnimations() {
   headerTitleBlock.classList.add(CLASS_ELEMENTS_HEADER_INTRO);
   headerTitleBlock.style.display = "flex";
   if (isOnMobile) {
+    footer.classList.add(CLASS_FOOTER_INTRO);
+    footerLinksDiv.classList.add(CLASS_ELEMENTS_FOOTER_INTRO_MOBILE);
     nav.style.display = "none";
     navMenuBurger.classList.add(CLASS_ELEMENTS_HEADER_INTRO);
     navMenuBurger.style.display = "flex";
   } else {
+    headerTitleBlock.classList.add(CLASS_HEADER_TITLE_BLOCK_HOVER_DEFAULT);
+    footer.classList.add(CLASS_ELEMENTS_FOOTER_INTRO);
     nav.classList.add(CLASS_ELEMENTS_HEADER_INTRO);
     nav.style.display = "flex";
   }
-  footer.classList.add(CLASS_FOOTER_INTRO);
-  footerLinksDiv.classList.add(CLASS_ELEMENTS_FOOTER_INTRO);
   footerLinksDiv.style.display = "flex";
   setTimeout(() => {
     homeTitle.classList.add(CLASS_HOME_TITLE_INTRO);
@@ -823,6 +827,7 @@ function resetHomeBeforeReloading() {
   isReloading = true;
   header.classList.remove(CLASS_HEADER_INTRO);
   footer.classList.remove(CLASS_FOOTER_INTRO);
+  footer.classList.remove(CLASS_ELEMENTS_FOOTER_INTRO);
   headerTitleBlock.style.display = "none";
   nav.style.display = "none";
   footerLinksDiv.style.display = "none";
@@ -1106,10 +1111,10 @@ function ifMobileSlideLimitsAreReach() {
   if (scrollYValue <= topCurrentMobileSlideLimit) {
     isTopMobileSlideLimitReach = true;
   }
-  if (scrollYBottom >= bottomCurrentMobileSlideLimit) {
+  if (scrollYBottom >= bottomCurrentMobileSlideLimit - 1) {
     isBottomMobileSlideLimitReach = true;
   }
-  if (scrollYValue > topCurrentMobileSlideLimit && scrollYBottom < bottomCurrentMobileSlideLimit) {
+  if (scrollYValue > topCurrentMobileSlideLimit && scrollYBottom < bottomCurrentMobileSlideLimit - 1) {
     isTopMobileSlideLimitReach = false;
     isBottomMobileSlideLimitReach = false;
   }
@@ -1172,6 +1177,7 @@ function handleHeaderTitleClick(event) {
 
 function addHeaderTitleHover() {
   if (indexSlide === 0 || isOnMobile) return;
+  headerTitleBlock.classList.remove(CLASS_HEADER_TITLE_BLOCK_HOVER_DEFAULT);
   headerTitleBlock.classList.add(CLASS_HEADER_TITLE_BLOCK_HOVER);
   headerTitleImage.classList.add(CLASS_HEADER_TITLE_IMAGE_HOVER);
   headerTitle.classList.add(CLASS_HEADER_TITLE_HOVER);
@@ -1179,10 +1185,12 @@ function addHeaderTitleHover() {
 
 function removeHeaderTitleHover() {
   if (isOnMobile) return;
-  if (indexSlide === 0) return;
-  headerTitleBlock.classList.remove(CLASS_HEADER_TITLE_BLOCK_HOVER);
-  headerTitleImage.classList.remove(CLASS_HEADER_TITLE_IMAGE_HOVER);
-  headerTitle.classList.remove(CLASS_HEADER_TITLE_HOVER);
+  if (indexSlide === 0) headerTitleBlock.classList.add(CLASS_HEADER_TITLE_BLOCK_HOVER_DEFAULT);
+  else {
+    headerTitleBlock.classList.remove(CLASS_HEADER_TITLE_BLOCK_HOVER);
+    headerTitleImage.classList.remove(CLASS_HEADER_TITLE_IMAGE_HOVER);
+    headerTitle.classList.remove(CLASS_HEADER_TITLE_HOVER);
+  }
 }
 
 function disableHeaderTitleBlockHover() {

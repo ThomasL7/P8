@@ -3,14 +3,14 @@
 }
 
 #home-content {
-  width: 800px;
-  margin: 0px var(--slide-side-margin);
+  align-items: center;
   display: flex;
-  position: absolute;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  margin: 0px var(--slide-side-margin);
+  position: absolute;
   text-align: center;
+  width: 800px;
 }
 
 #home h2 {
@@ -22,9 +22,9 @@
 #home p {
   font-size: 24px;
   font-weight: 400;
-  margin-top: 20px;
-  margin-bottom: 25px;
   line-height: 1.1;
+  margin-bottom: 25px;
+  margin-top: 20px;
 }
 
 #home-buttons {
@@ -33,16 +33,16 @@
 }
 
 #home-buttons a {
-  height: 34px;
-  width: 120px;
-  justify-content: center;
   align-items: center;
-  display: flex;
+  background: radial-gradient(ellipse at center, #df5050 0%, #e63838 100%);
   border: none;
+  border-radius: 30px;
+  display: flex;
   font-size: 18px;
   font-weight: 600;
-  background: radial-gradient(ellipse at center, #df5050 0%, #e63838 100%);
-  border-radius: 30px;
+  height: 34px;
+  justify-content: center;
+  width: 120px;
 }
 
 #home-contact-button {
@@ -54,9 +54,9 @@
 }
 
 #home-CV-button img {
-  position: relative;
-  width: 20px;
   height: 16px;
   margin-right: 8px;
+  position: relative;
   top: -1px;
+  width: 20px;
 }

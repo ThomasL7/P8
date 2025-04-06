@@ -1,28 +1,16 @@
 @media (max-width: 1440px) {
-  footer {
-    height: var(--footer-height-1440);
-  }
-
   #footer img {
     height: 21px;
   }
 }
 
 @media (max-width: 1024px) {
-  footer {
-    height: var(--footer-height-1024);
-  }
-
   #footer img {
     height: 20px;
   }
 }
 
 @media (max-height: 768px) {
-  footer {
-    height: var(--footer-height-768-H);
-  }
-
   #footer img {
     height: 19px;
   }
@@ -31,6 +19,32 @@
 @media (max-height: 590px), (max-width: 768px) {
   footer {
     height: var(--footer-height-on-mobile);
+    width: 100%;
+    right: unset;
+    top: unset;
+    left: 0;
+    bottom: 0;
+    transform: translateY(0%);
+    background-color: var(--general-background-color);
+  }
+
+  #footer {
+    border-radius: unset;
+    background: var(--header-footer-color);
+  }
+
+  #footer div {
+    padding: 0;
+    flex-direction: row;
+  }
+
+  #footer a {
+    margin-bottom: 0;
+    margin-right: 42px;
+  }
+
+  #footer a:last-child {
+    margin-right: 0px;
   }
 
   #footer img {

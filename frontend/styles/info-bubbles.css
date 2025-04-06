@@ -14,7 +14,7 @@
   display: none;
   z-index: 1;
   border-radius: 8px;
-  background: radial-gradient(ellipse at center, rgb(20, 20, 20, 0.95) 0%, rgb(20, 20, 20, 0.88) 100%);
+  background: radial-gradient(ellipse at center, rgb(32, 31, 31) 0%, rgb(32, 32, 32) 100%);
   color: rgb(235, 223, 223);
   font-size: 18px;
   font-weight: 400;

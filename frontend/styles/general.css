@@ -3,14 +3,14 @@
   --white: #ffffff;
   --black: #141313;
   --general-background-color: rgb(65, 65, 65);
-  --header-footer-color: rgb(26, 25, 25);
+  --header-footer-color: radial-gradient(ellipse at center, rgb(37, 36, 36) 0%, rgb(41, 40, 40) 100%);
+
   /* ==== Sizes ==== */
   --slide-max-width: 1360px;
   --slide-side-margin: 35px;
-  --header-height-normal: 52px;
-  --footer-height-normal: 52px;
+  --header-height-normal: 44px;
   --screen-height: 100dvh;
-  --section-height-normal: calc(var(--screen-height) - var(--header-height-normal) - var(--footer-height-normal) + 4px);
+  --section-height-normal: calc(var(--screen-height) - var(--header-height-normal) + 2px);
 }
 
 html {
